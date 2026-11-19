@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T19:35:19Z",
+  "updated": "2026-11-19T19:40:23Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -191,7 +191,7 @@
       "id": "soundness_metric",
       "label": "Thm 7.2 metric",
       "section": 7,
-      "file": "ContinuousFOL/Group2Axioms/SoundnessMetric.lean:112",
+      "file": "ContinuousFOL/Group2Axioms/SoundnessMetric.lean:138",
       "status": "done",
       "blocker": null,
       "detail": "ProvableMetricQ \u21d2 EntailsComplete."
@@ -200,7 +200,7 @@
       "id": "satisfiable_consistent_metric",
       "label": "Sat \u21d2 Cons (met)",
       "section": 7,
-      "file": "ContinuousFOL/Group2Axioms/SoundnessMetric.lean:135",
+      "file": "ContinuousFOL/Group2Axioms/SoundnessMetric.lean:151",
       "status": "done",
       "blocker": null,
       "detail": "CompletelySatisfiable \u21d2 ConsistentMetricQ."
@@ -482,7 +482,7 @@
       "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:103",
       "status": "done",
       "blocker": null,
-      "detail": "degreeOfTruthComplete = degreeOfProvabilityMetric."
+      "detail": "degreeOfTruthMetric = degreeOfProvabilityMetric (sup over metric pre-structures)."
     },
     {
       "id": "compactness_pre",
@@ -709,7 +709,12 @@
       "kind": "hard"
     },
     {
-      "from": "completeness_metric",
+      "from": "metric_prestructure_model_of_consistent",
+      "to": "pavelka_completeness_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "soundness_metric",
       "to": "pavelka_completeness_metric",
       "kind": "hard"
     },

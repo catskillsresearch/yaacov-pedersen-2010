@@ -30,7 +30,7 @@ def DegreeUniformlyComputable {LM : MetricSignature} (P : RecursivePresentation 
     (T : Set (Formula LM.toSignature)) : Prop :=
   ∃ f : ℕ → ℕ → ℤ, Computable₂ f ∧
     ∀ φ : Formula LM.toSignature, IsSentence φ → ∀ n : ℕ,
-      |(f (P.code φ) n : ℝ) / 2 ^ n - degreeOfTruthComplete T φ| ≤ (2 : ℝ) ^ (-(n : ℤ))
+      |(f (P.code φ) n : ℝ) / 2 ^ n - degreeOfTruthMetric T φ| ≤ (2 : ℝ) ^ (-(n : ℤ))
 
 /-- Definition 9.10: decidability of a theory `T`.
 (i) If `T` is complete, `T` is decidable if for every sentence `φ`, `φ°_T` is a recursive real

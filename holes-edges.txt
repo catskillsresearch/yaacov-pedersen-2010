@@ -37,7 +37,8 @@ completeness_metric -hard-> approximated_strong_completeness_metric
 soundness_metric -hard-> approximated_strong_completeness_metric
 provable_tsub_of_inconsistent_adjoin_metric -hard-> approximated_strong_completeness_metric
 completeness_pre -hard-> pavelka_completeness_pre
-completeness_metric -hard-> pavelka_completeness_metric
+metric_prestructure_model_of_consistent -hard-> pavelka_completeness_metric
+soundness_metric -hard-> pavelka_completeness_metric
 pavelka_completeness_metric -hard-> complete_re_theory_decidable
 cl_consistent_iff_satisfiable -soft-> cl_finite_strong_completeness
 cl_finite_strong_completeness -soft-> cl_approx_strong_completeness

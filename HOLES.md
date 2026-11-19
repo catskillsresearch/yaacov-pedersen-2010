@@ -2,7 +2,7 @@
 
 Inventory of paper-facing Lean holes, ordered **prove-first**.
 
-**Updated:** 2026-11-19T19:35:19Z
+**Updated:** 2026-11-19T19:40:23Z
 **Holes:** 10 open+blocked · 8 open · 2 blocked · 45 done.
 
 **Live board:** [`holes.html`](holes.html) (graph embedded; open the file directly).
@@ -76,8 +76,8 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 |---|---|---|---|
 | done | `soundness_pre` | Thm 7.2 sound | `ContinuousFOL/Group2Axioms/SoundnessPre.lean:223` |
 | done | `satisfiable_consistent_pre` | Sat ⇒ Cons (pre) | `ContinuousFOL/Group2Axioms/SoundnessPre.lean:244` |
-| done | `soundness_metric` | Thm 7.2 metric | `ContinuousFOL/Group2Axioms/SoundnessMetric.lean:112` |
-| done | `satisfiable_consistent_metric` | Sat ⇒ Cons (met) | `ContinuousFOL/Group2Axioms/SoundnessMetric.lean:135` |
+| done | `soundness_metric` | Thm 7.2 metric | `ContinuousFOL/Group2Axioms/SoundnessMetric.lean:138` |
+| done | `satisfiable_consistent_metric` | Sat ⇒ Cons (met) | `ContinuousFOL/Group2Axioms/SoundnessMetric.lean:151` |
 
 ### §8 — 0 hole(s)
 

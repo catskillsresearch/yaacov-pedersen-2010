@@ -108,16 +108,17 @@ lemma metricAxiom_eval_zero {LM : MetricSignature} {ψ : Formula LM.toSignature}
         (lt_trans hd hq)
       linarith
 
-/-- Theorem 7.2 (Soundness) for signatures with a metric. -/
-theorem soundness_metric {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
+/-- Theorem 7.2 (Soundness) over continuous `𝓛`-pre-structures, for a signature with
+    a metric: `Γ ⊢_Q φ` implies `Γ ⊨_Q φ`. -/
+theorem soundness_metric_pre {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
     (φ : Formula LM.toSignature) :
-    ProvableMetricQ Γ φ → EntailsComplete Γ φ := by
+    ProvableMetricQ Γ φ → EntailsMetricPre Γ φ := by
   intro hprov
   induction hprov with
   | @ax xs ψ hax =>
     intro M σ _
     exact Formula.eval_genList_eq_zero M.toPreStructure xs ψ
-      (fun σ' => metricAxiom_eval_zero hax M.toMetricPreStructure σ') σ
+      (fun σ' => metricAxiom_eval_zero hax M σ') σ
   | @hyp φ hmem =>
     intro M σ hM
     exact hM φ hmem
@@ -132,12 +133,25 @@ theorem soundness_metric {LM : MetricSignature} (Γ : Set (Formula LM.toSignatur
     have hle0 : ψ.eval M.toPreStructure σ ≤ 0 := by simpa [hφ0] using hle
     exact le_antisymm hle0 (Formula.eval_in_Icc M.toPreStructure σ ψ).1
 
+/-- Theorem 7.2 (Soundness) for signatures with a metric, restricted to complete
+    structures (follows from `soundness_metric_pre`). -/
+theorem soundness_metric {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
+    (φ : Formula LM.toSignature) :
+    ProvableMetricQ Γ φ → EntailsComplete Γ φ :=
+  fun hprov M σ hM => soundness_metric_pre Γ φ hprov M.toMetricPreStructure σ hM
+
+theorem satisfiable_consistent_metric_pre {LM : MetricSignature}
+    (Γ : Set (Formula LM.toSignature)) :
+    SatisfiableMetricPre Γ → ConsistentMetricQ Γ := by
+  rintro ⟨M, σ, hM⟩
+  refine ⟨Formula.one LM.toSignature, fun hprov => ?_⟩
+  have hval := soundness_metric_pre Γ (Formula.one LM.toSignature) hprov M σ hM
+  simp at hval
+
 theorem satisfiable_consistent_metric {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) :
     CompletelySatisfiable Γ → ConsistentMetricQ Γ := by
   rintro ⟨M, σ, hM⟩
-  refine ⟨Formula.one LM.toSignature, fun hprov => ?_⟩
-  have hval := soundness_metric Γ (Formula.one LM.toSignature) hprov M σ hM
-  simp at hval
+  exact satisfiable_consistent_metric_pre Γ ⟨M.toMetricPreStructure, σ, hM⟩
 
 end ContinuousFOL

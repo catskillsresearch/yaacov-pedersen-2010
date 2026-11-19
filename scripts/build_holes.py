@@ -350,7 +350,7 @@ NODES: dict[str, dict] = {
         "label": "Cor 9.8 metric",
         "section": 9,
         "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean",
-        "detail": "degreeOfTruthComplete = degreeOfProvabilityMetric.",
+        "detail": "degreeOfTruthMetric = degreeOfProvabilityMetric (sup over metric pre-structures).",
     },
     "compactness_pre": {
         "label": "Cor 9.12 compact",
@@ -419,7 +419,8 @@ HARD_EDGES: list[tuple[str, str]] = [
     ("soundness_metric", "approximated_strong_completeness_metric"),
     ("provable_tsub_of_inconsistent_adjoin_metric", "approximated_strong_completeness_metric"),
     ("completeness_pre", "pavelka_completeness_pre"),
-    ("completeness_metric", "pavelka_completeness_metric"),
+    ("metric_prestructure_model_of_consistent", "pavelka_completeness_metric"),
+    ("soundness_metric", "pavelka_completeness_metric"),
     ("pavelka_completeness_metric", "complete_re_theory_decidable"),
 ]
 

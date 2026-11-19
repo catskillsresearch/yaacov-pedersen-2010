@@ -7,6 +7,10 @@ Paper pin: §8 Lemma 8.4; vision.md page 16
 module
 
 public import ContinuousFOL.Group2Axioms.ProvableQ
+public import ContinuousFOL.Group2Axioms.ProvableMetricQ
+public import ContinuousFOL.Group2Axioms.MetricAxiomSchema
+public import ContinuousFOL.Essentials.DeductionTheorem
+public import ContinuousFOL.Essentials.GeneralizationTheorem
 public import ContinuousFOL.SubstitutionAndCompletions.FormulaHasFunc
 public import ContinuousFOL.Essentials.ProvableBoundSubst
 public import ContinuousFOL.Essentials.ProvableQMono
@@ -338,5 +342,133 @@ theorem generalize_fresh_const {L : Signature} (Γ : Set (Formula L)) (φ : Form
     rw [Formula.freeSubst_substConstVar_var φ c x y hyφ]
   rw [hb] at b2
   exact (ProvableQ.mp h2 (b2.mono (Set.empty_subset _))).mono hΓ₀
+
+
+lemma Term.substConstVar_var {L : Signature} (z : Var) (c : L.Func) (y : Var) :
+    (Term.var z).substConstVar c y = .var z := rfl
+
+lemma Formula.substConstVar_dist {LM : MetricSignature} (t₀ t₁ : Term LM.toSignature)
+    (c : LM.Func) (y : Var) :
+    (Formula.dist (LM := LM) t₀ t₁).substConstVar c y =
+      Formula.dist (LM := LM) (t₀.substConstVar c y) (t₁.substConstVar c y) := by
+  simp only [Formula.dist, Formula.substConstVar]
+  congr 1
+  funext i
+  split_ifs <;> rfl
+
+lemma Formula.substConstVar_dyadic {L : Signature} (d : DyadicCode) (c : L.Func) (y : Var) :
+    (Formula.dyadic L d).substConstVar c y = Formula.dyadic L d := by
+  induction d with
+  | one =>
+    simp only [Formula.dyadic, Formula.one, Formula.substConstVar, Formula.defaultAtom,
+      Term.substConstVar_var]
+  | neg d ih =>
+    simp only [Formula.dyadic, Formula.substConstVar, ih]
+  | tsub a b iha ihb =>
+    simp only [Formula.dyadic, Formula.substConstVar, iha, ihb]
+  | half d ih =>
+    simp only [Formula.dyadic, Formula.substConstVar, ih]
+
+lemma MetricAxiomSchema.substConstVar {LM : MetricSignature}
+    {ψ : Formula LM.toSignature} (h : MetricAxiomSchema (LM := LM) ψ)
+    (c : LM.Func) (y : Var) (hy : y ∉ ψ.allVars) :
+    MetricAxiomSchema (LM := LM) (ψ.substConstVar c y) := by
+  cases h with
+  | base hbase =>
+    exact .base (hbase.substConstVar c y hy)
+  | A10 x =>
+    simp only [Formula.substConstVar_dist, Term.substConstVar_var]
+    exact .A10 x
+  | A11 x z =>
+    simp only [Formula.substConstVar, Formula.substConstVar_dist, Term.substConstVar_var]
+    exact .A11 x z
+  | A12 x z w =>
+    simp only [Formula.substConstVar, Formula.substConstVar_dist, Term.substConstVar_var]
+    exact .A12 x z w
+  | @A13 f i ε r q v z w hε0 hε1 hεr hqm =>
+    have hterm (t : Term LM.toSignature) :
+        (Term.func f (replaceArg (fun j => Term.var (v j)) i t)).substConstVar c y =
+          .func f (replaceArg (fun j => Term.var (v j)) i (t.substConstVar c y)) := by
+      -- `f` cannot be a 0-ary constant, since `i : Fin (funcArity f)`.
+      have hf0 : ¬ (f = c ∧ LM.funcArity f = 0) := by
+        rintro ⟨_, hf0⟩
+        exact (hf0 ▸ i).elim0
+      simp only [Term.substConstVar, hf0, ↓reduceIte]
+      congr 1
+      funext j
+      simp only [replaceArg]
+      split_ifs <;> simp [Term.substConstVar_var]
+    simp only [Formula.minF, Formula.substConstVar, Formula.substConstVar_dist,
+      Formula.substConstVar_dyadic, Term.substConstVar_var, hterm]
+    exact .A13 f i ε r q v z w hε0 hε1 hεr hqm
+  | @A14 P i ε r q v z w hε0 hε1 hεr hqm =>
+    have hrel (t : Term LM.toSignature) :
+        (fun j => (replaceArg (fun k => Term.var (v k)) i t j).substConstVar c y) =
+          replaceArg (fun k => Term.var (v k)) i (t.substConstVar c y) := by
+      funext j
+      simp only [replaceArg]
+      split_ifs <;> simp [Term.substConstVar_var]
+    simp only [Formula.minF, Formula.substConstVar, Formula.substConstVar_dist,
+      Formula.substConstVar_dyadic, Term.substConstVar_var, hrel]
+    exact .A14 P i ε r q v z w hε0 hε1 hεr hqm
+
+lemma ProvableMetricQ.substConstVar_fresh {LM : MetricSignature}
+    {Γ : Set (Formula LM.toSignature)} (c : LM.Func)
+    (hcΓ : ∀ ψ ∈ Γ, ¬ ψ.hasFunc c) {φ : Formula LM.toSignature}
+    (h : ProvableMetricQ Γ φ) :
+    ∃ S : Finset Var, ∀ y ∉ S, ProvableMetricQ Γ (φ.substConstVar c y) := by
+  induction h with
+  | @ax xs ψ hax =>
+    refine ⟨ψ.allVars, fun y hy => ?_⟩
+    rw [Formula.substConstVar_genList]
+    exact .ax (hax.substConstVar c y hy)
+  | @hyp ψ hmem =>
+    exact ⟨∅, fun y _ => by
+      rw [Formula.substConstVar_of_not_hasFunc ψ c y (hcΓ ψ hmem)]
+      exact .hyp hmem⟩
+  | mp _ _ ih₁ ih₂ =>
+    obtain ⟨S₁, h₁⟩ := ih₁
+    obtain ⟨S₂, h₂⟩ := ih₂
+    exact ⟨S₁ ∪ S₂, fun y hy =>
+      .mp (h₁ y (fun h => hy (Finset.mem_union_left _ h)))
+        (h₂ y (fun h => hy (Finset.mem_union_right _ h)))⟩
+
+/-- Lemma 8.4 for a signature with a metric. -/
+theorem generalize_fresh_const_metric {LM : MetricSignature}
+    (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature)
+    (c : LM.Func) (_hc0 : LM.funcArity c = 0)
+    (hcΓ : ∀ ψ ∈ Γ, ¬ ψ.hasFunc c) (x : Var) (hxφ : x ∉ φ.allVars)
+    (hprov : ProvableMetricQ Γ φ) :
+    ProvableMetricQ Γ (.sup x (φ.substConstVar c x)) := by
+  obtain ⟨Γ₀, hΓ₀, hprov₀⟩ := ProvableMetricQ.compact hprov
+  obtain ⟨S, hS⟩ :=
+    ProvableMetricQ.substConstVar_fresh c (fun ψ hψ => hcΓ ψ (hΓ₀ hψ)) hprov₀
+  have hyT := freshAbove_not_mem (S ∪ φ.allVars ∪ insert x (Γ₀.biUnion Formula.allVars))
+  set y := freshAbove (S ∪ φ.allVars ∪ insert x (Γ₀.biUnion Formula.allVars))
+  simp only [Finset.mem_union, Finset.mem_insert, Finset.mem_biUnion, not_or, not_exists,
+    not_and] at hyT
+  obtain ⟨⟨hyS, hyφ⟩, hyx, hyΓ⟩ := hyT
+  have h1 : ProvableMetricQ (↑Γ₀ : Set (Formula LM.toSignature))
+      (φ.substConstVar c y) := hS y hyS
+  have h2 : ProvableMetricQ (↑Γ₀ : Set (Formula LM.toSignature))
+      (.sup y (φ.substConstVar c y)) :=
+    generalization_theorem_metric _ _ y
+      (fun ψ hψ hfree => hyΓ ψ hψ (Formula.freeVars_subset_allVars ψ hfree)) h1
+  have hxall : x ∉ (Formula.sup y (φ.substConstVar c y)).allVars := by
+    simp only [Formula.allVars, Finset.mem_insert, not_or]
+    refine ⟨fun h => hyx h.symm, fun h => ?_⟩
+    rcases Finset.mem_insert.mp (Formula.allVars_substConstVar φ c y h) with h' | h'
+    · exact hyx h'.symm
+    · exact hxφ h'
+  obtain ⟨-, b2⟩ := provable_bound_subst_metric (Formula.sup y (φ.substConstVar c y)) y x hxall
+  have hyb : y ∉ (φ.substConstVar c y).boundVars := by
+    rw [Formula.boundVars_substConstVar]
+    exact fun h => hyφ (Formula.boundVars_subset_allVars φ h)
+  have hb : (Formula.sup y (φ.substConstVar c y)).boundSubst x y =
+      .sup x (φ.substConstVar c x) := by
+    simp only [Formula.boundSubst, ↓reduceIte, Formula.boundSubst_of_not_mem_boundVars _ hyb]
+    rw [Formula.freeSubst_substConstVar_var φ c x y hyφ]
+  rw [hb] at b2
+  exact (ProvableMetricQ.mp h2 (b2.mono (Set.empty_subset _))).mono hΓ₀
 
 end ContinuousFOL

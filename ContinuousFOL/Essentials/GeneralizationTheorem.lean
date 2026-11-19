@@ -7,6 +7,7 @@ Paper pin: §8 Lemma 8.2; vision.md page 16
 module
 
 public import ContinuousFOL.Essentials.InconsistentIffProvableOne
+public import ContinuousFOL.Group2Axioms.ProvableMetricQ
 public import ContinuousFOL.SubstitutionAndCompletions.FormulaFreeVars
 
 @[expose] public section
@@ -33,5 +34,23 @@ theorem generalization_theorem {L : Signature} (Γ : Set (Formula L)) (φ : Form
         (.tsub (.tsub (.sup x ψ) (.sup x α)) (.sup x (.tsub ψ α))) :=
       ProvableQ.ax0 (.A7 x α ψ)
     exact ProvableQ.mp ihα (ProvableQ.mp ihimp hA7)
+
+/-- Lemma 8.2 (Generalization Theorem) for a signature with a metric. -/
+theorem generalization_theorem_metric {LM : MetricSignature}
+    (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature)
+    (x : Var) (hx : ∀ ψ ∈ Γ, x ∉ ψ.freeVars) (h : ProvableMetricQ Γ φ) :
+    ProvableMetricQ Γ (.sup x φ) := by
+  induction h with
+  | @ax xs ψ hax =>
+    simpa [Formula.genList] using
+      (ProvableMetricQ.ax (Γ := Γ) (xs := x :: xs) (ψ := ψ) hax)
+  | @hyp ψ hmem =>
+    exact ProvableMetricQ.mp (.hyp hmem)
+      (ProvableMetricQ.ax (xs := []) (.base (.A9 x ψ (hx ψ hmem))))
+  | @mp α ψ _hα _himp ihα ihimp =>
+    have hA7 : ProvableMetricQ Γ
+        (.tsub (.tsub (.sup x ψ) (.sup x α)) (.sup x (.tsub ψ α))) :=
+      ProvableMetricQ.ax (xs := []) (.base (.A7 x α ψ))
+    exact ProvableMetricQ.mp ihα (ProvableMetricQ.mp ihimp hA7)
 
 end ContinuousFOL

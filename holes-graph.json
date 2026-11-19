@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T19:45:55Z",
+  "updated": "2026-11-19T19:54:58Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -209,7 +209,7 @@
       "id": "deduction_theorem",
       "label": "Deduction",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/DeductionTheorem.lean:208",
+      "file": "ContinuousFOL/Essentials/DeductionTheorem.lean:209",
       "status": "done",
       "blocker": null,
       "detail": "Deduction theorem (pre)."
@@ -218,7 +218,7 @@
       "id": "deduction_theorem_metric",
       "label": "Deduction met",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/DeductionTheorem.lean:258",
+      "file": "ContinuousFOL/Essentials/DeductionTheorem.lean:277",
       "status": "done",
       "blocker": null,
       "detail": "Deduction theorem (metric)."
@@ -227,19 +227,37 @@
       "id": "generalization_theorem",
       "label": "Generalization",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/GeneralizationTheorem.lean:20",
+      "file": "ContinuousFOL/Essentials/GeneralizationTheorem.lean:21",
       "status": "done",
       "blocker": null,
       "detail": "Generalization theorem."
     },
     {
+      "id": "generalization_theorem_metric",
+      "label": "Generalization met",
+      "section": 8,
+      "file": "ContinuousFOL/Essentials/GeneralizationTheorem.lean:39",
+      "status": "done",
+      "blocker": null,
+      "detail": "Lemma 8.2 for a signature with a metric."
+    },
+    {
       "id": "generalize_fresh_const",
       "label": "Fresh const gen",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/GeneralizeFreshConst.lean:306",
+      "file": "ContinuousFOL/Essentials/GeneralizeFreshConst.lean:310",
       "status": "done",
       "blocker": null,
       "detail": "Generalize over a fresh constant."
+    },
+    {
+      "id": "generalize_fresh_const_metric",
+      "label": "Fresh const gen met",
+      "section": 8,
+      "file": "ContinuousFOL/Essentials/GeneralizeFreshConst.lean:437",
+      "status": "done",
+      "blocker": null,
+      "detail": "Lemma 8.4 for a signature with a metric."
     },
     {
       "id": "ProvableQ.tsub_one",
@@ -260,13 +278,31 @@
       "detail": "\u00acConsistentQ \u2194 ProvableQ \u0393 1."
     },
     {
+      "id": "inconsistent_iff_provable_one_metric",
+      "label": "Incons \u2194 \u22a21 met",
+      "section": 8,
+      "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:83",
+      "status": "done",
+      "blocker": null,
+      "detail": "\u00acConsistentMetricQ \u2194 ProvableMetricQ \u0393 1."
+    },
+    {
       "id": "provable_bound_subst",
       "label": "\u22a2 bound subst",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/ProvableBoundSubst.lean:438",
+      "file": "ContinuousFOL/Essentials/ProvableBoundSubst.lean:439",
       "status": "done",
       "blocker": null,
       "detail": "Bound substitution is provable."
+    },
+    {
+      "id": "provable_bound_subst_metric",
+      "label": "\u22a2 bound subst met",
+      "section": 8,
+      "file": "ContinuousFOL/Essentials/ProvableBoundSubst.lean:498",
+      "status": "done",
+      "blocker": null,
+      "detail": "Lemma 8.3 for a signature with a metric."
     },
     {
       "id": "consistent_adjoin_approx",
@@ -278,6 +314,15 @@
       "detail": "Consistent adjunction of approximate inequalities."
     },
     {
+      "id": "consistent_adjoin_approx_metric",
+      "label": "Adjoin approx met",
+      "section": 8,
+      "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:188",
+      "status": "done",
+      "blocker": null,
+      "detail": "Lemma 8.5(i) for a signature with a metric."
+    },
+    {
       "id": "consistent_adjoin_comparable",
       "label": "Adjoin comparable",
       "section": 8,
@@ -285,6 +330,15 @@
       "status": "done",
       "blocker": null,
       "detail": "Consistent adjunction of comparability."
+    },
+    {
+      "id": "consistent_adjoin_comparable_metric",
+      "label": "Adjoin comparable met",
+      "section": 8,
+      "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:209",
+      "status": "done",
+      "blocker": null,
+      "detail": "Lemma 8.5(ii) for a signature with a metric."
     },
     {
       "id": "mem_iff_provable",
@@ -296,6 +350,15 @@
       "detail": "In a maximal consistent set, membership \u2194 provability."
     },
     {
+      "id": "MaximalConsistentMetric.mem_iff_provable",
+      "label": "\u2208 \u2194 \u22a2 (max) met",
+      "section": 8,
+      "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:130",
+      "status": "done",
+      "blocker": null,
+      "detail": "Remark 8.9 for a signature with a metric."
+    },
+    {
       "id": "maximal_consistent_sup_instantiate",
       "label": "sup instantiate",
       "section": 8,
@@ -303,6 +366,15 @@
       "status": "done",
       "blocker": null,
       "detail": "Lemma 8.11: sup_x \u03c6 \u2238 p \u2208 \u0394 \u21d2 \u2203 \u03c6' \u2261 \u03c6, \u03c6'[t/x] \u2238 p \u2208 \u0394."
+    },
+    {
+      "id": "maximal_consistent_sup_instantiate_metric",
+      "label": "sup instantiate met",
+      "section": 8,
+      "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:178",
+      "status": "done",
+      "blocker": null,
+      "detail": "Lemma 8.11 for a signature with a metric."
     },
     {
       "id": "maximal_consistent_sup_instantiate_aux",
@@ -323,6 +395,15 @@
       "detail": "Degree of truth via Inf of dyadic approximations."
     },
     {
+      "id": "maximal_consistent_sup_eq_inf_metric",
+      "label": "sup = Inf met",
+      "section": 8,
+      "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:188",
+      "status": "done",
+      "blocker": null,
+      "detail": "Lemma 8.12 for a signature with a metric."
+    },
+    {
       "id": "maximal_in_consistent_extensions_iff",
       "label": "Max \u2194 no ext",
       "section": 8,
@@ -330,6 +411,15 @@
       "status": "done",
       "blocker": null,
       "detail": "Maximal among consistent extensions characterization."
+    },
+    {
+      "id": "maximal_in_consistent_extensions_iff_metric",
+      "label": "Max \u2194 no ext met",
+      "section": 8,
+      "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:142",
+      "status": "done",
+      "blocker": null,
+      "detail": "Lemma 8.6 for a signature with a metric."
     },
     {
       "id": "exists_maximal_consistent",
@@ -344,7 +434,7 @@
       "id": "exists_maximal_consistent_metric",
       "label": "Thm 8.10 metric",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:53",
+      "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:55",
       "status": "done",
       "blocker": null,
       "detail": "Metric Lindenbaum lemma."
@@ -497,7 +587,7 @@
       "id": "compactness_metric",
       "label": "Cor 9.12 metric",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/CompactnessMetric.lean:83",
+      "file": "ContinuousFOL/Completeness/CompactnessMetric.lean:58",
       "status": "done",
       "blocker": null,
       "detail": "Corollary 9.12 metric: finite (complete) satisfiability \u21d2 (complete) satisfiability."
@@ -586,6 +676,16 @@
     {
       "from": "exists_maximal_consistent",
       "to": "exists_maximal_consistent_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "maximal_consistent_sup_instantiate",
+      "to": "maximal_consistent_sup_instantiate_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "maximal_consistent_sup_eq_inf",
+      "to": "maximal_consistent_sup_eq_inf_metric",
       "kind": "hard"
     },
     {
@@ -775,7 +875,27 @@
     },
     {
       "from": "generalization_theorem",
+      "to": "generalization_theorem_metric",
+      "kind": "soft"
+    },
+    {
+      "from": "generalization_theorem",
       "to": "generalize_fresh_const",
+      "kind": "soft"
+    },
+    {
+      "from": "generalization_theorem_metric",
+      "to": "generalize_fresh_const_metric",
+      "kind": "soft"
+    },
+    {
+      "from": "provable_bound_subst",
+      "to": "provable_bound_subst_metric",
+      "kind": "soft"
+    },
+    {
+      "from": "generalize_fresh_const",
+      "to": "generalize_fresh_const_metric",
       "kind": "soft"
     },
     {
@@ -784,8 +904,53 @@
       "kind": "soft"
     },
     {
+      "from": "consistent_adjoin_approx",
+      "to": "consistent_adjoin_approx_metric",
+      "kind": "soft"
+    },
+    {
+      "from": "consistent_adjoin_comparable",
+      "to": "consistent_adjoin_comparable_metric",
+      "kind": "soft"
+    },
+    {
       "from": "consistent_adjoin_comparable",
       "to": "exists_maximal_consistent",
+      "kind": "soft"
+    },
+    {
+      "from": "consistent_adjoin_approx_metric",
+      "to": "consistent_adjoin_comparable_metric",
+      "kind": "soft"
+    },
+    {
+      "from": "consistent_adjoin_comparable_metric",
+      "to": "exists_maximal_consistent_metric",
+      "kind": "soft"
+    },
+    {
+      "from": "maximal_in_consistent_extensions_iff",
+      "to": "maximal_in_consistent_extensions_iff_metric",
+      "kind": "soft"
+    },
+    {
+      "from": "inconsistent_iff_provable_one",
+      "to": "inconsistent_iff_provable_one_metric",
+      "kind": "soft"
+    },
+    {
+      "from": "mem_iff_provable",
+      "to": "MaximalConsistentMetric.mem_iff_provable",
+      "kind": "soft"
+    },
+    {
+      "from": "maximal_consistent_sup_instantiate",
+      "to": "maximal_consistent_sup_instantiate_metric",
+      "kind": "soft"
+    },
+    {
+      "from": "maximal_consistent_sup_eq_inf",
+      "to": "maximal_consistent_sup_eq_inf_metric",
       "kind": "soft"
     },
     {

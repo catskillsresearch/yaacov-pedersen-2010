@@ -2,8 +2,8 @@
 
 Inventory of paper-facing Lean holes, ordered **prove-first**.
 
-**Updated:** 2026-11-19T19:45:55Z
-**Holes:** 10 open+blocked · 8 open · 2 blocked · 45 done.
+**Updated:** 2026-11-19T19:54:58Z
+**Holes:** 10 open+blocked · 8 open · 2 blocked · 55 done.
 
 **Live board:** [`holes.html`](holes.html) (graph embedded; open the file directly).
 
@@ -83,22 +83,32 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 
 | Status | Id | Label | File |
 |---|---|---|---|
-| done | `deduction_theorem` | Deduction | `ContinuousFOL/Essentials/DeductionTheorem.lean:208` |
-| done | `deduction_theorem_metric` | Deduction met | `ContinuousFOL/Essentials/DeductionTheorem.lean:258` |
-| done | `generalization_theorem` | Generalization | `ContinuousFOL/Essentials/GeneralizationTheorem.lean:20` |
-| done | `generalize_fresh_const` | Fresh const gen | `ContinuousFOL/Essentials/GeneralizeFreshConst.lean:306` |
+| done | `deduction_theorem` | Deduction | `ContinuousFOL/Essentials/DeductionTheorem.lean:209` |
+| done | `deduction_theorem_metric` | Deduction met | `ContinuousFOL/Essentials/DeductionTheorem.lean:277` |
+| done | `generalization_theorem` | Generalization | `ContinuousFOL/Essentials/GeneralizationTheorem.lean:21` |
+| done | `generalization_theorem_metric` | Generalization met | `ContinuousFOL/Essentials/GeneralizationTheorem.lean:39` |
+| done | `generalize_fresh_const` | Fresh const gen | `ContinuousFOL/Essentials/GeneralizeFreshConst.lean:310` |
+| done | `generalize_fresh_const_metric` | Fresh const gen met | `ContinuousFOL/Essentials/GeneralizeFreshConst.lean:437` |
 | done | `ProvableQ.tsub_one` | ⊢ φ ∸ 1 | `ContinuousFOL/Essentials/InconsistentIffProvableOne.lean:90` |
 | done | `inconsistent_iff_provable_one` | Incons ↔ ⊢1 | `ContinuousFOL/Essentials/InconsistentIffProvableOne.lean:104` |
-| done | `provable_bound_subst` | ⊢ bound subst | `ContinuousFOL/Essentials/ProvableBoundSubst.lean:438` |
+| done | `inconsistent_iff_provable_one_metric` | Incons ↔ ⊢1 met | `ContinuousFOL/Essentials/MaximalConsistentMetric.lean:83` |
+| done | `provable_bound_subst` | ⊢ bound subst | `ContinuousFOL/Essentials/ProvableBoundSubst.lean:439` |
+| done | `provable_bound_subst_metric` | ⊢ bound subst met | `ContinuousFOL/Essentials/ProvableBoundSubst.lean:498` |
 | done | `consistent_adjoin_approx` | Adjoin approx | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:136` |
+| done | `consistent_adjoin_approx_metric` | Adjoin approx met | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:188` |
 | done | `consistent_adjoin_comparable` | Adjoin comparable | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:158` |
+| done | `consistent_adjoin_comparable_metric` | Adjoin comparable met | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:209` |
 | done | `mem_iff_provable` | ∈ ↔ ⊢ (max) | `ContinuousFOL/Essentials/MaximalConsistent.lean:40` |
+| done | `MaximalConsistentMetric.mem_iff_provable` | ∈ ↔ ⊢ (max) met | `ContinuousFOL/Essentials/MaximalConsistentMetric.lean:130` |
 | done | `maximal_consistent_sup_instantiate` | sup instantiate | `ContinuousFOL/Essentials/MaximalConsistent.lean:199` |
+| done | `maximal_consistent_sup_instantiate_metric` | sup instantiate met | `ContinuousFOL/Essentials/MaximalConsistentMetric.lean:178` |
 | done | `maximal_consistent_sup_instantiate_aux` | 8.11 helper | `ContinuousFOL/Essentials/MaximalConsistent.lean:173` |
 | done | `maximal_consistent_sup_eq_inf` | sup = Inf | `ContinuousFOL/Essentials/MaximalConsistent.lean:247` |
+| done | `maximal_consistent_sup_eq_inf_metric` | sup = Inf met | `ContinuousFOL/Essentials/MaximalConsistentMetric.lean:188` |
 | done | `maximal_in_consistent_extensions_iff` | Max ↔ no ext | `ContinuousFOL/Essentials/MaximalConsistent.lean:284` |
+| done | `maximal_in_consistent_extensions_iff_metric` | Max ↔ no ext met | `ContinuousFOL/Essentials/MaximalConsistentMetric.lean:142` |
 | done | `exists_maximal_consistent` | Thm 8.10 Lindenbaum | `ContinuousFOL/Essentials/MaximalConsistent.lean:318` |
-| done | `exists_maximal_consistent_metric` | Thm 8.10 metric | `ContinuousFOL/Essentials/MaximalConsistentMetric.lean:53` |
+| done | `exists_maximal_consistent_metric` | Thm 8.10 metric | `ContinuousFOL/Essentials/MaximalConsistentMetric.lean:55` |
 
 ### §9 — 1 hole(s)
 
@@ -120,7 +130,7 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 | done | `pavelka_completeness_pre` | Cor 9.8 Pavelka | `ContinuousFOL/Completeness/PavelkaCompleteness.lean:35` |
 | done | `pavelka_completeness_metric` | Cor 9.8 metric | `ContinuousFOL/Completeness/PavelkaCompleteness.lean:117` |
 | done | `compactness_pre` | Cor 9.12 compact | `ContinuousFOL/Completeness/CompactnessPre.lean:21` |
-| done | `compactness_metric` | Cor 9.12 metric | `ContinuousFOL/Completeness/CompactnessMetric.lean:83` |
+| done | `compactness_metric` | Cor 9.12 metric | `ContinuousFOL/Completeness/CompactnessMetric.lean:58` |
 | open | `complete_re_theory_decidable` | Cor 9.11 RE ⇒ dec. | `ContinuousFOL/Completeness/UniformlyComputableDegree.lean:54` |
 
 ## Dependency sketch

@@ -173,4 +173,63 @@ theorem consistent_adjoin_comparable {L : Signature} {Γ : Set (Formula L)}
     exact (inconsistent_iff_provable_one Γ).mpr
       (ProvableQ.one_of_iterSub_one hswap n hn) hcons
 
+
+lemma ProvableMetricQ.one_of_iterSub_one {LM : MetricSignature}
+    {Γ : Set (Formula LM.toSignature)} {θ : Formula LM.toSignature}
+    (hθ : ProvableMetricQ Γ θ) (n : ℕ)
+    (h : ProvableMetricQ Γ (Formula.iterSub (Formula.one LM.toSignature) θ n)) :
+    ProvableMetricQ Γ (Formula.one LM.toSignature) := by
+  induction n with
+  | zero => simpa [Formula.iterSub] using h
+  | succ n ih =>
+    exact ih (by simpa [Formula.iterSub] using ProvableMetricQ.mp hθ h)
+
+/-- Lemma 8.5 (i) for a signature with a metric. -/
+theorem consistent_adjoin_approx_metric {LM : MetricSignature}
+    {Γ : Set (Formula LM.toSignature)} (hcons : ConsistentMetricQ Γ)
+    (φ : Formula LM.toSignature)
+    (happrox : ∀ n : ℕ, ProvableMetricQ Γ (.tsub φ (Formula.pow2Neg LM.toSignature n))) :
+    ConsistentMetricQ (Γ ∪ {φ}) := by
+  by_contra hincons
+  have h1 : ProvableMetricQ (Γ ∪ {φ}) (Formula.one LM.toSignature) := by
+    by_contra hnot
+    exact hincons ⟨Formula.one LM.toSignature, hnot⟩
+  obtain ⟨m, hm⟩ := (deduction_theorem_metric Γ (Formula.one LM.toSignature) φ).mp h1
+  have hD0 := ProvableMetricQ.cancel_iterSub (happrox (m + 2)) (2 * m)
+    (ProvableMetricQ.of_provableQ (ProvableQ.approx_schema Γ φ m))
+  have hD : ProvableMetricQ Γ (.half (Formula.one LM.toSignature)) :=
+    ProvableMetricQ.mp hm hD0
+  have hone : ProvableMetricQ Γ (Formula.one LM.toSignature) :=
+    ProvableMetricQ.cancel_iterSub hD 2
+      (ProvableMetricQ.of_provableQ (ProvableQ.one_sub_two_halves Γ))
+  obtain ⟨ψ, hψ⟩ := hcons
+  exact hψ (ProvableMetricQ.mp hone (ProvableMetricQ.of_provableQ (ProvableQ.tsub_one Γ ψ)))
+
+/-- Lemma 8.5 (ii) for a signature with a metric. -/
+theorem consistent_adjoin_comparable_metric {LM : MetricSignature}
+    {Γ : Set (Formula LM.toSignature)} (hcons : ConsistentMetricQ Γ)
+    (φ ψ : Formula LM.toSignature) :
+    ConsistentMetricQ (Γ ∪ {.tsub φ ψ}) ∨ ConsistentMetricQ (Γ ∪ {.tsub ψ φ}) := by
+  by_cases hleft : ConsistentMetricQ (Γ ∪ {.tsub φ ψ})
+  · exact Or.inl hleft
+  · refine Or.inr ?_
+    by_contra hright
+    have hswap : ProvableMetricQ Γ (.tsub ψ φ) := by
+      have h1 : ProvableMetricQ (Γ ∪ {.tsub φ ψ}) (Formula.one LM.toSignature) := by
+        by_contra hnot
+        exact hleft ⟨Formula.one LM.toSignature, hnot⟩
+      obtain ⟨n, hn⟩ := (deduction_theorem_metric Γ (Formula.one LM.toSignature)
+        (.tsub φ ψ)).mp h1
+      exact ProvableMetricQ.mp hn
+        (ProvableMetricQ.of_provableQ (ProvableQ.swap_one_iter Γ ψ φ n))
+    have h1 : ProvableMetricQ (Γ ∪ {.tsub ψ φ}) (Formula.one LM.toSignature) := by
+      by_contra hnot
+      exact hright ⟨Formula.one LM.toSignature, hnot⟩
+    obtain ⟨n, hn⟩ := (deduction_theorem_metric Γ (Formula.one LM.toSignature)
+      (.tsub ψ φ)).mp h1
+    have hone : ProvableMetricQ Γ (Formula.one LM.toSignature) :=
+      ProvableMetricQ.one_of_iterSub_one hswap n hn
+    obtain ⟨θ, hθ⟩ := hcons
+    exact hθ (ProvableMetricQ.mp hone (ProvableMetricQ.of_provableQ (ProvableQ.tsub_one Γ θ)))
+
 end ContinuousFOL

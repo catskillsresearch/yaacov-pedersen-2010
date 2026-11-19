@@ -7,6 +7,7 @@ Paper pin: §8 Lemma 8.3; vision.md page 16–17
 module
 
 public import ContinuousFOL.Essentials.GeneralizationTheorem
+public import ContinuousFOL.Essentials.DeductionTheorem
 public import ContinuousFOL.SubstitutionAndCompletions.FormulaBoundSubst
 public import ContinuousFOL.SubstitutionAndCompletions.BoundSubstitutionLemma
 public import ContinuousFOL.BlackBox.CLFiniteStrongCompleteness
@@ -491,5 +492,16 @@ theorem provable_bound_subst {L : Signature} (φ : Formula L) (x y : Var)
         (Formula.boundSubst_freeSubstCorrect α hyα)
         (Formula.not_mem_boundVars_boundSubst α hyx) h₁ h₂
     · exact ⟨ProvableQ.sup_cong0 z h₁, ProvableQ.sup_cong0 z h₂⟩
+
+
+/-- Lemma 8.3 for a signature with a metric. -/
+theorem provable_bound_subst_metric {LM : MetricSignature} (φ : Formula LM.toSignature)
+    (x y : Var) (hy : y ∉ φ.allVars) :
+    ProvableMetricQ (∅ : Set (Formula LM.toSignature))
+      (.tsub φ (φ.boundSubst y x)) ∧
+    ProvableMetricQ (∅ : Set (Formula LM.toSignature))
+      (.tsub (φ.boundSubst y x) φ) :=
+  let h := provable_bound_subst φ x y hy
+  ⟨ProvableMetricQ.of_provableQ h.1, ProvableMetricQ.of_provableQ h.2⟩
 
 end ContinuousFOL

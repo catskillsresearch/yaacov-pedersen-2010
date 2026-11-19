@@ -10,6 +10,7 @@ public import ContinuousFOL.Group2Axioms.ProvableQ
 public import ContinuousFOL.Group2Axioms.ProvableMetricQ
 public import ContinuousFOL.LanguageAndSemantics.FormulaIterSub
 public import ContinuousFOL.Essentials.ProvableQMono
+public import Mathlib.Data.Finset.Basic
 public import ContinuousFOL.Essentials.InconsistentIffProvableOne
 public import ContinuousFOL.BlackBox.LukWeakCompleteness
 public import Mathlib.Tactic.Linarith
@@ -245,6 +246,24 @@ lemma ProvableMetricQ.mono {LM : MetricSignature}
   | ax hax => exact .ax hax
   | hyp hmem => exact .hyp (hsub hmem)
   | mp h₁ h₂ ih₁ ih₂ => exact .mp ih₁ ih₂
+
+lemma ProvableMetricQ.compact {LM : MetricSignature} {Γ : Set (Formula LM.toSignature)} :
+    ∀ {φ : Formula LM.toSignature}, ProvableMetricQ Γ φ →
+      ∃ Γ₀ : Finset (Formula LM.toSignature),
+        (↑Γ₀ : Set (Formula LM.toSignature)) ⊆ Γ ∧ ProvableMetricQ (↑Γ₀) φ := by
+  intro φ h
+  induction h with
+  | ax hax => exact ⟨∅, by simp [Finset.coe_empty], .ax hax⟩
+  | hyp hmem =>
+    refine ⟨{_}, ?_, .hyp (Finset.mem_singleton_self _)⟩
+    simpa [Finset.coe_singleton] using Set.singleton_subset_iff.mpr hmem
+  | mp _ _ ih₁ ih₂ =>
+    obtain ⟨Γ₁, h₁s, hp₁⟩ := ih₁
+    obtain ⟨Γ₂, h₂s, hp₂⟩ := ih₂
+    refine ⟨Γ₁ ∪ Γ₂, ?_, .mp (hp₁.mono ?_) (hp₂.mono ?_)⟩
+    · simpa [Finset.coe_union] using Set.union_subset h₁s h₂s
+    · simp [Finset.coe_union]
+    · simp [Finset.coe_union]
 
 lemma ProvableMetricQ.cancel_iterSub {LM : MetricSignature}
     {Γ : Set (Formula LM.toSignature)} {φ ψ : Formula LM.toSignature}

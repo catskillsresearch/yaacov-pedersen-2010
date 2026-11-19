@@ -191,12 +191,79 @@ theorem maximal_consistent_sup_instantiate {L : Signature} {Δ : Set (Formula L)
   exact (hmc.mem_iff_provable _).mpr
     (ProvableQ.tsub_trans (ProvableQ.tsub_trans h2 h1) h3)
 
+/-- CL: `⊢ 0 ∸ φ`. -/
+lemma ProvableQ.zero_tsub {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) :
+    ProvableQ Γ (.tsub (Formula.dyadic L .zero) φ) := by
+  have h := CLPropForm.toFormula_provable_of_valid (Γ := Γ) ![φ, Formula.defaultAtom L]
+    (.tsub (CLPropForm.dyadic (.var 1) .zero) (.var 0)) (by
+      intro v hv
+      obtain ⟨h0, _⟩ := hv 0
+      simp only [CLPropForm.eval, CLPropForm.eval_dyadic, DyadicCode.val_zero, tsubR]
+      exact max_eq_right (by linarith))
+  have hform : (CLPropForm.tsub (CLPropForm.dyadic (.var 1) .zero) (.var 0)).toFormula
+      ![φ, Formula.defaultAtom L] = .tsub (Formula.dyadic L .zero) φ := by
+    simp only [CLPropForm.toFormula, CLPropForm.toFormula_dyadic ![φ, Formula.defaultAtom L] 1 rfl]
+    rfl
+  rw [hform] at h
+  exact h
+
+/-- A proof of a dyadic constant of positive value yields a proof of `1` (CL, Fact 4.5). -/
+lemma ProvableQ.one_of_dyadic_pos {L : Signature} {Γ : Set (Formula L)} (d : DyadicCode)
+    (hd : 0 < d.val) (h : ProvableQ Γ (Formula.dyadic L d)) : ProvableQ Γ (Formula.one L) := by
+  obtain ⟨k, hk⟩ := exists_nat_ge (1 / d.val)
+  have hk' : 1 ≤ (k : ℝ) * d.val := by rw [div_le_iff₀ hd] at hk; exact hk
+  have ht := CLPropForm.toFormula_provable_of_valid (Γ := Γ) ![Formula.defaultAtom L]
+    (CLPropForm.iterSub (CLPropForm.one (.var 0)) (CLPropForm.dyadic (.var 0) d) k) (by
+      intro v _
+      rw [CLPropForm.eval_iterSub, CLPropForm.eval_dyadic]
+      have hone : (CLPropForm.one (.var (0 : Fin 1))).eval v = 1 := by
+        simp [CLPropForm.one, CLPropForm.eval, tsubR]
+      rw [hone, iterSubR_eq zero_le_one hd.le]
+      exact max_eq_right (by linarith))
+  have hform : (CLPropForm.iterSub (CLPropForm.one (.var 0)) (CLPropForm.dyadic (.var 0) d)
+      k).toFormula ![Formula.defaultAtom L] =
+        Formula.iterSub (Formula.one L) (Formula.dyadic L d) k := by
+    rw [CLPropForm.toFormula_iterSub, CLPropForm.toFormula_dyadic _ 0 rfl]
+    simp [CLPropForm.one, CLPropForm.toFormula, Formula.one]
+  rw [hform] at ht
+  exact ProvableQ.cancel_iterSub h k ht
+
 /-- Lemma 8.12: Dedekind cut equality of dyadic lower and upper bounds in `Δ`. -/
 theorem maximal_consistent_sup_eq_inf {L : Signature} {Δ : Set (Formula L)}
     (hmc : MaximalConsistent Δ) (φ : Formula L) :
     sSup {r : ℝ | ∃ p : DyadicCode, r = p.val ∧ Formula.tsub (Formula.dyadic L p) φ ∈ Δ} =
     sInf {r : ℝ | ∃ q : DyadicCode, r = q.val ∧ Formula.tsub φ (Formula.dyadic L q) ∈ Δ} := by
-  sorry
+  set A := {r : ℝ | ∃ p : DyadicCode, r = p.val ∧ Formula.tsub (Formula.dyadic L p) φ ∈ Δ}
+  set B := {r : ℝ | ∃ q : DyadicCode, r = q.val ∧ Formula.tsub φ (Formula.dyadic L q) ∈ Δ}
+  have h0A : (0 : ℝ) ∈ A :=
+    ⟨.zero, DyadicCode.val_zero.symm, (hmc.mem_iff_provable _).mpr (ProvableQ.zero_tsub Δ φ)⟩
+  have h1B : (1 : ℝ) ∈ B :=
+    ⟨.one, DyadicCode.val_one.symm, (hmc.mem_iff_provable _).mpr (ProvableQ.tsub_one Δ φ)⟩
+  -- Consistency: every lower bound `p` lies below every upper bound `q`.
+  have hAB : ∀ a ∈ A, ∀ b ∈ B, a ≤ b := by
+    rintro a ⟨p, rfl, hp⟩ b ⟨q, rfl, hq⟩
+    by_contra hlt
+    push Not at hlt
+    have hpq : ProvableQ Δ (Formula.dyadic L (.tsub p q)) :=
+      ProvableQ.tsub_trans (.hyp hp) (.hyp hq)
+    have hpos : 0 < (DyadicCode.tsub p q).val := by
+      simp only [DyadicCode.val, tsubR]
+      exact lt_max_of_lt_left (by linarith)
+    exact (inconsistent_iff_provable_one Δ).mpr
+      (ProvableQ.one_of_dyadic_pos (.tsub p q) hpos hpq) hmc.consistent
+  have hAbdd : BddAbove A := ⟨1, by rintro a ⟨p, rfl, -⟩; exact (DyadicCode.val_mem_Icc p).2⟩
+  have hBbdd : BddBelow B := ⟨0, by rintro b ⟨q, rfl, -⟩; exact (DyadicCode.val_mem_Icc q).1⟩
+  apply le_antisymm
+  · exact csSup_le ⟨0, h0A⟩ fun a ha => le_csInf ⟨1, h1B⟩ fun b hb => hAB a ha b hb
+  · -- Comparability + density of dyadics (Remark 3.4) close any gap.
+    by_contra hlt
+    push Not at hlt
+    have hx : 0 ≤ sSup A := le_csSup hAbdd h0A
+    have hy : sInf B ≤ 1 := csInf_le hBbdd h1B
+    obtain ⟨r, hr1, hr2⟩ := DyadicCode.dense_in_Icc hx hy hlt
+    rcases hmc.comparable (Formula.dyadic L r) φ with h | h
+    · exact absurd (le_csSup hAbdd ⟨r, rfl, h⟩) (not_le.mpr hr1)
+    · exact absurd (csInf_le hBbdd ⟨r, rfl, h⟩) (not_le.mpr hr2)
 
 /-- Lemma 8.6: Maximal elements of `E(Γ)` coincide with `MaximalConsistent`. -/
 theorem maximal_in_consistent_extensions_iff {L : Signature} {Γ Δ : Set (Formula L)}

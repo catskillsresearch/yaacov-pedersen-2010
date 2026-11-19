@@ -66,6 +66,107 @@ lemma ProvableQ.one_of_pow2Neg {L : Signature} {Γ : Set (Formula L)} (n : ℕ)
       simpa [Formula.pow2Neg, DyadicCode.pow2Neg, Formula.dyadic] using h
     exact ih (ProvableQ.of_half hhalf)
 
+/-- Congruence of `∸` under provable two-way `∸`-bounds (cf. proof of Lemma 8.3). -/
+lemma ProvableQ.tsub_congr0 {L : Signature} {α α' β β' : Formula L}
+    (hα₁ : ProvableQ (∅ : Set (Formula L)) (.tsub α α'))
+    (hα₂ : ProvableQ (∅ : Set (Formula L)) (.tsub α' α))
+    (hβ₁ : ProvableQ (∅ : Set (Formula L)) (.tsub β β'))
+    (hβ₂ : ProvableQ (∅ : Set (Formula L)) (.tsub β' β)) :
+    ProvableQ ∅ (.tsub (.tsub α β) (.tsub α' β')) ∧
+    ProvableQ ∅ (.tsub (.tsub α' β') (.tsub α β)) :=
+  ⟨ProvableQ.mp hα₁ (ProvableQ.mp hβ₂
+      (ProvableQ.tsub_cong_schema (Γ := (∅ : Set (Formula L))) β' β α' α)),
+    ProvableQ.mp hα₂ (ProvableQ.mp hβ₁
+      (ProvableQ.tsub_cong_schema (Γ := (∅ : Set (Formula L))) β β' α α'))⟩
+
+lemma Formula.boundSubst_of_not_mem_boundVars {L : Signature} (φ : Formula L) {x y : Var}
+    (hx : x ∉ φ.boundVars) : φ.boundSubst y x = φ := by
+  induction φ with
+  | rel _ _ => rfl
+  | tsub α β ihα ihβ =>
+    simp only [Formula.boundVars, Finset.mem_union, not_or] at hx
+    simp only [Formula.boundSubst, ihα hx.1, ihβ hx.2]
+  | neg α ih => simp only [Formula.boundSubst, ih hx]
+  | half α ih => simp only [Formula.boundSubst, ih hx]
+  | sup z α ih =>
+    simp only [Formula.boundVars, Finset.mem_insert, not_or] at hx
+    have hzx : ¬ z = x := fun h => hx.1 h.symm
+    simp only [Formula.boundSubst, ih hx.2, eq_false hzx, ↓reduceIte]
+
+lemma Formula.rank_freeSubst {L : Signature} (φ : Formula L) (t : Term L) (x : Var) :
+    (φ.freeSubst t x).rank = φ.rank := by
+  induction φ with
+  | rel _ _ => rfl
+  | tsub α β ihα ihβ => simp [Formula.freeSubst, Formula.rank, ihα, ihβ]
+  | neg α ih => simp [Formula.freeSubst, Formula.rank, ih]
+  | half α ih => simp [Formula.freeSubst, Formula.rank, ih]
+  | sup z α ih => by_cases h : z = x <;> simp [Formula.freeSubst, Formula.rank, h, ih]
+
+lemma Formula.rank_renameBound {L : Signature} (avoid : Finset Var) (φ : Formula L) :
+    (φ.renameBound avoid).rank = φ.rank := by
+  induction φ with
+  | rel _ _ => rfl
+  | tsub α β ihα ihβ => simp [Formula.renameBound, Formula.rank, ihα, ihβ]
+  | neg α ih => simp [Formula.renameBound, Formula.rank, ih]
+  | half α ih => simp [Formula.renameBound, Formula.rank, ih]
+  | sup z α ih =>
+    simp only [Formula.renameBound]
+    split_ifs <;> simp [Formula.rank, Formula.rank_freeSubst, ih]
+
+lemma Formula.freeSubstCorrect_of_disjoint {L : Signature} (φ : Formula L) (t : Term L)
+    (x : Var) (h : Disjoint t.vars φ.boundVars) : φ.FreeSubstCorrect t x := by
+  induction φ with
+  | rel _ _ => simp [Formula.FreeSubstCorrect]
+  | tsub α β ihα ihβ =>
+    simp only [Formula.boundVars, Finset.disjoint_union_right] at h
+    exact ⟨ihα h.1, ihβ h.2⟩
+  | neg α ih => exact ih h
+  | half α ih => exact ih h
+  | sup z α ih =>
+    simp only [Formula.boundVars, Finset.disjoint_insert_right] at h
+    unfold Formula.FreeSubstCorrect
+    by_cases hz : z = x
+    · simp [hz]
+    · simp only [eq_false hz, ↓reduceIte]
+      exact ⟨fun _ => h.1, ih h.2⟩
+
+/-- Renaming bound variables (Lemma 6.4's `renameBound`) is provably two-way bounded,
+    by repeated applications of Lemma 8.3 and (A2) (cf. proof of Lemma 8.11). -/
+lemma ProvableQ.renameBound {L : Signature} (avoid : Finset Var) (φ : Formula L) :
+    ProvableQ (∅ : Set (Formula L)) (.tsub φ (φ.renameBound avoid)) ∧
+    ProvableQ ∅ (.tsub (φ.renameBound avoid) φ) := by
+  induction φ with
+  | rel _ _ => exact ⟨ProvableQ.imp_refl _, ProvableQ.imp_refl _⟩
+  | tsub α β ihα ihβ =>
+    simp only [Formula.renameBound]
+    exact ProvableQ.tsub_congr0 ihα.1 ihα.2 ihβ.1 ihβ.2
+  | neg α ih =>
+    simp only [Formula.renameBound]
+    exact ⟨ProvableQ.neg_tsub ih.2, ProvableQ.neg_tsub ih.1⟩
+  | half α ih =>
+    simp only [Formula.renameBound]
+    exact ⟨ProvableQ.half_mono ih.1, ProvableQ.half_mono ih.2⟩
+  | sup z α ih =>
+    simp only [Formula.renameBound]
+    split_ifs with hz
+    · set α' := α.renameBound avoid with hα'
+      set y := freshAbove (avoid ∪ α'.allVars) with hy
+      have hyfresh := freshAbove_not_mem (avoid ∪ α'.allVars)
+      rw [← hy] at hyfresh
+      have hyz : y ≠ z := fun h => hyfresh (Finset.mem_union_left _ (h ▸ hz))
+      have hyall : y ∉ (Formula.sup z α').allVars := by
+        simp only [Formula.allVars, Finset.mem_insert, not_or]
+        exact ⟨hyz, fun h => hyfresh (Finset.mem_union_right _ h)⟩
+      have hzb : z ∉ α'.boundVars := fun h =>
+        Finset.disjoint_left.mp (Formula.boundVars_renameBound avoid α) hz h
+      obtain ⟨b1, b2⟩ := provable_bound_subst (Formula.sup z α') z y hyall
+      have hb : (Formula.sup z α').boundSubst y z = .sup y (α'.freeSubst (.var y) z) := by
+        simp only [Formula.boundSubst, ↓reduceIte, Formula.boundSubst_of_not_mem_boundVars α' hzb]
+      rw [hb] at b1 b2
+      exact ⟨ProvableQ.tsub_trans (ProvableQ.sup_cong0 z ih.1) b1,
+        ProvableQ.tsub_trans b2 (ProvableQ.sup_cong0 z ih.2)⟩
+    · exact ⟨ProvableQ.sup_cong0 z ih.1, ProvableQ.sup_cong0 z ih.2⟩
+
 /-- Lemma 8.11: Instantiation inside maximal consistent sets after bound renaming. -/
 theorem maximal_consistent_sup_instantiate {L : Signature} {Δ : Set (Formula L)}
     (hmc : MaximalConsistent Δ) (t : Term L) (x : Var) (φ : Formula L) (p : DyadicCode)
@@ -73,7 +174,22 @@ theorem maximal_consistent_sup_instantiate {L : Signature} {Δ : Set (Formula L)
     ∃ φ' : Formula L, (φ ≡ᶠ φ') ∧ φ'.rank = φ.rank ∧
       Formula.FreeSubstCorrect φ' t x ∧
       Formula.tsub (φ'.freeSubst t x) (Formula.dyadic L p) ∈ Δ := by
-  sorry
+  -- Lemma 6.4: rename bound variables of `φ` off the variables of `t`.
+  refine ⟨φ.renameBound t.vars, fun M σ => (Formula.eval_renameBound M t.vars φ σ).symm,
+    Formula.rank_renameBound _ _,
+    Formula.freeSubstCorrect_of_disjoint _ t x (Formula.boundVars_renameBound t.vars φ), ?_⟩
+  have hcorr : (φ.renameBound t.vars).FreeSubstCorrect t x :=
+    Formula.freeSubstCorrect_of_disjoint _ t x (Formula.boundVars_renameBound t.vars φ)
+  -- Lemma 8.3 + (A2), Generalization, (A7): `⊢ sup_x φ' ∸ sup_x φ`.
+  have h1 : ProvableQ Δ (.tsub (.sup x (φ.renameBound t.vars)) (.sup x φ)) :=
+    (ProvableQ.sup_cong0 x (ProvableQ.renameBound t.vars φ).2).mono (Set.empty_subset _)
+  -- (A8): `⊢ φ'[t/x] ∸ sup_x φ'`.
+  have h2 : ProvableQ Δ (.tsub ((φ.renameBound t.vars).freeSubst t x)
+      (.sup x (φ.renameBound t.vars))) :=
+    ProvableQ.ax0 (.A8 x t _ hcorr)
+  have h3 : ProvableQ Δ (.tsub (.sup x φ) (Formula.dyadic L p)) := .hyp hmem
+  exact (hmc.mem_iff_provable _).mpr
+    (ProvableQ.tsub_trans (ProvableQ.tsub_trans h2 h1) h3)
 
 /-- Lemma 8.12: Dedekind cut equality of dyadic lower and upper bounds in `Δ`. -/
 theorem maximal_consistent_sup_eq_inf {L : Signature} {Δ : Set (Formula L)}

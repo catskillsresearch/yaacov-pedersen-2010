@@ -125,7 +125,7 @@ NODES: dict[str, dict] = {
         "label": "eval unif. cont.",
         "section": 6,
         "file": "ContinuousFOL/SubstitutionAndCompletions/EvalUniformlyContinuous.lean",
-        "detail": "Formula eval is uniformly continuous on metric structures.",
+        "detail": "Theorem 6.8: induced maps of terms and formulae on M^n are uniformly continuous (term half proved).",
     },
     "entails_metric_iff_complete": {
         "label": "Entails ↔ complete",

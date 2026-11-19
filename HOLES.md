@@ -2,7 +2,7 @@
 
 Inventory of paper-facing Lean holes, ordered **prove-first**.
 
-**Updated:** 2026-11-19T20:01:14Z
+**Updated:** 2026-11-19T20:04:07Z
 **Holes:** 10 open+blocked · 8 open · 2 blocked · 56 done.
 
 **Live board:** [`holes.html`](holes.html) (graph embedded; open the file directly).
@@ -19,7 +19,7 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 |---|---|---|
 | `cl_consistent_iff_satisfiable` | Fact 4.1 CL | `ContinuousFOL/BlackBox/CLConsistentIffSatisfiable.lean:20` |
 | `cl_finite_strong_completeness` | Fact 4.2 finite | `ContinuousFOL/BlackBox/CLFiniteStrongCompleteness.lean:21` |
-| `cl_approx_strong_completeness` | Fact 4.3 approx | `ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:22` |
+| `cl_approx_strong_completeness` | Fact 4.3 approx | `ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:27` |
 | `luk_consistent_iff_satisfiable` | Fact 4.4 Łuk | `ContinuousFOL/BlackBox/LukConsistentIffSatisfiable.lean:20` |
 | `luk_weak_completeness` | Fact 4.5 weak | `ContinuousFOL/BlackBox/LukWeakCompleteness.lean:20` |
 | `exists_metric_completion` | Metric completion | `ContinuousFOL/SubstitutionAndCompletions/ExistsMetricCompletion.lean:21` |
@@ -48,7 +48,7 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 |---|---|---|---|
 | open | `cl_consistent_iff_satisfiable` | Fact 4.1 CL | `ContinuousFOL/BlackBox/CLConsistentIffSatisfiable.lean:20` |
 | open | `cl_finite_strong_completeness` | Fact 4.2 finite | `ContinuousFOL/BlackBox/CLFiniteStrongCompleteness.lean:21` |
-| open | `cl_approx_strong_completeness` | Fact 4.3 approx | `ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:22` |
+| open | `cl_approx_strong_completeness` | Fact 4.3 approx | `ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:27` |
 | open | `luk_consistent_iff_satisfiable` | Fact 4.4 Łuk | `ContinuousFOL/BlackBox/LukConsistentIffSatisfiable.lean:20` |
 | open | `luk_weak_completeness` | Fact 4.5 weak | `ContinuousFOL/BlackBox/LukWeakCompleteness.lean:20` |
 

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T20:01:14Z",
+  "updated": "2026-11-19T20:04:07Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -74,7 +74,7 @@
       "id": "cl_approx_strong_completeness",
       "label": "Fact 4.3 approx",
       "section": 4,
-      "file": "ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:22",
+      "file": "ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:27",
       "status": "open",
       "blocker": null,
       "detail": "CL approximated strong completeness."

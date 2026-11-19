@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-19T18:03:24Z",
-  "sorryCount": 23,
+  "updated": "2026-11-19T18:10:38Z",
+  "sorryCount": 22,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
     "blocked": "Waiting on incomplete required proof-deps",
@@ -13,7 +13,7 @@
     "\u00a74 axioms are intentional black boxes and stay open until discharged.",
     "Blue = done. Green = open. Grey = blocked.",
     "Regenerate with: python3 scripts/build_holes.py",
-    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, exists_metric_completion, eval_uniformly_continuous, exists_henkin_extension, exists_henkin_extension_metric, termPreStructure_eval_eq_sup."
+    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, exists_metric_completion, eval_uniformly_continuous, exists_henkin_extension, exists_henkin_extension_metric."
   ],
   "nodes": [
     {
@@ -371,8 +371,8 @@
       "id": "termPreStructure_eval_eq_sup",
       "label": "term eval = Inf",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/TermPreStructureEvalEqSup.lean:22",
-      "status": "open",
+      "file": "ContinuousFOL/Completeness/TermPreStructureEvalEqSup.lean:316",
+      "status": "done",
       "blocker": null,
       "detail": "Term model evaluation matches Inf of dyadics in \u0394."
     },
@@ -382,7 +382,7 @@
       "section": 9,
       "file": "ContinuousFOL/Completeness/HenkinModelExistence.lean:24",
       "status": "blocked",
-      "blocker": "needs exists_henkin_extension, termPreStructure_eval_eq_sup",
+      "blocker": "needs exists_henkin_extension",
       "detail": "Consistent \u21d2 term-model of a maximal Henkin extension."
     },
     {

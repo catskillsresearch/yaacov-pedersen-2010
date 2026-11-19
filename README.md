@@ -1,3 +1,5 @@
+[![Lean 4](https://img.shields.io/github/actions/workflow/status/catskillsresearch/yaacov-pedersen-2010/build.yml?label=Lean%204)](https://github.com/catskillsresearch/yaacov-pedersen-2010/actions/workflows/build.yml)
+
 # Formalization of Completeness for Continuous First-Order Logic
 
 Formalization of Itaï Ben Yaacov and Arthur Paul Pedersen,

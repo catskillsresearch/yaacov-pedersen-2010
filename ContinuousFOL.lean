@@ -34,8 +34,10 @@ public import ContinuousFOL.Completeness.IsCompleteTheory
 public import ContinuousFOL.Completeness.IsSentence
 public import ContinuousFOL.Completeness.IsTheory
 public import ContinuousFOL.Completeness.PavelkaCompleteness
+public import ContinuousFOL.Completeness.ProvableMetricQRE
 public import ContinuousFOL.Completeness.ProvableTsubOfInconsistentAdjoin
 public import ContinuousFOL.Completeness.RecursivePresentation
+public import ContinuousFOL.Completeness.REPredBasic
 public import ContinuousFOL.Completeness.SignatureExtension
 public import ContinuousFOL.Completeness.TermPreStructure
 public import ContinuousFOL.Completeness.TermPreStructureEvalEqSup

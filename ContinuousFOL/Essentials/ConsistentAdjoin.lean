@@ -8,6 +8,7 @@ module
 
 public import ContinuousFOL.Group2Axioms.ConsistentQ
 public import ContinuousFOL.LanguageAndSemantics.FormulaDyadic
+public import ContinuousFOL.Completeness.ProvableTsubOfInconsistentAdjoin
 
 @[expose] public section
 
@@ -23,9 +24,31 @@ theorem consistent_adjoin_approx {L : Signature} {Γ : Set (Formula L)}
     ConsistentQ (Γ ∪ {φ}) := by
   sorry
 
+lemma ProvableQ.one_of_iterSub_one {L : Signature} {Γ : Set (Formula L)} {θ : Formula L}
+    (hθ : ProvableQ Γ θ) (n : ℕ)
+    (h : ProvableQ Γ (Formula.iterSub (Formula.one L) θ n)) :
+    ProvableQ Γ (Formula.one L) := by
+  induction n with
+  | zero => simpa [Formula.iterSub] using h
+  | succ n ih =>
+    exact ih (by simpa [Formula.iterSub] using ProvableQ.mp hθ h)
+
 theorem consistent_adjoin_comparable {L : Signature} {Γ : Set (Formula L)}
     (hcons : ConsistentQ Γ) (φ ψ : Formula L) :
     ConsistentQ (Γ ∪ {.tsub φ ψ}) ∨ ConsistentQ (Γ ∪ {.tsub ψ φ}) := by
-  sorry
+  by_cases hleft : ConsistentQ (Γ ∪ {.tsub φ ψ})
+  · exact Or.inl hleft
+  · refine Or.inr ?_
+    by_contra hright
+    have hswap : ProvableQ Γ (.tsub ψ φ) := by
+      have h1 : ProvableQ (Γ ∪ {.tsub φ ψ}) (Formula.one L) :=
+        (inconsistent_iff_provable_one _).mp hleft
+      obtain ⟨n, hn⟩ := (deduction_theorem Γ (Formula.one L) (.tsub φ ψ)).mp h1
+      exact ProvableQ.mp hn (ProvableQ.swap_one_iter Γ ψ φ n)
+    have h1 : ProvableQ (Γ ∪ {.tsub ψ φ}) (Formula.one L) :=
+      (inconsistent_iff_provable_one _).mp hright
+    obtain ⟨n, hn⟩ := (deduction_theorem Γ (Formula.one L) (.tsub ψ φ)).mp h1
+    exact (inconsistent_iff_provable_one Γ).mpr
+      (ProvableQ.one_of_iterSub_one hswap n hn) hcons
 
 end ContinuousFOL

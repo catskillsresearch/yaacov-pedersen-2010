@@ -45,7 +45,8 @@ theorem approximated_strong_completeness_pre {L : Signature}
     by_contra hne
     have hpos : 0 < φ.eval M σ := lt_of_le_of_ne hnonneg (Ne.symm hne)
     obtain ⟨n, hn⟩ : ∃ n : ℕ, (2 : ℝ) ^ (-(n : ℤ)) < φ.eval M σ := by
-      sorry
+      obtain ⟨n, hn⟩ := exists_pow_lt_of_lt_one hpos (by norm_num : (1 / 2 : ℝ) < 1)
+      exact ⟨n, by simpa [zpow_neg, zpow_natCast, one_div, inv_pow] using hn⟩
     linarith [hle n]
 
 /-- Corollary 9.6 (Approximated Strong Completeness — with complete metric). -/

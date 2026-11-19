@@ -156,7 +156,7 @@ NODES: dict[str, dict] = {
         "label": "Thm 7.2 metric",
         "section": 7,
         "file": "ContinuousFOL/Group2Axioms/SoundnessMetric.lean",
-        "detail": "ProvableMetricQ ⇒ EntailsComplete.",
+        "detail": "Theorem 7.2 metric: ⊢ implies ⊨_Q and ⊨_QC; (complete) satisfiability implies consistency.",
     },
     "satisfiable_consistent_metric": {
         "label": "Sat ⇒ Cons (met)",
@@ -338,7 +338,7 @@ NODES: dict[str, dict] = {
         "label": "Cor 9.6 metric",
         "section": 9,
         "file": "ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean",
-        "detail": "EntailsComplete ↔ ∀n ProvableMetricQ (φ∸2⁻ⁿ).",
+        "detail": "Corollary 9.6 metric: EntailsMetricPre and EntailsComplete iff ⊢ φ ∸ 2^{-n} for all n.",
     },
     "pavelka_completeness_pre": {
         "label": "Cor 9.8 Pavelka",
@@ -362,7 +362,7 @@ NODES: dict[str, dict] = {
         "label": "Cor 9.12 metric",
         "section": 9,
         "file": "ContinuousFOL/Completeness/CompactnessMetric.lean",
-        "detail": "Finite complete-satisfiability ⇒ CompletelySatisfiable.",
+        "detail": "Corollary 9.12 metric: finite (complete) satisfiability ⇒ (complete) satisfiability.",
     },
     "complete_re_theory_decidable": {
         "label": "Cor 9.11 RE ⇒ dec.",

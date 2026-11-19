@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T19:41:58Z",
+  "updated": "2026-11-19T19:45:55Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -194,7 +194,7 @@
       "file": "ContinuousFOL/Group2Axioms/SoundnessMetric.lean:138",
       "status": "done",
       "blocker": null,
-      "detail": "ProvableMetricQ \u21d2 EntailsComplete."
+      "detail": "Theorem 7.2 metric: \u22a2 implies \u22a8_Q and \u22a8_QC; (complete) satisfiability implies consistency."
     },
     {
       "id": "satisfiable_consistent_metric",
@@ -461,10 +461,10 @@
       "id": "approximated_strong_completeness_metric",
       "label": "Cor 9.6 metric",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean:53",
+      "file": "ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean:116",
       "status": "done",
       "blocker": null,
-      "detail": "EntailsComplete \u2194 \u2200n ProvableMetricQ (\u03c6\u22382\u207b\u207f)."
+      "detail": "Corollary 9.6 metric: EntailsMetricPre and EntailsComplete iff \u22a2 \u03c6 \u2238 2^{-n} for all n."
     },
     {
       "id": "pavelka_completeness_pre",
@@ -497,10 +497,10 @@
       "id": "compactness_metric",
       "label": "Cor 9.12 metric",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/CompactnessMetric.lean:22",
+      "file": "ContinuousFOL/Completeness/CompactnessMetric.lean:83",
       "status": "done",
       "blocker": null,
-      "detail": "Finite complete-satisfiability \u21d2 CompletelySatisfiable."
+      "detail": "Corollary 9.12 metric: finite (complete) satisfiability \u21d2 (complete) satisfiability."
     },
     {
       "id": "complete_re_theory_decidable",

@@ -154,4 +154,16 @@ theorem satisfiable_consistent_metric {LM : MetricSignature}
   rintro ⟨M, σ, hM⟩
   exact satisfiable_consistent_metric_pre Γ ⟨M.toMetricPreStructure, σ, hM⟩
 
+/-- Theorem 7.2 (Soundness) for a continuous signature with a metric, in the
+    paper's form: (i) if `Γ ⊢_Q φ`, then `Γ ⊨_Q φ` (`Γ ⊨_QC φ`);
+    (ii) if `Γ` is (completely) satisfiable, then `Γ` is consistent. -/
+theorem soundness_metric_full {LM : MetricSignature}
+    (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
+    (ProvableMetricQ Γ φ → EntailsMetricPre Γ φ ∧ EntailsComplete Γ φ) ∧
+    (SatisfiableMetricPre Γ → ConsistentMetricQ Γ) ∧
+    (CompletelySatisfiable Γ → ConsistentMetricQ Γ) :=
+  ⟨fun h => ⟨soundness_metric_pre Γ φ h, soundness_metric Γ φ h⟩,
+    satisfiable_consistent_metric_pre Γ,
+    satisfiable_consistent_metric Γ⟩
+
 end ContinuousFOL

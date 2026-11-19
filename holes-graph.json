@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-19T18:10:38Z",
-  "sorryCount": 22,
+  "updated": "2026-11-19T18:24:27Z",
+  "sorryCount": 21,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
     "blocked": "Waiting on incomplete required proof-deps",
@@ -13,7 +13,7 @@
     "\u00a74 axioms are intentional black boxes and stay open until discharged.",
     "Blue = done. Green = open. Grey = blocked.",
     "Regenerate with: python3 scripts/build_holes.py",
-    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, exists_metric_completion, eval_uniformly_continuous, exists_henkin_extension, exists_henkin_extension_metric."
+    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, exists_metric_completion, eval_uniformly_continuous, exists_henkin_extension_metric, henkin_model_existence."
   ],
   "nodes": [
     {
@@ -353,8 +353,8 @@
       "id": "exists_henkin_extension",
       "label": "Henkin extension",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/ExistsHenkinExtension.lean:22",
-      "status": "open",
+      "file": "ContinuousFOL/Completeness/ExistsHenkinExtension.lean:785",
+      "status": "done",
       "blocker": null,
       "detail": "Consistent theories admit Henkin extensions."
     },
@@ -362,7 +362,7 @@
       "id": "exists_henkin_extension_metric",
       "label": "Henkin ext met",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/ExistsHenkinExtension.lean:28",
+      "file": "ContinuousFOL/Completeness/ExistsHenkinExtension.lean:813",
       "status": "open",
       "blocker": null,
       "detail": "Metric Henkin extension."
@@ -381,8 +381,8 @@
       "label": "Thm 9.4 Henkin",
       "section": 9,
       "file": "ContinuousFOL/Completeness/HenkinModelExistence.lean:24",
-      "status": "blocked",
-      "blocker": "needs exists_henkin_extension",
+      "status": "open",
+      "blocker": null,
       "detail": "Consistent \u21d2 term-model of a maximal Henkin extension."
     },
     {

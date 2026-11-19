@@ -48,6 +48,24 @@ lemma mem_iff_provable {L : Signature} {Δ : Set (Formula L)}
 
 end MaximalConsistent
 
+/-- From `⊢ ½φ` infer `⊢ φ`, by (A6) and two applications of modus ponens. -/
+lemma ProvableQ.of_half {L : Signature} {Γ : Set (Formula L)} {φ : Formula L}
+    (h : ProvableQ Γ (.half φ)) : ProvableQ Γ φ := by
+  have hA6 : ProvableQ Γ (.tsub (.tsub φ (.half φ)) (.half φ)) :=
+    ProvableQ.ax0 (.A6 φ)
+  exact ProvableQ.mp h (ProvableQ.mp h hA6)
+
+/-- A proof of the constant `2^{-n}` yields a proof of `1`. -/
+lemma ProvableQ.one_of_pow2Neg {L : Signature} {Γ : Set (Formula L)} (n : ℕ)
+    (h : ProvableQ Γ (Formula.pow2Neg L n)) : ProvableQ Γ (Formula.one L) := by
+  induction n with
+  | zero =>
+    simpa [Formula.pow2Neg, DyadicCode.pow2Neg, Formula.dyadic] using h
+  | succ n ih =>
+    have hhalf : ProvableQ Γ (.half (Formula.pow2Neg L n)) := by
+      simpa [Formula.pow2Neg, DyadicCode.pow2Neg, Formula.dyadic] using h
+    exact ih (ProvableQ.of_half hhalf)
+
 /-- Lemma 8.11: Instantiation inside maximal consistent sets after bound renaming. -/
 theorem maximal_consistent_sup_instantiate {L : Signature} {Δ : Set (Formula L)}
     (hmc : MaximalConsistent Δ) (t : Term L) (x : Var) (φ : Formula L) (p : DyadicCode)
@@ -66,7 +84,7 @@ theorem maximal_consistent_sup_eq_inf {L : Signature} {Δ : Set (Formula L)}
 
 /-- Lemma 8.6: Maximal elements of `E(Γ)` coincide with `MaximalConsistent`. -/
 theorem maximal_in_consistent_extensions_iff {L : Signature} {Γ Δ : Set (Formula L)}
-    (hΓ : ConsistentQ Γ) :
+    (_hΓ : ConsistentQ Γ) :
     Maximal (fun Γ' => Γ ⊆ Γ' ∧ ConsistentQ Γ') Δ ↔ (Γ ⊆ Δ ∧ MaximalConsistent Δ) := by
   constructor
   · rintro ⟨⟨hsub, hcons⟩, hmax⟩
@@ -85,10 +103,18 @@ theorem maximal_in_consistent_extensions_iff {L : Signature} {Γ Δ : Set (Formu
         exact heq (Set.mem_union_right _ (Set.mem_singleton _))
   · rintro ⟨hsub, hmc⟩
     refine ⟨⟨hsub, hmc.consistent⟩, ?_⟩
-    rintro Γ' ⟨hΓ'sub, hΓ'cons⟩ hΔΓ' φ hφ
+    rintro Γ' ⟨_hΓ'sub, hΓ'cons⟩ hΔΓ' φ hφ
     apply hmc.archimedean
     intro n
-    sorry
+    -- Comparability: `φ ∸ 2^{-n} ∈ Δ` or `2^{-n} ∸ φ ∈ Δ`.
+    -- The second alternative, with `φ ∈ Γ' ⊇ Δ`, proves `2^{-n}` and hence `1`.
+    rcases hmc.comparable φ (Formula.pow2Neg L n) with hle | hge
+    · exact .hyp hle
+    · exfalso
+      have hpow : ProvableQ Γ' (Formula.pow2Neg L n) :=
+        ProvableQ.mp (.hyp hφ) (.hyp (hΔΓ' hge))
+      exact (inconsistent_iff_provable_one Γ').mpr
+        (ProvableQ.one_of_pow2Neg n hpow) hΓ'cons
 
 /-- Theorem 8.10: Lindenbaum's Lemma via Zorn's Lemma. -/
 theorem exists_maximal_consistent {L : Signature} {Γ : Set (Formula L)}

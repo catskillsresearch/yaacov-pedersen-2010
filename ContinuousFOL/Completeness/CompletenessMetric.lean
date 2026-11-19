@@ -19,10 +19,15 @@ namespace ContinuousFOL
 
 /-- Theorem 9.5 (Completeness for Continuous First-Order Logic — with complete metric). -/
 theorem completeness_metric {LM : MetricSignature} (Γ : Set (Formula LM.toSignature)) :
-    ConsistentMetricQ Γ ↔ CompletelySatisfiable Γ := by
-  refine ⟨?_, satisfiable_consistent_metric Γ⟩
+    ConsistentMetricQ Γ → CompletelySatisfiable Γ := by
   intro hcons
   obtain ⟨M, σ, hM⟩ := metric_prestructure_model_of_consistent hcons
   exact (satisfiable_metric_iff_complete Γ).mp ⟨M, σ, hM⟩
+
+/-- Theorem 9.5 (metric) together with soundness (Theorem 7.2): `Γ` is consistent iff
+completely satisfiable (helper; not a paper statement). -/
+theorem completeness_metric_iff {LM : MetricSignature} (Γ : Set (Formula LM.toSignature)) :
+    ConsistentMetricQ Γ ↔ CompletelySatisfiable Γ :=
+  ⟨completeness_metric Γ, satisfiable_consistent_metric Γ⟩
 
 end ContinuousFOL

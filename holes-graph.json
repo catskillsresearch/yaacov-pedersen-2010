@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T19:21:07Z",
+  "updated": "2026-11-19T19:22:20Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -410,7 +410,7 @@
       "file": "ContinuousFOL/Completeness/CompletenessPre.lean:20",
       "status": "done",
       "blocker": null,
-      "detail": "ConsistentQ \u2194 SatisfiablePre."
+      "detail": "ConsistentQ \u2192 SatisfiablePre (iff helper: completeness_pre_iff)."
     },
     {
       "id": "completeness_metric",
@@ -419,7 +419,7 @@
       "file": "ContinuousFOL/Completeness/CompletenessMetric.lean:21",
       "status": "done",
       "blocker": null,
-      "detail": "ConsistentMetricQ \u2194 CompletelySatisfiable."
+      "detail": "ConsistentMetricQ \u2192 CompletelySatisfiable (iff helper: completeness_metric_iff)."
     },
     {
       "id": "provable_tsub_of_inconsistent_adjoin",

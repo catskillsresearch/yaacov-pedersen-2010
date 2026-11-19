@@ -24,7 +24,7 @@ theorem compactness_metric {LM : MetricSignature} (Γ : Set (Formula LM.toSignat
       (Γ₀ : Set (Formula LM.toSignature)) ⊆ Γ →
         CompletelySatisfiable (Γ₀ : Set (Formula LM.toSignature))) :
     CompletelySatisfiable Γ := by
-  rw [← completeness_metric]
+  rw [← completeness_metric_iff]
   by_contra hincons
   have hprov1 : ProvableMetricQ Γ (Formula.one LM.toSignature) := by
     by_contra hnot

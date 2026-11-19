@@ -27,7 +27,7 @@ theorem approximated_strong_completeness_pre {L : Signature}
   constructor
   · intro hent n
     apply provable_tsub_of_inconsistent_adjoin Γ φ (.pow2Neg n)
-    rw [completeness_pre]
+    rw [completeness_pre_iff]
     rintro ⟨M, σ, hM⟩
     have hφ0 : φ.eval M σ = 0 := hent M σ (fun ψ hψ => hM ψ (Set.mem_union_left _ hψ))
     have hmem : Formula.tsub (Formula.dyadic L (.pow2Neg n)) φ ∈
@@ -57,7 +57,7 @@ theorem approximated_strong_completeness_metric {LM : MetricSignature}
   constructor
   · intro hent n
     apply provable_tsub_of_inconsistent_adjoin_metric Γ φ (.pow2Neg n)
-    rw [completeness_metric]
+    rw [completeness_metric_iff]
     rintro ⟨M, σ, hM⟩
     have hφ0 : φ.eval M.toPreStructure σ = 0 :=
       hent M σ (fun ψ hψ => hM ψ (Set.mem_union_left _ hψ))

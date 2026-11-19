@@ -302,13 +302,13 @@ NODES: dict[str, dict] = {
         "label": "Thm 9.5 complete",
         "section": 9,
         "file": "ContinuousFOL/Completeness/CompletenessPre.lean",
-        "detail": "ConsistentQ ↔ SatisfiablePre.",
+        "detail": "ConsistentQ → SatisfiablePre (iff helper: completeness_pre_iff).",
     },
     "completeness_metric": {
         "label": "Thm 9.5 metric",
         "section": 9,
         "file": "ContinuousFOL/Completeness/CompletenessMetric.lean",
-        "detail": "ConsistentMetricQ ↔ CompletelySatisfiable.",
+        "detail": "ConsistentMetricQ → CompletelySatisfiable (iff helper: completeness_metric_iff).",
     },
     "provable_tsub_of_inconsistent_adjoin": {
         "label": "⊢ φ∸p from ⊥",

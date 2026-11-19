@@ -50,7 +50,7 @@ theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Fo
     · rintro _ ⟨p, rfl, -⟩
       exact (DyadicCode.val_mem_Icc p).1
   -- The set of truth values in models of `Γ` is nonempty (Theorem 9.5) and bounded by `1`.
-  obtain ⟨M₀, σ₀, hM₀⟩ := (completeness_pre Γ).mp hcons
+  obtain ⟨M₀, σ₀, hM₀⟩ := completeness_pre Γ hcons
   have hTne : {r : ℝ | ∃ (M : PreStructure L) (σ : Var → M.Carrier),
       ModelsPre M σ Γ ∧ r = φ.eval M σ}.Nonempty := ⟨_, M₀, σ₀, hM₀, rfl⟩
   have hTbdd : BddAbove {r : ℝ | ∃ (M : PreStructure L) (σ : Var → M.Carrier),
@@ -92,7 +92,7 @@ theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Fo
     have hcons' : ConsistentQ (Γ ∪ {.tsub (Formula.dyadic L p) φ}) := by
       by_contra h
       exact hnot (provable_tsub_of_inconsistent_adjoin Γ φ p h)
-    obtain ⟨M, σ, hM⟩ := (completeness_pre _).mp hcons'
+    obtain ⟨M, σ, hM⟩ := completeness_pre _ hcons'
     have hMΓ : ModelsPre M σ Γ := fun ψ hψ => hM ψ (Set.mem_union_left _ hψ)
     have h := hM _ (Set.mem_union_right _ (Set.mem_singleton _))
     simp only [Formula.eval, Formula.eval_dyadic, tsubR] at h
@@ -141,7 +141,7 @@ theorem pavelka_completeness_metric {LM : MetricSignature}
     rintro _ ⟨p, rfl, -⟩
     exact (DyadicCode.val_mem_Icc p).1
   -- Consistent `Γ`: a complete model exists (Theorem 9.5, metric).
-  obtain ⟨M₀, σ₀, hM₀⟩ := (completeness_metric Γ).mp hcons
+  obtain ⟨M₀, σ₀, hM₀⟩ := completeness_metric Γ hcons
   have hTne : {r : ℝ | ∃ (M : ContinuousStructure LM) (σ : Var → M.Carrier),
       ModelsPre M.toPreStructure σ Γ ∧ r = φ.eval M.toPreStructure σ}.Nonempty :=
     ⟨_, M₀, σ₀, hM₀, rfl⟩
@@ -170,7 +170,7 @@ theorem pavelka_completeness_metric {LM : MetricSignature}
     have hcons' : ConsistentMetricQ (Γ ∪ {.tsub (Formula.dyadic LM.toSignature p) φ}) := by
       by_contra h
       exact hnot (provable_tsub_of_inconsistent_adjoin_metric Γ φ p h)
-    obtain ⟨M, σ, hM⟩ := (completeness_metric _).mp hcons'
+    obtain ⟨M, σ, hM⟩ := completeness_metric _ hcons'
     have hMΓ : ModelsPre M.toPreStructure σ Γ := fun ψ hψ => hM ψ (Set.mem_union_left _ hψ)
     have h := hM _ (Set.mem_union_right _ (Set.mem_singleton _))
     simp only [Formula.eval, Formula.eval_dyadic, tsubR] at h

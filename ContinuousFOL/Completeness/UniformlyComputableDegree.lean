@@ -799,6 +799,513 @@ opaque computable_doubleTsubCode_rev {LM : MetricSignature} (P : RecursivePresen
 lemma computable_bool_and : Computable₂ fun a b : Bool => a && b :=
   Primrec.and.to_comp
 
+
+/-! ### Primitive-recursive projections of packed witnesses -/
+
+lemma primrec_unpack6 : Primrec unpack6 := by
+  have hunp : Primrec Nat.unpair := Primrec.unpair
+  have hfst : Primrec fun w : ℕ => (Nat.unpair w).1 := Primrec.fst.comp hunp
+  have hsnd : Primrec fun w : ℕ => (Nat.unpair w).2 := Primrec.snd.comp hunp
+  have hkn : Primrec fun w : ℕ => Nat.unpair (Nat.unpair w).1 := hunp.comp hfst
+  have hrest : Primrec fun w : ℕ => Nat.unpair (Nat.unpair w).2 := hunp.comp hsnd
+  have hkn' : Primrec fun w : ℕ => Nat.unpair (Nat.unpair (Nat.unpair w).2).1 :=
+    hunp.comp (Primrec.fst.comp hrest)
+  have hst : Primrec fun w : ℕ => Nat.unpair (Nat.unpair (Nat.unpair w).2).2 :=
+    hunp.comp (Primrec.snd.comp hrest)
+  exact (Primrec.fst.comp hkn).pair
+    ((Primrec.snd.comp hkn).pair
+      ((Primrec.fst.comp hkn').pair
+        ((Primrec.snd.comp hkn').pair
+          ((Primrec.fst.comp hst).pair (Primrec.snd.comp hst)))))
+
+lemma primrec_w_k : Primrec fun w : ℕ => (unpack6 w).1 :=
+  Primrec.fst.comp primrec_unpack6
+
+lemma primrec_w_N : Primrec fun w : ℕ => (unpack6 w).2.1 :=
+  Primrec.fst.comp (Primrec.snd.comp primrec_unpack6)
+
+lemma primrec_w_s : Primrec fun w : ℕ => (unpack6 w).2.2.1 :=
+  Primrec.fst.comp (Primrec.snd.comp (Primrec.snd.comp primrec_unpack6))
+
+lemma primrec_w_t : Primrec fun w : ℕ => (unpack6 w).2.2.2.1 :=
+  Primrec.fst.comp
+    (Primrec.snd.comp (Primrec.snd.comp (Primrec.snd.comp primrec_unpack6)))
+
+lemma primrec_leN : Primrec fun w : ℕ => decide (1 ≤ (unpack6 w).2.1) :=
+  (Primrec.nat_le.comp (Primrec.const 1) primrec_w_N).decide
+
+lemma primrec_pow2N : Primrec fun w : ℕ => 2 ^ (unpack6 w).2.1 :=
+  (Primrec₂.unpaired'.1 Nat.Primrec.pow).comp (Primrec.const 2) primrec_w_N
+
+lemma primrec_lek : Primrec fun w : ℕ => decide ((unpack6 w).1 ≤ 2 ^ (unpack6 w).2.1) :=
+  (Primrec.nat_le.comp primrec_w_k primrec_pow2N).decide
+
+lemma primrec_c_of_cn : Primrec fun cn : ℕ => (Nat.unpair cn).1 :=
+  Primrec.fst.comp Primrec.unpair
+
+lemma primrec_n_of_cn : Primrec fun cn : ℕ => (Nat.unpair cn).2 :=
+  Primrec.snd.comp Primrec.unpair
+
+/-- Pack `(c, n, k, N)` as a single natural, from a packed `(c, n)` and a witness `w`. -/
+def packCKN (cn w : ℕ) : ℕ :=
+  Nat.pair cn (Nat.pair (unpack6 w).1 (unpack6 w).2.1)
+
+lemma primrec_nat_pair : Primrec fun p : ℕ × ℕ => Nat.pair p.1 p.2 :=
+  (Primrec.encode (α := ℕ × ℕ)).of_eq fun p => by
+    simpa [encode] using encode_prod_val p.1 p.2
+
+lemma primrec_packCKN : Primrec fun p : ℕ × ℕ => packCKN p.1 p.2 :=
+  primrec_nat_pair.comp
+    (Primrec.fst.pair
+      (primrec_nat_pair.comp
+        ((primrec_w_k.comp Primrec.snd).pair (primrec_w_N.comp Primrec.snd))))
+
+/-! ### `ℕ`-coded versions of the double-truncated codes -/
+
+def doubleTsubCodeNat {LM : MetricSignature} (P : RecursivePresentation LM) (e : ℕ) : ℕ :=
+  doubleTsubCode P
+    (Nat.unpair (Nat.unpair e).1).1
+    (Nat.unpair (Nat.unpair e).1).2
+    (Nat.unpair (Nat.unpair e).2).1
+    (Nat.unpair (Nat.unpair e).2).2
+
+def doubleTsubCodeRevNat {LM : MetricSignature} (P : RecursivePresentation LM) (e : ℕ) : ℕ :=
+  doubleTsubCode_rev P
+    (Nat.unpair (Nat.unpair e).1).1
+    (Nat.unpair (Nat.unpair e).1).2
+    (Nat.unpair (Nat.unpair e).2).1
+    (Nat.unpair (Nat.unpair e).2).2
+
+opaque computable_c_of_e : Computable fun e : ℕ => (Nat.unpair (Nat.unpair e).1).1 :=
+  (Primrec.fst.comp (Primrec.unpair.comp (Primrec.fst.comp Primrec.unpair))).to_comp
+
+opaque computable_n_of_e : Computable fun e : ℕ => (Nat.unpair (Nat.unpair e).1).2 :=
+  (Primrec.snd.comp (Primrec.unpair.comp (Primrec.fst.comp Primrec.unpair))).to_comp
+
+opaque computable_k_of_e : Computable fun e : ℕ => (Nat.unpair (Nat.unpair e).2).1 :=
+  (Primrec.fst.comp (Primrec.unpair.comp (Primrec.snd.comp Primrec.unpair))).to_comp
+
+opaque computable_N_of_e : Computable fun e : ℕ => (Nat.unpair (Nat.unpair e).2).2 :=
+  (Primrec.snd.comp (Primrec.unpair.comp (Primrec.snd.comp Primrec.unpair))).to_comp
+
+opaque computable_sup_of_e {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (fun e : ℕ => P.supClosureCode (Nat.unpair (Nat.unpair e).1).1) :=
+  P.supClosureCode_computable.comp computable_c_of_e
+
+opaque computable_dyadic_kN_of_e {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (fun e : ℕ =>
+      P.dyadicCode (Nat.unpair (Nat.unpair e).2).1 (Nat.unpair (Nat.unpair e).2).2) :=
+  P.dyadicCode_computable.comp computable_k_of_e computable_N_of_e
+
+opaque computable_n2_of_e : Computable fun e : ℕ => (Nat.unpair (Nat.unpair e).1).2 + 2 :=
+  (Primrec.nat_add.comp
+    (Primrec.snd.comp (Primrec.unpair.comp (Primrec.fst.comp Primrec.unpair)))
+    (Primrec.const 2)).to_comp
+
+opaque computable_dyadic_eps_of_e {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (fun e : ℕ => P.dyadicCode 1 ((Nat.unpair (Nat.unpair e).1).2 + 2)) :=
+  P.dyadicCode_computable.comp (Computable.const 1) computable_n2_of_e
+
+opaque computable_tsub_c'_d {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (fun e : ℕ =>
+      P.tsubCode (P.supClosureCode (Nat.unpair (Nat.unpair e).1).1)
+        (P.dyadicCode (Nat.unpair (Nat.unpair e).2).1 (Nat.unpair (Nat.unpair e).2).2)) :=
+  P.tsubCode_computable.comp (computable_sup_of_e P) (computable_dyadic_kN_of_e P)
+
+opaque computable_tsub_c'_d_eps {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (fun e : ℕ =>
+      P.tsubCode
+        (P.tsubCode (P.supClosureCode (Nat.unpair (Nat.unpair e).1).1)
+          (P.dyadicCode (Nat.unpair (Nat.unpair e).2).1 (Nat.unpair (Nat.unpair e).2).2))
+        (P.dyadicCode 1 ((Nat.unpair (Nat.unpair e).1).2 + 2))) :=
+  P.tsubCode_computable.comp (computable_tsub_c'_d P) (computable_dyadic_eps_of_e P)
+
+opaque computable_doubleTsubCodeNat {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (doubleTsubCodeNat P) :=
+  (P.tsubCode_computable.comp (computable_tsub_c'_d_eps P) (computable_dyadic_eps_of_e P)).of_eq
+    fun _ => rfl
+
+opaque computable_tsub_d_c' {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (fun e : ℕ =>
+      P.tsubCode
+        (P.dyadicCode (Nat.unpair (Nat.unpair e).2).1 (Nat.unpair (Nat.unpair e).2).2)
+        (P.supClosureCode (Nat.unpair (Nat.unpair e).1).1)) :=
+  P.tsubCode_computable.comp (computable_dyadic_kN_of_e P) (computable_sup_of_e P)
+
+opaque computable_tsub_d_c'_eps {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (fun e : ℕ =>
+      P.tsubCode
+        (P.tsubCode
+          (P.dyadicCode (Nat.unpair (Nat.unpair e).2).1 (Nat.unpair (Nat.unpair e).2).2)
+          (P.supClosureCode (Nat.unpair (Nat.unpair e).1).1))
+        (P.dyadicCode 1 ((Nat.unpair (Nat.unpair e).1).2 + 2))) :=
+  P.tsubCode_computable.comp (computable_tsub_d_c' P) (computable_dyadic_eps_of_e P)
+
+opaque computable_doubleTsubCodeRevNat {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (doubleTsubCodeRevNat P) :=
+  (P.tsubCode_computable.comp (computable_tsub_d_c'_eps P) (computable_dyadic_eps_of_e P)).of_eq
+    fun _ => rfl
+
+
+lemma doubleTsubCodeNat_packCKN {LM : MetricSignature} (P : RecursivePresentation LM)
+    (cn w : ℕ) :
+    doubleTsubCodeNat P (packCKN cn w) =
+      doubleTsubCode P (Nat.unpair cn).1 (Nat.unpair cn).2
+        (unpack6 w).1 (unpack6 w).2.1 := by
+  simp [doubleTsubCodeNat, packCKN, Nat.unpair_pair]
+
+lemma doubleTsubCodeRevNat_packCKN {LM : MetricSignature} (P : RecursivePresentation LM)
+    (cn w : ℕ) :
+    doubleTsubCodeRevNat P (packCKN cn w) =
+      doubleTsubCode_rev P (Nat.unpair cn).1 (Nat.unpair cn).2
+        (unpack6 w).1 (unpack6 w).2.1 := by
+  simp [doubleTsubCodeRevNat, packCKN, Nat.unpair_pair]
+
+/-! ### Search predicate, assembled on `ℕ` codes -/
+
+/-- A packed witness `w` is good for a packed input `cn = Nat.pair c n` when
+`k, N` are a legal dyadic and both truncated cuts are provable at stages `s, t`. -/
+def goodCore {LM : MetricSignature} (P : RecursivePresentation LM)
+    (qProv : ℕ → ℕ → Bool) (cn w : ℕ) : Bool :=
+  (decide (1 ≤ (unpack6 w).2.1) &&
+      decide ((unpack6 w).1 ≤ 2 ^ (unpack6 w).2.1)) &&
+    (qProv (doubleTsubCodeNat P (packCKN cn w)) (unpack6 w).2.2.1 &&
+      qProv (doubleTsubCodeRevNat P (packCKN cn w)) (unpack6 w).2.2.2.1)
+
+/-- On formula codes, search for a good witness; on junk codes, accept `w = 0`. -/
+def goodAll {LM : MetricSignature} (P : RecursivePresentation LM)
+    (qProv : ℕ → ℕ → Bool) (cn w : ℕ) : Bool :=
+  bif decide (∃ φ : Formula LM.toSignature, P.code φ = (Nat.unpair cn).1)
+  then goodCore P qProv cn w
+  else decide (w = 0)
+
+opaque computable_packCKN : Computable (fun p : ℕ × ℕ => packCKN p.1 p.2) :=
+  primrec_packCKN.to_comp
+
+opaque computable_fwdCode {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (fun p : ℕ × ℕ => doubleTsubCodeNat P (packCKN p.1 p.2)) :=
+  (computable_doubleTsubCodeNat P).comp computable_packCKN
+
+opaque computable_revCode {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (fun p : ℕ × ℕ => doubleTsubCodeRevNat P (packCKN p.1 p.2)) :=
+  (computable_doubleTsubCodeRevNat P).comp computable_packCKN
+
+opaque computable_s_at : Computable (fun p : ℕ × ℕ => (unpack6 p.2).2.2.1) :=
+  (primrec_w_s.comp Primrec.snd).to_comp
+
+opaque computable_t_at : Computable (fun p : ℕ × ℕ => (unpack6 p.2).2.2.2.1) :=
+  (primrec_w_t.comp Primrec.snd).to_comp
+
+opaque computable_leN_at : Computable (fun p : ℕ × ℕ => decide (1 ≤ (unpack6 p.2).2.1)) :=
+  (primrec_leN.comp Primrec.snd).to_comp
+
+opaque computable_lek_at :
+    Computable (fun p : ℕ × ℕ => decide ((unpack6 p.2).1 ≤ 2 ^ (unpack6 p.2).2.1)) :=
+  (primrec_lek.comp Primrec.snd).to_comp
+
+opaque computable_unpair : Computable Nat.unpair :=
+  Primrec.unpair.to_comp
+
+opaque computable_qProv_unpaired {qProv : ℕ → ℕ → Bool} (hq : Computable₂ qProv) :
+    Computable (fun e : ℕ => qProv (Nat.unpair e).1 (Nat.unpair e).2) :=
+  hq.comp (Computable.fst.comp computable_unpair) (Computable.snd.comp computable_unpair)
+
+opaque computable_nat_lt_bool : Computable₂ (fun a b : ℕ => decide (a < b)) :=
+  Primrec.nat_lt.decide.to_comp
+
+/-- Pair the values of two unary computable functions, staying on `ℕ`. -/
+lemma computable_pair_of {f g : ℕ → ℕ} (hf : Computable f) (hg : Computable g) :
+    Computable (fun n => Nat.pair (f n) (g n)) := by
+  have hlt : Computable (fun n => decide (f n < g n)) :=
+    computable_nat_lt_bool.comp hf hg
+  have hbb : Computable (fun n => g n * g n) := computable_nat_mul.comp hg hg
+  have hthen : Computable (fun n => g n * g n + f n) := computable_nat_add.comp hbb hf
+  have haa : Computable (fun n => f n * f n) := computable_nat_mul.comp hf hf
+  have haaa : Computable (fun n => f n * f n + f n) := computable_nat_add.comp haa hf
+  have helse : Computable (fun n => f n * f n + f n + g n) := computable_nat_add.comp haaa hg
+  exact (Computable.cond hlt hthen helse).of_eq fun n => by
+    rw [Bool.cond_decide, Nat.pair]
+
+def fwdCodeNat {LM : MetricSignature} (P : RecursivePresentation LM) (e : ℕ) : ℕ :=
+  doubleTsubCodeNat P (packCKN (Nat.unpair e).1 (Nat.unpair e).2)
+
+def revCodeNat {LM : MetricSignature} (P : RecursivePresentation LM) (e : ℕ) : ℕ :=
+  doubleTsubCodeRevNat P (packCKN (Nat.unpair e).1 (Nat.unpair e).2)
+
+def sAtNat (e : ℕ) : ℕ := (unpack6 (Nat.unpair e).2).2.2.1
+def tAtNat (e : ℕ) : ℕ := (unpack6 (Nat.unpair e).2).2.2.2.1
+def leNAtNat (e : ℕ) : Bool := decide (1 ≤ (unpack6 (Nat.unpair e).2).2.1)
+def lekAtNat (e : ℕ) : Bool :=
+  decide ((unpack6 (Nat.unpair e).2).1 ≤ 2 ^ (unpack6 (Nat.unpair e).2).2.1)
+
+def pairFwdSNat {LM : MetricSignature} (P : RecursivePresentation LM) (e : ℕ) : ℕ :=
+  Nat.pair (fwdCodeNat P e) (sAtNat e)
+
+def pairRevTNat {LM : MetricSignature} (P : RecursivePresentation LM) (e : ℕ) : ℕ :=
+  Nat.pair (revCodeNat P e) (tAtNat e)
+
+def goodFwdNat {LM : MetricSignature} (P : RecursivePresentation LM)
+    (qProv : ℕ → ℕ → Bool) (e : ℕ) : Bool :=
+  qProv (fwdCodeNat P e) (sAtNat e)
+
+def goodRevNat {LM : MetricSignature} (P : RecursivePresentation LM)
+    (qProv : ℕ → ℕ → Bool) (e : ℕ) : Bool :=
+  qProv (revCodeNat P e) (tAtNat e)
+
+def isCodeCnNat {LM : MetricSignature} (P : RecursivePresentation LM) (e : ℕ) : Bool :=
+  decide (∃ φ : Formula LM.toSignature, P.code φ = (Nat.unpair (Nat.unpair e).1).1)
+
+def wEqZeroNat (e : ℕ) : Bool := decide ((Nat.unpair e).2 = 0)
+
+def goodCoreNat {LM : MetricSignature} (P : RecursivePresentation LM)
+    (qProv : ℕ → ℕ → Bool) (e : ℕ) : Bool :=
+  goodCore P qProv (Nat.unpair e).1 (Nat.unpair e).2
+
+def goodAllNat {LM : MetricSignature} (P : RecursivePresentation LM)
+    (qProv : ℕ → ℕ → Bool) (e : ℕ) : Bool :=
+  goodAll P qProv (Nat.unpair e).1 (Nat.unpair e).2
+
+opaque computable_fwdCode_nat {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (fwdCodeNat P) :=
+  (computable_doubleTsubCodeNat P).comp (primrec_packCKN.comp Primrec.unpair).to_comp
+
+opaque computable_revCode_nat {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (revCodeNat P) :=
+  (computable_doubleTsubCodeRevNat P).comp (primrec_packCKN.comp Primrec.unpair).to_comp
+
+opaque computable_s_at_nat : Computable sAtNat :=
+  (primrec_w_s.comp (Primrec.snd.comp Primrec.unpair)).to_comp
+
+opaque computable_t_at_nat : Computable tAtNat :=
+  (primrec_w_t.comp (Primrec.snd.comp Primrec.unpair)).to_comp
+
+opaque computable_leN_at_nat : Computable leNAtNat :=
+  (primrec_leN.comp (Primrec.snd.comp Primrec.unpair)).to_comp
+
+opaque computable_lek_at_nat : Computable lekAtNat :=
+  (primrec_lek.comp (Primrec.snd.comp Primrec.unpair)).to_comp
+
+opaque computable_pair_fwd_s_nat {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (pairFwdSNat P) :=
+  computable_pair_of (computable_fwdCode_nat P) computable_s_at_nat
+
+opaque computable_pair_rev_t_nat {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (pairRevTNat P) :=
+  computable_pair_of (computable_revCode_nat P) computable_t_at_nat
+
+opaque computable_goodFwd_nat {LM : MetricSignature} (P : RecursivePresentation LM)
+    {qProv : ℕ → ℕ → Bool} (hq : Computable₂ qProv) :
+    Computable (goodFwdNat P qProv) :=
+  ((computable_qProv_unpaired hq).comp (computable_pair_fwd_s_nat P)).of_eq fun e => by
+    simp [pairFwdSNat, goodFwdNat, Nat.unpair_pair]
+
+opaque computable_goodRev_nat {LM : MetricSignature} (P : RecursivePresentation LM)
+    {qProv : ℕ → ℕ → Bool} (hq : Computable₂ qProv) :
+    Computable (goodRevNat P qProv) :=
+  ((computable_qProv_unpaired hq).comp (computable_pair_rev_t_nat P)).of_eq fun e => by
+    simp [pairRevTNat, goodRevNat, Nat.unpair_pair]
+
+opaque computable_and_nat {f g : ℕ → Bool} (hf : Computable f) (hg : Computable g) :
+    Computable (fun n : ℕ => f n && g n) :=
+  computable_bool_and.comp hf hg
+
+opaque computable_goodCore_nat {LM : MetricSignature} (P : RecursivePresentation LM)
+    {qProv : ℕ → ℕ → Bool} (hq : Computable₂ qProv) :
+    Computable (goodCoreNat P qProv) :=
+  (computable_and_nat
+      (computable_and_nat computable_leN_at_nat computable_lek_at_nat)
+      (computable_and_nat (computable_goodFwd_nat P hq) (computable_goodRev_nat P hq))).of_eq
+    fun e => by
+      simp [goodCoreNat, goodCore, leNAtNat, lekAtNat, goodFwdNat, goodRevNat,
+        fwdCodeNat, revCodeNat, sAtNat, tAtNat]
+
+opaque computable_isCode_cn_nat {LM : MetricSignature} (P : RecursivePresentation LM) :
+    Computable (isCodeCnNat P) :=
+  (computablePred_iff_computable_decide.mp P.isCode_computable).comp
+    (primrec_c_of_cn.comp (Primrec.fst.comp Primrec.unpair)).to_comp
+
+opaque computable_w_eq_zero_nat : Computable wEqZeroNat :=
+  ((Primrec.eq (α := ℕ)).comp (Primrec.snd.comp Primrec.unpair) (Primrec.const 0)).decide.to_comp
+
+opaque computable_goodAll_nat {LM : MetricSignature} (P : RecursivePresentation LM)
+    {qProv : ℕ → ℕ → Bool} (hq : Computable₂ qProv) :
+    Computable (goodAllNat P qProv) :=
+  (Computable.cond (computable_isCode_cn_nat P) (computable_goodCore_nat P hq)
+      computable_w_eq_zero_nat).of_eq
+    fun e => by
+      simp [goodAllNat, goodAll, isCodeCnNat, goodCoreNat, wEqZeroNat]
+
+
+lemma goodAllNat_pair {LM : MetricSignature} (P : RecursivePresentation LM)
+    (qProv : ℕ → ℕ → Bool) (cn w : ℕ) :
+    goodAllNat P qProv (Nat.pair cn w) = goodAll P qProv cn w := by
+  simp [goodAllNat, Nat.unpair_pair]
+
+opaque computable_goodAll {LM : MetricSignature} (P : RecursivePresentation LM)
+    {qProv : ℕ → ℕ → Bool} (hq : Computable₂ qProv) :
+    Computable₂ (goodAll P qProv) :=
+  ((computable_goodAll_nat P hq).comp primrec_nat_pair.to_comp).of_eq fun p =>
+    goodAllNat_pair P qProv p.1 p.2
+
+def kOfWitness (w : ℕ) : ℕ := (unpack6 w).1
+def NOfWitness (w : ℕ) : ℕ := (unpack6 w).2.1
+
+lemma primrec_kOfWitness : Primrec kOfWitness := primrec_w_k
+lemma primrec_NOfWitness : Primrec NOfWitness := primrec_w_N
+
+/-- `approxNum k N n` from a packed triple `Nat.pair k (Nat.pair N n)`. -/
+def approxNumPacked (e : ℕ) : ℤ :=
+  approxNum (Nat.unpair e).1 (Nat.unpair (Nat.unpair e).2).1 (Nat.unpair (Nat.unpair e).2).2
+
+opaque computable_k_of_e2 : Computable fun e : ℕ => (Nat.unpair e).1 :=
+  (Primrec.fst.comp Primrec.unpair).to_comp
+
+opaque computable_N_of_e2 : Computable fun e : ℕ => (Nat.unpair (Nat.unpair e).2).1 :=
+  (Primrec.fst.comp (Primrec.unpair.comp (Primrec.snd.comp Primrec.unpair))).to_comp
+
+opaque computable_n_of_e2 : Computable fun e : ℕ => (Nat.unpair (Nat.unpair e).2).2 :=
+  (Primrec.snd.comp (Primrec.unpair.comp (Primrec.snd.comp Primrec.unpair))).to_comp
+
+opaque computable_N_eq_zero_e2 : Computable fun e : ℕ => decide ((Nat.unpair (Nat.unpair e).2).1 = 0) :=
+  ((Primrec.eq (α := ℕ)).comp
+    (Primrec.fst.comp (Primrec.unpair.comp (Primrec.snd.comp Primrec.unpair)))
+    (Primrec.const 0)).decide.to_comp
+
+opaque computable_pow2n_e2 : Computable fun e : ℕ => (2 : ℕ) ^ (Nat.unpair (Nat.unpair e).2).2 :=
+  computable_nat_pow.comp (Computable.const 2) computable_n_of_e2
+
+opaque computable_pow2N_e2 : Computable fun e : ℕ => (2 : ℕ) ^ (Nat.unpair (Nat.unpair e).2).1 :=
+  computable_nat_pow.comp (Computable.const 2) computable_N_of_e2
+
+opaque computable_Nsub1_e2 : Computable fun e : ℕ => (Nat.unpair (Nat.unpair e).2).1 - 1 :=
+  Primrec.nat_sub.to_comp.comp computable_N_of_e2 (Computable.const 1)
+
+opaque computable_pow2Nsub1_e2 : Computable fun e : ℕ => (2 : ℕ) ^ ((Nat.unpair (Nat.unpair e).2).1 - 1) :=
+  computable_nat_pow.comp (Computable.const 2) computable_Nsub1_e2
+
+opaque computable_kmul_e2 : Computable fun e : ℕ =>
+    (Nat.unpair e).1 * 2 ^ (Nat.unpair (Nat.unpair e).2).2 :=
+  computable_nat_mul.comp computable_k_of_e2 computable_pow2n_e2
+
+opaque computable_num_e2 : Computable fun e : ℕ =>
+    (Nat.unpair e).1 * 2 ^ (Nat.unpair (Nat.unpair e).2).2 +
+      2 ^ ((Nat.unpair (Nat.unpair e).2).1 - 1) :=
+  computable_nat_add.comp computable_kmul_e2 computable_pow2Nsub1_e2
+
+opaque computable_div_e2 : Computable fun e : ℕ =>
+    ((Nat.unpair e).1 * 2 ^ (Nat.unpair (Nat.unpair e).2).2 +
+      2 ^ ((Nat.unpair (Nat.unpair e).2).1 - 1)) /
+      2 ^ (Nat.unpair (Nat.unpair e).2).1 :=
+  computable_nat_div.comp computable_num_e2 computable_pow2N_e2
+
+opaque computable_divZ_e2 : Computable fun e : ℕ =>
+    (((Nat.unpair e).1 * 2 ^ (Nat.unpair (Nat.unpair e).2).2 +
+      2 ^ ((Nat.unpair (Nat.unpair e).2).1 - 1)) /
+      2 ^ (Nat.unpair (Nat.unpair e).2).1 : ℕ) :=
+  computable_div_e2
+
+opaque computable_kZ_e2 : Computable fun e : ℕ => ((Nat.unpair e).1 : ℤ) :=
+  computable_nat_cast_int.comp computable_k_of_e2
+
+opaque computable_divZ'_e2 : Computable fun e : ℕ =>
+    ((((Nat.unpair e).1 * 2 ^ (Nat.unpair (Nat.unpair e).2).2 +
+      2 ^ ((Nat.unpair (Nat.unpair e).2).1 - 1)) /
+      2 ^ (Nat.unpair (Nat.unpair e).2).1 : ℕ) : ℤ) :=
+  computable_nat_cast_int.comp computable_div_e2
+
+opaque computable_approxNumPacked : Computable approxNumPacked :=
+  (Computable.cond computable_N_eq_zero_e2 computable_kZ_e2 computable_divZ'_e2).of_eq
+    fun e => by
+      simp [approxNumPacked, approxNum]
+
+
+def packFindArgs (cn w : ℕ) : ℕ :=
+  Nat.pair (unpack6 w).1 (Nat.pair (unpack6 w).2.1 (Nat.unpair cn).2)
+
+def packFindArgsNat (e : ℕ) : ℕ :=
+  packFindArgs (Nat.unpair e).1 (Nat.unpair e).2
+
+lemma primrec_packFindArgsNat : Primrec packFindArgsNat := by
+  have hk : Primrec fun e : ℕ => (unpack6 (Nat.unpair e).2).1 :=
+    primrec_w_k.comp (Primrec.snd.comp Primrec.unpair)
+  have hN : Primrec fun e : ℕ => (unpack6 (Nat.unpair e).2).2.1 :=
+    primrec_w_N.comp (Primrec.snd.comp Primrec.unpair)
+  have hn : Primrec fun e : ℕ => (Nat.unpair (Nat.unpair e).1).2 :=
+    Primrec.snd.comp (Primrec.unpair.comp (Primrec.fst.comp Primrec.unpair))
+  have hNn : Primrec fun e : ℕ =>
+      Nat.pair (unpack6 (Nat.unpair e).2).2.1 (Nat.unpair (Nat.unpair e).1).2 :=
+    primrec_nat_pair.comp (hN.pair hn)
+  exact (primrec_nat_pair.comp (hk.pair hNn)).of_eq fun e => rfl
+
+def approxFromFind (cn w : ℕ) : ℤ :=
+  approxNum (unpack6 w).1 (unpack6 w).2.1 (Nat.unpair cn).2
+
+def approxFromFindNat (e : ℕ) : ℤ :=
+  approxFromFind (Nat.unpair e).1 (Nat.unpair e).2
+
+lemma approxFromFind_packed (cn w : ℕ) :
+    approxFromFind cn w = approxNumPacked (packFindArgs cn w) := by
+  simp [approxFromFind, packFindArgs, approxNumPacked, Nat.unpair_pair]
+
+opaque computable_approxFromFindNat : Computable approxFromFindNat :=
+  (computable_approxNumPacked.comp primrec_packFindArgsNat.to_comp).of_eq fun e => by
+    simp [approxFromFindNat, packFindArgsNat, approxFromFind_packed]
+
+lemma goodAll_total.{u} {LM : MetricSignature} (P : RecursivePresentation LM)
+    {T Ax : Set (Formula LM.toSignature)}
+    (hcomp : IsCompleteTheory.{u} T) (hAx : IsAxiomatization.{u} Ax T)
+    (qProv : ℕ → ℕ → Bool)
+    (hqProv_iff : ∀ c : ℕ,
+      (∃ ψ, ProvableMetricQ Ax ψ ∧ P.code ψ = c) ↔ ∃ s, qProv c s = true) :
+    ∀ cn : ℕ, ∃ w, goodAll P qProv cn w = true := by
+  intro cn
+  by_cases hc : ∃ φ : Formula LM.toSignature, P.code φ = (Nat.unpair cn).1
+  · obtain ⟨φ, hφc⟩ := hc
+    have hsen : IsSentence φ.supClosure := Formula.supClosure_isSentence φ
+    obtain ⟨k, N, hN, hk, hpr1, hpr2⟩ :=
+      exists_two_sided_cut.{u} hcomp hAx hsen (Nat.unpair cn).2
+    have hcode1 :
+        doubleTsubCode P (Nat.unpair cn).1 (Nat.unpair cn).2 k N =
+          P.code
+            (.tsub
+              (.tsub
+                (.tsub φ.supClosure
+                  (Formula.dyadic LM.toSignature (DyadicCode.mulPow2Neg k N)))
+                (Formula.dyadic LM.toSignature (DyadicCode.mulPow2Neg 1 ((Nat.unpair cn).2 + 2))))
+              (Formula.dyadic LM.toSignature (DyadicCode.mulPow2Neg 1 ((Nat.unpair cn).2 + 2)))) := by
+      simpa [hφc] using doubleTsubCode_spec P φ (Nat.unpair cn).2 k N
+    have hcode2 :
+        doubleTsubCode_rev P (Nat.unpair cn).1 (Nat.unpair cn).2 k N =
+          P.code
+            (.tsub
+              (.tsub
+                (.tsub
+                  (Formula.dyadic LM.toSignature (DyadicCode.mulPow2Neg k N))
+                  φ.supClosure)
+                (Formula.dyadic LM.toSignature (DyadicCode.mulPow2Neg 1 ((Nat.unpair cn).2 + 2))))
+              (Formula.dyadic LM.toSignature (DyadicCode.mulPow2Neg 1 ((Nat.unpair cn).2 + 2)))) := by
+      simpa [hφc] using doubleTsubCode_rev_spec P φ (Nat.unpair cn).2 k N
+    have hex1 : ∃ ψ, ProvableMetricQ Ax ψ ∧
+        P.code ψ = doubleTsubCode P (Nat.unpair cn).1 (Nat.unpair cn).2 k N :=
+      ⟨_, hpr1, hcode1.symm⟩
+    have hex2 : ∃ ψ, ProvableMetricQ Ax ψ ∧
+        P.code ψ = doubleTsubCode_rev P (Nat.unpair cn).1 (Nat.unpair cn).2 k N :=
+      ⟨_, hpr2, hcode2.symm⟩
+    obtain ⟨s, hs⟩ := (hqProv_iff _).mp hex1
+    obtain ⟨t, ht⟩ := (hqProv_iff _).mp hex2
+    refine ⟨pack6 k N s t 0 0, ?_⟩
+    have hc' : decide (∃ ψ : Formula LM.toSignature,
+        P.code ψ = (Nat.unpair cn).1) = true :=
+      decide_eq_true ⟨φ, hφc⟩
+    rw [goodAll, hc', Bool.cond_true, goodCore,
+      doubleTsubCodeNat_packCKN, doubleTsubCodeRevNat_packCKN]
+    simp [unpack6_pack6, hN, hk, hs, ht]
+  · refine ⟨0, ?_⟩
+    have hc' : decide (∃ ψ : Formula LM.toSignature,
+        P.code ψ = (Nat.unpair cn).1) = false :=
+      decide_eq_false hc
+    simp [goodAll, hc']
+
 /-- Corollary 9.11: Every complete theory with a recursive or recursively enumerable
 axiomatization is decidable. -/
 theorem complete_re_theory_decidable.{u} {LM : MetricSignature}
@@ -808,6 +1315,150 @@ theorem complete_re_theory_decidable.{u} {LM : MetricSignature}
       (ComputablePred (fun n : ℕ => ∃ φ ∈ Ax, P.code φ = n) ∨
         REPred (fun n : ℕ => ∃ φ ∈ Ax, P.code φ = n))) :
     IsDecidableTheory.{u} P T := by
-  sorry
+  refine ⟨?deg, fun hnot => (hnot hcomp).elim⟩
+  intro _
+  obtain ⟨Ax, hAx, hAxRE⟩ := hax
+  have hAx_re : REPred (fun n => ∃ φ ∈ Ax, P.code φ = n) :=
+    hAxRE.elim ComputablePred.to_re' id
+  have hprov_re := provableMetricQ_codes_re P Ax hAx_re
+  obtain ⟨qProv, hqProv, hqProv_iff⟩ := REPred.exists_computable hprov_re
+  have htot : ∀ cn : ℕ, ∃ w, goodAll P qProv cn w = true :=
+    goodAll_total.{u} P hcomp hAx qProv hqProv_iff
+  have hfind : Computable (fun cn : ℕ => Nat.find (htot cn)) :=
+    computable_nat_find (computable_goodAll P hqProv) htot
+  have hpair : Computable (fun cn : ℕ => Nat.pair cn (Nat.find (htot cn))) :=
+    computable_pair_of Computable.id hfind
+  have happ : Computable (fun cn : ℕ => approxFromFind cn (Nat.find (htot cn))) :=
+    (computable_approxFromFindNat.comp hpair).of_eq fun cn => by
+      simp [approxFromFindNat, Nat.unpair_pair]
+  have his : Computable (fun cn : ℕ =>
+      decide (∃ ψ : Formula LM.toSignature, P.code ψ = (Nat.unpair cn).1)) :=
+    (computablePred_iff_computable_decide.mp P.isCode_computable).comp
+      primrec_c_of_cn.to_comp
+  let f : ℕ → ℕ → ℤ := fun c n =>
+    bif decide (∃ ψ : Formula LM.toSignature, P.code ψ = c) then
+      approxFromFind (Nat.pair c n) (Nat.find (htot (Nat.pair c n)))
+    else
+      0
+  have hf₁ : Computable (fun cn : ℕ => f (Nat.unpair cn).1 (Nat.unpair cn).2) :=
+    (Computable.cond his happ (Computable.const (0 : ℤ))).of_eq fun cn => by
+      simp [f, Nat.pair_unpair]
+  have hf : Computable₂ f :=
+    (hf₁.comp primrec_nat_pair.to_comp).of_eq fun p => by
+      simp [Nat.unpair_pair]
+  refine ⟨f, hf, ?corr⟩
+  intro φ hsen n
+  have hc' : decide (∃ ψ : Formula LM.toSignature, P.code ψ = P.code φ) = true :=
+    decide_eq_true ⟨φ, rfl⟩
+  have hfval : f (P.code φ) n =
+      approxFromFind (Nat.pair (P.code φ) n)
+        (Nat.find (htot (Nat.pair (P.code φ) n))) := by
+    simp [f]
+  rw [hfval]
+  set cn := Nat.pair (P.code φ) n
+  set w := Nat.find (htot cn)
+  set k := (unpack6 w).1
+  set N := (unpack6 w).2.1
+  have hcn : Nat.unpair cn = (P.code φ, n) := Nat.unpair_pair _ _
+  have hw : goodAll P qProv cn w = true := Nat.find_spec (htot cn)
+  have hcore : goodCore P qProv cn w = true := by
+    have : decide (∃ ψ : Formula LM.toSignature,
+        P.code ψ = (Nat.unpair cn).1) = true := by
+      simp [cn, hcn]
+    simpa [goodAll, this] using hw
+  have hbits :
+      (decide (1 ≤ N) && decide (k ≤ 2 ^ N)) &&
+        (qProv (doubleTsubCodeNat P (packCKN cn w)) (unpack6 w).2.2.1 &&
+          qProv (doubleTsubCodeRevNat P (packCKN cn w)) (unpack6 w).2.2.2.1) = true := by
+    simpa [goodCore, k, N] using hcore
+  have hleg_prb := Bool.and_eq_true_iff.mp hbits
+  have hN : 1 ≤ N := of_decide_eq_true (Bool.and_eq_true_iff.mp hleg_prb.1).1
+  have hk : k ≤ 2 ^ N := of_decide_eq_true (Bool.and_eq_true_iff.mp hleg_prb.1).2
+  have hsT : qProv (doubleTsubCodeNat P (packCKN cn w)) (unpack6 w).2.2.1 = true :=
+    (Bool.and_eq_true_iff.mp hleg_prb.2).1
+  have htT : qProv (doubleTsubCodeRevNat P (packCKN cn w)) (unpack6 w).2.2.2.1 = true :=
+    (Bool.and_eq_true_iff.mp hleg_prb.2).2
+  rw [doubleTsubCodeNat_packCKN, hcn] at hsT
+  rw [doubleTsubCodeRevNat_packCKN, hcn] at htT
+  have hex1 := (hqProv_iff (doubleTsubCode P (P.code φ) n k N)).mpr ⟨_, hsT⟩
+  have hex2 := (hqProv_iff (doubleTsubCode_rev P (P.code φ) n k N)).mpr ⟨_, htT⟩
+  have hφsup : φ.supClosure = φ := Formula.supClosure_of_freeVars_empty hsen
+  have hpr1 : ProvableMetricQ Ax
+      (.tsub
+        (.tsub
+          (.tsub φ (Formula.dyadic LM.toSignature (DyadicCode.mulPow2Neg k N)))
+          (Formula.dyadic LM.toSignature (DyadicCode.mulPow2Neg 1 (n + 2))))
+        (Formula.dyadic LM.toSignature (DyadicCode.mulPow2Neg 1 (n + 2)))) := by
+    obtain ⟨ψ, hpr, hψc⟩ := hex1
+    have hspec := doubleTsubCode_spec P φ n k N
+    rw [hφsup] at hspec
+    exact (P.code_injective (hψc.trans hspec)).symm ▸ hpr
+  have hpr2 : ProvableMetricQ Ax
+      (.tsub
+        (.tsub
+          (.tsub (Formula.dyadic LM.toSignature (DyadicCode.mulPow2Neg k N)) φ)
+          (Formula.dyadic LM.toSignature (DyadicCode.mulPow2Neg 1 (n + 2))))
+        (Formula.dyadic LM.toSignature (DyadicCode.mulPow2Neg 1 (n + 2)))) := by
+    obtain ⟨ψ, hpr, hψc⟩ := hex2
+    have hspec := doubleTsubCode_rev_spec P φ n k N
+    rw [hφsup] at hspec
+    exact (P.code_injective (hψc.trans hspec)).symm ▸ hpr
+  obtain ⟨M0, σ0, hM0T, hdeg⟩ :=
+    degreeOfTruthMetric_of_complete_theory.{u} hcomp hsen
+  set δ := φ.eval M0.toPreStructure σ0
+  set d := DyadicCode.mulPow2Neg k N
+  set e := DyadicCode.mulPow2Neg 1 (n + 2)
+  have hTthy : IsTheory T := hcomp.1
+  have hle1 : degreeOfTruthComplete.{u} Ax
+      (.tsub φ (Formula.dyadic LM.toSignature d)) ≤ e.val + e.val :=
+    degreeOfTruthComplete_le_of_double_tsub.{u} Ax _ e hpr1
+  have hle2 : degreeOfTruthComplete.{u} Ax
+      (.tsub (Formula.dyadic LM.toSignature d) φ) ≤ e.val + e.val :=
+    degreeOfTruthComplete_le_of_double_tsub.{u} Ax _ e hpr2
+  have hM0Ax : ModelsPre M0.toPreStructure σ0 Ax :=
+    (axiomatization_models.{u} hTthy hAx M0 σ0).mp hM0T
+  have hagree : ∀ (K : ContinuousStructure.{u} LM) (τ : Var → K.Carrier),
+      ModelsPre K.toPreStructure τ Ax →
+        φ.eval K.toPreStructure τ = δ := by
+    intro K τ hKAx
+    have hKT : ModelsPre K.toPreStructure τ T :=
+      (axiomatization_models.{u} hTthy hAx K τ).mpr hKAx
+    exact complete_theory_agree_on_sentences.{u} hcomp K M0 τ σ0 hKT hM0T hsen
+  have hval1 : degreeOfTruthComplete.{u} Ax
+      (.tsub φ (Formula.dyadic LM.toSignature d)) = δ ∸ d.val :=
+    degreeOfTruthComplete_formula_tsub_dyadic.{u} M0 σ0 hM0Ax hagree d
+  have hval2 : degreeOfTruthComplete.{u} Ax
+      (.tsub (Formula.dyadic LM.toSignature d) φ) = d.val ∸ δ :=
+    degreeOfTruthComplete_tsub_dyadic.{u} M0 σ0 hM0Ax hsen hagree d
+  have hε : e.val + e.val = (2 : ℝ) ^ (-((n + 1 : ℕ) : ℤ)) := by
+    have hk' : 1 ≤ 2 ^ (n + 2) := Nat.one_le_two_pow
+    have hv : e.val = (2 : ℝ) ^ (-((n + 2 : ℕ) : ℤ)) := by
+      rw [DyadicCode.val_mulPow2Neg_div _ _ hk', zpow_neg, zpow_natCast, Nat.cast_one,
+        one_div]
+    rw [hv]
+    exact two_pow_neg_add (n + 1)
+  have hδd : |d.val - δ| ≤ (2 : ℝ) ^ (-((n + 1 : ℕ) : ℤ)) := by
+    apply abs_le_of_tsub_le
+    · exact (hval2 ▸ hle2).trans_eq hε
+    · exact (hval1 ▸ hle1).trans_eq hε
+  have hround := approxNum_close k N n hN
+  have hvald : d.val = (k : ℝ) / (2 : ℝ) ^ N :=
+    DyadicCode.val_mulPow2Neg_div k N hk
+  have htri :=
+    abs_sub_le ((approxNum k N n : ℝ) / (2 : ℝ) ^ n) ((k : ℝ) / (2 : ℝ) ^ N) δ
+  have hsum :
+      |(approxNum k N n : ℝ) / (2 : ℝ) ^ n - (k : ℝ) / (2 : ℝ) ^ N| +
+          |(k : ℝ) / (2 : ℝ) ^ N - δ| ≤
+        (2 : ℝ) ^ (-((n + 1 : ℕ) : ℤ)) + (2 : ℝ) ^ (-((n + 1 : ℕ) : ℤ)) := by
+    refine add_le_add ?_ ?_
+    · simpa [abs_sub_comm] using hround
+    · simpa [hvald] using hδd
+  have hclose :
+      |(approxNum k N n : ℝ) / (2 : ℝ) ^ n - δ| ≤ (2 : ℝ) ^ (-(n : ℤ)) :=
+    (htri.trans hsum).trans_eq (two_pow_neg_add n)
+  have happx : approxFromFind cn w = approxNum k N n := by
+    simp [approxFromFind, cn, hcn, k, N]
+  rw [happx, hdeg]
+  exact hclose
 
 end ContinuousFOL

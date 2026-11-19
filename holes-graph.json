@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-19T22:23:52Z",
-  "sorryCount": 6,
+  "updated": "2026-11-19T22:38:59Z",
+  "sorryCount": 5,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
     "blocked": "Waiting on incomplete required proof-deps",
@@ -13,7 +13,7 @@
     "\u00a74 axioms are intentional black boxes and stay open until discharged.",
     "Blue = done. Green = open. Grey = blocked.",
     "Regenerate with: python3 scripts/build_holes.py",
-    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, complete_re_theory_decidable."
+    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness."
   ],
   "nodes": [
     {
@@ -614,8 +614,8 @@
       "id": "complete_re_theory_decidable",
       "label": "Cor 9.11 RE \u21d2 dec.",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/UniformlyComputableDegree.lean:804",
-      "status": "open",
+      "file": "ContinuousFOL/Completeness/UniformlyComputableDegree.lean:1311",
+      "status": "done",
       "blocker": null,
       "detail": "Complete theory with recursive or r.e. axiomatization is decidable (Mathlib computability)."
     }

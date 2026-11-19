@@ -1,0 +1,16 @@
+{
+  "updated": "2026-11-19T12:15:24Z",
+  "sorryCount": 0,
+  "legend": {
+    "open": "No unfinished required proof-deps \u2014 try next",
+    "blocked": "Waiting on incomplete required proof-deps",
+    "done": "Proved (no sorry)"
+  },
+  "notes": [
+    "Hard edge B\u2192A: Lean proof of A still needs B.",
+    "Regenerate with: python3 scripts/build_holes.py",
+    "Writeup root: ContinuousFOL.md (not a topic nickname from another paper)."
+  ],
+  "nodes": [],
+  "edges": []
+}

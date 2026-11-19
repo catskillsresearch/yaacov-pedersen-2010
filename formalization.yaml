@@ -1,0 +1,131 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# yaacov-pedersen-2010 — Palomar packaging scaffold (Challenge/Solution/comparator).
+version: v0.4
+project:
+  name: Ben Yaacov–Pedersen 2010 continuous FOL completeness in Lean 4
+  description: >-
+    A Lean 4 / Mathlib formalization of Itaï Ben Yaacov and Arthur Paul
+    Pedersen, "A proof of completeness for continuous first-order logic",
+    Journal of Symbolic Logic 75 (2010) 168–190 (arXiv:0903.4051). Framing:
+    rigorous reconstruction/verification of continuous propositional and
+    first-order syntax/semantics, Group 1 / Group 2 axioms, black-box
+    theorems, and the completeness / approximated strong-completeness
+    results. Project rule: no Lean `axiom` declarations. Itaï Ben Yaacov
+    and Arthur Paul Pedersen did not participate in or endorse this
+    formalization. Lean is written with AI-agent assistance under Lars
+    Warren Ericson’s direction and review. Mathlib is the Lake dependency.
+    Palomar registration pending; packaging follows the Challenge /
+    Solution / comparator.json pattern.
+  authors:
+  - Lars Warren Ericson
+  license: Apache-2.0
+  responsible_maintainers:
+  - Lars Warren Ericson
+repository:
+  role: substantive-development
+classification:
+  arxiv:
+  - math.LO
+  - cs.LO
+  msc2020:
+  - '03B50'
+  - '03C66'
+  - '03B10'
+  - '68V20'
+status:
+  scope: >-
+    Scaffold stage. Comparator family in comparator.json will list
+    axioms-clean proof-chart theorems as the ContinuousFOL library is
+    developed. No Lean `axiom`. Intermediate lemmas remain library-only
+    until promoted to the chart.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms:
+  - propext
+  - Classical.choice
+  - Quot.sound
+  main_results: []
+
+sources:
+  - title: "A proof of completeness for continuous first-order logic"
+    authors:
+    - Itaï Ben Yaacov
+    - Arthur Paul Pedersen
+    type: article
+    venue: Journal of Symbolic Logic
+    year: 2010
+    volume: '75'
+    pages: 168–190
+    id: https://doi.org/10.2178/jsl/1264433914
+    arxiv: '0903.4051'
+    relationship: formalizes
+    author_endorsement: none
+    note: >-
+      Primary source. Ben Yaacov and Pedersen did not participate in or
+      endorse this formalization.
+
+related_formalizations: []
+
+automation:
+  methods:
+  - method: agent
+    models:
+    - Cursor Grok 4.7
+    framework: Cursor
+    role: >-
+      Primary agent for Lean 4 / Mathlib formalization, lake build repair,
+      vision-OCR alignment, ContinuousFOL writeup, and Palomar packaging.
+  - method: agent
+    models:
+    - Cursor Composer 2.5
+    framework: Cursor
+    role: Routine scaffolding and medium-complexity proof obligations.
+  - method: agent
+    models:
+    - Claude Fable 5.2
+    framework: Cursor
+    role: Substantive Lean repairs and larger proof obligations.
+  - method: agent
+    models:
+    - Google Gemini 4 Carbon
+    framework: Cursor
+    role: >-
+      Agent and support passes (gemini-4-carbon). Required model card for
+      this project; listed in scripts/ai_model_cards.py.
+  - method: manual
+    models: []
+    role: >-
+      Lars Warren Ericson chose the formalization route and reviewed the
+      Lean development. The human author takes responsibility for the
+      report's mathematical claims.
+  notes: >-
+    Palomar Challenge / Solution / comparator / formalization.yaml packaging.
+    Model-card registry: scripts/ai_model_cards.py (includes Gemini 4 Carbon).
+    No other human collaborators. Source authors had no involvement.
+
+review:
+  status: self-assessed
+  reviewers:
+  - Lars Warren Ericson
+  notes: >-
+    Lars Warren Ericson directed and reviewed the Lean development. This is
+    not recorded as an independent external review. Comparator proofs will be
+    checked by the Lean kernel.
+
+known_gaps:
+  - >-
+    Scaffold only: ContinuousFOL/ library and Comparator chart are not yet
+    populated with paper-facing theorems.
+  - >-
+    Vision OCR (`sources/yaacov_pedersen_2010_vision.md`) is in progress;
+    prefer it over pdftotext when aligning Lean to the paper.
+
+limitations:
+  - >-
+    No external mathematical review has been performed.
+  - >-
+    Source PDF and OCR transcriptions are not Apache-2.0; see NOTICE.
+
+alignment:
+  namespace: ContinuousFOL
+  statements: []

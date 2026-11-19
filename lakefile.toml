@@ -1,0 +1,24 @@
+name = "yaacov-pedersen-2010"
+defaultTargets = ["ContinuousFOL", "ContinuousFOLChallenge", "ContinuousFOLSolution"]
+
+[leanOptions]
+pp.unicode.fun = true
+autoImplicit = false
+relaxedAutoImplicit = false
+
+[[require]]
+name = "mathlib"
+git = "https://github.com/leanprover-community/mathlib4"
+rev = "e91b128082cc221d6432a6a5aadcd3243af8e76c"
+
+[[lean_lib]]
+name = "ContinuousFOL"
+globs = ["ContinuousFOL", "ContinuousFOL.+"]
+
+[[lean_lib]]
+name = "ContinuousFOLChallenge"
+roots = ["ContinuousFOLComparator.Challenge"]
+
+[[lean_lib]]
+name = "ContinuousFOLSolution"
+roots = ["ContinuousFOLComparator.Solution"]

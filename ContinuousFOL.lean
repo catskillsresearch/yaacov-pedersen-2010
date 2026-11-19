@@ -1,0 +1,114 @@
+/-
+Copyright (c) 2026 Lars Warren Ericson. All rights reserved.
+Released under Apache 2.0 license.
+
+Formalization of
+  I. Ben Yaacov and A. P. Pedersen,
+  "A proof of completeness for continuous first-order logic",
+  J. Symbolic Logic 75 (2010) 168–190.
+
+Dependencies: Mathlib (Lake Git pin).
+Source transcription: `sources/yaacov_pedersen_2010_vision.md`.
+-/
+module
+
+public import ContinuousFOL.Basic
+public import ContinuousFOL.BlackBox.CLApproxStrongCompleteness
+public import ContinuousFOL.BlackBox.CLConsistentIffSatisfiable
+public import ContinuousFOL.BlackBox.CLFiniteStrongCompleteness
+public import ContinuousFOL.BlackBox.LukConsistentIffSatisfiable
+public import ContinuousFOL.BlackBox.LukWeakCompleteness
+public import ContinuousFOL.Completeness.ApproximatedStrongCompleteness
+public import ContinuousFOL.Completeness.CompactnessMetric
+public import ContinuousFOL.Completeness.CompactnessPre
+public import ContinuousFOL.Completeness.CompletenessMetric
+public import ContinuousFOL.Completeness.CompletenessPre
+public import ContinuousFOL.Completeness.DegreeOfProvability
+public import ContinuousFOL.Completeness.DegreeOfTruth
+public import ContinuousFOL.Completeness.ExistsHenkinExtension
+public import ContinuousFOL.Completeness.HenkinComplete
+public import ContinuousFOL.Completeness.HenkinModelExistence
+public import ContinuousFOL.Completeness.HenkinModelExistenceMetric
+public import ContinuousFOL.Completeness.IsCompleteTheory
+public import ContinuousFOL.Completeness.IsSentence
+public import ContinuousFOL.Completeness.IsTheory
+public import ContinuousFOL.Completeness.PavelkaCompleteness
+public import ContinuousFOL.Completeness.ProvableTsubOfInconsistentAdjoin
+public import ContinuousFOL.Completeness.RecursivePresentation
+public import ContinuousFOL.Completeness.SignatureExtension
+public import ContinuousFOL.Completeness.TermPreStructure
+public import ContinuousFOL.Completeness.TermPreStructureEvalEqSup
+public import ContinuousFOL.Completeness.UniformlyComputableDegree
+public import ContinuousFOL.Essentials.ConsistentAdjoin
+public import ContinuousFOL.Essentials.DeductionTheorem
+public import ContinuousFOL.Essentials.GeneralizationTheorem
+public import ContinuousFOL.Essentials.GeneralizeFreshConst
+public import ContinuousFOL.Essentials.InconsistentIffProvableOne
+public import ContinuousFOL.Essentials.MaximalConsistent
+public import ContinuousFOL.Essentials.MaximalConsistentMetric
+public import ContinuousFOL.Essentials.ProvableBoundSubst
+public import ContinuousFOL.Essentials.ProvableQMono
+public import ContinuousFOL.Group1Axioms.CLPropForm.Dyadic
+public import ContinuousFOL.Group1Axioms.CLPropForm.IsAxiom
+public import ContinuousFOL.Group1Axioms.CLPropForm.IterSub
+public import ContinuousFOL.Group1Axioms.CLPropForm.One
+public import ContinuousFOL.Group1Axioms.CLPropForm.Provable
+public import ContinuousFOL.Group1Axioms.DyadicCode.Basic
+public import ContinuousFOL.Group1Axioms.DyadicCode.Pow2Neg
+public import ContinuousFOL.Group1Axioms.DyadicCode.Val
+public import ContinuousFOL.Group1Axioms.DyadicCode.Zero
+public import ContinuousFOL.Group1Axioms.LukPropForm.IsAxiom
+public import ContinuousFOL.Group1Axioms.LukPropForm.Provable
+public import ContinuousFOL.Group2Axioms.BaseAxiomSchema
+public import ContinuousFOL.Group2Axioms.ConsistentQ
+public import ContinuousFOL.Group2Axioms.FormulaGenList
+public import ContinuousFOL.Group2Axioms.MetricAxiomSchema
+public import ContinuousFOL.Group2Axioms.ProvableMetricQ
+public import ContinuousFOL.Group2Axioms.ProvableQ
+public import ContinuousFOL.Group2Axioms.SoundnessMetric
+public import ContinuousFOL.Group2Axioms.SoundnessPre
+public import ContinuousFOL.Introduction.TsubR
+public import ContinuousFOL.Introduction.UnitInterval
+public import ContinuousFOL.LanguageAndSemantics.CompletelySatisfiable
+public import ContinuousFOL.LanguageAndSemantics.ContinuousStructure
+public import ContinuousFOL.LanguageAndSemantics.EntailsPre
+public import ContinuousFOL.LanguageAndSemantics.Formula
+public import ContinuousFOL.LanguageAndSemantics.FormulaConnectives
+public import ContinuousFOL.LanguageAndSemantics.FormulaDefaultAtom
+public import ContinuousFOL.LanguageAndSemantics.FormulaDyadic
+public import ContinuousFOL.LanguageAndSemantics.FormulaEquiv
+public import ContinuousFOL.LanguageAndSemantics.FormulaEval
+public import ContinuousFOL.LanguageAndSemantics.FormulaIterSub
+public import ContinuousFOL.LanguageAndSemantics.FormulaOne
+public import ContinuousFOL.LanguageAndSemantics.FormulaRank
+public import ContinuousFOL.LanguageAndSemantics.MetricPreStructure
+public import ContinuousFOL.LanguageAndSemantics.MetricSignature
+public import ContinuousFOL.LanguageAndSemantics.ModelsPre
+public import ContinuousFOL.LanguageAndSemantics.PreStructure
+public import ContinuousFOL.LanguageAndSemantics.ReplaceArg
+public import ContinuousFOL.LanguageAndSemantics.Signature
+public import ContinuousFOL.LanguageAndSemantics.Term
+public import ContinuousFOL.LanguageAndSemantics.TermEval
+public import ContinuousFOL.LanguageAndSemantics.UpdateAssign
+public import ContinuousFOL.LanguageAndSemantics.Var
+public import ContinuousFOL.LukasiewiczAndContinuous.CLPropForm
+public import ContinuousFOL.LukasiewiczAndContinuous.CLPropFormEval
+public import ContinuousFOL.LukasiewiczAndContinuous.CLPropFormModels
+public import ContinuousFOL.LukasiewiczAndContinuous.LukPropForm
+public import ContinuousFOL.LukasiewiczAndContinuous.LukPropFormEval
+public import ContinuousFOL.LukasiewiczAndContinuous.LukPropFormModels
+public import ContinuousFOL.SubstitutionAndCompletions.BoundSubstitutionLemma
+public import ContinuousFOL.SubstitutionAndCompletions.ElementaryLMorphism
+public import ContinuousFOL.SubstitutionAndCompletions.EntailsMetricIffComplete
+public import ContinuousFOL.SubstitutionAndCompletions.EvalUniformlyContinuous
+public import ContinuousFOL.SubstitutionAndCompletions.ExistsMetricCompletion
+public import ContinuousFOL.SubstitutionAndCompletions.FormulaBoundSubst
+public import ContinuousFOL.SubstitutionAndCompletions.FormulaFreeSubst
+public import ContinuousFOL.SubstitutionAndCompletions.FormulaFreeVars
+public import ContinuousFOL.SubstitutionAndCompletions.FormulaHasFunc
+public import ContinuousFOL.SubstitutionAndCompletions.LMorphism
+public import ContinuousFOL.SubstitutionAndCompletions.SubstitutionLemma
+public import ContinuousFOL.SubstitutionAndCompletions.TermSubst
+public import ContinuousFOL.SubstitutionAndCompletions.TermVars
+
+@[expose] public section

@@ -1,0 +1,1584 @@
+arXiv:0903.4051v1 [math.LO] 24 Mar 2009
+
+A PROOF OF COMPLETENESS FOR
+CONTINUOUS FIRST-ORDER LOGIC
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+Abstract. Continuous first-order logic has found interest among model theorists who
+wish to extend the classical analysis of “algebraic” structures (such as fields, group, and
+graphs) to various natural classes of complete metric structures (such as probability
+algebras, Hilbert spaces, and Banach spaces). With research in continuous first-order
+logic preoccupied with studying the model theory of this framework, we find a natural
+question calls for attention: Is there an interesting set of axioms yielding a completeness
+result?
+The primary purpose of this article is to show that a certain, interesting set of axioms
+does indeed yield a completeness result for continuous first-order logic. In particular,
+we show that in continuous first-order logic a set of formulae is (completely) satisfiable
+if (and only if) it is consistent. From this result it follows that continuous first-order
+logic also satisfies an approximated form of strong completeness, whereby Σ  ϕ (if and)
+. 2−n for all n < ω. This approximated form of strong completeness
+only if Σ ⊢ ϕ −
+asserts that if Σ  ϕ, then proofs from Σ, being finite, can provide arbitrary better
+approximations of the truth of ϕ.
+Additionally, we consider a different kind of question traditionally arising in model
+theory – that of decidability: When is the set of all consequences of a theory (in a
+countable, recursive language) recursive? Say that a complete theory T is decidable if
+for every sentence ϕ, the value ϕT is a recursive real, and moreover, uniformly computable from ϕ. If T is incomplete, we say it is decidable if for every sentence ϕ the
+real number ϕ◦T is uniformly recursive from ϕ, where ϕ◦T is the maximal value of ϕ
+consistent with T . As in classical first-order logic, it follows from the completeness
+theorem of continuous first-order logic that if a complete theory admits a recursive (or
+even recursively enumerable) axiomatization then it is decidable.
+
+1. Introduction
+Roughly speaking, model theory studies ﬁrst-order theories and the corresponding
+classes of their models (i.e., elementary classes). Properties of the ﬁrst-order theory of a
+structure can then give direct insight into the structure itself. Investigation thereof was
+We wish to thank Jeremy Avigad for valuable comments. We also wish to thank Petr Hájek for offering
+useful remarks and for pointing us to important references. Finally, we wish to thank an anonymous
+referee for helpful suggestions.
+First author supported by ANR chaire d’excellence junior THEMODMET (ANR-06-CEXC-007) and
+by Marie Curie research network ModNet.
+Revision 856 of 16 March 2009.
+1
+
+2
+
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+
+classically restricted to so-called “algebraic” structures, such as ﬁelds, groups, and graphs.
+Additionally, in modern model theory one often studies stable theories — theories whose
+models admit a “well-behaved” notion of independence (which, if it exists, is always
+unique).
+Continuous ﬁrst-order logic was developed in [BU] as an extension of classical ﬁrstorder logic, permitting one to broaden the aforementioned classical analysis of algebraic
+structures to various natural classes of complete metric structures. (It should be pointed
+out that classes of complete metric structures cannot be elementary in the classical sense
+for several reasons. For example, completeness is an inﬁnitary property and is therefore
+not expressible in classical ﬁrst-order logic. See also [BBHU08] for a general survey of
+continuous logic and its applications for various kinds of metric structures arising in functional analysis and probability theory.) For example, the class (of unit balls) of Hilbert
+spaces and the class of probability algebras are elementary in this sense. (A probability
+algebra is the Boolean algebra of events of a probability space modulo the null measure
+ideal, with the metric d(A, B) = µ(A∆B).) Furthermore, the classical notion of stability
+can easily be extended to continuous ﬁrst-order logic. Indeed, somewhat unsurprisingly,
+the classes of Hilbert spaces and probability algebras are stable, independence being
+orthogonality and probabilistic independence, respectively.
+Historically, two groups of logics precede continuous ﬁrst-order logic. On the one hand,
+continuous ﬁrst-order logic has structural precursors. The structural precursors are those
+logics which make use of machinery similar to that of continuous ﬁrst-order logic yet were
+never developed to study complete metric structures. Such structural precursors include
+Chang and Keisler’s continuous logic [CK66], Lukasiewicz’s many-valued logic [Háj98],
+and Pavelka’s many-valued logic [Pav79]. Chang and Keisler’s logic is much too general
+for the study of complete metric structures, while Lukasiewicz logic and Pavelka’s logic
+were developed for diﬀerent purposes. Nonetheless, continuous ﬁrst-order logic is an
+improved variant of Chang and Keisler’s logic. On the other hand, continuous ﬁrst-order
+logic has purposive precursors. The purposive precursors are those logics which were
+developed to study complete metric structures yet do not make use of machinery similar
+to that of continuous ﬁrst-order logic. The purposive precursors of continuous ﬁrstorder logic include Henson’s logic for Banach structures [Hen76] and compact abstract
+theories (“cats”) [Ben03a, Ben03b, Ben05]. Continuous ﬁrst-order logic does not suﬀer
+from several shortcomings of these logics. Importantly, continuous ﬁrst-order logic is less
+technically involved than the previous logics and in many respects much closer to classical
+ﬁrst-order logic. Still, continuous ﬁrst-order logic is expressively equivalent to the logic of
+metric open Hausdorﬀ cats. Continuous ﬁrst-order logic also generalizes Henson’s logic
+for Banach structures, and as such, is expressively equivalent to a natural variant of
+Henson’s logic.
+As an extension of classical ﬁrst-order logic, continuous ﬁrst-order logic satisﬁes suitably phrased forms of the compactness theorem, the Löwenheim-Skolem theorems, the
+
+A PROOF OF COMPLETENESS
+
+3
+
+diagram arguments, Craig’s interpolation theorem, Beth’s deﬁnability theorem, characterizations of quantiﬁer elimination and model completeness, the existence of saturated
+and homogeneous models results, the omitting types theorem, fundamental results of
+stability theory, and nearly all other results of elementary model theory. Moreover,
+continuous ﬁrst-order logic aﬀords a tractable framework for ultraproduct constructions
+(and so hull constructions) in applications of model theory in analysis and geometry. In
+fact, expressing conditions from analysis and geometry feels quite natural in continuous
+ﬁrst-order logic, furnishing model theorists and analysts with a common language.
+Thus it is clear that continuous ﬁrst-order logic is of interest to model theorists. Yet
+with research focused on the model theory of continuous ﬁrst-order logic and thus semantic features of this framework, a natural question seems to lurk in the background:
+Is there an interesting set of axioms yielding a completeness result? The answer depends
+on how one formulates the notion of completeness. To be sure, there is an interesting
+set of axioms, and, as we will see, a set of formulae is (completely) satisﬁable if (and
+only if) it is consistent. However, as for continuous propositional logic, only an approximated form of strong completeness is obtainable. By this we mean that Σ  ϕ only
+. 2−n for all n < ω, which amounts to the idea if Σ  ϕ, then proofs from
+if Σ ⊢ ϕ −
+Σ, being ﬁnite, can provide arbitrarily better approximations of the truth of ϕ. (What
+this means will become clearer below.) This should hardly be surprising in light of the
+fact that continuous ﬁrst-order logic has been developed for complete metric structures
+equipped with uniformly continuous functions with respect to which formulae take truth
+values anywhere in [0, 1].
+Of course, a diﬀerent kind of question traditionally arising in model theory is that of
+decidability: When is the set of all consequences of a theory (in a countable, recursive
+language) recursive? Again, such questions can be extended to continuous ﬁrst-order
+logic. Say that a complete theory T is decidable if for every sentence ϕ, the value ϕT
+is a recursive real, and moreover, uniformly computable from ϕ. If T is incomplete, we
+say it is decidable if for every sentence ϕ the real number ϕ◦T is uniformly recursive from
+ϕ, where ϕ◦T is the maximal value of ϕ consistent with T . (See Deﬁnition 9.7. If T is
+complete, then ϕ takes the same value in all models of T , so ϕT coincides with ϕ◦T and
+therefore ϕ◦T is the unique value of ϕ consistent with T .) As in classical ﬁrst-order logic,
+it follows from the completeness theorem that if a complete theory admits a recursive (or
+even recursively enumerable) axiomatization then it is decidable, whence the connection
+to the present paper.
+Following an introduction to Lukasiewicz propositional logic and continuous propositional logic, we oﬀer a deﬁnition of the language of continuous ﬁrst-order logic and then
+supply a precise formulation of its semantics. Indeed, this paper can also be seen as an
+eﬀort to precisely organize and unify the various presentations of continuous ﬁrst-order
+logic found in the literature which are often intimated in a rough-and-ready form. Finally, we state and usually prove various results needed to reach the goal of this paper:
+to state and prove the completeness theorem for continuous ﬁrst-order logic.
+
+4
+
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+
+To follow our intuitions to this end, the structure of our approach is largely borrowed
+from the classical approach employed to prove the completeness theorem. In particular,
+we make use of a Henkin-like construction and a weakened version of the deduction
+theorem of classical ﬁrst-order logic. Moreover, various deﬁnitions and results found in
+the classical approach are translated to play analogous roles in our development, while
+from [BU] we take some basic facts and deﬁnitions peculiar to continuous ﬁrst-order
+logic. It will become apparent, however, that our approach diﬀers from the classical one
+in many respects. Furthermore, the completeness theorem we oﬀer is formulated with
+respect to the semantics employed by the model theorist who studies continuous ﬁrstorder logic. In particular, our work does not exploit an algebraic semantics. Finally,
+we should note that results of research on the interplay between logical and deductive
+entailment for both continuous propositional logic and Lukasiewicz propositional logic
+play a crucial role in getting our feet oﬀ the ground so that we may follow our intuitions
+in the ﬁrst place [Ben]. (This work of the ﬁrst author is partially based on the results of
+work done by Chang [Cha58, Cha59] and Rose and Rosser [RR58] on Lukasiewicz logic.)
+With this, we set out to the task at hand.
+2. Lukasiewicz Logic and Continuous Logic
+Definition 2.1. Let S0 = {Pi : i ∈ I} be a set of distinct symbols. Let S be freely
+. and the unary operation ¬. We call
+generated from S0 by the formal binary operation −
+S a Lukasiewicz propositional logic.
+Definition 2.2. Let S be a Lukasiewicz propositional logic.
+(i) If v0 : S0 → [0, 1] is a mapping, we can extend v0 to a unique mapping v : S →
+[0, 1] by setting
+. ψ) := max(v(ϕ) − v(ψ), 0).
+• v(ϕ −
+• v(¬ϕ) := 1 − v(ϕ).
+We call v the truth assignment deﬁned by v0 .
+(ii) If Σ ⊆ S, we write v  Σ if v(ϕ) = 0 for all ϕ ∈ Σ, and we call v a model of Σ.
+We also write v  ϕ if v  {ϕ}.
+(iii) We say that Σ ⊆ S is satisﬁable if it has a model.
+(iv) We write Σ  ϕ if every model of Σ is also a model of ϕ.
+We may write Σ L ϕ to indicate that we are dealing with a Lukasiewicz propositional
+logic.
+Remark 2.3. Observe that 0 corresponds to truth and any r ∈ (0, 1] corresponds to a
+degree of truth or falsity, where 1 may be construed as absolute falsity. Also observe that
+. ’ plays a role analogous to that of ‘→’ in classical logic: We may interpret ‘ψ −
+. ϕ’ as
+‘−
+‘ψ is implied by ϕ,’ ‘ϕ is at least as false as ψ’, ‘ψ is at most as true as ϕ,’ or simply, ‘ψ
+is less than or equal to ϕ.’ We prefer the last interpretation.
+
+A PROOF OF COMPLETENESS
+
+5
+
+Definition 2.4. Let S0 = {Pi : i ∈ I} be a set of distinct symbols. Let S be freely
+. and the unary operations ¬ and 1 .
+generated from S0 by the formal binary operation −
+2
+We call S a continuous propositional logic.
+A truth assignment v is deﬁned as in (i) of Deﬁnition 2.2 with the extra condition that
+v( 12 ϕ) := 12 v(ϕ). Models, satisﬁability, and logical entailment are deﬁned as in Deﬁnition
+CL
+2.2. We may write Σ  ϕ to indicate that we are dealing with a continuous propositional
+logic.
+3. Axioms: Group 1
+We now present six of our fourteen axiom schemata. The ﬁrst four form an axiomatization for Lukasiewicz propositional logic [Cha58, RR58].
+. ψ) −
+. ϕ
+(A1) (ϕ −
+.
+. (χ −
+. ψ)) −
+. (ψ −
+. ϕ)
+(A2) ((χ − ϕ) −
+. (ϕ −
+. ψ)) −
+. (ψ −
+. (ψ −
+. ϕ))
+(A3) (ϕ −
+.
+.
+.
+(A4) (ϕ − ψ) − (¬ψ − ¬ϕ)
+When the next two axiom schemata are added to the ﬁrst four (in the appropriate
+language), we obtain an axiomatization for continuous propositional logic [Ben].
+. (ϕ −
+. 1 ϕ)
+(A5) 21 ϕ −
+.
+. 21 ϕ
+(A6) (ϕ − 21 ϕ) −
+2
+Note that (A5) and (A6) say that 12 behaves as it ought to. Informally, under the
+intended interpretation, (A5) and (A6) taken together imply that 21 ϕ∔ 12 ϕ = ϕ. (‘∔’ may
+. ψ); thus, according to the intended interpretation
+be deﬁned by setting ϕ ∔ ψ := ¬(¬ϕ −
+.
+of ‘−’, the interpretation of ‘∔’ is given by x ∔ y = min(x + y, 1).)
+Formal deductions and the relation ⊢ for both logics are deﬁned in the natural way,
+the only rule of inference being modus ponens:
+. ϕ
+ϕ, ψ −
+ψ
+We can make this more precise as follows: a formal deduction from Σ is a ﬁnite sequence
+of formulae (ϕi : i < n) such that for each i < n, either (i) ϕi is an instance of an axiom
+. ϕ . We accordingly
+schema, (ii) ϕi ∈ Σ, or (iii) there are j, k < i such that ϕk = ϕi −
+j
+say that ϕ is provable from (or deducible from, or a consequence of ) Σ and write Σ ⊢ ϕ
+if there is a formal deduction from Σ ending in ϕ. Observe that a formula ϕ is provable
+from Σ just in case it is provable from a ﬁnite subset of Σ. To avoid confusion, we may
+write Σ ⊢L ϕ to indicate that ϕ is provable from Σ in Lukasiewicz propositional logic, and
+
+6
+
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+
+we may write Σ ⊢CLϕ to indicate that ϕ is provable from Σ in continuous propositional
+logic.
+It should be fairly clear to the reader how the proof systems of continuous propositional
+logic and Lukasiewicz propositional logic are related. Both proof systems are of course
+sound, by which we mean that if Σ ⊢L ϕ (respectively, Σ ⊢CLϕ), then Σ |=L ϕ (respectively,
+Σ |=CL ϕ). We leave this section with a deﬁnition, a few notational conventions, and a
+remark, each of which addresses some aspects of our presentation of continuous logic in
+this paper.
+Definition 3.1. We say that a set of formulae Σ is inconsistent if Σ ⊢ ϕ for every formula
+ϕ and consistent otherwise.
+. nϕ by recursion on n < ω:
+Notation 3.2. Deﬁne ψ −
+. 0ϕ := ψ.
+(i) ψ −
+.
+. nϕ) −
+. ϕ.
+(ii) ψ − (n + 1)ϕ := (ψ −
+. ϕ), where ϕ is any formula, and let 2−n be
+Notation 3.3. Let 1 be shorthand for ¬(ϕ −
+1
+1
+shorthand for · · · 1. Also, let 0 be shorthand for ¬1.
+|2 {z 2}
+n−times
+
+Remark 3.4. Observe that on any truth assignment v the set D generated from 1 by
+. , and 1 is such that {v(d) : d ∈ D} = D, the set of dyadic
+applying the operations ¬, −
+2
+numbers, i.e., numbers of the form 2kn , where k, n < ω and k ≤ 2n . For simplicity of
+notation, we do not distinguish between the syntactic set D thus generated and D.
+4. Black Box Theorems
+We now record several results which will be used in this paper.
+
+Fact 4.1 (Weak Completeness for Lukasiewicz Logic [Cha59, RR58]). Let S be a Lukasiewicz
+propositional logic and ϕ ∈ S. Then  ϕ if and only if ⊢ ϕ.
+Fact 4.2. Let S be a Lukasiewicz propositional logic, and Σ ⊆ S. Then Σ is consistent
+if and only if it is satisﬁable.
+Fact 4.3. Let S be a continuous propositional logic and Σ ⊆ S. Then Σ is consistent if
+and only if it is satisﬁable.
+An immediate corollary of the previous fact is the following approximated form of
+strong completeness.
+Fact 4.4 (Approximated Strong Completeness for Continuous Logic). Let S be a con. 2−n
+tinuous propositional logic, Σ ⊆ S, and ϕ ∈ S. Then Σ  ϕ if and only if Σ ⊢ ϕ −
+for all n < ω.
+
+A PROOF OF COMPLETENESS
+
+7
+
+. 2−n : n < ω}.
+In fact, this is the best we can hope for. To see why, consider Σ := {P −
+Then Σ  P , yet for no ﬁnite Σ0 ⊆ Σ do we have Σ0  P . However, we do have the
+following weaker result.
+Fact 4.5 (Finite Strong Completeness for Continuous Logic). Let S be a continuous
+propositional logic, Σ ⊆ S be ﬁnite, and ϕ ∈ S. Then Σ  ϕ if and only if Σ ⊢ ϕ.
+In view of the above facts, observe that if S is a Lukasiewicz or continuous propositional
+logic and Σ ⊆ S,
+• Σ is inconsistent if and only if Σ ⊢L 1.
+• Σ is inconsistent if and only if Σ ⊢CL d for some d ∈ D\{0}.
+Fact 4.2 – Fact 4.5 have been established independently by the ﬁrst author in [Ben].
+Nonetheless, Fact 4.2 has been proved in [BC63] (indeed, for Lukasiewicz ﬁrst-order logic;
+see also [Háj98]) and Fact 4.4 has a counterpart in [Hay63] (again, see also [Háj98]),
+while Fact 4.5 has been proved for rational Pavelka propositional logic [Háj98] and for
+Lukasiewicz propositional logic [CDM00, Háj98].
+5. The Language and Semantics of Continuous First-Order Logic
+Definition 5.1. The logical symbols of continuous ﬁrst-order logic are
+• Parentheses: ( , )
+. , ¬, 1
+• Connectives: −
+2
+• Quantiﬁers: sup (or inf)
+• Variables: v0 , v1 , . . .
+• An optional binary metric: d
+The sup-quantiﬁer plays the role of the ∀-quantiﬁer from classical ﬁrst-order logic,
+whereas the inf-quantiﬁer plays the role of the ∃-quantiﬁer from classical ﬁrst-order logic.
+In fact, the sup-quantiﬁer can be deﬁned in terms of the inf-quantiﬁer. Furthermore,
+instead of an optional binary congruence relation symbol ≈ as in classical ﬁrst-order
+logic, continuous ﬁrst-order logic has an optional binary metric symbol d.
+We should now say something about the choice of connectives. In classical ﬁrst-order
+logic, a set of connectives is complete if every mapping from {0, 1}n → {0, 1} can be
+written using the set of connectives. The set of connectives {¬, →} is complete in this
+sense. Similarly, in continuous ﬁrst-order logic, a set of connectives is complete if every
+continuous mapping from [0, 1]n → [0, 1] can be written using the set of connectives. But
+this notion is much too demanding. Indeed, a complete set of connectives would require
+continuum many connectives. A more reasonable demand of a set of connectives is that
+every continuous function from [0, 1]n → [0, 1] can be written using the set of connectives
+up to arbitrarily better approximations. A set of connectives satisfying this requirement
+. , ¬, 1 } is full
+is said to be full (see [BU]; see also [CDM00]). The set of connectives {−
+. , 1 , 0, 1} is full as well — so is any set of connectives which2includes
+in this sense, and {−
+. , 1, and some dense 2set C ⊆ [0, 1], such as D or Q ∩ [0, 1]. Here we choose to canonize
+−
+
+8
+
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+
+. , ¬, 1 } as the set connectives. As it is ﬁnite, this set of connectives is an economical
+{−
+2
+choice, and it is the analogue of the popular choice of connectives {¬, →} of classical
+ﬁrst-order logic.
+Definition 5.2. A continuous signature is a quadruple L = (R, F , G, n) such that
+(i) R =
+6 ∅.
+(ii) R ∩ F = ∅.
+(iii) G has the form {δs,i : (0, 1] → (0, 1] : s ∈ R ∪ F and i < ns }.
+(iv) n : R ∪ F → ω.
+Members of R are called relation symbols, while members of F are called function symbols.
+For each s ∈ R ∪ F , we write ns for the value of s under n and call ns the arity of s. We
+call a member of G a modulus of uniform continuity.
+Remark 5.3. Observe that members of G are not syntactic objects. Rather, each member
+of G is a genuine operation on (0, 1]. The role of the moduli of uniform continuity will
+be clariﬁed below.
+Definition 5.4. A continuous signature with a metric is a continuous signature with a
+distinguished binary relation symbol d.
+Terms, formulae, and notions of free and bound substitution are deﬁned in the usual
+way (see §6 concerning these notions). We denote the set of variables by V and the
+set of formulae by For(L). In classical ﬁrst-order logic, a metric symbol d would most
+naturally be thought of as a function symbol. In continuous ﬁrst-order logic, however, d
+is a relation symbol, and as such, dt0 t1 is a formula rather than a term.
+We write ‘supx ’ (and ‘inf x ’) instead of ‘sup x’ (and ‘inf x’). We deﬁne ‘inf,’ ‘∧,’ ‘∨,’
+and ‘| |’ by setting
+inf x ϕ
+ϕ∧ψ
+ϕ∨ψ
+|ϕ − ψ|
+
+:=
+:=
+:=
+:=
+
+¬ supx ¬ϕ.
+. (ϕ −
+. ψ).
+ϕ−
+¬(¬ϕ ∧ ¬ψ).
+. ψ) ∨ (ψ −
+. ϕ).
+(ϕ −
+
+The reader should verify that the deﬁnition of ‘inf’ accords with the obvious intended
+interpretation when the semantics are given below. Observe that (A2) becomes ‘(ϕ ∧
+. (ψ ∧ ϕ).’ Also, according to the intended interpretation of ‘−
+. ,’ the interpretation
+ψ) −
+of ‘∧’ is given by x ∧ y = min(x, y). Thus, according to the interpretation of ‘∧,’ the
+interpretation of ‘∨’ is given by x ∨ y = max(x, y), whereby the interpretation of ‘| |’
+is one-dimensional Euclidean distance. As 0 corresponds to truth, it should be clear
+that the interpretation of ‘∧’ is the continuous analogue of the classical ‘or,’ whereas the
+interpretation of ‘∨’ is the continuous analogue of the classical ‘and.’
+Definition 5.5.
+
+A PROOF OF COMPLETENESS
+
+9
+
+(i) Let (M, d) and (M ′ , d′) be metric spaces and f : M → M ′ be a function. We say
+that δ : (0, 1] → (0, 1] is a modulus of uniform continuity for f if for each ǫ ∈ (0, 1]
+and all a, b ∈ M, d(a, b) < δ(ǫ) =⇒ d′ (f (a), f (b)) ≤ ǫ.
+(ii) We say that f is uniformly continuous if there is a modulus of uniform continuity
+for f .
+Definition 5.6. Let L be a continuous signature. A continuous L-pre-structure is an
+ordered pair M = (M, ρ), where M is a non-empty set and ρ is a function whose domain
+is R ∪ F , such that:
+(i) To each f ∈ F , ρ assigns a mapping f M : M nf → M.
+(ii) To each P ∈ R, ρ assigns a mapping P M : M nP → [0, 1].
+If L is also a continuous signature with a metric, then M is such that:
+(iii) ρ assigns to d a pseudo-metric dM : M × M → [0, 1].
+(iv) For each f ∈ F , i < nf , and ǫ ∈ (0, 1], δf,i satisﬁes the following condition:
+∀ā, b̄, c, e [dM(c, e) < δf,i (ǫ) =⇒ dM(f M(ā, c, b̄), f M(ā, e, b̄)) ≤ ǫ],
+where |ā| = i and |ā| + |b̄| + 1 = nf ; we thereby call δf,i the uniform continuity
+modulus of f with respect to the ith argument.
+(v) For each P ∈ R, i < nP , and ǫ ∈ (0, 1], δP,i satisﬁes the following condition:
+∀ā, b̄, c, e [dM(c, e) < δP,i (ǫ) =⇒ max(P M(ā, c, b̄) − P M(ā, e, b̄), 0) ≤ ǫ],
+where |ā| = i and |ā| + |b̄| + 1 = nP ; we thereby call δP,i the uniform continuity
+modulus of P with respect to the ith argument.
+Here, as well as in the remainder of this paper, a tuple a0 , . . . , an−1 may be for convenience denoted by ā, whereby |ā| will denote the length of ā.
+Convention 5.7. In this paper we make the convention that for an n-ary function f ,
+the ith argument of the expression f (x0 , . . . , xn−1 ) is xi . In particular, the 0 th argument
+of f is x0 .
+Remark 5.8. Conditions (iv) and (v) correspond to the congruence axioms of classical
+ﬁrst-order logic. In classical ﬁrst-order logic it is required that a distinguished binary
+relation symbol ≈ be such that for each classical structure A, the relation ≈A is an
+equivalence relation satisfying the following congruence axioms:
+• For each function symbol f and i < nf ,
+∀ā, b̄, c, e (c ≈A e =⇒ f A(ā, c, b̄) ≈A f A(ā, e, b̄)),
+where |ā| = i and |ā| + |b̄| + 1 = nf .
+• For each relation symbol P and i < nP ,
+∀ā, b̄, c, e (c ≈A e =⇒ (P A(ā, c, b̄) ⇒ P A(ā, e, b̄))),
+where |ā| = i and |ā| + |b̄| + 1 = nP .
+In classical ﬁrst-order logic, one can thereby show that for each classical structure A, the
+relation ≈A satisﬁes the following properties:
+
+10
+
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+
+• For each
+V function Asymbol f , A
+∀ā, b̄ (( i<nf ai ≈ bi ) =⇒ f (ā) ≈A f A(b̄)),
+where |ā| = |b̄| = nf .
+• For each
+V relation symbol P ,
+∀ā, b̄ (( i<nP ai ≈A bi ) =⇒ (P A(ā) ⇒ P A(b̄))),
+where |ā| = |b̄| = nP .
+Along a similar vein, in continuous ﬁrst-order logic one can show that for each function
+symbol f and predicate symbol P , there are moduli of uniform continuity ∆f and ∆P
+which depend on their uniform continuity moduli (δf,i : i < nf ) and (δP,i : i < nP ),
+respectively. For example, ∆f : (0, 1] → (0, 1] may be deﬁned by setting ∆f (ǫ) :=
+min{δf,0 (ǫ/nf ), . . . , δf,nf −1 (ǫ/nf )}. Accordingly, in each continuous L-pre-structure M,
+the mapping ∆f is a modulus of uniform continuity for f MW
+with respect to the maximum
+M
+M
+M
+:=
+metric Dnf deﬁned by Dnf (ā, b̄)
+maxi<nf (d (ai , bi )) = i<nf dM(ai , bi ). This may be
+expressed formally as follows:
+• For each
+the following condition:
+W f ∈ FMand ǫ ∈ (0, 1], ∆f satisﬁes
+M M
+∀ā, b̄ [( i<nf d (ai , bi )) < ∆f (ǫ) =⇒ d (f (ā), f M(b̄)) ≤ ǫ],
+where |ā| = |b̄| = nf .
+In light of the foregoing discussion, observe that for every continuous L-pre-structure M
+and s ∈ R ∪ F , sM is a uniformly continuous function.
+Definition 5.9. A continuous L-structure is a continuous L-pre-structure M = (M, ρ)
+such that ρ assigns to d a complete metric:
+(i) ∀a, b (dM(a, b) = 0 =⇒ a = b).
+(ii) Every Cauchy sequence converges.
+Definition 5.10.
+(i) If M is a continuous L-pre-structure, then an M-assignment is a mapping σ :
+V → M.
+(ii) If σ is an M-assignment, x ∈ V , and a ∈ M, we deﬁne an M-assignment σxa by
+setting for all y ∈ V ,
+(
+a
+if x = y
+σxa (y) :=
+σ(y) otherwise.
+The interpretation of a term t in a continuous L-pre-structure M is deﬁned as in
+classical ﬁrst-order logic. We denote its interpretation by tM,σ .
+Definition 5.11. Let M be a continuous L-pre-structure. For a formula ϕ and an
+M-assignment σ, we deﬁne the value of ϕ in M under σ, M(ϕ, σ), by induction:
+, . . . , tM,σ
+(i) M(P t0 · · · tnP −1 , σ) := P M(tM,σ
+nP −1 ).
+0
+.
+(ii) M(α − β, σ) := max(M(α, σ) − M(β, σ), 0).
+(iii) M(¬α, σ) := 1 − M(α, σ).
+
+A PROOF OF COMPLETENESS
+
+11
+
+(iv) M( 21 α, σ) := 12 M(α, σ).
+(v) M(supx α, σ) := sup{M(α, σxa) : a ∈ M}.
+If one chooses to use ‘inf’ instead of ‘sup,’ one may replace (v) with M(inf x α, σ) :=
+inf{M(α, σxa) : a ∈ M}.
+Definition 5.12. Let M be a continuous L-pre-structure, let σ be an M-assignment,
+and let Γ ⊆ For(L).
+(i) We say that (M, σ) models (or satisﬁes) Γ and that (M, σ) is a model of Γ, written
+(M, σ) Q Γ, if M(ϕ, σ) = 0 for all ϕ ∈ Γ. We of course say that (M, σ) is a
+model of ϕ and write (M, σ) Q ϕ if (M, σ) Q {ϕ}.
+(ii) We say that Γ is satisﬁable if it has a model.
+Definition 5.13. Let Γ be a set of formulae and ϕ be a formula. We write Γ Q ϕ if
+every model of Γ is a model of ϕ. If ∅ Q ϕ, we say that ϕ is valid.
+Definition 5.14. We write ϕ ≡ ψ if M(ϕ, σ) = M(ψ, σ) for every continuous L-prestructure and M-assignment σ.
+With these deﬁnitions, many properties analogous to those of classical ﬁrst-order logic
+can be derived (see [EFT94]).
+6. Substitution and Metric Completions
+Substitution. As in classical ﬁst-order logic, free and bound substitution play an important role in connecting the syntax with the semantics. This brief subsection is intended
+to remind the reader of these two notions of substitution and to indicate to the reader
+what features of these notions are crucial for our purposes.
+Definition 6.1. Let t be a term, and let x be a variable. We deﬁne the free substitution
+of t for x inside a formula ϕ, ϕ[t/x], as the result of replacing x by t in ϕ if x occurs free
+in ϕ. We say that ϕ[t/x] is correct if no variable y in t is captured by a supy (or inf y )
+quantiﬁer in ϕ[t/x].
+The next lemma is the continuous analogue of the substitution lemma of classical
+ﬁrst-order logic.
+Lemma 6.2 (Substitution Lemma). Let M be a continuous L-pre-structure, and let σ
+be an M-assignment. Let t be a term, x be a variable, and ϕ be a formula. Put a := tM,σ .
+Suppose ϕ[t/x] is correct. Then
+M(ϕ[t/x], σ) = M(ϕ, σxa ).
+Definition 6.3. Let ϕ be a formula, and let x, y be variables. We deﬁne the bound
+substitution of y for x inside ϕ, ϕ{y/x}, as the result of replacing each subformula supx α
+(or inf x α) of ϕ by supy α[y/x] (or inf y α). We say that ϕ{y/x} is correct if y is not free
+in α and α[y/x] is correct in each such subformula supx α (or inf x α).
+
+12
+
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+
+The following lemma is an immediate result. The reader interested may consult
+[EFT94] for a classical ﬁrst-order proof to see how a proof for continuous ﬁrst-order
+logic may be constructed.
+Lemma 6.4 (Bound Substitution Lemma). Let ϕ be a formula, and let x0 , . . . , xn−1 be a
+ﬁnite sequence of variables. Then by a sequence of bound substitutions there is a formula
+ϕ′ in which x0 , . . . , xn−1 are not bound and ϕ ≡ ϕ′ .
+Metric Completions. We will presently see that each continuous L-pre-structure (for
+a continuous signature with a metric) is virtually indistinguishable from its metric completion (Theorem 6.9). To this end, we ﬁrst oﬀer a deﬁnition.
+Definition 6.5. Let M and N be continuous L-pre-structures, and let h : M → N. We
+call h an L-morphism of M into N if h satisﬁes the following two conditions:
+(i) For each f ∈ F and all a0 , . . . , anf −1 ∈ M,
+h(f M(a0 , . . . , anf −1 )) = f N(h(a0 ), . . . , h(anf −1 )).
+(ii) For each P ∈ R and all a0 , . . . , anP −1 ∈ M,
+P M(a0 , . . . , anP −1 ) = P N(h(a0 ), . . . , h(anP −1 )).
+We call h an elementary L-morphism if h is an L-morphism and for every M-assignment
+σ and formula ϕ, M(ϕ, σ) = N(ϕ, h ◦ σ).
+Observe that if L is a continuous signature with a metric d and h is an L-morphism
+of M into N, then for all a0 , a1 ∈ M,
+dM(a0 , a1 ) = dN(h(a0 ), h(a1 )).
+In other words, h is an isometry.
+An immediate consequence of our deﬁnitions is the following theorem.
+Theorem 6.6. If M and N are continuous L-pre-structures and h : M → N is a
+surjective L-morphism, then h is an elementary L-morphism of M onto N.
+Proof. Straightforward induction on formulae.
+
+
+
+Definition 6.7. Let M be a continuous L-pre-structure. Let t be a term and ϕ be
+a formula such that all variables occurring in t and all free variables occurring in ϕ
+appear among n distinct variables x0 , . . . , xn−1 . Deﬁne functions e
+t M,x̄ : M n → M and
+M,x̄
+n
+n
+ϕ
+e
+: M → [0, 1] by setting for all ā ∈ M ,
+tM,ā := tM,σ
+ϕ
+e M,x̄ (ā) := M(ϕ, σ),
+
+where σ is an M-assignment such that σ(xi ) = ai for each i < n.
+We have all of the ingredients necessary to prove the following theorem.
+
+A PROOF OF COMPLETENESS
+
+13
+
+Theorem 6.8. Let M be a continuous L-pre-structure. Then for every term t and formula ϕ the mappings e
+t M,x̄ : M n → M and ϕ
+e M,x̄ : M n → [0, 1] are uniformly continuous.
+
+Proof. By induction on terms and formulae, using the fact that moduli of uniform continuity can be built up from other moduli, as mentioned in Remark 5.8.
+
+Using Lemma 6.4, Theorem 6.6, and Theorem 6.8 , one can prove the following:
+Theorem 6.9 (Existence of Metric Completion). Let L be a continuous signature with
+a metric, and let M be a continuous L-pre-structure. Then there is a continuous Lc and an elementary L-morphism of M into M.
+c
+structure M
+
+Proof. The proof invokes elementary facts about metric spaces, pseudo-metrics, Cauchy
+sequences, and metric completions. Essential to this proof is the fact that for all metric
+spaces (M, d) and (M ′ , d′) such that (M ′ , d′) is complete and N ⊆ M, if f : N → M ′
+is a mapping and δ is a modulus of uniform continuity for f , then f can be uniquely
+extended to a function f¯ : N̄ → M ′ such that δ is a modulus of uniform continuity for
+f¯ (where N̄ denotes the closure of N in M). This fact is important insofar as it implies
+that an underlying continuous signature with a metric will not have to be altered for a
+metric completion.
+
+
+Definition 6.10. Let L be a continuous signature with a metric, let Γ ⊆ For(L), and
+let ϕ be a formula.
+(i) We write Γ QC ϕ if for every continuous L-structure M and M-assignment σ, if
+(M, σ) Q Γ, then (M, σ) Q ϕ.
+(ii) We say that Γ is completely satisﬁable or that Γ has a complete model if there is
+a continuous L-structure M and M-assignment σ such that (M, σ) models Γ.
+We therefore have the following corollary:
+Corollary 6.11. Let L be a continuous signature with a metric, and let Γ ⊆ For(L).
+Then for every formula ϕ,
+(i) Γ Q ϕ if and only if Γ QC ϕ.
+(ii) Γ is satisﬁable if and only if Γ is completely satisﬁable.
+We may thereby restrict the notion of logical entailment to continuous L-structures.
+In classical ﬁrst-order logic, if one were to require a distinguished binary relation symbol
+≈ be interpreted only as a congruence relation in each classical structure rather than as
+strict equality, then one could show for each such structure that there is a surjective
+elementary L-morphism (in the obvious sense) onto its quotient structure. Accordingly,
+we would ﬁnd that classical ﬁrst-order logic does not distinguish between structures which
+require that ≈ be interpreted as a congruence relation and structures which require that
+≈ be interpreted as strict equality.
+In continuous ﬁrst-order logic, we see a somewhat analogous result. We require that
+a distinguished binary relation symbol d be interpreted as a pseudo-metric that satisﬁes
+
+14
+
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+
+congruence properties, akin to those of classical ﬁrst-order logic (cf. Deﬁnition 5.6,
+parts (iii) and (iv)). One can show that for each L-pre-structure, there is a surjective
+elementary L-morphism onto its quotient structure (which essentially transforms d into a
+genuine metric). Yet one can go one step further: For any L-pre-structure with a genuine
+metric, there is an injective elementary L-morphism (and a fortiori an isometry) into its
+completion, a continuous L-structure. Therefore, continuous ﬁrst-order logic does not
+distinguish between continuous L-pre-structures and continuous L-structures. Theorem
+6.9 can be seen as encoding this fact. As you would expect, most of our work does not
+rely on this fact, but it nevertheless indicates what matters.
+7. Axioms: Group 2
+Before we present the second group of axioms, let us deﬁne a notion familiar from
+classical ﬁrst-order logic. We say that a formula ϕ is a generalization of a formula ψ
+if for some n < ω there are variables x1 , . . . , xn such that ϕ = supx1· · · supxn ψ (see
+[End01]). Observe that every formula is a generalization of itself.
+When all generalizations of the following eight axiom schemata are added to all generalizations of (A1) – (A6) (in the appropriate language of course), we obtain an axiomatization for continuous ﬁrst-order logic. In this article we show that this axiomatization
+is complete. Formal deductions and provability are deﬁned as in §3, the only rule of
+inference again being modus ponens. We write Γ ⊢Q ϕ to indicate that ϕ is provable
+from Γ in continuous ﬁrst-order logic. Recall that a formula ϕ is provable from Γ just in
+case it is provable from a ﬁnite subset of Γ.
+The ﬁrst three schemata are analogues of axiom schemata of classical ﬁrst-order logic
+(see [End01]).
+. sup ϕ) −
+. sup (ψ −
+. ϕ)
+(A7) (supx ψ −
+x
+x
+.
+(A8) ϕ[t/x] − supx ϕ, where substitution is correct
+. ϕ, where x is not free in ϕ
+(A9) supx ϕ −
+If we are dealing with a continuous signature with a metric, we add:
+(A10) dxx
+. dyx
+(A11) dxy −
+. dxy) −
+. dyz
+(A12) (dxz −
+(A13) For each f ∈ F , ǫ ∈ (0, 1], and r, q ∈ D with r > ǫ and q < δf,i (ǫ), the following
+is an axiom (where |x̄| = i and |x̄| + |ȳ| + 1 = nf ):
+. dzw) ∧ (df x̄z ȳf x̄wȳ −
+. r)
+(q −
+
+A PROOF OF COMPLETENESS
+
+15
+
+(A14) For each P ∈ R, ǫ ∈ (0, 1], and r, q ∈ D with r > ǫ and q < δP,i (ǫ), the following
+is an axiom (where |x̄| = i and |x̄| + |ȳ| + 1 = nP ):
+. dzw) ∧ ((P x̄z ȳ −
+. P x̄wȳ) −
+. r)
+(q −
+Axiom schemata (A10) – (A12) assert that d is pseudo-metric. These axiom schemata
+correspond to the equivalence relation axiom schemata of classical ﬁrst-order logic. Although less immediate, (A13) – (A14) deﬁne the uniform continuity moduli with respect
+to the ith argument.
+Let us informally consider (A13). Suppose (A13) holds and that d(z, w) < δf,i (ǫ).
+. d(z, w) > 0, whence by
+Then there is q ∈ D such that d(z, w) < q < δf,i (ǫ), so q −
+.
+(A13) it follows that d(f (x̄, z, ȳ), f (x̄, w, ȳ)) − r = 0, i.e., d(f (x̄, z, ȳ), f (x̄, w, ȳ)) ≤ r for
+every r > ǫ. Thus, d(f (x̄, z, ȳ), f (x̄, w, ȳ)) ≤ ǫ, so δf,i is a uniform continuity modulus
+of f with respect to the ith argument. Conversely, suppose δf,i is a uniform continuity
+modulus of f with respect to the ith argument and that r, q ∈ D are such that r > ǫ
+. d(z, w) > 0, then d(z, w) < q < δ (ǫ) and
+and q < δP,i (ǫ). On the one hand, if q −
+f,i
+. r = 0 and therefore
+so d(f (x̄, z, ȳ), f (x̄, w, ȳ)) ≤ ǫ < r, whence d(f (x̄, z, ȳ), f (x̄, w, ȳ)) −
+. d(z, w)) ∧ (d(f (x̄, z, ȳ), f (x̄, w, ȳ)) −
+. r) = 0. On the other hand, if q −
+. d(z, w) ≤ 0,
+(q −
+.
+.
+again we have (q − d(z, w)) ∧ (d(f (x̄, z, ȳ), f (x̄, w, ȳ)) − r) = 0.
+Remark 7.1. In view of Remark 5.8, the reader may have noticed that a continuous
+signature could equivalently be deﬁned so that G may instead have the form {δs : (0, 1] →
+(0, 1] : s ∈ R ∪ F }, whereby one could forgo talk of moduli of uniform continuity of each
+symbol s with respect to each of its arguments. In particuar, (A13) could be replaced by
+(A13′ ) For every ǫ ∈ (0, 1] and r, q ∈ D with r > ǫ and q < ∆f (ǫ), the following is an
+axiom:
+. W
+.
+(q −
+i<nf dxi yi ) ∧ (df x0 · · · xnf −1 f y0 · · · ynf −1 − r)
+
+(A14) could also be replaced by an analogous axiom. Situations might arise in which the
+uniform continuity moduli of a symbol with respect to each of its arguments are very
+diﬀerent, and one might desire to keep track of this, thereby preferring one deﬁnition
+over the other.
+We conclude this section with a soundness theorem.
+
+Theorem 7.2 (Soundness). Let L be a continuous signature (with a metric), and let
+Γ ⊆ For(L). Then for every formula ϕ,
+(i) If Γ ⊢Q ϕ, then Γ Q ϕ (Γ QC ϕ).
+(ii) If Γ is (completely) satisﬁable, then Γ is consistent.
+Proof. It suﬃces to show that each axiom schema is valid. The facts recorded in §4 can
+be used to show that (A1) – (A6) are valid, while the results from §6 can be used to
+prove that (A7) – (A9) are valid. The discussion following (A14) explains why (A10) –
+(A14) are valid.
+
+
+16
+
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+
+8. The Essentials
+In this section, we rely heavily on facts recorded in §4 insofar as we exploit obvious relations amongst continuous ﬁrst-order logic and continuous and Lukasiewicz propositional
+logics.
+The Deduction Theorem, Generalization Theorem, and a Lemma about Bound
+Substitution. Observe
+. Q) −
+. Q, Q} ⊢L P, but
+{(P −
+. Q) −
+. Q} 0L P −
+. Q.
+{(P −
+Thus the reader should be unsurprised to ﬁnd that continuous ﬁrst-order logic only
+satisﬁes a weak version of the classical Deduction Theorem.
+Theorem 8.1 (Deduction Theorem). Let Γ ⊆ For(L), and let ϕ, ψ be formulae.
+. nψ for some n < ω.
+Then Γ ∪ {ψ} ⊢Q ϕ if and only if Γ ⊢Q ϕ −
+Proof. Right to left is clear. For the implication from left to right, observe that for all
+α, β, γ and n, m < ω,
+. (n + m)α) −
+. ((β −
+. γ) −
+. nα)) −
+. (γ −
+. mα).
+⊢L ((β −
+This can be shown using the semantics of Lukasiewicz propositional logic. The proof
+then proceeds by induction on the set of consequences of Γ ∪ {ψ}.
+
+Lemma 8.2 (Generalization Theorem). Let Γ ⊆ For(L), and let ϕ be a formula. If
+Γ ⊢ ϕ and x is not a free variable in Γ, then Γ ⊢ supx ϕ.
+Proof. This is similar to the proof of the Generalization Theorem for classical ﬁrst-order
+logic (see [End01]).
+
+To illustrate how we rely on facts recorded in §4 , we provide a proof of the next lemma.
+Lemma 8.3. Let ϕ be a formula, and let y be a variable which does not occur in ϕ. Then
+. ϕ{y/x}.
+(a) ⊢Q ϕ −
+. ϕ.
+(b) ⊢Q ϕ{y/x} −
+Proof. This is proved by induction on ϕ for y which does not occur in ϕ.
+. ϕ, we are done.
+ϕ = P t0 · · · tnP −1 : Then by deﬁnition ϕ{y/x} = ϕ; since ⊢Qϕ −
+ϕ = 21 ψ: Then by deﬁnition ϕ{y/x} = 21 ψ{y/x} and this bound substitution
+. ψ{y/x} and ⊢
+is correct. So by the induction hypothesis, we have ⊢Q ψ −
+Q
+. ψ. Now observe
+ψ{y/x} −
+1 .
+⊢ CL α −
+α, and
+2
+1 . 1
+. 1 (β −
+. α).
+α) −
+⊢CL( β −
+2
+2
+2
+
+A PROOF OF COMPLETENESS
+
+17
+
+Thus by a few applications of modus ponens, we arrive at (a) and (b).
+ϕ = ¬ψ: Then again by deﬁnition ϕ{y/x} = ¬ψ{y/x} and this bound substitution is correct. Observe
+. ¬β) −
+. (β −
+. α).
+⊢L (¬α −
+Using the induction hypothesis and modus ponens we obtain (a) and (b).
+. α): Then ϕ{y/x} = (β{y/x} −
+. α{y/x}) and β{y/x} and α{y/x} are
+ϕ = (β −
+correct. Our induction hypothesis supplies us
+. α{y/x},
+⊢ α−
+Q
+
+. α,
+⊢Q α{y/x} −
+and
+
+. β{y/x},
+⊢Q β −
+. β.
+⊢ β{y/x} −
+Q
+
+Moreover, observe
+. α′ ) −
+. (β −
+. α)) −
+. (β ′ −
+. β)) −
+. (α −
+. α′ ).
+⊢L (((β ′ −
+Hence, by repeated applications of modus ponens and the induction hypothesis,
+we obtain (a) and (b).
+ϕ = supx ψ: Then ϕ{y/x} = supx ψ[y/x] and this substitution is correct (y is not
+free in ψ). Hence,
+. sup ψ (A8)
+⊢Q ψ[y/x] −
+x
+. sup ψ) (Generalization Theorem)
+⊢ sup (ψ[y/x] −
+Q
+
+y
+
+x
+
+. sup sup ψ) −
+. sup (ψ[y/x] −
+. sup ψ) (A7)
+⊢Q (supy ψ[y/x] −
+y
+x
+y
+x
+.
+⊢ sup ψ[y/x] − sup sup ψ (modus ponens)
+Q
+
+y
+
+y
+
+x
+
+. sup ψ) −
+. (sup ψ[y/x] −
+. sup sup ψ)) −
+. (sup sup ψ −
+. sup ψ) (A2)
+⊢Q ((supy ψ[y/x] −
+x
+y
+y
+x
+y
+x
+x
+.
+⊢ sup sup ψ − sup ψ (A9) (y is not free in sup ψ),
+Q
+
+y
+
+x
+
+x
+
+x
+
+. ϕ.
+from which it follows by applying modus ponens several times that ⊢Q ϕ{y/x}−
+A similar argument can be used to establish (a).
+ϕ = supz ψ and z 6= x: Then ϕ{y/x} = supz ψ{y/x} and this bound substitution
+is correct. Apply the induction hypothesis, the Generalization Theorem, (A7),
+and modus ponens to obtain (a) and (b).
+
+If c is an 0-ary function symbol (what we of course call a constant symbol ) and x is a
+variable, we may deﬁne ϕ[x/c] in the expected way. However, we omit a formal deﬁnition
+and state a lemma without proof.
+Lemma 8.4. Let Γ ⊆ For(L), and let ϕ be a formula. If Γ ⊢Q ϕ, c is a constant symbol
+that does not occur in Γ, and x does not occur in ϕ, then Γ ⊢Q supx ϕ[x/c].
+
+18
+
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+
+Maximal Consistent Sets of Formulae. In classical ﬁrst-order logic, we say that a
+set ∆ of formulae is maximal consistent if ∆ is consistent and for every formula ϕ,
+ϕ ∈ ∆ or ¬ϕ ∈ ∆.
+In continuous ﬁrst-order, however, this deﬁnition will not do. For we certainly should like
+to exclude both 12 and ¬ 21 from every consistent set. In this subsection, we show what
+one should mean by calling a set of formulae maximal consistent in continuous ﬁrst-order
+logic.
+Lemma 8.5. Let Γ ⊆ For(L) be consistent. Then for all formulae ϕ, ψ,
+. 2−n for all n < ω then Γ ∪ {ϕ} is consistent.
+(i) If Γ ⊢Q ϕ −
+. ψ} or Γ ∪ {ψ −
+. ϕ} is consistent.
+(ii) Either Γ ∪ {ϕ −
+Proof.
+. 2−n for all n < ω. For reductio ad absurdum, assume Γ ∪ {ϕ}
+(i) Suppose Γ ⊢Q ϕ −
+. mϕ for some m < ω.
+is inconsistent. Then by the Deduction Theorem, Γ ⊢ 1 −
+Observe
+. α )−
+. α )−
+. ···−
+. α
+. (((β −
+. α )−
+. α )−
+. ···−
+. α )
+⊢L (((β −
+)−
+σ(0)
+
+σ(1)
+
+σ(k−1)
+
+0
+
+1
+
+k−1
+
+for any k < ω and permutation σ on k. By repeated uses of this fact, axiom (A2),
+. 2−1 ) −
+. 2−2 ) −
+. ··· −
+. 2−m , so Γ is
+and our supposition, we ﬁnd that Γ ⊢Q ((1 −
+inconsistent, yielding a contradiction.
+. ψ} is inconsistent. Then by the Deduction Theorem, there is
+(ii) Suppose Γ ∪ {ϕ −
+. n(ϕ −
+. ψ). Observe that for all m < ω, ⊢L (β −
+. α) −
+.
+n < ω such that Γ ⊢Q 1 −
+. m(α −
+. β)), whereby it follows that ⊢ (ϕ −
+. ψ) −
+. (1 −
+. n(ϕ −
+. ψ)). Hence, by
+(1 −
+Q
+.
+.
+modus ponens we have Γ ⊢Q ψ − ϕ, so Γ ∪ {ψ − ϕ} is consistent.
+
+Lemma 8.6. Let Γ ⊆ For(L) be consistent, and let E(Γ) := {Γ′ : Γ ⊆ Γ′ ⊆ For(L) and Γ′ is consistent}.
+Then ∆ is a maximal member of E(Γ) if and only if for all formulae ϕ, ψ,
+(i) Γ ⊆ ∆ and ∆ is consistent.
+. 2−n for all n < ω then ϕ ∈ ∆.
+(ii) If ∆ ⊢Q ϕ −
+.
+. ϕ ∈ ∆.
+(iii) ϕ − ψ ∈ ∆ or ψ −
+Proof.
+(⇒) If ∆ is a maximal member of E(Γ), then (i) is immediate, while (ii) and (iii)
+follow from Lemma 8.5.
+(⇐) Suppose (i), (ii), and (iii) hold. Let Γ′ ∈ E(Γ) be such that ∆ ⊆ Γ′ . Assume
+. ϕ∈
+. 2−n ∈ ∆. It follows that
+ϕ ∈ Γ′ . Then for every n < ω, 2−n −
+/ Γ′ and so ϕ −
+ϕ ∈ ∆, as desired.
+
+Remark 8.7. In continuous propositional logic, conditions (ii) and (iii) are independent.
+To see this, let S be a continuous propositional logic. First we show that (ii) does not
+imply (iii). Let ∆ := {ϕ ∈ S : ⊢CL ϕ}. Observe that by completeness of continuous
+
+A PROOF OF COMPLETENESS
+
+19
+
+. 2−n for all n < ω, then
+propositional logic (Fact 4.5), ∆ is consistent, and if ∆ ⊢CLϕ −
+. 1 and 0CL 1 −
+. P , neither P −
+. 1 nor 1 −
+. P is in ∆. We now
+ϕ ∈ ∆. However, since 0CL P −
+2
+2
+2
+2
+.
+−n
+show that (iii) does not imply (ii). Let Γ := {P − 2 : n < ω}. Then Γ is consistent,
+and so by (ii) of Lemma 8.5 we can construct a consistent set ∆ ⊇ Γ such that for every
+. ψ ∈ ∆ or ψ −
+. ϕ ∈ ∆. Nonetheless, ∆ ⊢CL P −
+. 2−n for all n < ω, yet
+ϕ, ψ ∈ S, either ϕ −
+P ∈
+/ ∆.
+Lemma 8.6 justiﬁes the following the deﬁnition.
+Definition 8.8. Let ∆ ⊆ For(L). We say that ∆ is maximal consistent if ∆ is consistent
+and for all formulae ϕ, ψ,
+. 2−n for all n < ω then ϕ ∈ ∆.
+(i) If ∆ ⊢Q ϕ −
+. ψ ∈ ∆ or ψ −
+. ϕ ∈ ∆.
+(ii) ϕ −
+Condition (i) says that if ∆ can furnish a series of proofs which altogether indicate
+that ϕ is a consequence of ∆, then ∆ must be granted ϕ. Condition (ii) says that ∆ can
+compare any two formulae.
+Remark 8.9. Observe that if ∆ a maximal consistent set of formulae, then ϕ ∈ ∆ if and
+only if ∆ ⊢Q ϕ. It can be shown that in the above deﬁnition condition (i) can be replaced
+. 2−n : n < ω} ⊆ ∆, then ϕ ∈ ∆. Indeed, condition (i′ ) is also
+by condition (i′ ): If {ϕ −
+independent of (ii) in continuous propositional logic.
+We thereby obtain the following result.
+Theorem 8.10. If Γ ⊆ For(L) is consistent, then there exists a maximal consistent set
+of formulae ∆ ⊇ Γ.
+Proof. By Zorn’s Lemma and Lemma 8.6.
+
+
+
+Lemma 8.11. Let Γ ⊆ For(L), let ∆ be a maximal consistent set of formulae containing
+. p ∈ ∆, there is a formula ϕ′ such that
+Γ, let t be a term, and let p ∈ D. Then if supx ϕ −
+. p ∈ ∆.
+ϕ ≡ ϕ′ and ϕ′ [t/x] −
+Proof. By Lemma 6.4, there is a formula ϕ′ such that no variable of t is bound in ϕ′
+. ϕ.
+and ϕ ≡ ϕ′ , so by repeated applications of Lemma 8.3 and (A2), we have ⊢Q ϕ′ −
+.
+Then by the Generalization Theorem, ⊢Q supx (ϕ′ − ϕ), whence by (A7) it follows that
+. sup ϕ. Now as sup ϕ −
+. p ∈ ∆, by (A2) we have ∆ ⊢ sup ϕ′ −
+. p. Because
+⊢Q supx ϕ′ −
+Q
+x
+x
+x
+.
+ϕ′ [t/x] is correct, again by (A2) and by (A8) we have ∆ ⊢Q ϕ′ [t/x] − supx ϕ, so once
+. p. Therefore, since ∆ is maximal consistent,
+more by (A2) it follows that ∆ ⊢Q ϕ′ [t/x] −
+.
+we conclude that ϕ′ [t/x] − p ∈ ∆, as desired.
+
+We will use the following lemma to deﬁne a continuous pre-structure and to help us
+in parts of our proof of completeness.
+
+20
+
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+
+Lemma 8.12. Let Γ ⊆ For(L) be consistent, let ∆ be a maximal consistent set of formulae containing Γ, and let ϕ be a formula. Then
+. ϕ ∈ ∆} = inf{q ∈ D : ϕ −
+. q ∈ ∆}.
+sup{p ∈ D : p −
+Proof. Straightforward, by Lemma 8.6.
+
+
+
+9. Completeness Theorem
+In classical ﬁrst-order logic, we say that a set Γ of formulae is Henkin complete if for
+every formula ϕ and variable x, there is a constant c such that
+¬∀xϕ → ¬ϕ[c/x] ∈ Γ.
+The intuition to deﬁne a Henkin complete set in continuous ﬁrst-order logic as the syntactic translation of this deﬁnition will not work. Indeed, if Γ is maximal consistent
+and ¬ supx ¬ϕ ∈ Γ, i.e., inf x ϕ ∈ Γ, we would be better oﬀ to not require that there is
+a constant c such that ϕ[c/x] ∈ Γ. For example, a perfectly consistent situation could
+arise in which inf x ϕ ∈ Γ, there is a sequence of formulae (ϕ[ti /x] : i < ω) such that
+. 2−n for each n < ω, yet each term t has a non-zero p ∈ D such that
+Γ ⊢Q ϕ[tn /x] −
+t
+. ϕ[t/x], whereby we should certainly not require that there is a term t such that
+Γ ⊢ Q pt −
+ϕ[t/x] ∈ Γ. Rather than attempt to prevent this sort of situation from ever occurring,
+we wish to accommodate this sort of situation in our deﬁnition of a Henkin complete set.
+Definition 9.1. Let Γ be a set of formulae. We say that Γ is Henkin complete if for
+every formula ϕ, variable x, and p, q ∈ D with p < q, there is a constant symbol c such
+that
+. q) ∧ (p −
+. ϕ[c/x]) ∈ Γ.
+(supx ϕ −
+The next proposition guarantees we can construct a consistent Henkin complete set.
+Proposition 9.2. Let L be a continuous signature. There exists a continuous signature
+Lc with L ⊆ Lc and a set Γc ⊆ F or(Lc ) such that for every Γ ⊆ For(L),
+(i) Γ ∪ Γc is Henkin complete.
+(ii) If Γ is consistent, then Γ ∪ Γc is consistent.
+Proof. Permitting some abuse of notation, we deﬁne an increasing sequence of signatures
+inductively:
+L0 := L
+Ln+1 := Ln ∪ {c(ϕ,x,p,q) : ϕ ∈ F or(Ln ), x ∈ V, and p, q ∈ D with p < q}
+where each c(ϕ,x,p,q) is a new constant symbol. We then put
+S
+Lc := n<ω Ln
+. q) ∧ (p −
+. ϕ[c
+ψ(ϕ,x,p,q) := (supx ϕ −
+(ϕ,x,p,q) /x]) and
+c
+c
+Γ := {ψ(ϕ,x,p,q) : ϕ ∈ F or(L ), x ∈ V, and p, q ∈ D with p < q}.
+
+A PROOF OF COMPLETENESS
+
+21
+
+(i) is obviously true, so we proceed to establish (ii).
+Suppose Γ is consistent. For reductio ad absurdum, assume Γ ∪Γc is inconsistent. Then
+there is a minimal ﬁnite non-empty Γc0 ⊆ Γc such that Γ ∪ Γc0 is inconsistent. We may
+write Γc0 = {ψ(ϕi ,xi,pi ,qi) : i < n}, where the (ϕi , xi , pi , qi ) are pairwise distinct. For each
+i < n, there is a minimal mi such that ϕi ∈ F or(Lmi ). Let mi0 be the maximal such mi .
+For simplicity of notation, put ϕ := ϕi0 , x := xi0 , p := pi0 , q := qi0 , and m := mi0 .
+Now observe that for each i < n, ϕi ∈ F or(Lm ), while c(ϕ,x,p,q) ∈ Lm+1 \Lm . Put
+c := c
+Γ0 \{ψ(ϕ,x,p,q) } and Γ1 := Γ ∪ Γc1 . Note that c(ϕ,x,p,q) does not occur in Γ1 and that
+Γ1
+.
+Γ1 must be consistent (by the minimality of Γc0 ). Nonetheless, Γ ∪ Γc0 = Γ1 ∪ {(supx ϕ −
+.
+.
+.
+q) ∧ (p − ϕ[c(ϕ,x,p,q)/x])} is inconsistent. Observe that ⊢L (α ∧ β) − α and ⊢L (α ∧ β) − β.
+Thus, by modus ponens,
+. q)} ⊢ (sup ϕ −
+. q) ∧ (p −
+. ϕ[c
+Γ1 ∪ {(supx ϕ −
+Q
+x
+(ϕ,x,p,q) /x]), and
+.
+.
+.
+Γ ∪ {(p − ϕ[c
+/x])} ⊢ (sup ϕ − q) ∧ (p − ϕ[c
+/x]).
+1
+
+(ϕ,x,p,q)
+
+Q
+
+(ϕ,x,p,q)
+
+x
+
+Since Γ ∪ Γc0 is inconsistent, by the Deduction Theorem there is n < ω such that Γ1 ⊢Q
+
+. n((sup ϕ −
+. q) ∧ (p −
+. ϕ[c
+1−
+(ϕ,x,p,q) /x])). Therefore, by modus ponens, we ﬁnd that
+x
+.
+. ϕ[c
+Γ1 ∪ {(supx ϕ − q)} and Γ1 ∪ {(p −
+(ϕ,x,p,q) /x])} are both inconsistent. It follows that
+. sup ϕ) and Γ ⊢ (ϕ[c
+. p) (cf. proof of Lemma 8.5).
+Γ1 ⊢Q (q −
+/x] −
+1
+Q
+(ϕ,x,p,q)
+x
+Now let y be a variable not occurring in ϕ. On the one hand, by Lemma 8.3 we have
+. sup ϕ){y/x} −
+. (q −
+. sup ϕ), so by modus ponens,
+Γ1 ⊢Q (q −
+x
+x
+.
+. sup ϕ[y/x])
+Γ1 ⊢Q (q − supx ϕ){y/x} = (q{y/x} −
+y
+.
+= (q − sup ϕ[y/x]).
+y
+
+On the other hand, because c(ϕ,x,p,q) does not occur in Γ1 , by Lemma 8.4 we have
+. p)[y/c
+.
+Γ1 ⊢Q supy (ϕ[c(ϕ,x,p,q)/x] −
+(ϕ,x,p,q)] = supy (ϕ[c(ϕ,x,p,q) /x][y/c(ϕ,x,p,q)] − p[y/c(ϕ,x,p,q)])
+. p).
+= sup (ϕ[y/x] −
+y
+
+. sup p. Since y is not free in p,
+Then by (A7) and modus ponens, Γ1 ⊢Q supy ϕ[y/x] −
+y
+. p. Thus by (A2) and modus ponens, Γ ⊢ sup ϕ[y/x] −
+. p.
+(A9) yields Γ1 ⊢Q supy p −
+1 Q
+y
+.
+. p,
+It remains to observe that since Γ1 ⊢Q (q − supy ϕ[y/x]) and Γ1 ⊢Q supy ϕ[y/x] −
+. p, so Γ is inconsistent, which is impossible (q −
+. p ∈ D and
+by (A2) we have Γ1 ⊢Q q −
+1
+.
+q − p > 0 by construction).
+
+Definition 9.3. We deﬁne the rank of ϕ, rank(ϕ), by recursion:
+rank(P t0 · · · tnP −1 ) := 0.
+rank( 12 ϕ) := rank(ϕ) + 1.
+rank(¬ϕ) := rank(ϕ) + 1.
+. ψ) := rank(ϕ) + rank(ψ) + 1.
+rank(ϕ −
+rank(supx ϕ) := rank(ϕ) + 1.
+Theorem 9.4. Let L be a continuous signature (possibly with a metric), and let Γ ⊆
+For(L). Assume Γ is consistent. Then there is a continuous signature Lc ⊇ L, a maximal
+
+22
+
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+
+consistent and Henkin complete set ∆ ⊆ F or(Lc ) with ∆ ⊇ Γ, a continuous Lc -prestructure M, and an M-assignment σ such that (M, σ) Q ∆.
+Proof. Suppose Γ is consistent. By the previous proposition, there is Γc ⊆ F or(Lc ) such
+that Γ ∪ Γc is consistent and Henkin complete, so by Theorem 8.10 there is a maximal
+consistent ∆ ⊆ F or(Lc ) such that ∆ ⊇ Γ ∪ Γc . Deﬁne a continuous Lc -pre-structure M
+such that M is the set of all Lc -terms.
+(i) For each f ∈ F , deﬁne f M : M nf → M by setting
+f M(t0 , . . . , tnf −1 ) := f t0 · · · tnf −1 for all t0 , . . . , tnf −1 ∈ M.
+(ii) For each P ∈ R, deﬁne P M : M nP → [0, 1] by setting
+. Pt ···t
+P M(t0 , . . . , tnP −1 ) := sup{p ∈ D : p −
+0
+nP −1 ∈ ∆}
+for all t0 , . . . , tnP −1 ∈ M.
+Deﬁne an M-assignment σ by setting σ(x) := x for all x ∈ V . It is a simple matter to
+check that tM,σ = t for all terms t.
+It suﬃces to prove by induction on the number of quantiﬁers and connectives in ϕ,
+. ϕ ∈ ∆} for all ϕ ∈ F or(Lc ). For the
+i.e., the rank of ϕ, that M(ϕ, σ) = sup{p ∈ D : p −
+sake of brevity, here we only consider the subcases ϕ = 21 ψ and ϕ = supx ψ. Although
+the case for rank(ϕ) = 0 is trivial, we encourage the reader to work out the subcases of
+. for rank(ϕ) > 0.
+¬ and −
+. 1 ψ ∈ ∆}. By deﬁnition,
+ϕ = 21 ψ: We wish to show that M( 12 ψ, σ) = sup{p ∈ D : p −
+2
+. ψ ∈ ∆}, and by induction hypothesis,
+M( 21 ψ, σ) = 21 sup{p ∈ D : p −
+M(ψ, σ) = sup{p ∈
+.
+.
+1
+D : p − ψ ∈ ∆}. We must therefore show 2 sup{p ∈ D : p − ψ ∈ ∆} = sup{p ∈ D :
+. 1 ψ ∈ ∆}. We consider two cases.
+p−
+2
+. 1 ψ ∈ ∆ only
+(a) By Fact 4.5, since ∆ is maximal consistent, for every p ∈ D, p −
+2
+. p) −
+. ψ ∈ ∆. Hence, for every p ∈ D such that p −
+. 1ψ
+if ¬(¬p −
+∈ ∆, p ≤
+2
+.
+.
+. 1ψ ∈
+1
+1
+¬(¬p − p) ≤ 2 sup{p ∈ D : p − ψ ∈ ∆}. It follows that sup{p ∈ D : p −
+2
+2
+.
+∆} ≤ 12 sup{p ∈ D : p − ψ ∈ ∆}.
+. ψ ∈ ∆ only if
+(b) By Fact 4.5, since ∆ is maximal consistent, for every p ∈ D, p −
+. ψ ∈ ∆,
+1 . 1
+p− 2 ψ ∈ ∆ (cf. proof of Lemma 8.3). Hence, for every p ∈ D such that p−
+2
+. 1 ψ ∈ ∆} and therefore p ≤ 2 sup{p ∈ D : p −
+. 1 ψ ∈ ∆}.
+1
+p ≤ sup{p ∈ D : p −
+2
+2
+2
+. ψ ∈ ∆} ≤ 2 sup{p ∈ D : p −
+. 1 ψ ∈ ∆},
+It follows that sup{p ∈ D : p −
+whence
+2
+.
+.
+1
+1
+sup{p ∈ D : p − ψ ∈ ∆} ≤ sup{p ∈ D : p − 2 ψ ∈ ∆}, as desired.
+2
+. sup ψ ∈ ∆}. Observe
+ϕ = sup ψ: We wish to show that M(sup ψ, σ) = sup{p ∈ D : p−
+x
+
+x
+
+x
+
+that by deﬁnition M(supx ψ, σ) = sup{M(ψ, σxt ) : t ∈ M}. So it suﬃces to show that
+. sup ψ ∈ ∆}. For reductio ad absurdum,
+sup{M(ψ, σxt ) : t ∈ M} = sup{p ∈ D : p −
+x
+assume this equality fails to hold. We of course consider two cases.
+. sup ψ ∈ ∆}. Then for some
+(a) Suppose sup{M(ψ, σxt ) : t ∈ M} < sup{p ∈ D : p −
+x
+. sup ψ ∈ ∆}. Since
+t
+p, q ∈ D, sup{M(ψ, σx ) : t ∈ M} < p < q < sup{p ∈ D : p −
+. q) ∧x (p −
+. ψ[c/x]) ∈
+Γc ⊆ ∆ and p < q, there is a constant c such that (supx ψ −
+
+A PROOF OF COMPLETENESS
+
+23
+
+. sup ψ ∈ ∆. As
+∆. Furthermore, there is r ∈ D such that q < r and r −
+. ψ[c/x]x ∈ ∆. Since
+∆ is maximal consistent, by Fact 4.5 it follows that p −
+rank(ψ[c/x]) < rank(ϕ), our induction hypothesis tells us that M(ψ[c/x], σ) =
+. ψ[c/x] ∈ ∆}. Also, since ψ[c/x] is correct, by Lemma 6.2 it follows
+sup{p ∈ D : p−
+that M(ψ[c/x], σ) = M(ψ, σxc ). Thus p ≤ M(ψ, σxc ) ≤ sup{M(ψ, σxt ) : t ∈ M},
+yielding a contradiction.
+. sup ψ ∈ ∆} < sup{M(ψ, σ t ) : t ∈ M}. On the one
+(b) Suppose sup{p ∈ D : p −
+x
+x
+hand, since ∆ is maximal consistent, for all p ∈ D such that p > sup{p ∈ D :
+. sup ψ ∈ ∆}, sup ψ −
+. p ∈ ∆. On the other hand, there must be t ∈ M
+p−
+x
+x
+. sup ψ ∈ ∆}, so there is p ∈ D such
+such that M(ψ, σxt ) > sup{p ∈ D : p −
+. sup x ψ ∈ ∆}. Thus sup ψ −
+. p ∈ ∆,
+that M(ψ, σxt ) > p > sup{p ∈ D : p −
+x
+x
+.
+whence by Lemma 8.11, there is ψ ′ ≡ ψ such that ψ ′ [t/x] − p ∈ ∆. Thus inf{p :
+. p ∈ ∆} ≤ p. By Lemma 8.12, inf{p : ψ ′ [t/x] −
+. p ∈ ∆} = sup{p ∈ D :
+ψ ′ [t/x] −
+.
+p − ψ ′ [t/x] ∈ ∆}, and because rank(ψ ′ [t/x]) < rank(ϕ), our induction hypothesis
+. ψ ′ [t/x] ∈ ∆}. Moreover, since
+tells us that M(ψ ′ [t/x], σ) = sup{p ∈ D : p −
+ψ ′ [t/x] is correct, M(ψ ′[t/x], σ) = M(ψ ′ , σxt ) by Lemma 6.2. Finally, since ψ ′ ≡ ψ,
+we have M(ψ ′ , σxt ) = M(ψ, σxt ). It follows that M(ψ, σxt ) ≤ p, yielding another
+contradiction.
+. 0 ∈ ∆, so M(ϕ, σ) = sup{p ∈ D : p −
+. ϕ ∈ ∆} =
+Now if ϕ ∈ ∆, then by (A1), ϕ −
+. q ∈ ∆} = 0 (Lemma 8.12). This shows that (M, σ)  ∆, proving our
+inf{q ∈ D : ϕ −
+Q
+
+theorem.
+
+
+
+We may now state and prove the long-awaited completeness theorem.
+Theorem 9.5 (Completeness for Continuous First-Order Logic).
+Let L be a continuous signature, and let Γ ⊆ For(L). Then Γ is consistent only if Γ is
+satisﬁable. Furthermore, if L is a continuous signature with a metric, then Γ is consistent
+only if Γ is completely satisﬁable.
+Proof. By Theorem 9.4, there is a continuous signature Lc ⊇ L, a maximal consistent
+set ∆ ⊆ F or(Lc) with ∆ ⊇ Γ, an Lc -pre-structure M, and an M-assignment σ such
+that (M, σ) Q ∆. If L does not have a metric, we are done; we observe (M, σ) models
+Γ and simply restrict M to our original signature. But if L has a metric d, we can
+only guarantee that dM is a pseudo-metric relative to this restriction. We wish to ﬁnd a
+c and an M-assignment
+c
+c σ
+continuous L-structure M
+σ
+b such that (M,
+b) Q Γ. By Theorem
+c
+b
+c such that for
+6.9, there is a continuous L-structure M and an L-morphism h : M → M
+c h ◦ σ). Therefore, putting σ
+every formula ϕ, M(ϕ, σ) = M(ϕ,
+b := h ◦ σ, since (M, σ)
+c σ
+models Γ, (M,
+b) models Γ.
+
+We conclude with several corollaries. The following result has a counterpart in [Hay63]
+(see also [Háj98]).
+
+24
+
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+
+Corollary 9.6 (Approximated Strong Completeness for Continuous Logic). Let L be a
+continuous signature, letΓ ⊆ For(L), and let ϕ be a formula. Then Γ Q ϕ if and only
+. 2−n for all n < ω. Moreover, if L is a continuous signature with a metric,
+if Γ ⊢Q ϕ −
+. 2−n for all n < ω.
+then Γ QC ϕ if and only if Γ ⊢Q ϕ −
+Proof. Right to left is by soundness (Theorem 7.2). For the implication from left to
+. ϕ} is not (completely) satisﬁable and
+right, if Γ  ϕ, then for every n < ω, Γ ∪ {2−n −
+. 2−n for all n < ω (cf. proof of Lemma
+so inconsistent by Theorem 9.5; hence, Γ ⊢ ϕ −
+8.5).
+
+We can, however, try to make the best of the previous result. We ﬁrst oﬀer a deﬁnition.
+Definition 9.7. Let L be a continuous signature (possibly with a metric), let Γ ⊆ For(L),
+and let ϕ be a formula.
+(i) We deﬁne the degree of truth of ϕ with respect to Γ, ϕ◦Γ , by setting
+ϕ◦Γ := sup{M(ϕ, σ) : (M, σ)  Γ}.
+(ii) We deﬁne the degree of provability of ϕ with respect to Γ, ϕ⊚
+Γ , by setting
+.
+⊚
+ϕ := inf{p ∈ D : Γ ⊢ ϕ − p}.
+Γ
+
+We then have the following result, commonly called Pavelka-style completeness.
+Corollary 9.8. Let L be a continuous signature, and let Γ ⊆ For(L). Then for every
+formula ϕ, the degree of truth of ϕ with respect to Γ equals the degree of provability of ϕ
+with respect to Γ. In other words,
+ϕ◦Γ = ϕ⊚
+Γ.
+Proof. We consider two cases:
+(i) We ﬁrst show ϕ◦Γ ≤ ϕ⊚
+Γ . This follows from soundness (Theorem 7.2). To see this,
+. p, by soundness Γ  ϕ −
+. p, so for
+observe that for every p ∈ D such that Γ ⊢ ϕ −
+any continuous L(-pre)-structure M and M-assignment σ such that (M, σ)  Γ,
+M(ϕ, σ) ≤ p; thus, ϕ◦Γ ≤ p. It follows that ϕ◦Γ ≤ ϕ⊚
+Γ.
+(ii) We now show ϕ◦Γ ≥ ϕ⊚
+.
+It
+suﬃces
+to
+show
+that
+for each p ∈ D such that
+Γ
+⊚
+p < ϕΓ , there is a continuous L(-pre)-structure M and M-assignment σ such that
+.
+(M, σ)  Γ and p ≤ M(ϕ, σ). Let p ∈ D, and suppose p < ϕ⊚
+Γ . Then Γ 0 ϕ − p,
+.
+so Γ ∪ {p − ϕ} is consistent (cf. proof of Lemma 8.5), whence by Theorem 9.5,
+. ϕ} is (completely) satisﬁable. Hence, there is a continuous L(-pre)Γ ∪ {p −
+. ϕ, σ) = 0, so
+structure M and M-assignment σ such that (M, σ)  Γ and M(p −
+p ≤ M(ϕ, σ).
+
+Definition 9.9. Let L be a continuous signature with a metric.
+(i) We call T a theory if T is a set of formulae in L without free variables, i.e., a set
+of sentences.
+
+A PROOF OF COMPLETENESS
+
+25
+
+(ii) We call a theory T complete if there is a continuous L-structure M (and an Massignment σ) such that T = {ϕ : (M, σ) QC ϕ}. Otherwise, we call T an
+incomplete theory.
+Definition 9.10. Let T be a theory.
+(i) If T is complete, we say T is decidable if for every sentence ϕ, the value ϕ◦T is a
+recursive real and uniformly computable from ϕ.
+(ii) If T is incomplete, we say T is decidable if for every sentence ϕ the real number
+ϕ◦T is uniformly recursive from ϕ.
+Corollary 9.11. Every complete theory with a recursive or recursively enumerable axiomatization is decidable.
+As with classical ﬁrst-order logic, the following corollary could be obtained more directly by way of an ultraproduct construction (see [BU]). We nevertheless include it for
+the sake of completeness.
+Corollary 9.12 (Compactness). Let L be a continuous signature, and let Γ ⊆ For(L).
+If every ﬁnite subset Γ0 of Γ is (completely) satisﬁable, then Γ is (completely) satisﬁable.
+References
+[BBHU08] Itaı̈ Ben Yaacov, Alexander Berenstein, C. Ward Henson, and Alexander Usvyatsov, Model
+theory for metric structures, Model theory with Applications to Algebra and Analysis, volume
+2 (Zoé Chatzidakis, Dugald Macpherson, Anand Pillay, and Alex Wilkie, eds.), London Math
+Society Lecture Note Series, vol. 350, 2008, pp. 315–427.
+[BC63] L.P. Belluce and C.C. Change, A weak completeness theorem for inﬁnite valued ﬁrst-order
+logic, Journal of Symbolic logic 28 (1963), no. 1, 43–50.
+[Ben]
+Itaı̈ Ben Yaacov, On theories of random variables, in preparation.
+[Ben03a]
+, Positive model theory and compact abstract theories, Journal of Mathematical Logic
+3 (2003), no. 1, 85–118.
+[Ben03b]
+, Simplicity in compact abstract theories, Journal of Mathematical Logic 3 (2003), no. 2,
+163–191.
+, Uncountable dense categoricity in cats, Journal of Symbolic Logic 70 (2005), no. 3,
+[Ben05]
+829–860.
+[BU]
+Itaı̈ Ben Yaacov and Alexander Usvyatsov, Continuous ﬁrst order logic and local stability,
+Transactions of the American Mathematical Society, to appear.
+[CDM00] Roberto L.O. Cignoli, Itala M.L. D’Ottaviano, and Daniele Mundici, Algebraic foundations
+of many-valued reasoning, Trends in Logic—Studia Logica Library, vol. 7, Kluwer Academic
+Publishers, Dordrecht, 2000.
+[Cha58] C. C. Chang, Proof of an axiom of Lukasiewicz, Transactions of the American Mathematical
+Society 87 (1958), 55–56.
+, A new proof of the completeness of the Lukasiewicz axioms, Transactions of the Amer[Cha59]
+ican Mathematical Society 93 (1959), 74–80.
+[CK66] C. C. Chang and H. Jerome Keisler, Continuous model theory, Princeton University Press,
+1966.
+
+26
+
+ITAÏ BEN YAACOV AND ARTHUR PAUL PEDERSEN
+
+[EFT94] H.-D. Ebbinghaus, J. Flum, and W. Thomas, Mathematical logic, second ed., Undergraduate
+Texts in Mathematics, Springer-Verlag, New York, 1994, Translated from the German by
+Margit Meßmer.
+[End01] Herbert B. Enderton, A mathematical introduction to logic, second ed., Harcourt/Academic
+Press, Burlington, MA, 2001.
+[Háj98] Petr Hájek, Metamathematics of fuzzy logic, Trends in Logic—Studia Logica Library, vol. 4,
+Kluwer Academic Publishers, Dordrecht, 1998.
+[Hay63] Louise Schmir Hay, Axiomatization of the inﬁnite-valued predicate calculus, Journal of Symbolic Logic 28 (1963), no. 1, 77–86.
+[Hen76] C. Ward Henson, Nonstandard hulls of Banach spaces, Israel Journal of Mathematics 25 (1976),
+108–144.
+[Pav79] Jan Pavelka, On fuzzy logic I, II and III, Zeitschrift für Mathematische Logik und Grundlagen
+der Mathematik 25 (1979), no. 5, 45–52, 119–134, 447–464.
+[RR58] Alan Rose and J. Barkley Rosser, Fragments of many-valued statement calculi, Transactions
+of the American Mathematical Society 87 (1958), 1–53.
+Itaı̈ Ben Yaacov, Université Claude Bernard – Lyon 1, Institut Camille Jordan, 43
+boulevard du 11 novembre 1918, 69622 Villeurbanne Cedex, France
+URL: http://math.univ-lyon1.fr/~begnac
+Arthur Paul Pedersen, Department of Philosophy, Carnegie Mellon University, Pittsburgh, PA 15213, USA
+E-mail address: apaulpedersen@cmu.edu
+URL: http://andrew.cmu.edu/~ppederse
+
+

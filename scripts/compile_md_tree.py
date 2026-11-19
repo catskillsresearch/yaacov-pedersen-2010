@@ -1,0 +1,1014 @@
+#!/usr/bin/env python3
+# Copyright (c) 2026 Lars Warren Ericson. All rights reserved.
+"""Flatten the ContinuousFOL.md note tree into arxiv.md, then build arxiv.tex / ContinuousFOL.pdf.
+
+Walks markdown links from a root note (default ``ContinuousFOL.md``), expands
+``@import`` directives relative to each note, writes a single ``arxiv.md``, and
+optionally runs the existing TeX/PDF pipeline.
+
+Outline structure follows TOC bullets (and numbered lists like ``1. [Section](…)``):
+each link hop adds one markdown heading level so LaTeX numbering runs
+1 → 1.1 → 1.1.1. Section titles come from the link text, not the linked file's
+``#`` heading.
+
+Lean imports default to path citations (the tree has ~2500 Lean modules). Pass
+``--lean=inline`` to embed source listings.
+
+Examples::
+
+    python3 scripts/compile_md_tree.py                 # flatten + tex + pdf
+    python3 scripts/compile_md_tree.py --md-only       # write arxiv.md only
+    python3 scripts/compile_md_tree.py --lean=inline   # embed Lean listings
+"""
+
+from __future__ import annotations
+
+import argparse
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+SCRIPTS = Path(__file__).resolve().parent
+DEFAULT_ROOT_MD = ROOT / "ContinuousFOL.md"
+ARXIV_MD = ROOT / "arxiv.md"
+
+MD_LINK_RE = re.compile(r"\[([^\]]*)\]\(([^)]+\.md)\)")
+# Outline entry: bullet or numbered list item linking to another note.
+TOC_BULLET_RE = re.compile(
+    r"^(?P<indent>[ \t]*)(?:[-*][ \t]+|\d+\.\s+)\[(?P<title>.+?)\]\((?P<href>[^)]+\.md)\)"
+    r"(?:[ \t]+\[[^\]]*\]\([^)]*\)|[ \t]+✓)*[ \t]*$",
+    re.MULTILINE,
+)
+BARE_TOC_CHECK_RE = re.compile(r"[ \t]+✓\s*$")
+# Outline progress marks: keep a bare check on the section title, never the revision URL.
+REVISION_MARK_RE = re.compile(r"\[\s*✓\s*\]\([^)]*1972_REVISION\.md\)")
+REVISED_FOOTER_RE = re.compile(
+    r"<p[^>]*>\s*✓\s*<strong>Revised</strong>.*?</p>\s*",
+    re.IGNORECASE | re.DOTALL,
+)
+FIRST_H1_RE = re.compile(r"^#\s+.+?(?:\n+|$)", re.MULTILINE)
+IMPORT_RE = re.compile(
+    r'^@import[ \t]+"([^"]+)"(?:[ \t]*\{([^}]*)\})?[ \t]*$',
+    re.MULTILINE,
+)
+HEADING_RE = re.compile(r"^(#{1,6})[ \t]+(.+)$", re.MULTILINE)
+
+DEFAULT_ABSTRACT = """\
+We give a Lean 4 / Mathlib formalization of Ita\\\"i Ben Yaacov and Arthur Paul
+Pedersen, *A proof of completeness for continuous first-order logic*
+(J.~Symbolic Logic 75 (2010) 168--190). The library develops continuous
+propositional and first-order syntax/semantics, the Group~1/Group~2 axiom
+systems, and the completeness / approximated strong-completeness theorems.
+"""
+
+
+ORPHAN_TEX_LINE = re.compile(
+    r"^(?:"
+    r"\\(?:bigcap|bigcup|sum|prod|int|frac|left|right|big|Big|mathcal|mathfrak|mathbb|text\{)"
+    r"|=\s*\\left"
+    # Short formula lines like `X \subseteq Y \quad \text{iff} ...` (not prose).
+    r"|[A-Za-z][A-Za-z0-9_]*\s*(?:=|\\(?:subseteq|supseteq|in|notin|mid|cup|cap))\b"
+    r")"
+)
+_PROSE_WORDS = re.compile(
+    r"\b(?:the|and|that|with|this|from|which|have|been|also|within|domain|model)\b",
+    re.IGNORECASE,
+)
+
+
+def repair_broken_display_math(text: str) -> str:
+    """Move headings that were mistakenly placed inside ``$$...$$`` blocks out.
+
+    Some notes open a display fence, then a ``##`` clause heading, then the
+    formula and the closing fence. Pandoc then emits literal ``\\$\\$`` and raw
+    TeX. Also drop empty orphan opening fences.
+    """
+    lines = text.splitlines(keepends=True)
+    out: list[str] = []
+    i = 0
+    in_code = False
+    while i < len(lines):
+        line = lines[i]
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            in_code = not in_code
+            out.append(line)
+            i += 1
+            continue
+        if in_code or stripped != "$$":
+            out.append(line)
+            i += 1
+            continue
+        # Potential display open: scan forward for close / heading.
+        j = i + 1
+        heading_idx: int | None = None
+        close_idx: int | None = None
+        while j < len(lines):
+            s = lines[j].strip()
+            if s.startswith("```"):
+                break
+            if s == "$$":
+                close_idx = j
+                break
+            if s.startswith("#") and heading_idx is None:
+                heading_idx = j
+            j += 1
+        if close_idx is None:
+            # Orphan open: skip it.
+            i += 1
+            continue
+        body_lines = lines[i + 1 : close_idx]
+        if heading_idx is not None:
+            headings: list[str] = []
+            rest: list[str] = []
+            seen_math = False
+            for bl in body_lines:
+                s = bl.strip()
+                if not seen_math and s.startswith("#"):
+                    headings.append(bl if bl.endswith("\n") else bl + "\n")
+                elif not seen_math and not s:
+                    continue
+                else:
+                    seen_math = True
+                    rest.append(bl.rstrip("\n"))
+            out.extend(headings)
+            math = "\n".join(rest).strip("\n")
+            if math.strip():
+                out.append("$$\n" + math + "\n$$\n")
+            i = close_idx + 1
+            continue
+        # Intact block: keep as-is (open + body + close).
+        out.extend(lines[i : close_idx + 1])
+        i = close_idx + 1
+    return "".join(out)
+
+
+def repair_cases_row_breaks(text: str) -> str:
+    """Insert ``\\\\`` between ``cases`` rows when Scott source omitted the line break."""
+    out: list[str] = []
+    i = 0
+    marker = "\\begin{cases}"
+    end_marker = "\\end{cases}"
+    while i < len(text):
+        start = text.find(marker, i)
+        if start == -1:
+            out.append(text[i:])
+            break
+        out.append(text[i:start])
+        end = text.find(end_marker, start)
+        if end == -1:
+            out.append(text[start:])
+            break
+        block = text[start : end + len(end_marker)]
+        block = re.sub(
+            r"([;,])\s+(\\(?:bot|perp|top|[A-Za-z{])) &",
+            r"\1 \\\\ \2 &",
+            block,
+        )
+        block = re.sub(
+            r",(?!\s*\\\\)\s*\n(\s*)(?=[^\n]+&)",
+            r", \\\\\n\1",
+            block,
+        )
+        out.append(block)
+        i = end + len(end_marker)
+    return "".join(out)
+
+
+def repair_array_row_breaks(text: str) -> str:
+    """Insert ``\\\\`` between ``array`` rows when Scott source omitted them."""
+    out: list[str] = []
+    i = 0
+    marker = "\\begin{array}"
+    end_marker = "\\end{array}"
+    while i < len(text):
+        start = text.find(marker, i)
+        if start == -1:
+            out.append(text[i:])
+            break
+        out.append(text[i:start])
+        end = text.find(end_marker, start)
+        if end == -1:
+            out.append(text[start:])
+            break
+        block = text[start : end + len(end_marker)]
+        block = re.sub(
+            r"(?<!\n)(?<!\$)(?<![\\])\n(\s*)([^\n\\]+&[^\n]*)\n(\s*)([^\n\\]+&)",
+            r"\n\1\2 \\\\\n\3\4",
+            block,
+        )
+        out.append(block)
+        i = end + len(end_marker)
+    return "".join(out)
+
+
+_SET_COMP_TAIL = (
+    r"(?=[,;.]|$|\s+will|\s+is|\s+are|\s+form|\s+remain|\s+can|\s+where|\s+for|\s+and|\s+or|\s+as|\s+—|\s+–|\s+-|\s+\\quad|\s+\\text)"
+)
+_SET_COMP = re.compile(
+    r"(?<![\\{])"
+    r"(?:"
+    r"\\sqcap\s+[A-Za-z0-9_'\\]+\s*:\s*.+?"
+    r"|"
+    r"[A-Za-z0-9_'\\]+\s+\\in\s+[A-Za-z0-9_{}\\']+\s*:\s*.+?"
+    r")"
+    + _SET_COMP_TAIL,
+)
+# ``z : z_i \in U`` (no leading ``\in`` on the left of ``:``)
+_SET_COMP_COLON = re.compile(
+    r"(?<![\\{])"
+    r"(?<!\\in\s)"
+    r"[]A-Za-z0-9_'^{}\\]+\s*:\s*"
+    r".+?"
+    + _SET_COMP_TAIL,
+)
+
+_RELATION_IN_MATH = re.compile(
+    r"\\(?:in|ll|sqsubseteq|sqsupseteq|sqcap|sqcup|bigcap|bigcup|subseteq|supseteq|ge|le)\b"
+)
+
+
+def _wrap_comprehension_fragment(fragment: str) -> str:
+    inner = fragment.strip()
+    if inner.startswith("\\{") or inner.startswith("{"):
+        return fragment
+    return r"\{ " + inner + r" \}"
+
+
+def _is_pure_set_comprehension(s: str) -> bool:
+    s = s.strip()
+    if ":" not in s or not _RELATION_IN_MATH.search(s):
+        return False
+    if any(tok in s for tok in ("=", r"\bigsqcup", r"\bigcap", r"\sqcup", r"\lim")):
+        return False
+    return True
+
+
+def _repair_math_body(body: str) -> str:
+    """Make Scott-style set comprehensions valid for Pandoc/LaTeX math."""
+    if re.search(r"\\{", body):
+        return body
+
+    stripped = body.strip()
+    if _is_pure_set_comprehension(stripped):
+        wrapped = _wrap_comprehension_fragment(stripped)
+        pad_left = body[: len(body) - len(body.lstrip())]
+        pad_right = body[len(body.rstrip()) :]
+        return pad_left + wrapped + pad_right
+
+    def repl(m: re.Match[str]) -> str:
+        frag = m.group(0)
+        if r"\in" not in frag and r"\ll" not in frag and r"\sqsubseteq" not in frag:
+            return frag
+        return _wrap_comprehension_fragment(frag)
+
+    out = _SET_COMP.sub(repl, body)
+    if out != body:
+        return out
+    return _SET_COMP_COLON.sub(repl, body)
+
+
+def repair_bare_set_comprehensions(text: str) -> str:
+    """Scott prose often writes ``$y \\in D : P$`` without set braces."""
+
+    def fix_inline(m: re.Match[str]) -> str:
+        inner = _repair_math_body(m.group(1)).strip()
+        return "$" + inner + "$"
+
+    text = re.sub(r"(?<!\$)\$(?!\$)([^\n$]+?)(?<!\$)\$(?!\$)", fix_inline, text)
+
+    def fix_display(m: re.Match[str]) -> str:
+        body = m.group(1)
+        if re.search(r"\\begin\{", body):
+            return m.group(0)
+        inner = _repair_math_body(body).strip()
+        return "$$" + inner + "$$"
+
+    text = re.sub(r"\$\$([^\$]+?)\$\$", fix_display, text, flags=re.DOTALL)
+    return text
+
+
+def wrap_orphan_tex_display(text: str) -> str:
+    """Wrap contiguous bare TeX math lines in ``$$...$$`` when not already fenced."""
+    lines = text.splitlines(keepends=True)
+    out: list[str] = []
+    i = 0
+    in_code = False
+    in_math = False
+    while i < len(lines):
+        line = lines[i]
+        stripped = line.strip()
+        if stripped.startswith("```"):
+            in_code = not in_code
+            out.append(line)
+            i += 1
+            continue
+        # Display-math fences: ``$$``, ``\[`` / ``\]``, or ``$$`` opened/closed on partial lines.
+        # Content inside ``\[...\]`` must not be re-wrapped (orphan ``\bigl`` lines match
+        # ORPHAN_TEX_LINE and would otherwise inject nested ``$$`` and break pdflatex).
+        if not in_code:
+            if stripped in ("$$", "\\[", "\\]"):
+                if stripped == "\\[":
+                    in_math = True
+                elif stripped == "\\]":
+                    in_math = False
+                else:
+                    in_math = not in_math
+                out.append(line)
+                i += 1
+                continue
+            one_line_display = (
+                stripped.startswith("$$")
+                and stripped.endswith("$$")
+                and len(stripped) > 4
+            )
+            open_display = stripped.startswith("$$") and not one_line_display
+            close_display = in_math and stripped.endswith("$$") and stripped != "$$"
+            if in_math or open_display:
+                out.append(line)
+                if open_display:
+                    in_math = True
+                elif close_display:
+                    in_math = False
+                i += 1
+                continue
+        if (
+            not in_code
+            and not in_math
+            and stripped
+            and ORPHAN_TEX_LINE.match(stripped)
+            and not _PROSE_WORDS.search(stripped)
+            and len(stripped) < 200
+        ):
+            chunk = [stripped]
+            i += 1
+            while i < len(lines):
+                nxt = lines[i].strip()
+                if not nxt or nxt.startswith("#") or nxt.startswith("```"):
+                    break
+                if nxt in ("$$", "\\]"):
+                    # Closing fence belonging to a half-broken block: leave ``\]``
+                    # for the caller; consume a stray ``$$``.
+                    if nxt == "$$":
+                        i += 1
+                    break
+                chunk.append(nxt)
+                i += 1
+            out.append("$$\n" + "\n".join(chunk) + "\n$$\n")
+            continue
+        out.append(line)
+        i += 1
+    return "".join(out)
+
+
+def demote_headings(text: str, by: int) -> str:
+    if by <= 0:
+        return text
+
+    def repl(m: re.Match[str]) -> str:
+        level = len(m.group(1))
+        new_level = min(level + by, 6)
+        return "#" * new_level + " " + m.group(2)
+
+    return HEADING_RE.sub(repl, text)
+
+
+def indent_columns(indent: str) -> int:
+    return len(indent.expandtabs(4))
+
+
+def shift_headings(text: str, delta: int) -> str:
+    if delta == 0:
+        return text
+
+    def repl(m: re.Match[str]) -> str:
+        level = len(m.group(1))
+        new_level = min(max(level + delta, 1), 6)
+        return "#" * new_level + " " + m.group(2)
+
+    return HEADING_RE.sub(repl, text)
+
+
+def align_body_headings(text: str, base_level: int) -> str:
+    """Shift headings so the shallowest one in ``text`` is ``base_level``."""
+    levels = [len(m.group(1)) for m in HEADING_RE.finditer(text)]
+    if not levels:
+        return text
+    delta = base_level - min(levels)
+    return shift_headings(text, delta)
+
+
+def strip_first_h1(text: str) -> str:
+    return FIRST_H1_RE.sub("", text, count=1)
+
+
+EXERCISE_TITLE_RE = re.compile(
+    r"^Exercise\s+(\d+(?:\.\d+)*)\b",
+    re.IGNORECASE,
+)
+EXERCISE_BODY_LABEL_RE = re.compile(
+    r"^\*\*EXERCISE\s+(\d+(?:\.\d+)*)\.\*\*\s*",
+    re.IGNORECASE,
+)
+
+
+def strip_redundant_exercise_label(body: str, section_title: str) -> str:
+    """Drop a leading ``**EXERCISE X.YZ.**`` when the section title already says Exercise X.YZ."""
+    tm = EXERCISE_TITLE_RE.match(section_title.strip())
+    if not tm:
+        return body
+    title_num = tm.group(1)
+    # Skip leading blank lines, then strip matching all-caps label.
+    lines = body.splitlines(keepends=True)
+    i = 0
+    while i < len(lines) and not lines[i].strip():
+        i += 1
+    if i >= len(lines):
+        return body
+    bm = EXERCISE_BODY_LABEL_RE.match(lines[i].lstrip())
+    if not bm or bm.group(1) != title_num:
+        return body
+    # Keep any remainder of the first content line after the label.
+    indent_len = len(lines[i]) - len(lines[i].lstrip())
+    remainder = EXERCISE_BODY_LABEL_RE.sub("", lines[i].lstrip(), count=1)
+    new_first = ((" " * indent_len) + remainder) if remainder.strip() else ""
+    rebuilt = lines[:i]
+    if new_first:
+        rebuilt.append(new_first if new_first.endswith("\n") else new_first + "\n")
+    rebuilt.extend(lines[i + 1 :])
+    return "".join(rebuilt)
+
+
+# AI-generated prose sidecars often contain raw TeX math macros outside math
+# mode; omit them from the PDF by default (human English + Lean links remain).
+AI_PROSE_SUFFIXES = {
+    ".ai_lean_to_english",
+    ".ai_english_concordance",
+    # ContinuousFOL / Nowakowska leaf sidecars (imported with code_block=false).
+    "_aisummary.txt",
+    "_ailean.txt",
+}
+
+
+BOLD_LEAN_CITATION_ABOVE = re.compile(
+    r"\*\*\[[^\]]*\]\([^)]+\.lean\)\*\*\s*\n+\s*$"
+)
+BOLD_LEAN_CITATION_LINE = re.compile(
+    r"^\s*\*\*\[[^\]]*\]\(([^)]+\.lean)\)\*\*\s*$",
+    re.MULTILINE,
+)
+
+
+def resolve_lean_target(md_path: Path, href_or_rel: str) -> Path:
+    s = href_or_rel.split("#", 1)[0].strip()
+    if s.startswith("DomainTheory/"):
+        return (ROOT / s).resolve()
+    p = Path(s)
+    if p.is_absolute():
+        return p.resolve()
+    return (md_path.parent / s).resolve()
+
+
+def strip_duplicate_lean_citations(
+    md_path: Path, text: str, included_lean: set[Path]
+) -> str:
+    """Drop repeated ``**[…](*.lean)**`` lines once that module is already in the PDF."""
+    if not included_lean:
+        return text
+
+    def repl(m: re.Match[str]) -> str:
+        target = resolve_lean_target(md_path, m.group(1))
+        if target in included_lean:
+            return ""
+        return m.group(0)
+
+    return BOLD_LEAN_CITATION_LINE.sub(repl, text)
+
+
+def expand_import(
+    md_path: Path,
+    rel: str,
+    opts: str,
+    *,
+    lean_mode: str,
+    include_ai_prose: bool,
+    cited_above: bool = False,
+) -> str:
+    target = (md_path.parent / rel).resolve()
+    code_block = "code_block=false" not in (opts or "").replace(" ", "")
+    suffix = target.suffix.lower()
+
+    if not target.is_file():
+        return f"\n\n*Missing import:* `{rel}`\n\n"
+
+    if suffix == ".mermaid":
+        body = target.read_text(encoding="utf-8").rstrip() + "\n"
+        return f"\n\n```mermaid\n{body}```\n\n"
+
+    # Paper quotations (`*_math.txt`): leave notes as bare @import for interactive
+    # viewing; wrap in ```source only when flattening for the TeX/PDF pipeline.
+    if suffix == ".txt" and target.name.endswith("_math.txt"):
+        body = target.read_text(encoding="utf-8").rstrip() + "\n"
+        return f"\n\n```source\n{body}```\n\n"
+
+    if suffix == ".svg":
+        import hashlib
+        import shutil
+        import subprocess
+
+        figures = ROOT / "figures"
+        figures.mkdir(parents=True, exist_ok=True)
+        digest = hashlib.sha1(target.read_bytes()).hexdigest()[:10]
+        try:
+            stem = target.relative_to(ROOT).as_posix().replace("/", "-")
+        except ValueError:
+            stem = target.stem
+        if stem.lower().endswith(".svg"):
+            stem = stem[:-4]
+        caption = None
+        if opts:
+            cm = re.search(r'caption\s*=\s*"([^"]+)"', opts)
+            if not cm:
+                cm = re.search(r"caption\s*=\s*'([^']+)'", opts)
+            if cm:
+                caption = cm.group(1).strip()
+        if not caption:
+            # ``ModuleName: full subsection title`` (e.g. MotCalc: Motivational…).
+            module = target.stem
+            section = module
+            try:
+                for line in md_path.read_text(encoding="utf-8").splitlines():
+                    if line.startswith("# "):
+                        section = line[2:].strip()
+                        break
+            except OSError:
+                pass
+            caption = f"{module}: {section}"
+        # Prefer a sibling Graphviz .dot → vector PDF (crisp at any zoom).
+        # Rasterizing SVG at 72 dpi made import graphs look fuzzy in the PDF.
+        dot_src = target.with_suffix(".dot")
+        pdf = figures / f"{stem}-{digest}.pdf"
+        png = figures / f"{stem}-{digest}.png"
+        if dot_src.is_file() and shutil.which("dot"):
+            if not pdf.is_file():
+                proc = subprocess.run(
+                    ["dot", "-Tpdf", str(dot_src), "-o", str(pdf)],
+                    capture_output=True,
+                    text=True,
+                    check=False,
+                )
+                if proc.returncode != 0 or not pdf.is_file():
+                    return f"\n\n*dot→PDF failed:* `{rel}`\n\n"
+            return f"\n\n![{caption}]({pdf.relative_to(ROOT).as_posix()})\n\n"
+        if not png.is_file():
+            convert = shutil.which("convert")
+            if not convert:
+                return f"\n\n*Missing convert for SVG:* `{rel}`\n\n"
+            # High-DPI raster fallback (no .dot): dense pixels, print size via
+            # density metadata so labels stay near body text.
+            proc = subprocess.run(
+                [
+                    convert,
+                    "-density",
+                    "300",
+                    str(target),
+                    "-units",
+                    "PixelsPerInch",
+                    "-density",
+                    "300",
+                    str(png),
+                ],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+            if proc.returncode != 0 or not png.is_file():
+                return f"\n\n*SVG convert failed:* `{rel}`\n\n"
+        return f"\n\n![{caption}]({png.relative_to(ROOT).as_posix()})\n\n"
+
+    if suffix == ".lean":
+        try:
+            rel_repo = target.relative_to(ROOT).as_posix()
+        except ValueError:
+            rel_repo = target.name
+        if lean_mode == "omit":
+            return "\n\n"
+        source = target.read_text(encoding="utf-8").rstrip() + "\n"
+        fenced = f"\n\n```lean\n{source}```\n\n"
+        if lean_mode == "link":
+            # Notes cite the file with ** [label](path) **; @import supplies the listing only.
+            if cited_above:
+                return fenced
+            return f"\n\n**[{rel_repo}]({rel_repo})**\n\n{fenced.lstrip()}"
+        # inline: notes already carry the blue path link; do not emit a duplicate heading.
+        return fenced
+
+    if suffix in AI_PROSE_SUFFIXES and not include_ai_prose:
+        return "\n\n"
+
+    # Prose sidecars (.english, optionally AI English, …)
+    text = target.read_text(encoding="utf-8").rstrip() + "\n"
+    if not code_block or suffix == ".english" or suffix in AI_PROSE_SUFFIXES:
+        return f"\n\n{text}\n"
+    lang = suffix.lstrip(".") or "text"
+    return f"\n\n```{lang}\n{text}```\n\n"
+
+
+def expand_imports(
+    md_path: Path,
+    text: str,
+    *,
+    lean_mode: str,
+    include_ai_prose: bool,
+    included_lean: set[Path],
+) -> str:
+    text = strip_duplicate_lean_citations(md_path, text, included_lean)
+
+    def repl(m: re.Match[str]) -> str:
+        rel = m.group(1)
+        target = resolve_lean_target(md_path, rel)
+        if (
+            target.suffix.lower() == ".lean"
+            and lean_mode != "omit"
+            and target in included_lean
+        ):
+            return ""
+        before = text[max(0, m.start() - 500) : m.start()]
+        cited_above = bool(BOLD_LEAN_CITATION_ABOVE.search(before))
+        chunk = expand_import(
+            md_path,
+            rel,
+            m.group(2) or "",
+            lean_mode=lean_mode,
+            include_ai_prose=include_ai_prose,
+            cited_above=cited_above,
+        )
+        if target.suffix.lower() == ".lean" and lean_mode != "omit" and target.is_file():
+            included_lean.add(target)
+        return chunk
+
+    return IMPORT_RE.sub(repl, text)
+
+
+def child_md_targets(md_path: Path, text: str) -> list[tuple[int, str, Path]]:
+    """TOC children in document order: ``(relative_indent, title, path)``."""
+    matches = list(TOC_BULLET_RE.finditer(text))
+    if not matches:
+        return []
+    base_indent = min(indent_columns(m.group("indent")) for m in matches)
+    seen: set[Path] = set()
+    out: list[tuple[int, str, Path]] = []
+    for m in matches:
+        rel = (indent_columns(m.group("indent")) - base_indent) // 2
+        href = m.group("href")
+        title = m.group("title").strip()
+        line = m.group(0)
+        if (
+            (REVISION_MARK_RE.search(line) or BARE_TOC_CHECK_RE.search(line))
+            and not title.endswith("✓")
+        ):
+            title = f"{title} ✓"
+        tgt = (md_path.parent / href).resolve()
+        if tgt in seen or not tgt.is_file():
+            continue
+        seen.add(tgt)
+        out.append((rel, title, tgt))
+    return out
+
+
+def strip_toc_bullets(text: str) -> str:
+    return TOC_BULLET_RE.sub("", text)
+
+
+_FENCE_LINE_RE = re.compile(r"^\s*(`{3,})")
+_LEAN_HREF_RE = re.compile(r"\[[^\]]*\]\(([^)]+\.lean)\)")
+
+
+def lean_targets_in_note_text(md_path: Path, text: str) -> set[Path]:
+    """``.lean`` paths cited via ``@import`` or markdown links (outside fenced blocks)."""
+    found: set[Path] = set()
+    for m in IMPORT_RE.finditer(text):
+        rel = m.group(1)
+        if not rel.lower().endswith(".lean"):
+            continue
+        target = resolve_lean_target(md_path, rel)
+        if target.is_file():
+            found.add(target.resolve())
+    in_fence = False
+    fence_mark = ""
+    for line in text.splitlines():
+        fm = _FENCE_LINE_RE.match(line)
+        if fm:
+            mark = fm.group(1)
+            if not in_fence:
+                in_fence = True
+                fence_mark = mark
+            elif line.lstrip().startswith(fence_mark):
+                in_fence = False
+            continue
+        if in_fence:
+            continue
+        for m in _LEAN_HREF_RE.finditer(line):
+            target = resolve_lean_target(md_path, m.group(1))
+            if target.is_file():
+                found.add(target.resolve())
+    return found
+
+
+def collect_md_hierarchy_lean(
+    root_md: Path = DEFAULT_ROOT_MD,
+) -> tuple[set[Path], set[Path]]:
+    """Walk the TOC tree from ``root_md``; return ``(notes, lean modules linked)``."""
+    visited_notes: set[Path] = set()
+    lean_paths: set[Path] = set()
+
+    def walk(md_path: Path) -> None:
+        resolved = md_path.resolve()
+        if resolved in visited_notes:
+            return
+        visited_notes.add(resolved)
+        raw = resolved.read_text(encoding="utf-8")
+        lean_paths.update(lean_targets_in_note_text(resolved, raw))
+        for _rel_indent, _title, child in child_md_targets(resolved, raw):
+            walk(child)
+
+    if not root_md.is_file():
+        raise FileNotFoundError(f"missing root markdown: {root_md}")
+    walk(root_md)
+    return visited_notes, lean_paths
+
+
+def flatten_file(
+    md_path: Path,
+    *,
+    section_level: int,
+    section_title: str | None,
+    lean_mode: str,
+    include_ai_prose: bool,
+    visited: set[Path],
+    included_lean: set[Path],
+) -> str:
+    """Recursively flatten one note and its TOC-linked children."""
+    resolved = md_path.resolve()
+    if resolved in visited:
+        return f"\n\n*(Already included: `{md_path.name}`.)*\n\n"
+    visited.add(resolved)
+
+    section_level = min(max(section_level, 1), 6)
+
+    raw = REVISED_FOOTER_RE.sub("\n", resolved.read_text(encoding="utf-8"))
+    children = child_md_targets(resolved, raw)
+    body = strip_toc_bullets(raw) if children else raw
+    if section_title is not None:
+        body = strip_first_h1(body)
+    body = expand_imports(
+        resolved,
+        body,
+        lean_mode=lean_mode,
+        include_ai_prose=include_ai_prose,
+        included_lean=included_lean,
+    )
+    if section_title is not None:
+        body = align_body_headings(body, min(section_level + 1, 6))
+        body = strip_redundant_exercise_label(body, section_title)
+    body = repair_cases_row_breaks(body)
+    body = repair_array_row_breaks(body)
+    body = repair_bare_set_comprehensions(body)
+    # Repair `$$` / heading inversions, then wrap remaining bare TeX displays.
+    body = repair_broken_display_math(body)
+    body = wrap_orphan_tex_display(body)
+    body = re.sub(r"\n{3,}", "\n\n", body).strip() + "\n"
+
+    parts: list[str] = []
+    if section_title is not None:
+        parts.append(f"{'#' * section_level} {section_title}\n\n{body}")
+    else:
+        parts.append(body)
+
+    for rel_indent, title, child in children:
+        # One outline link = one deeper section (1 → 1.1 → 1.1.1); indent nests further.
+        child_level = min(section_level + 1 + rel_indent, 6)
+        parts.append(
+            flatten_file(
+                child,
+                section_level=child_level,
+                section_title=title,
+                lean_mode=lean_mode,
+                include_ai_prose=include_ai_prose,
+                visited=visited,
+                included_lean=included_lean,
+            )
+        )
+    return "\n".join(parts)
+
+
+def ensure_abstract(text: str) -> str:
+    if re.search(r"^##\s+Abstract\s*$", text, re.MULTILINE):
+        return text
+    # Insert after the first top-level title line.
+    m = re.match(r"^#\s+.+\n+", text)
+    if not m:
+        return "## Abstract\n\n" + DEFAULT_ABSTRACT + "\n\n" + text
+    insert_at = m.end()
+    return (
+        text[:insert_at]
+        + "## Abstract\n\n"
+        + DEFAULT_ABSTRACT
+        + "\n\n"
+        + text[insert_at:]
+    )
+
+
+def ensure_model_card_markers(text: str) -> str:
+    """Ensure a ``## References`` heading exists (bibliography lives in ``references.bib``)."""
+    if not re.search(r"^#{1,6}\s+References\s*$", text, re.MULTILINE):
+        text = text.rstrip() + "\n\n## References\n\n"
+    return text
+
+
+def flatten_md_tree(
+    root_md: Path = DEFAULT_ROOT_MD,
+    *,
+    lean_mode: str = "link",
+    include_ai_prose: bool = False,
+    out_path: Path = ARXIV_MD,
+) -> Path:
+    """Compile the markdown tree rooted at ``root_md`` into ``out_path``."""
+    if not root_md.is_file():
+        raise FileNotFoundError(f"missing root markdown: {root_md}")
+    if lean_mode not in {"link", "inline", "omit"}:
+        raise ValueError(f"unknown lean_mode: {lean_mode!r}")
+
+    visited: set[Path] = set()
+    included_lean: set[Path] = set()
+    body = flatten_file(
+        root_md,
+        section_level=1,
+        section_title=None,
+        lean_mode=lean_mode,
+        include_ai_prose=include_ai_prose,
+        visited=visited,
+        included_lean=included_lean,
+    )
+    # Insert a default abstract if the note tree has none (title-page abstract env).
+    if root_md.resolve() in {
+        (ROOT / "DomainTheory.md").resolve(),
+        (ROOT / "ContinuousFOL.md").resolve(),
+    }:
+        body = ensure_abstract(body)
+    body = ensure_model_card_markers(body)
+    header = (
+        "<!-- AUTO-GENERATED by scripts/compile_md_tree.py — do not edit -->\n"
+        f"<!-- Root: {root_md.relative_to(ROOT).as_posix()} "
+        f"({len(visited)} notes, lean={lean_mode}, "
+        f"ai_prose={'on' if include_ai_prose else 'off'}) -->\n\n"
+    )
+    out_path.write_text(header + body, encoding="utf-8")
+    return out_path
+
+
+def build_arxiv_with_code() -> None:
+    """Copy flattened ``arxiv.md`` to ``arxiv_with_code.md`` for the TeX builder."""
+    src = ROOT / "arxiv.md"
+    dst = ROOT / "arxiv_with_code.md"
+    if not src.is_file():
+        raise FileNotFoundError("missing arxiv.md; flatten the note tree first")
+    dst.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+
+
+def build_arxiv_tex() -> None:
+    subprocess.run(
+        [sys.executable, str(SCRIPTS / "build_arxiv_tex.py")],
+        cwd=ROOT,
+        check=True,
+    )
+
+
+def build_arxiv_pdf(*, clean: bool = False) -> None:
+    """Compile ``arxiv.tex`` to ``ContinuousFOL.pdf`` via ``scripts/build_arxiv_pdf.sh``."""
+    script = SCRIPTS / "build_arxiv_pdf.sh"
+    if not script.is_file():
+        raise FileNotFoundError(f"missing {script}")
+    proc = subprocess.run(["bash", str(script)], cwd=ROOT, check=False)
+    if proc.returncode != 0:
+        raise RuntimeError("build_arxiv_pdf.sh failed")
+    pdf = ROOT / "ContinuousFOL.pdf"
+    if not pdf.is_file():
+        raise RuntimeError("ContinuousFOL.pdf missing after build_arxiv_pdf.sh")
+    # Drop legacy Zenodo / view.pdf alias if present.
+    view = ROOT / "view.pdf"
+    if view.is_file():
+        view.unlink()
+
+
+def refresh_note_lean_imports() -> None:
+    """Retarget broken Lean ``@import``s in notes before flattening (optional)."""
+    try:
+        from refresh_note_lean_imports import refresh_all
+    except ImportError:
+        print("note: refresh_note_lean_imports.py not present; skipping", file=sys.stderr)
+        return
+    print("==> Refreshing Lean @imports in notes")
+    n = refresh_all(ROOT / "ContinuousFOL")
+    print(f"updated {n} notes")
+
+
+def compile_tree_to_pdf(
+    root_md: Path = DEFAULT_ROOT_MD,
+    *,
+    lean_mode: str = "link",
+    include_ai_prose: bool = False,
+    md_only: bool = False,
+    tex_only: bool = False,
+    clean: bool = False,
+) -> Path:
+    """Flatten the note tree and build ``ContinuousFOL.pdf`` (unless ``md_only`` / ``tex_only``)."""
+    refresh_note_lean_imports()
+    out = flatten_md_tree(
+        root_md, lean_mode=lean_mode, include_ai_prose=include_ai_prose
+    )
+    print(f"wrote {out.relative_to(ROOT)} ({out.stat().st_size:,} bytes)")
+    if md_only:
+        return out
+    build_arxiv_with_code()
+    build_arxiv_tex()
+    if tex_only:
+        return ROOT / "arxiv.tex"
+    build_arxiv_pdf(clean=clean)
+    pdf = ROOT / "ContinuousFOL.pdf"
+    print(f"wrote {pdf.relative_to(ROOT)} ({pdf.stat().st_size:,} bytes)")
+    return pdf
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--root",
+        type=Path,
+        default=DEFAULT_ROOT_MD,
+        help="root markdown file (default: ContinuousFOL.md)",
+    )
+    parser.add_argument(
+        "--out",
+        type=Path,
+        default=ARXIV_MD,
+        help="flattened markdown output (default: arxiv.md at repo root)",
+    )
+    parser.add_argument(
+        "--lean",
+        choices=("link", "inline", "omit"),
+        default="link",
+        help="how to expand @import of .lean files (default: link)",
+    )
+    parser.add_argument(
+        "--ai-prose",
+        action="store_true",
+        help="include .ai_lean_to_english / .ai_english_concordance imports",
+    )
+    parser.add_argument(
+        "--md-only",
+        action="store_true",
+        help="only write arxiv.md",
+    )
+    parser.add_argument(
+        "--tex-only",
+        action="store_true",
+        help="write arxiv.md and arxiv.tex, skip PDF",
+    )
+    parser.add_argument(
+        "--clean",
+        action="store_true",
+        help="latexmk -C before compiling the PDF",
+    )
+    args = parser.parse_args(argv)
+    root = args.root if args.root.is_absolute() else ROOT / args.root
+    out = args.out if args.out.is_absolute() else ROOT / args.out
+    if args.md_only:
+        refresh_note_lean_imports()
+        flatten_md_tree(
+            root,
+            lean_mode=args.lean,
+            include_ai_prose=args.ai_prose,
+            out_path=out,
+        )
+        try:
+            out_label = out.relative_to(ROOT).as_posix()
+        except ValueError:
+            out_label = out.as_posix()
+        print(f"wrote {out_label} ({out.stat().st_size:,} bytes)")
+        return 0
+    compile_tree_to_pdf(
+        root,
+        lean_mode=args.lean,
+        include_ai_prose=args.ai_prose,
+        md_only=args.md_only,
+        tex_only=args.tex_only,
+        clean=args.clean,
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

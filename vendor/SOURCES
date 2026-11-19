@@ -1,0 +1,7 @@
+# Dependency pins
+
+mathlib
+  url:    https://github.com/leanprover-community/mathlib4
+  commit: e91b128082cc221d6432a6a5aadcd3243af8e76c
+  toolchain: leanprover/lean4:v4.35.0
+  note:   Lake Git pin (same rev as sibling formalization template at scaffold time)

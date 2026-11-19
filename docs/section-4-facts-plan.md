@@ -107,7 +107,7 @@ are unchanged and still `sorry`. The board is still 5 open, 0 blocked, 62 done.
 | 1 | Weak deduction theorems for both propositional calculi | done, ~500 lines | done |
 | 2 | Semantic iteration for finite premise sets | done, ~1,240 lines | done |
 | 3a | MV-algebra axioms, standard `[0,1]` instance, and `evalMV` agreement | done, 318 lines | done |
-| 3b | **Lindenbaum algebra.** Quotient formulae by `⊢ φ ∸ ψ ∧ ⊢ ψ ∸ φ`; show the quotient is an MV-algebra and `[[φ]] = 0 ↔ ⊢ φ`. | 500–1,000 lines | 1–2 |
+| 3b | **Lindenbaum algebra.** Quotient, and `[[φ]] = 0 ↔ ⊢ φ`, done (~161 lines). Remaining: double negation, operations, and the MV axioms on the quotient. | 350–850 lines left | 1–2 |
 | 3c | **Chang representation.** Every MV-algebra is a subdirect product of chains, and a chain identity that holds on `[0,1]` holds in every MV-algebra. This is still the bulk and the main uncertainty. | 1,200–3,200 lines | 2–6 |
 | 4 | **Fact 4.5, converse.** Weak completeness for continuous logic, then the reduction in the previous section. This needs an extension of step 3 to a `½`-operation (divisible / product MV, or a McNaughton argument with dyadic coefficients). | 1,000–2,000 lines on top of step 3 | 2–4 |
 
@@ -122,10 +122,30 @@ The other three §4 Facts (4.2–4.4) are not needed for any main theorem.
 They would typically follow from the same Lindenbaum / maximal-consistent
 machinery once 4.1 and 4.5 are in place, and should stay last.
 
+## Progress after the Lindenbaum zero-class checkpoint
+
+The Lindenbaum quotient and the zero-class characterization are done and
+`sorry`-free (`LukLindenbaum.lean`, 161 lines):
+
+- Provable equivalence `φ ≡ ψ` iff `⊢ φ → ψ` and `⊢ ψ → φ` is an equivalence
+  relation; all theorems are equivalent by weakening (A1).
+- `LukLind ι` is the quotient. For any formula `ψ`, `mk φ = mk (ψ ∸ ψ)` iff
+  `⊢ φ`. With `[Inhabited (LukPropForm ι)]`, this is `mk φ = 0 ↔ ⊢ φ`.
+- Truncated subtraction is well-defined on the quotient, by (A2).
+- (A4), written as an implication, is the *converse* contraposition
+  `(¬φ → ¬ψ) → (ψ → φ)`. (Because `Imp α β = β ∸ α`, the paper’s
+  `(φ ∸ ψ) ∸ (¬ψ ∸ ¬φ)` is this form, not `(φ → ψ) → (¬ψ → ¬φ)`.)
+  The ex-falso seed `⊢ ¬φ → (φ → ψ)` follows immediately from (A1) and (A4).
+
+What remains of step 3b is the Hilbert work needed to make `LukLind` an
+`MVAlgebra`: double negation `φ ≡ ¬¬φ`, direct contraposition, congruence
+of `¬` and of `φ ⊕ ψ := ¬(¬φ ∸ ψ)`, and then the MV identities on classes.
+Double negation is the first remaining lemma.
+
 ## Suggested order on resume
 
 1. Keep the official statements fixed.
-2. Build the Lindenbaum MV-algebra for Łukasiewicz logic and prove
-   `[[φ]] = 0 ↔ ⊢ φ`, committing as it compiles.
+2. Prove double negation and lift `¬` and `⊕` to `LukLind`; verify Chang’s
+   axioms so `LukLind` is an `MVAlgebra`.
 3. Formalize Chang’s representation theorem and close Fact 4.1.
 4. Extend the argument by `½` and finish Fact 4.5.

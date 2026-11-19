@@ -21,10 +21,32 @@ open Classical
 namespace ContinuousFOL
 
 /-- Corollary 9.8 (Pavelka-style Completeness): `φ°_Γ = φ^⊛_Γ`. -/
-theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L))
-    (hcons : ConsistentQ Γ) (φ : Formula L) :
+theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) :
     degreeOfTruthPre Γ φ = degreeOfProvabilityPre Γ φ := by
   unfold degreeOfTruthPre degreeOfProvabilityPre
+  by_cases hcons : ConsistentQ Γ
+  swap
+  · -- Inconsistent `Γ`: no models, so the degree of truth is `sSup ∅ = 0`; and `Γ ⊢ φ ∸ 0`,
+    -- so the degree of provability is `0` as well.
+    have hall : ∀ ψ, ProvableQ Γ ψ := fun ψ => by
+      by_contra h
+      exact hcons ⟨ψ, h⟩
+    have hT : {r : ℝ | ∃ (M : PreStructure L) (σ : Var → M.Carrier),
+        ModelsPre M σ Γ ∧ r = φ.eval M σ} = ∅ := by
+      ext r
+      simp only [Set.mem_ofPred_eq, Set.mem_empty_iff_false, iff_false]
+      rintro ⟨M, σ, hM, -⟩
+      exact hcons (satisfiable_consistent_pre Γ ⟨M, σ, hM⟩)
+    rw [hT, Real.sSup_empty]
+    have h0 : (0 : ℝ) ∈ {r : ℝ | ∃ p : DyadicCode, r = p.val ∧
+        ProvableQ Γ (.tsub φ (Formula.dyadic L p))} :=
+      ⟨.zero, DyadicCode.val_zero.symm, hall _⟩
+    refine le_antisymm ?_ (csInf_le ⟨0, ?_⟩ h0)
+    · refine le_csInf ⟨0, h0⟩ ?_
+      rintro _ ⟨p, rfl, -⟩
+      exact (DyadicCode.val_mem_Icc p).1
+    · rintro _ ⟨p, rfl, -⟩
+      exact (DyadicCode.val_mem_Icc p).1
   -- The set of truth values in models of `Γ` is nonempty (Theorem 9.5) and bounded by `1`.
   obtain ⟨M₀, σ₀, hM₀⟩ := (completeness_pre Γ).mp hcons
   have hTne : {r : ℝ | ∃ (M : PreStructure L) (σ : Var → M.Carrier),
@@ -77,8 +99,7 @@ theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L))
     linarith
 
 theorem pavelka_completeness_metric {LM : MetricSignature}
-    (Γ : Set (Formula LM.toSignature)) (hcons : ConsistentMetricQ Γ)
-    (φ : Formula LM.toSignature) :
+    (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
     degreeOfTruthComplete Γ φ = degreeOfProvabilityMetric Γ φ := by
   sorry
 

@@ -9,6 +9,7 @@ module
 public import ContinuousFOL.LanguageAndSemantics.Term
 public import Mathlib.Data.Finset.Basic
 public import Mathlib.Data.Finset.Union
+public import Mathlib.Data.Fintype.Basic
 
 @[expose] public section
 

@@ -6,7 +6,7 @@ Paper pin: preliminaries; used throughout (cf. vision.md)
 -/
 module
 
-public import Mathlib.Data.Real.Basic
+public import Mathlib.Basic.Real.Basic
 public import Mathlib.Tactic.Linarith
 
 @[expose] public section
@@ -28,12 +28,12 @@ namespace tsubR
 lemma nonneg (x y : ℝ) : 0 ≤ x ∸ y := le_max_right _ _
 
 lemma eq_zero_iff (x y : ℝ) : x ∸ y = 0 ↔ x ≤ y := by
-  simp [tsubR, max_eq_right_iff, sub_nonpos]
+  simp [tsubR]
 
 lemma le_iff (x y z : ℝ) (hz : 0 ≤ z) : x ∸ y ≤ z ↔ x - y ≤ z := by
-  simp [tsubR, max_le_iff, hz]
+  simp [tsubR, hz]
 
-lemma unitClosed {x y : ℝ} (hx0 : 0 ≤ x) (hx1 : x ≤ 1) (hy0 : 0 ≤ y) :
+lemma unitClosed {x y : ℝ} (_hx0 : 0 ≤ x) (hx1 : x ≤ 1) (_hy0 : 0 ≤ y) :
     0 ≤ x ∸ y ∧ x ∸ y ≤ 1 := by
   refine ⟨nonneg x y, max_le ?_ zero_le_one⟩
   linarith

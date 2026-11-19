@@ -10,7 +10,9 @@ public import ContinuousFOL.Group2Axioms.ProvableQ
 public import ContinuousFOL.Group2Axioms.ProvableMetricQ
 public import ContinuousFOL.LanguageAndSemantics.FormulaDyadic
 public import ContinuousFOL.Group1Axioms.DyadicCode.Val
-public import Mathlib.Data.Set.Lattice
+public import Mathlib.Data.Set.Lattice.Indexed
+public import Mathlib.Data.Set.Lattice.Image
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
 
 @[expose] public section
 

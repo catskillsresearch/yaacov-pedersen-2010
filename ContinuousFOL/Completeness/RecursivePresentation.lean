@@ -7,6 +7,7 @@ Paper pin: §9 Definition 9.10; vision.md page 25
 module
 
 public import ContinuousFOL.LanguageAndSemantics.MetricSignature
+public import ContinuousFOL.LanguageAndSemantics.Formula
 public import ContinuousFOL.Group1Axioms.DyadicCode.Basic
 
 @[expose] public section

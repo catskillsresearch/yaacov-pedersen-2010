@@ -16,7 +16,7 @@ open Classical
 namespace ContinuousFOL
 
 /-- Continuous first-order `𝓛`-formulae (§5). -/
-inductive Formula (L : Signature) : Type _
+inductive Formula (L : Signature) : Type
   | rel  : (P : L.Rel) → (Fin (L.relArity P) → Term L) → Formula L
   | tsub : Formula L → Formula L → Formula L
   | neg  : Formula L → Formula L

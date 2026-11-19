@@ -6,7 +6,7 @@ Paper pin: §5 Definition 5.2; vision.md page 7–8
 -/
 module
 
-public import Mathlib.Data.Real.Basic
+public import Mathlib.Basic.Real.Basic
 public import Mathlib.Data.Fin.Basic
 
 @[expose] public section
@@ -20,8 +20,8 @@ namespace ContinuousFOL
     Note: `ℛ ≠ ∅` is captured by `Nonempty L.Rel`.
     Moduli `δ : ℝ → ℝ` map `(0, 1]` into `(0, 1]`. -/
 structure Signature where
-  Rel      : Type*
-  Func     : Type*
+  Rel      : Type
+  Func     : Type
   nonempty_rel : Nonempty Rel
   relArity  : Rel → ℕ
   funcArity : Func → ℕ

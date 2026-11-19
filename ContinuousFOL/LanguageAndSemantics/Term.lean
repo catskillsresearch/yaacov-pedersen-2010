@@ -17,7 +17,7 @@ open Classical
 namespace ContinuousFOL
 
 /-- First-order `𝓛`-terms (§5). -/
-inductive Term (L : Signature) : Type _
+inductive Term (L : Signature) : Type
   | var  : Var → Term L
   | func : (f : L.Func) → (Fin (L.funcArity f) → Term L) → Term L
 

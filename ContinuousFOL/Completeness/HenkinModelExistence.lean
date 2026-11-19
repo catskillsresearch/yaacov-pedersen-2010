@@ -9,6 +9,7 @@ module
 public import ContinuousFOL.Completeness.ExistsHenkinExtension
 public import ContinuousFOL.Completeness.TermPreStructureEvalEqSup
 public import ContinuousFOL.Essentials.MaximalConsistent
+public import ContinuousFOL.LanguageAndSemantics.ModelsPre
 public import ContinuousFOL.Group1Axioms.DyadicCode.Zero
 
 @[expose] public section
@@ -42,7 +43,7 @@ theorem henkin_model_existence {L : Signature} {Γ : Set (Formula L)}
         Formula.tsub φ (Formula.dyadic Lc q) ∈ Δ}, 0 ≤ r := by
       rintro _ ⟨q, rfl, _⟩; exact (q.val_mem_Icc).1
     apply le_antisymm
-    · exact le_trans (csInf_le ⟨0, hnonneg⟩ ⟨.zero, rfl, h0⟩) (by simp)
-    · exact le_csInf ⟨0, .zero, rfl, h0⟩ hnonneg
+    · exact le_trans (csInf_le ⟨0, hnonneg⟩ ⟨.zero, DyadicCode.val_zero.symm, h0⟩) (by simp)
+    · exact le_csInf ⟨0, .zero, DyadicCode.val_zero.symm, h0⟩ hnonneg
 
 end ContinuousFOL

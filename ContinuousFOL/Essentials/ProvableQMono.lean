@@ -24,18 +24,21 @@ lemma ProvableQ.mono {L : Signature} {Γ Γ' : Set (Formula L)} (hsub : Γ ⊆ �
   | hyp hmem => exact .hyp (hsub hmem)
   | mp h₁ h₂ ih₁ ih₂ => exact .mp ih₁ ih₂
 
-lemma ProvableQ.compact {L : Signature} {Γ : Set (Formula L)} {φ : Formula L}
-    (h : ProvableQ Γ φ) :
-    ∃ Γ₀ : Finset (Formula L), (↑Γ₀ : Set (Formula L)) ⊆ Γ ∧ ProvableQ (↑Γ₀) φ := by
+lemma ProvableQ.compact {L : Signature} {Γ : Set (Formula L)} :
+    ∀ {φ : Formula L}, ProvableQ Γ φ →
+      ∃ Γ₀ : Finset (Formula L), (↑Γ₀ : Set (Formula L)) ⊆ Γ ∧ ProvableQ (↑Γ₀) φ := by
+  intro φ h
   induction h with
-  | ax hax => exact ⟨∅, Set.empty_subset _, .ax hax⟩
-  | hyp hmem => exact ⟨{φ}, Set.singleton_subset_iff.mpr hmem, .hyp (Finset.mem_singleton_self φ)⟩
+  | ax hax => exact ⟨∅, by simp [Finset.coe_empty], .ax hax⟩
+  | hyp hmem =>
+    refine ⟨{_}, ?_, .hyp (Finset.mem_singleton_self _)⟩
+    simpa [Finset.coe_singleton] using Set.singleton_subset_iff.mpr hmem
   | mp _ _ ih₁ ih₂ =>
     obtain ⟨Γ₁, h₁s, hp₁⟩ := ih₁
     obtain ⟨Γ₂, h₂s, hp₂⟩ := ih₂
     refine ⟨Γ₁ ∪ Γ₂, ?_, .mp (hp₁.mono ?_) (hp₂.mono ?_)⟩
-    · rw [Finset.coe_union]; exact Set.union_subset h₁s h₂s
-    · rw [Finset.coe_union]; exact Set.subset_union_left
-    · rw [Finset.coe_union]; exact Set.subset_union_right
+    · simpa [Finset.coe_union] using Set.union_subset h₁s h₂s
+    · simp [Finset.coe_union]
+    · simp [Finset.coe_union]
 
 end ContinuousFOL

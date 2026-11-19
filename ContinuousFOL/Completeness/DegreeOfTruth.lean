@@ -8,7 +8,9 @@ module
 
 public import ContinuousFOL.LanguageAndSemantics.ModelsPre
 public import ContinuousFOL.LanguageAndSemantics.ContinuousStructure
-public import Mathlib.Data.Set.Lattice
+public import Mathlib.Data.Set.Lattice.Indexed
+public import Mathlib.Data.Set.Lattice.Image
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
 
 @[expose] public section
 

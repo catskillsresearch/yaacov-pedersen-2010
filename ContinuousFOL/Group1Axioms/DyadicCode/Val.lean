@@ -9,6 +9,7 @@ module
 public import ContinuousFOL.Group1Axioms.DyadicCode.Pow2Neg
 public import ContinuousFOL.Group1Axioms.DyadicCode.Zero
 public import ContinuousFOL.Introduction.UnitInterval
+public import Mathlib.Tactic.Linarith
 
 @[expose] public section
 
@@ -31,10 +32,12 @@ def val : DyadicCode → ℝ
 
 lemma val_pow2Neg (n : ℕ) : (pow2Neg n).val = (2 : ℝ) ^ (-(n : ℤ)) := by
   induction n with
-  | zero => simp [pow2Neg, val]
+  | zero => simp [pow2Neg]
   | succ n ih =>
-    simp [pow2Neg, val, ih, zpow_neg, zpow_natCast, pow_succ]
-    ring
+    change (pow2Neg n).val / 2 = (2 : ℝ) ^ (-((n + 1 : ℕ) : ℤ))
+    rw [ih, div_eq_mul_inv, ← zpow_neg_one (2 : ℝ), ← zpow_add₀ (by norm_num : (2 : ℝ) ≠ 0)]
+    congr 1
+    omega
 
 lemma val_mem_Icc (d : DyadicCode) : 0 ≤ d.val ∧ d.val ≤ 1 := by
   induction d with

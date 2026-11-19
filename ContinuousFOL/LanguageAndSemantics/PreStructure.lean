@@ -7,7 +7,7 @@ Paper pin: §5 Definition 5.6 (i)–(ii); vision.md page 8–9
 module
 
 public import ContinuousFOL.LanguageAndSemantics.Signature
-public import Mathlib.Data.Real.Basic
+public import Mathlib.Basic.Real.Basic
 
 @[expose] public section
 
@@ -18,7 +18,7 @@ namespace ContinuousFOL
 
 /-- A continuous `𝓛`-pre-structure (Definition 5.6 (i)–(ii)). -/
 structure PreStructure (L : Signature) where
-  Carrier    : Type*
+  Carrier    : Type
   nonempty   : Nonempty Carrier
   funcInterp : (f : L.Func) → (Fin (L.funcArity f) → Carrier) → Carrier
   relInterp  : (P : L.Rel) → (Fin (L.relArity P) → Carrier) → ℝ

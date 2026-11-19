@@ -34,15 +34,13 @@ theorem approximated_strong_completeness_pre {L : Signature}
         Γ ∪ {Formula.tsub (Formula.dyadic L (.pow2Neg n)) φ} :=
       Set.mem_union_right _ (Set.mem_singleton _)
     have hval := hM _ hmem
-    simp [Formula.eval, hφ0, tsubR.eq_zero_iff, DyadicCode.val_pow2Neg] at hval
-    have hpos : (0 : ℝ) < (2 : ℝ) ^ (-(n : ℤ)) := zpow_pos (by norm_num) _
-    linarith
+    -- `p ∸ φ` evaluates to a positive power of 1/2, contradicting models-to-0.
+    simp [Formula.eval, hφ0, DyadicCode.val_pow2Neg] at hval
   · intro hprov M σ hM
     have hle : ∀ n : ℕ, φ.eval M σ ≤ (2 : ℝ) ^ (-(n : ℤ)) := by
       intro n
       have hv := soundness_pre Γ _ (hprov n) M σ hM
-      simp [Formula.eval, Formula.pow2Neg, tsubR.eq_zero_iff, DyadicCode.val_pow2Neg] at hv
-      exact hv
+      simpa [Formula.eval, Formula.pow2Neg, DyadicCode.val_pow2Neg] using hv
     have hnonneg := (φ.eval_in_Icc M σ).1
     by_contra hne
     have hpos : 0 < φ.eval M σ := lt_of_le_of_ne hnonneg (Ne.symm hne)
@@ -66,15 +64,12 @@ theorem approximated_strong_completeness_metric {LM : MetricSignature}
         Γ ∪ {Formula.tsub (Formula.dyadic LM.toSignature (.pow2Neg n)) φ} :=
       Set.mem_union_right _ (Set.mem_singleton _)
     have hval := hM _ hmem
-    simp [Formula.eval, hφ0, tsubR.eq_zero_iff, DyadicCode.val_pow2Neg] at hval
-    have hpos : (0 : ℝ) < (2 : ℝ) ^ (-(n : ℤ)) := zpow_pos (by norm_num) _
-    linarith
+    simp [Formula.eval, hφ0, DyadicCode.val_pow2Neg] at hval
   · intro hprov M σ hM
     have hle : ∀ n : ℕ, φ.eval M.toPreStructure σ ≤ (2 : ℝ) ^ (-(n : ℤ)) := by
       intro n
       have hv := soundness_metric Γ _ (hprov n) M σ hM
-      simp [Formula.eval, Formula.pow2Neg, tsubR.eq_zero_iff, DyadicCode.val_pow2Neg] at hv
-      exact hv
+      simpa [Formula.eval, Formula.pow2Neg, DyadicCode.val_pow2Neg] using hv
     have hnonneg := (φ.eval_in_Icc M.toPreStructure σ).1
     by_contra hne
     have hpos : 0 < φ.eval M.toPreStructure σ := lt_of_le_of_ne hnonneg (Ne.symm hne)

@@ -15,7 +15,9 @@ public import ContinuousFOL.Essentials.ConsistentAdjoin
 public import ContinuousFOL.Essentials.InconsistentIffProvableOne
 public import ContinuousFOL.Essentials.ProvableQMono
 public import ContinuousFOL.Group1Axioms.DyadicCode.Val
-public import Mathlib.Data.Set.Lattice
+public import Mathlib.Data.Set.Lattice.Indexed
+public import Mathlib.Data.Set.Lattice.Image
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
 public import Mathlib.Order.Basic
 public import Mathlib.Order.Zorn
 
@@ -92,24 +94,26 @@ theorem exists_maximal_consistent {L : Signature} {Γ : Set (Formula L)}
   have hchain : ∀ c ⊆ E, IsChain (· ⊆ ·) c → c.Nonempty →
       ∃ ub ∈ E, ∀ s ∈ c, s ⊆ ub := by
     intro c hcE hch ⟨s₀, hs₀⟩
-    refine ⟨⋃₀ c, ⟨?_, ?_⟩, fun s hs => Set.subset_sUnion_of_mem hs⟩
+    refine ⟨⋃₀ c, ⟨?sub, ?cons⟩, fun s hs => Set.subset_sUnion_of_mem hs⟩
     · exact Set.Subset.trans (hcE hs₀).1 (Set.subset_sUnion_of_mem hs₀)
-    · rw [← not_iff_not, inconsistent_iff_provable_one]
-      intro hprov
-      obtain ⟨Γ₀, hΓ₀sub, hΓ₀prov⟩ := hprov.compact
-      have hmem_s₀ : (s₀ : Set (Formula L)) ∈ c := hs₀
+    · -- Consistency of directed unions of consistent sets (via proof compactness).
+      by_contra hincons
+      rw [inconsistent_iff_provable_one] at hincons
+      obtain ⟨Γ₀, hΓ₀sub, hΓ₀prov⟩ := hincons.compact
       have hdir : DirectedOn (· ⊆ ·) c := hch.directedOn
-      have hex : ∃ t ∈ c, (↑Γ₀ : Set (Formula L)) ⊆ t := by
-        induction Γ₀ using Finset.induction with
-        | empty => exact ⟨s₀, hs₀, Set.empty_subset _⟩
-        | @insert ψ S _ ih =>
-          obtain ⟨t₁, ht₁c, ht₁sub⟩ := ih
-          have hψ : ψ ∈ ⋃₀ c := hΓ₀sub (by simp)
+      have hex : ∃ t ∈ c, (Γ₀ : Set (Formula L)) ⊆ t := by
+        refine Finset.induction_on (motive := fun S =>
+            (S : Set (Formula L)) ⊆ ⋃₀ c → ∃ t ∈ c, (S : Set (Formula L)) ⊆ t) Γ₀ ?empty ?insert hΓ₀sub
+        · intro _
+          exact ⟨s₀, hs₀, by simp [Finset.coe_empty]⟩
+        · intro ψ S _ ih hsub
+          have hψ : ψ ∈ ⋃₀ c := hsub (by simp)
           obtain ⟨t₂, ht₂c, hψt₂⟩ := Set.mem_sUnion.mp hψ
+          obtain ⟨t₁, ht₁c, ht₁sub⟩ := ih (Set.Subset.trans (by simp) hsub)
           obtain ⟨t₃, ht₃c, h₁₃, h₂₃⟩ := hdir t₁ ht₁c t₂ ht₂c
-          refine ⟨t₃, ht₃c, ?_⟩
-          rw [Finset.coe_insert]
-          exact Set.insert_subset (h₂₃ hψt₂) (Set.Subset.trans ht₁sub h₁₃)
+          exact ⟨t₃, ht₃c, by
+            rw [Finset.coe_insert]
+            exact Set.insert_subset (h₂₃ hψt₂) (Set.Subset.trans ht₁sub h₁₃)⟩
       obtain ⟨t, htc, htsub⟩ := hex
       have ht_incons : ¬ ConsistentQ t := by
         rw [inconsistent_iff_provable_one]

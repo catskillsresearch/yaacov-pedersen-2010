@@ -18,14 +18,14 @@ namespace ContinuousFOL
 
 namespace CLPropForm
 
-def Models {I : Type*} (v₀ : I → ℝ) (Σ_set : Set (CLPropForm I)) : Prop :=
-  (∀ i, 0 ≤ v₀ i ∧ v₀ i ≤ 1) ∧ ∀ φ ∈ Σ_set, eval v₀ φ = 0
+def Models {I : Type*} (v₀ : I → ℝ) (hypSet : Set (CLPropForm I)) : Prop :=
+  (∀ i, 0 ≤ v₀ i ∧ v₀ i ≤ 1) ∧ ∀ φ ∈ hypSet, eval v₀ φ = 0
 
-def Satisfiable {I : Type*} (Σ_set : Set (CLPropForm I)) : Prop :=
-  ∃ v₀, Models v₀ Σ_set
+def Satisfiable {I : Type*} (hypSet : Set (CLPropForm I)) : Prop :=
+  ∃ v₀, Models v₀ hypSet
 
-def Entails {I : Type*} (Σ_set : Set (CLPropForm I)) (φ : CLPropForm I) : Prop :=
-  ∀ v₀, Models v₀ Σ_set → eval v₀ φ = 0
+def Entails {I : Type*} (hypSet : Set (CLPropForm I)) (φ : CLPropForm I) : Prop :=
+  ∀ v₀, Models v₀ hypSet → eval v₀ φ = 0
 
 end CLPropForm
 

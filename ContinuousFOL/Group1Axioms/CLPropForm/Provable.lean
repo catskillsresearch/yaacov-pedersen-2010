@@ -19,13 +19,13 @@ namespace ContinuousFOL
 namespace CLPropForm
 
 /-- Formal provability `Σ ⊢^{CL} φ` (§3). -/
-inductive Provable {I : Type*} (Σ_set : Set (CLPropForm I)) : CLPropForm I → Prop
-  | ax  {φ}   : IsAxiom φ → Provable Σ_set φ
-  | hyp {φ}   : φ ∈ Σ_set → Provable Σ_set φ
-  | mp  {φ ψ} : Provable Σ_set φ → Provable Σ_set (.tsub ψ φ) → Provable Σ_set ψ
+inductive Provable {I : Type*} (hypSet : Set (CLPropForm I)) : CLPropForm I → Prop
+  | ax  {φ}   : IsAxiom φ → Provable hypSet φ
+  | hyp {φ}   : φ ∈ hypSet → Provable hypSet φ
+  | mp  {φ ψ} : Provable hypSet φ → Provable hypSet (.tsub ψ φ) → Provable hypSet ψ
 
-def Consistent {I : Type*} (Σ_set : Set (CLPropForm I)) : Prop :=
-  ∃ φ, ¬ Provable Σ_set φ
+def Consistent {I : Type*} (hypSet : Set (CLPropForm I)) : Prop :=
+  ∃ φ, ¬ Provable hypSet φ
 
 end CLPropForm
 

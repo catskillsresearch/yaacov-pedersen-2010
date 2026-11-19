@@ -56,7 +56,7 @@ def reductPre {L₁ L₂ : Signature} (e : SignatureExtension L₁ L₂) (M : Pr
     M.funcInterp (e.funcMap f) (fun i => args (Fin.cast (e.funcArity_eq f) i))
   relInterp  := fun P args =>
     M.relInterp (e.relEquiv P) (fun i => args (Fin.cast (e.relArity_eq P) i))
-  rel_in_Icc := fun P args => M.rel_in_Icc (e.relEquiv P) _
+  rel_in_Icc := fun P _args => M.rel_in_Icc (e.relEquiv P) _
 
 lemma eval_reduct {L₁ L₂ : Signature} (e : SignatureExtension L₁ L₂) (M : PreStructure L₂)
     (σ : Var → M.Carrier) (φ : Formula L₁) :

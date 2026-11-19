@@ -12,8 +12,9 @@ public import ContinuousFOL.LanguageAndSemantics.FormulaOne
 public import ContinuousFOL.LanguageAndSemantics.FormulaDyadic
 public import ContinuousFOL.Introduction.UnitInterval
 public import ContinuousFOL.Group1Axioms.DyadicCode.Val
-public import Mathlib.Data.Set.Lattice
-public import Mathlib.Order.ConditionallyCompleteLattice.Basic
+public import Mathlib.Data.Set.Lattice.Indexed
+public import Mathlib.Data.Set.Lattice.Image
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
 
 @[expose] public section
 

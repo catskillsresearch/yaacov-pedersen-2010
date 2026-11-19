@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-19T18:01:01Z",
-  "sorryCount": 25,
+  "updated": "2026-11-19T18:03:24Z",
+  "sorryCount": 23,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
     "blocked": "Waiting on incomplete required proof-deps",
@@ -13,7 +13,7 @@
     "\u00a74 axioms are intentional black boxes and stay open until discharged.",
     "Blue = done. Green = open. Grey = blocked.",
     "Regenerate with: python3 scripts/build_holes.py",
-    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, exists_metric_completion, eval_uniformly_continuous, soundness_metric, exists_henkin_extension, exists_henkin_extension_metric, termPreStructure_eval_eq_sup."
+    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, exists_metric_completion, eval_uniformly_continuous, exists_henkin_extension, exists_henkin_extension_metric, termPreStructure_eval_eq_sup."
   ],
   "nodes": [
     {
@@ -191,8 +191,8 @@
       "id": "soundness_metric",
       "label": "Thm 7.2 metric",
       "section": 7,
-      "file": "ContinuousFOL/Group2Axioms/SoundnessMetric.lean:21",
-      "status": "open",
+      "file": "ContinuousFOL/Group2Axioms/SoundnessMetric.lean:112",
+      "status": "done",
       "blocker": null,
       "detail": "ProvableMetricQ \u21d2 EntailsComplete."
     },
@@ -200,9 +200,9 @@
       "id": "satisfiable_consistent_metric",
       "label": "Sat \u21d2 Cons (met)",
       "section": 7,
-      "file": "ContinuousFOL/Group2Axioms/SoundnessMetric.lean:26",
-      "status": "blocked",
-      "blocker": "needs soundness_metric",
+      "file": "ContinuousFOL/Group2Axioms/SoundnessMetric.lean:135",
+      "status": "done",
+      "blocker": null,
       "detail": "CompletelySatisfiable \u21d2 ConsistentMetricQ."
     },
     {
@@ -409,7 +409,7 @@
       "section": 9,
       "file": "ContinuousFOL/Completeness/CompletenessMetric.lean:21",
       "status": "blocked",
-      "blocker": "needs henkin_model_existence_metric, satisfiable_consistent_metric",
+      "blocker": "needs henkin_model_existence_metric",
       "detail": "ConsistentMetricQ \u2194 CompletelySatisfiable."
     },
     {
@@ -445,7 +445,7 @@
       "section": 9,
       "file": "ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean:52",
       "status": "blocked",
-      "blocker": "needs completeness_metric, soundness_metric",
+      "blocker": "needs completeness_metric",
       "detail": "EntailsComplete \u2194 \u2200n ProvableMetricQ (\u03c6\u22382\u207b\u207f)."
     },
     {

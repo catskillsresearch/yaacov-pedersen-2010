@@ -66,35 +66,84 @@ NODES: dict[str, dict] = {
         "detail": "Image of DyadicCode.val equals the dyadic numbers in [0,1].",
     },
     # §4 black boxes (axioms / approx completeness)
-    "cl_consistent_iff_satisfiable": {
-        "label": "Fact 4.1 CL",
-        "section": 4,
-        "file": "ContinuousFOL/BlackBox/CLConsistentIffSatisfiable.lean",
-        "detail": "CL: consistent ↔ satisfiable (black-box axiom).",
-    },
-    "cl_finite_strong_completeness": {
-        "label": "Fact 4.2 finite",
-        "section": 4,
-        "file": "ContinuousFOL/BlackBox/CLFiniteStrongCompleteness.lean",
-        "detail": "CL finite strong completeness (black-box axiom).",
-    },
-    "cl_approx_strong_completeness": {
-        "label": "Fact 4.3 approx",
-        "section": 4,
-        "file": "ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean",
-        "detail": "CL approximated strong completeness.",
-    },
-    "luk_consistent_iff_satisfiable": {
-        "label": "Fact 4.4 Łuk",
-        "section": 4,
-        "file": "ContinuousFOL/BlackBox/LukConsistentIffSatisfiable.lean",
-        "detail": "Łukasiewicz: consistent ↔ satisfiable (black-box axiom).",
-    },
     "luk_weak_completeness": {
-        "label": "Fact 4.5 weak",
+        "label": "Fact 4.1 Łuk weak",
         "section": 4,
         "file": "ContinuousFOL/BlackBox/LukWeakCompleteness.lean",
-        "detail": "Łukasiewicz weak completeness (black-box axiom).",
+        "detail": "Fact 4.1: ⊨ φ iff ⊢ φ, for Łukasiewicz propositional logic.",
+    },
+    "luk_consistent_iff_satisfiable": {
+        "label": "Fact 4.2 Łuk cons",
+        "section": 4,
+        "file": "ContinuousFOL/BlackBox/LukConsistentIffSatisfiable.lean",
+        "detail": "Fact 4.2: a Łukasiewicz set is consistent iff it is satisfiable. No Lean user on the completeness path.",
+    },
+    "cl_consistent_iff_satisfiable": {
+        "label": "Fact 4.3 CL cons",
+        "section": 4,
+        "file": "ContinuousFOL/BlackBox/CLConsistentIffSatisfiable.lean",
+        "detail": "Fact 4.3: a continuous-propositional set is consistent iff it is satisfiable. No Lean user on the completeness path.",
+    },
+    "cl_approx_strong_completeness": {
+        "label": "Fact 4.4 CL approx",
+        "section": 4,
+        "file": "ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean",
+        "detail": "Fact 4.4: Σ ⊨ φ iff Σ ⊢ φ ∸ 2⁻ⁿ for all n. No Lean user on the completeness path (FOL 9.6 is proved from Henkin, not from this Fact).",
+    },
+    "cl_finite_strong_completeness": {
+        "label": "Fact 4.5 CL finite",
+        "section": 4,
+        "file": "ContinuousFOL/BlackBox/CLFiniteStrongCompleteness.lean",
+        "detail": "Fact 4.5: for finite Σ, Σ ⊨ φ iff Σ ⊢ φ, in continuous propositional logic.",
+    },
+    # §4 infrastructure for the two Facts that feed the main theorems
+    "entails_empty_iff_evalMV": {
+        "label": "MV eval on [0,1]",
+        "section": 4,
+        "file": "ContinuousFOL/LukasiewiczAndContinuous/StandardMVAlgebra.lean",
+        "detail": "⊨ φ iff φ evaluates to 0 in the standard MV-algebra on [0,1].",
+    },
+    "LukLind.mk_eq_zero_iff": {
+        "label": "Lindenbaum [[φ]]=0",
+        "section": 4,
+        "file": "ContinuousFOL/LukasiewiczAndContinuous/LukLindenbaum.lean",
+        "detail": "In the Lindenbaum quotient, mk φ = 0 iff ⊢ φ.",
+    },
+    "LukPropForm.deduction_theorem": {
+        "label": "WDT Łuk",
+        "section": 4,
+        "file": "ContinuousFOL/LukasiewiczAndContinuous/LukPropFormDeduction.lean",
+        "detail": "Weak deduction theorem for Łukasiewicz propositional logic.",
+    },
+    "CLPropForm.deduction_theorem": {
+        "label": "WDT CL",
+        "section": 4,
+        "file": "ContinuousFOL/LukasiewiczAndContinuous/CLPropFormDeduction.lean",
+        "detail": "Weak deduction theorem for continuous propositional logic.",
+    },
+    "LukPropForm.semantic_iteration": {
+        "label": "Sem. iter. Łuk",
+        "section": 4,
+        "file": "ContinuousFOL/LukasiewiczAndContinuous/LukPropFormSemanticIteration.lean",
+        "detail": "Semantic iteration for finite Łukasiewicz premise sets.",
+    },
+    "CLPropForm.semantic_iteration": {
+        "label": "Sem. iter. CL",
+        "section": 4,
+        "file": "ContinuousFOL/LukasiewiczAndContinuous/CLPropFormSemanticIteration.lean",
+        "detail": "Semantic iteration for finite continuous-propositional premise sets.",
+    },
+    "LukPropForm.soundness": {
+        "label": "Łuk soundness",
+        "section": 4,
+        "file": "ContinuousFOL/LukasiewiczAndContinuous/LukPropFormSoundness.lean",
+        "detail": "Łukasiewicz propositional soundness: ⊢ implies ⊨.",
+    },
+    "CLPropForm.soundness": {
+        "label": "CL soundness",
+        "section": 4,
+        "file": "ContinuousFOL/LukasiewiczAndContinuous/CLPropFormSoundness.lean",
+        "detail": "Continuous propositional soundness: ⊢ implies ⊨.",
     },
     # §5
     "Formula.eval_in_Icc": {
@@ -447,6 +496,40 @@ NODES: dict[str, dict] = {
 
 # Hard edges: from → to means the current Lean proof of `to` still needs `from`.
 HARD_EDGES: list[tuple[str, str]] = [
+    # Fact 4.1 is used to prove the FOL deduction theorem, the 8.5-style
+    # "inconsistent adjoin" cut, and the consistent-adjoin lemmas.
+    ("luk_weak_completeness", "deduction_theorem"),
+    ("luk_weak_completeness", "deduction_theorem_metric"),
+    ("luk_weak_completeness", "provable_tsub_of_inconsistent_adjoin"),
+    ("luk_weak_completeness", "provable_tsub_of_inconsistent_adjoin_metric"),
+    ("luk_weak_completeness", "consistent_adjoin_approx"),
+    ("luk_weak_completeness", "consistent_adjoin_approx_metric"),
+    ("luk_weak_completeness", "consistent_adjoin_comparable"),
+    ("luk_weak_completeness", "consistent_adjoin_comparable_metric"),
+    # Fact 4.5 is used to transfer valid continuous-propositional schemata
+    # into ⊢_Q, which is how bound substitution is proved.
+    ("cl_finite_strong_completeness", "provable_bound_subst"),
+    ("cl_finite_strong_completeness", "provable_bound_subst_metric"),
+    # Those lemmas feed the Henkin / 9.4 / 9.6 / 9.8 chain.
+    ("deduction_theorem", "provable_tsub_of_inconsistent_adjoin"),
+    ("deduction_theorem", "consistent_adjoin_approx"),
+    ("deduction_theorem", "consistent_adjoin_comparable"),
+    ("deduction_theorem_metric", "provable_tsub_of_inconsistent_adjoin_metric"),
+    ("deduction_theorem_metric", "consistent_adjoin_approx_metric"),
+    ("deduction_theorem_metric", "consistent_adjoin_comparable_metric"),
+    ("consistent_adjoin_approx", "exists_maximal_consistent"),
+    ("consistent_adjoin_comparable", "exists_maximal_consistent"),
+    ("consistent_adjoin_approx_metric", "exists_maximal_consistent_metric"),
+    ("consistent_adjoin_comparable_metric", "exists_maximal_consistent_metric"),
+    ("provable_tsub_of_inconsistent_adjoin", "exists_henkin_extension"),
+    ("provable_tsub_of_inconsistent_adjoin", "exists_henkin_extension_metric"),
+    ("provable_tsub_of_inconsistent_adjoin", "pavelka_completeness_pre"),
+    ("provable_tsub_of_inconsistent_adjoin_metric", "pavelka_completeness_metric"),
+    ("provable_bound_subst", "generalize_fresh_const"),
+    ("provable_bound_subst", "maximal_consistent_sup_instantiate_aux"),
+    ("provable_bound_subst_metric", "generalize_fresh_const_metric"),
+    ("generalize_fresh_const", "exists_henkin_extension"),
+    ("generalize_fresh_const", "exists_henkin_extension_metric"),
     # §1 → §3
     ("unit_closed_neg", "DyadicCode.val_mem_Icc"),
     ("unit_closed_half", "DyadicCode.val_mem_Icc"),
@@ -501,10 +584,16 @@ HARD_EDGES: list[tuple[str, str]] = [
 
 # Soft edges: paper/logical order only. Drawn dashed; do NOT force status.
 SOFT_EDGES: list[tuple[str, str]] = [
-    ("cl_consistent_iff_satisfiable", "cl_finite_strong_completeness"),
-    ("cl_finite_strong_completeness", "cl_approx_strong_completeness"),
-    ("luk_consistent_iff_satisfiable", "luk_weak_completeness"),
-    ("cl_approx_strong_completeness", "approximated_strong_completeness_pre"),
+    # Planned algebraic/deductive infrastructure for Facts 4.1 and 4.5
+    # (not yet imported into the official still-sorry statements).
+    ("LukPropForm.soundness", "luk_weak_completeness"),
+    ("entails_empty_iff_evalMV", "luk_weak_completeness"),
+    ("LukLind.mk_eq_zero_iff", "luk_weak_completeness"),
+    ("LukPropForm.deduction_theorem", "luk_weak_completeness"),
+    ("LukPropForm.semantic_iteration", "luk_weak_completeness"),
+    ("CLPropForm.soundness", "cl_finite_strong_completeness"),
+    ("CLPropForm.deduction_theorem", "cl_finite_strong_completeness"),
+    ("CLPropForm.semantic_iteration", "cl_finite_strong_completeness"),
     ("substitution_lemma", "bound_substitution_lemma"),
     ("bound_substitution_lemma", "bound_substitution_lemma_metric"),
     ("bound_substitution_lemma", "provable_bound_subst"),

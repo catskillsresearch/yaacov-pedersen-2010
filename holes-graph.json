@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-19T23:33:25Z",
-  "sorryCount": 5,
+  "updated": "2026-11-19T23:37:13Z",
+  "sorryCount": 37,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
     "blocked": "Waiting on incomplete required proof-deps",
@@ -13,7 +13,7 @@
     "\u00a74 axioms are intentional black boxes and stay open until discharged.",
     "Blue = done. Green = open. Grey = blocked.",
     "Regenerate with: python3 scripts/build_holes.py",
-    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness."
+    "Open tips: luk_weak_completeness, luk_consistent_iff_satisfiable, cl_consistent_iff_satisfiable, cl_approx_strong_completeness, cl_finite_strong_completeness."
   ],
   "nodes": [
     {
@@ -62,49 +62,121 @@
       "detail": "Image of DyadicCode.val equals the dyadic numbers in [0,1]."
     },
     {
-      "id": "cl_consistent_iff_satisfiable",
-      "label": "Fact 4.1 CL",
-      "section": 4,
-      "file": "ContinuousFOL/BlackBox/CLConsistentIffSatisfiable.lean:20",
-      "status": "open",
-      "blocker": null,
-      "detail": "CL: consistent \u2194 satisfiable (black-box axiom)."
-    },
-    {
-      "id": "cl_finite_strong_completeness",
-      "label": "Fact 4.2 finite",
-      "section": 4,
-      "file": "ContinuousFOL/BlackBox/CLFiniteStrongCompleteness.lean:21",
-      "status": "open",
-      "blocker": null,
-      "detail": "CL finite strong completeness (black-box axiom)."
-    },
-    {
-      "id": "cl_approx_strong_completeness",
-      "label": "Fact 4.3 approx",
-      "section": 4,
-      "file": "ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:27",
-      "status": "open",
-      "blocker": null,
-      "detail": "CL approximated strong completeness."
-    },
-    {
-      "id": "luk_consistent_iff_satisfiable",
-      "label": "Fact 4.4 \u0141uk",
-      "section": 4,
-      "file": "ContinuousFOL/BlackBox/LukConsistentIffSatisfiable.lean:20",
-      "status": "open",
-      "blocker": null,
-      "detail": "\u0141ukasiewicz: consistent \u2194 satisfiable (black-box axiom)."
-    },
-    {
       "id": "luk_weak_completeness",
-      "label": "Fact 4.5 weak",
+      "label": "Fact 4.1 \u0141uk weak",
       "section": 4,
       "file": "ContinuousFOL/BlackBox/LukWeakCompleteness.lean:20",
       "status": "open",
       "blocker": null,
-      "detail": "\u0141ukasiewicz weak completeness (black-box axiom)."
+      "detail": "Fact 4.1: \u22a8 \u03c6 iff \u22a2 \u03c6, for \u0141ukasiewicz propositional logic."
+    },
+    {
+      "id": "luk_consistent_iff_satisfiable",
+      "label": "Fact 4.2 \u0141uk cons",
+      "section": 4,
+      "file": "ContinuousFOL/BlackBox/LukConsistentIffSatisfiable.lean:20",
+      "status": "open",
+      "blocker": null,
+      "detail": "Fact 4.2: a \u0141ukasiewicz set is consistent iff it is satisfiable. No Lean user on the completeness path."
+    },
+    {
+      "id": "cl_consistent_iff_satisfiable",
+      "label": "Fact 4.3 CL cons",
+      "section": 4,
+      "file": "ContinuousFOL/BlackBox/CLConsistentIffSatisfiable.lean:20",
+      "status": "open",
+      "blocker": null,
+      "detail": "Fact 4.3: a continuous-propositional set is consistent iff it is satisfiable. No Lean user on the completeness path."
+    },
+    {
+      "id": "cl_approx_strong_completeness",
+      "label": "Fact 4.4 CL approx",
+      "section": 4,
+      "file": "ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:27",
+      "status": "open",
+      "blocker": null,
+      "detail": "Fact 4.4: \u03a3 \u22a8 \u03c6 iff \u03a3 \u22a2 \u03c6 \u2238 2\u207b\u207f for all n. No Lean user on the completeness path (FOL 9.6 is proved from Henkin, not from this Fact)."
+    },
+    {
+      "id": "cl_finite_strong_completeness",
+      "label": "Fact 4.5 CL finite",
+      "section": 4,
+      "file": "ContinuousFOL/BlackBox/CLFiniteStrongCompleteness.lean:21",
+      "status": "open",
+      "blocker": null,
+      "detail": "Fact 4.5: for finite \u03a3, \u03a3 \u22a8 \u03c6 iff \u03a3 \u22a2 \u03c6, in continuous propositional logic."
+    },
+    {
+      "id": "entails_empty_iff_evalMV",
+      "label": "MV eval on [0,1]",
+      "section": 4,
+      "file": "ContinuousFOL/LukasiewiczAndContinuous/StandardMVAlgebra.lean:183",
+      "status": "done",
+      "blocker": null,
+      "detail": "\u22a8 \u03c6 iff \u03c6 evaluates to 0 in the standard MV-algebra on [0,1]."
+    },
+    {
+      "id": "LukLind.mk_eq_zero_iff",
+      "label": "Lindenbaum [[\u03c6]]=0",
+      "section": 4,
+      "file": "ContinuousFOL/LukasiewiczAndContinuous/LukLindenbaum.lean:147",
+      "status": "done",
+      "blocker": null,
+      "detail": "In the Lindenbaum quotient, mk \u03c6 = 0 iff \u22a2 \u03c6."
+    },
+    {
+      "id": "LukPropForm.deduction_theorem",
+      "label": "WDT \u0141uk",
+      "section": 4,
+      "file": "ContinuousFOL/LukasiewiczAndContinuous/LukPropFormDeduction.lean:212",
+      "status": "done",
+      "blocker": null,
+      "detail": "Weak deduction theorem for \u0141ukasiewicz propositional logic."
+    },
+    {
+      "id": "CLPropForm.deduction_theorem",
+      "label": "WDT CL",
+      "section": 4,
+      "file": "ContinuousFOL/LukasiewiczAndContinuous/CLPropFormDeduction.lean:212",
+      "status": "done",
+      "blocker": null,
+      "detail": "Weak deduction theorem for continuous propositional logic."
+    },
+    {
+      "id": "LukPropForm.semantic_iteration",
+      "label": "Sem. iter. \u0141uk",
+      "section": 4,
+      "file": "ContinuousFOL/LukasiewiczAndContinuous/LukPropFormSemanticIteration.lean:101",
+      "status": "done",
+      "blocker": null,
+      "detail": "Semantic iteration for finite \u0141ukasiewicz premise sets."
+    },
+    {
+      "id": "CLPropForm.semantic_iteration",
+      "label": "Sem. iter. CL",
+      "section": 4,
+      "file": "ContinuousFOL/LukasiewiczAndContinuous/CLPropFormSemanticIteration.lean:111",
+      "status": "done",
+      "blocker": null,
+      "detail": "Semantic iteration for finite continuous-propositional premise sets."
+    },
+    {
+      "id": "LukPropForm.soundness",
+      "label": "\u0141uk soundness",
+      "section": 4,
+      "file": "ContinuousFOL/LukasiewiczAndContinuous/LukPropFormSoundness.lean:50",
+      "status": "done",
+      "blocker": null,
+      "detail": "\u0141ukasiewicz propositional soundness: \u22a2 implies \u22a8."
+    },
+    {
+      "id": "CLPropForm.soundness",
+      "label": "CL soundness",
+      "section": 4,
+      "file": "ContinuousFOL/LukasiewiczAndContinuous/CLPropFormSoundness.lean:60",
+      "status": "done",
+      "blocker": null,
+      "detail": "Continuous propositional soundness: \u22a2 implies \u22a8."
     },
     {
       "id": "Formula.eval_in_Icc",
@@ -228,8 +300,8 @@
       "label": "Deduction",
       "section": 8,
       "file": "ContinuousFOL/Essentials/DeductionTheorem.lean:167",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs luk_weak_completeness",
       "detail": "Deduction theorem (pre)."
     },
     {
@@ -237,8 +309,8 @@
       "label": "Deduction met",
       "section": 8,
       "file": "ContinuousFOL/Essentials/DeductionTheorem.lean:235",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs luk_weak_completeness",
       "detail": "Deduction theorem (metric)."
     },
     {
@@ -264,8 +336,8 @@
       "label": "Fresh const gen",
       "section": 8,
       "file": "ContinuousFOL/Essentials/GeneralizeFreshConst.lean:310",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs provable_bound_subst",
       "detail": "Generalize over a fresh constant."
     },
     {
@@ -273,8 +345,8 @@
       "label": "Fresh const gen met",
       "section": 8,
       "file": "ContinuousFOL/Essentials/GeneralizeFreshConst.lean:437",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs provable_bound_subst_metric",
       "detail": "Lemma 8.4 for a signature with a metric."
     },
     {
@@ -309,8 +381,8 @@
       "label": "\u22a2 bound subst",
       "section": 8,
       "file": "ContinuousFOL/Essentials/ProvableBoundSubst.lean:439",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs cl_finite_strong_completeness",
       "detail": "Bound substitution is provable."
     },
     {
@@ -318,8 +390,8 @@
       "label": "\u22a2 bound subst met",
       "section": 8,
       "file": "ContinuousFOL/Essentials/ProvableBoundSubst.lean:498",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs cl_finite_strong_completeness",
       "detail": "Lemma 8.3 for a signature with a metric."
     },
     {
@@ -327,8 +399,8 @@
       "label": "Adjoin approx",
       "section": 8,
       "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:131",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs luk_weak_completeness, deduction_theorem",
       "detail": "Consistent adjunction of approximate inequalities."
     },
     {
@@ -336,8 +408,8 @@
       "label": "Adjoin approx met",
       "section": 8,
       "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:183",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs luk_weak_completeness, deduction_theorem_metric",
       "detail": "Lemma 8.5(i) for a signature with a metric."
     },
     {
@@ -345,8 +417,8 @@
       "label": "Adjoin comparable",
       "section": 8,
       "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:153",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs luk_weak_completeness, deduction_theorem",
       "detail": "Consistent adjunction of comparability."
     },
     {
@@ -354,8 +426,8 @@
       "label": "Adjoin comparable met",
       "section": 8,
       "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:204",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs luk_weak_completeness, deduction_theorem_metric",
       "detail": "Lemma 8.5(ii) for a signature with a metric."
     },
     {
@@ -381,8 +453,8 @@
       "label": "sup instantiate",
       "section": 8,
       "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:199",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs maximal_consistent_sup_instantiate_aux",
       "detail": "Lemma 8.11: sup_x \u03c6 \u2238 p \u2208 \u0394 \u21d2 \u2203 \u03c6' \u2261 \u03c6, \u03c6'[t/x] \u2238 p \u2208 \u0394."
     },
     {
@@ -390,8 +462,8 @@
       "label": "sup instantiate met",
       "section": 8,
       "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:197",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs maximal_consistent_sup_instantiate",
       "detail": "Lemma 8.11 for a signature with a metric."
     },
     {
@@ -399,8 +471,8 @@
       "label": "8.11 helper",
       "section": 8,
       "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:173",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs provable_bound_subst",
       "detail": "Helper: Lemma 8.11 plus rank and substitution correctness of \u03c6'."
     },
     {
@@ -444,8 +516,8 @@
       "label": "Thm 8.10 Lindenbaum",
       "section": 8,
       "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:334",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs consistent_adjoin_approx, consistent_adjoin_comparable",
       "detail": "Lindenbaum: every consistent set has a maximal extension."
     },
     {
@@ -453,8 +525,8 @@
       "label": "Thm 8.10 metric",
       "section": 8,
       "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:55",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs consistent_adjoin_approx_metric, consistent_adjoin_comparable_metric, exists_maximal_consistent",
       "detail": "Metric Lindenbaum lemma."
     },
     {
@@ -471,8 +543,8 @@
       "label": "Henkin extension",
       "section": 9,
       "file": "ContinuousFOL/Completeness/ExistsHenkinExtension.lean:807",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs provable_tsub_of_inconsistent_adjoin, generalize_fresh_const",
       "detail": "Consistent theories admit Henkin extensions."
     },
     {
@@ -480,8 +552,8 @@
       "label": "Henkin ext met",
       "section": 9,
       "file": "ContinuousFOL/Completeness/ExistsHenkinExtension.lean:932",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs provable_tsub_of_inconsistent_adjoin, generalize_fresh_const",
       "detail": "Metric Henkin extension."
     },
     {
@@ -489,8 +561,8 @@
       "label": "term eval = Inf",
       "section": 9,
       "file": "ContinuousFOL/Completeness/TermPreStructureEvalEqSup.lean:316",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs maximal_consistent_sup_instantiate_aux",
       "detail": "Term model evaluation matches Inf of dyadics in \u0394."
     },
     {
@@ -498,8 +570,8 @@
       "label": "Thm 9.4 Henkin",
       "section": 9,
       "file": "ContinuousFOL/Completeness/HenkinModelExistence.lean:24",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs exists_henkin_extension, exists_maximal_consistent, termPreStructure_eval_eq_sup",
       "detail": "Consistent \u21d2 term-model of a maximal Henkin extension."
     },
     {
@@ -507,8 +579,8 @@
       "label": "Thm 9.4 metric",
       "section": 9,
       "file": "ContinuousFOL/Completeness/HenkinModelExistenceMetric.lean:177",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs exists_henkin_extension_metric, exists_maximal_consistent, termPreStructure_eval_eq_sup",
       "detail": "Consistent \u21d2 metric term-model of a maximal consistent Henkin complete \u0394 \u2287 \u0393."
     },
     {
@@ -516,8 +588,8 @@
       "label": "9.5 met helper",
       "section": 9,
       "file": "ContinuousFOL/Completeness/HenkinModelExistenceMetric.lean:157",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs henkin_model_existence",
       "detail": "Helper: metric-consistent \u0393 has a metric pre-structure model."
     },
     {
@@ -525,8 +597,8 @@
       "label": "Thm 9.5 complete",
       "section": 9,
       "file": "ContinuousFOL/Completeness/CompletenessPre.lean:21",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs henkin_model_existence",
       "detail": "ConsistentQ \u2192 SatisfiablePre (iff helper: completeness_pre_iff)."
     },
     {
@@ -534,8 +606,8 @@
       "label": "Thm 9.5 metric",
       "section": 9,
       "file": "ContinuousFOL/Completeness/CompletenessMetric.lean:22",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs metric_prestructure_model_of_consistent",
       "detail": "ConsistentMetricQ \u2192 CompletelySatisfiable (iff helper: completeness_metric_iff)."
     },
     {
@@ -543,8 +615,8 @@
       "label": "\u22a2 \u03c6\u2238p from \u22a5",
       "section": 9,
       "file": "ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean:81",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs luk_weak_completeness, deduction_theorem",
       "detail": "Inconsistent adjunction of p\u2238\u03c6 yields ProvableQ \u0393 (\u03c6\u2238p)."
     },
     {
@@ -552,8 +624,8 @@
       "label": "\u22a2 \u03c6\u2238p met",
       "section": 9,
       "file": "ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean:92",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs luk_weak_completeness, deduction_theorem_metric",
       "detail": "Metric variant of inconsistent-adjunction rule."
     },
     {
@@ -561,8 +633,8 @@
       "label": "Cor 9.6 approx",
       "section": 9,
       "file": "ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean:24",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs completeness_pre, provable_tsub_of_inconsistent_adjoin",
       "detail": "EntailsPre \u2194 \u2200n ProvableQ (\u03c6\u22382\u207b\u207f)."
     },
     {
@@ -570,8 +642,8 @@
       "label": "Cor 9.6 metric",
       "section": 9,
       "file": "ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean:118",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs completeness_metric, provable_tsub_of_inconsistent_adjoin_metric",
       "detail": "Corollary 9.6 metric: EntailsMetricPre and EntailsComplete iff \u22a2 \u03c6 \u2238 2^{-n} for all n."
     },
     {
@@ -579,8 +651,8 @@
       "label": "Cor 9.8 Pavelka",
       "section": 9,
       "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:200",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs provable_tsub_of_inconsistent_adjoin, completeness_pre",
       "detail": "degreeOfTruthPre = degreeOfProvabilityPre."
     },
     {
@@ -588,8 +660,8 @@
       "label": "Cor 9.8 metric",
       "section": 9,
       "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:207",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs provable_tsub_of_inconsistent_adjoin_metric, metric_prestructure_model_of_consistent",
       "detail": "degreeOfTruthMetric = degreeOfProvabilityMetric (sup over metric pre-structures)."
     },
     {
@@ -597,8 +669,8 @@
       "label": "Cor 9.12 compact",
       "section": 9,
       "file": "ContinuousFOL/Completeness/CompactnessPre.lean:21",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs completeness_pre",
       "detail": "Finite satisfiability \u21d2 SatisfiablePre."
     },
     {
@@ -606,8 +678,8 @@
       "label": "Cor 9.12 metric",
       "section": 9,
       "file": "ContinuousFOL/Completeness/CompactnessMetric.lean:59",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs completeness_metric",
       "detail": "Corollary 9.12 metric: finite (complete) satisfiability \u21d2 (complete) satisfiability."
     },
     {
@@ -615,12 +687,157 @@
       "label": "Cor 9.11 RE \u21d2 dec.",
       "section": 9,
       "file": "ContinuousFOL/Completeness/UniformlyComputableDegree.lean:1311",
-      "status": "done",
-      "blocker": null,
+      "status": "blocked",
+      "blocker": "needs pavelka_completeness_metric",
       "detail": "Complete theory with recursive or r.e. axiomatization is decidable (Mathlib computability)."
     }
   ],
   "edges": [
+    {
+      "from": "luk_weak_completeness",
+      "to": "deduction_theorem",
+      "kind": "hard"
+    },
+    {
+      "from": "luk_weak_completeness",
+      "to": "deduction_theorem_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "luk_weak_completeness",
+      "to": "provable_tsub_of_inconsistent_adjoin",
+      "kind": "hard"
+    },
+    {
+      "from": "luk_weak_completeness",
+      "to": "provable_tsub_of_inconsistent_adjoin_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "luk_weak_completeness",
+      "to": "consistent_adjoin_approx",
+      "kind": "hard"
+    },
+    {
+      "from": "luk_weak_completeness",
+      "to": "consistent_adjoin_approx_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "luk_weak_completeness",
+      "to": "consistent_adjoin_comparable",
+      "kind": "hard"
+    },
+    {
+      "from": "luk_weak_completeness",
+      "to": "consistent_adjoin_comparable_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "cl_finite_strong_completeness",
+      "to": "provable_bound_subst",
+      "kind": "hard"
+    },
+    {
+      "from": "cl_finite_strong_completeness",
+      "to": "provable_bound_subst_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "deduction_theorem",
+      "to": "provable_tsub_of_inconsistent_adjoin",
+      "kind": "hard"
+    },
+    {
+      "from": "deduction_theorem",
+      "to": "consistent_adjoin_approx",
+      "kind": "hard"
+    },
+    {
+      "from": "deduction_theorem",
+      "to": "consistent_adjoin_comparable",
+      "kind": "hard"
+    },
+    {
+      "from": "deduction_theorem_metric",
+      "to": "provable_tsub_of_inconsistent_adjoin_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "deduction_theorem_metric",
+      "to": "consistent_adjoin_approx_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "deduction_theorem_metric",
+      "to": "consistent_adjoin_comparable_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "consistent_adjoin_approx",
+      "to": "exists_maximal_consistent",
+      "kind": "hard"
+    },
+    {
+      "from": "consistent_adjoin_comparable",
+      "to": "exists_maximal_consistent",
+      "kind": "hard"
+    },
+    {
+      "from": "consistent_adjoin_approx_metric",
+      "to": "exists_maximal_consistent_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "consistent_adjoin_comparable_metric",
+      "to": "exists_maximal_consistent_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "provable_tsub_of_inconsistent_adjoin",
+      "to": "exists_henkin_extension",
+      "kind": "hard"
+    },
+    {
+      "from": "provable_tsub_of_inconsistent_adjoin",
+      "to": "exists_henkin_extension_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "provable_tsub_of_inconsistent_adjoin",
+      "to": "pavelka_completeness_pre",
+      "kind": "hard"
+    },
+    {
+      "from": "provable_tsub_of_inconsistent_adjoin_metric",
+      "to": "pavelka_completeness_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "provable_bound_subst",
+      "to": "generalize_fresh_const",
+      "kind": "hard"
+    },
+    {
+      "from": "provable_bound_subst",
+      "to": "maximal_consistent_sup_instantiate_aux",
+      "kind": "hard"
+    },
+    {
+      "from": "provable_bound_subst_metric",
+      "to": "generalize_fresh_const_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "generalize_fresh_const",
+      "to": "exists_henkin_extension",
+      "kind": "hard"
+    },
+    {
+      "from": "generalize_fresh_const",
+      "to": "exists_henkin_extension_metric",
+      "kind": "hard"
+    },
     {
       "from": "unit_closed_neg",
       "to": "DyadicCode.val_mem_Icc",
@@ -842,23 +1059,43 @@
       "kind": "hard"
     },
     {
-      "from": "cl_consistent_iff_satisfiable",
-      "to": "cl_finite_strong_completeness",
-      "kind": "soft"
-    },
-    {
-      "from": "cl_finite_strong_completeness",
-      "to": "cl_approx_strong_completeness",
-      "kind": "soft"
-    },
-    {
-      "from": "luk_consistent_iff_satisfiable",
+      "from": "LukPropForm.soundness",
       "to": "luk_weak_completeness",
       "kind": "soft"
     },
     {
-      "from": "cl_approx_strong_completeness",
-      "to": "approximated_strong_completeness_pre",
+      "from": "entails_empty_iff_evalMV",
+      "to": "luk_weak_completeness",
+      "kind": "soft"
+    },
+    {
+      "from": "LukLind.mk_eq_zero_iff",
+      "to": "luk_weak_completeness",
+      "kind": "soft"
+    },
+    {
+      "from": "LukPropForm.deduction_theorem",
+      "to": "luk_weak_completeness",
+      "kind": "soft"
+    },
+    {
+      "from": "LukPropForm.semantic_iteration",
+      "to": "luk_weak_completeness",
+      "kind": "soft"
+    },
+    {
+      "from": "CLPropForm.soundness",
+      "to": "cl_finite_strong_completeness",
+      "kind": "soft"
+    },
+    {
+      "from": "CLPropForm.deduction_theorem",
+      "to": "cl_finite_strong_completeness",
+      "kind": "soft"
+    },
+    {
+      "from": "CLPropForm.semantic_iteration",
+      "to": "cl_finite_strong_completeness",
       "kind": "soft"
     },
     {

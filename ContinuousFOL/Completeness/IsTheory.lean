@@ -16,6 +16,8 @@ open Classical
 
 namespace ContinuousFOL
 
+/-- Definition 9.9(i): "We call T a *theory* if T is a set of formulae in
+    𝓛 without free variables, i.e., a set of sentences." -/
 def IsTheory {LM : MetricSignature} (T : Set (Formula LM.toSignature)) : Prop :=
   ∀ φ ∈ T, IsSentence φ
 

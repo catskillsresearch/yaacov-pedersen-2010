@@ -203,7 +203,8 @@ theorem henkin_model_existence_metric {LM : MetricSignature}
   -- The term pre-structure of `Δ` models `Δ` (truth lemma).
   have hM : ModelsPre (termPreStructure Δ) (idTermAssign LMc.toSignature) Δ := by
     intro φ hφ
-    rw [termPreStructure_eval_eq_sup hmc hhenkΔ φ, maximal_consistent_sup_eq_inf hmc φ]
+    rw [termPreStructure_eval_eq_sup hmc hhenkΔ φ,
+        maximal_consistent_sup_eq_inf hmc.consistent hmc (Set.Subset.rfl) φ]
     have h0 : Formula.tsub φ (Formula.dyadic LMc.toSignature .zero) ∈ Δ :=
       (hmc.mem_iff_provable _).mpr (.mp (.hyp hφ) (ProvableQ.ax0 (.A1 _ _)))
     have hnonneg : ∀ r ∈ {r : ℝ | ∃ q : DyadicCode, r = q.val ∧

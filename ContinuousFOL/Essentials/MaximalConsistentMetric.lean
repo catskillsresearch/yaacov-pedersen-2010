@@ -138,9 +138,11 @@ lemma MaximalConsistentMetric.mem_iff_provable {LM : MetricSignature}
       ProvableMetricQ.mp hprov
         (ProvableMetricQ.ax0 (.base (.A1 φ (Formula.pow2Neg LM.toSignature n))))
 
-/-- Lemma 8.6 for a signature with a metric. -/
-theorem maximal_in_consistent_extensions_iff_metric {LM : MetricSignature}
-    {Γ Δ : Set (Formula LM.toSignature)} (_hΓ : ConsistentMetricQ Γ) :
+/-- Helper: metric Lemma 8.6 with the right-hand side packaged as
+    `MaximalConsistentMetric`. -/
+theorem maximal_in_consistent_extensions_iff_maximalConsistent_metric
+    {LM : MetricSignature} {Γ Δ : Set (Formula LM.toSignature)}
+    (_hΓ : ConsistentMetricQ Γ) :
     Maximal (fun Γ' => Γ ⊆ Γ' ∧ ConsistentMetricQ Γ') Δ ↔
       (Γ ⊆ Δ ∧ MaximalConsistentMetric Δ) := by
   constructor
@@ -174,6 +176,23 @@ theorem maximal_in_consistent_extensions_iff_metric {LM : MetricSignature}
       exact (inconsistent_iff_provable_one_metric Γ').mpr
         (ProvableMetricQ.one_of_pow2Neg n hpow) hΓ'cons
 
+/-- Lemma 8.6 for a signature with a metric, with the paper's clauses (i)–(iii). -/
+theorem maximal_in_consistent_extensions_iff_metric {LM : MetricSignature}
+    {Γ Δ : Set (Formula LM.toSignature)} (hΓ : ConsistentMetricQ Γ) :
+    Maximal (fun Γ' => Γ ⊆ Γ' ∧ ConsistentMetricQ Γ') Δ ↔
+      (Γ ⊆ Δ ∧ ConsistentMetricQ Δ ∧
+        (∀ φ, (∀ n : ℕ, ProvableMetricQ Δ
+            (.tsub φ (Formula.pow2Neg LM.toSignature n))) → φ ∈ Δ) ∧
+        (∀ φ ψ, Formula.tsub φ ψ ∈ Δ ∨ Formula.tsub ψ φ ∈ Δ)) := by
+  constructor
+  · intro h
+    obtain ⟨hsub, hmc⟩ :=
+      (maximal_in_consistent_extensions_iff_maximalConsistent_metric hΓ).mp h
+    exact ⟨hsub, hmc.consistent, hmc.archimedean, hmc.comparable⟩
+  · intro ⟨hsub, hcons, harch, hcomp⟩
+    exact (maximal_in_consistent_extensions_iff_maximalConsistent_metric hΓ).mpr
+      ⟨hsub, ⟨hcons, harch, hcomp⟩⟩
+
 /-- Lemma 8.11 for a signature with a metric. -/
 theorem maximal_consistent_sup_instantiate_metric {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) {Δ : Set (Formula LM.toSignature)}
@@ -186,12 +205,15 @@ theorem maximal_consistent_sup_instantiate_metric {LM : MetricSignature}
 
 /-- Lemma 8.12 for a signature with a metric. -/
 theorem maximal_consistent_sup_eq_inf_metric {LM : MetricSignature}
-    {Γ Δ : Set (Formula LM.toSignature)} (_hcons : ConsistentMetricQ Γ)
-    (hmc : MaximalConsistentMetric Δ) (_hΓΔ : Γ ⊆ Δ) (φ : Formula LM.toSignature) :
+    {Γ Δ : Set (Formula LM.toSignature)} (hcons : ConsistentMetricQ Γ)
+    (hmc : MaximalConsistentMetric Δ) (hΓΔ : Γ ⊆ Δ) (φ : Formula LM.toSignature) :
     sSup {r : ℝ | ∃ p : DyadicCode, r = p.val ∧
       Formula.tsub (Formula.dyadic LM.toSignature p) φ ∈ Δ} =
     sInf {r : ℝ | ∃ q : DyadicCode, r = q.val ∧
-      Formula.tsub φ (Formula.dyadic LM.toSignature q) ∈ Δ} :=
-  maximal_consistent_sup_eq_inf hmc.toMaximalConsistent φ
+      Formula.tsub φ (Formula.dyadic LM.toSignature q) ∈ Δ} := by
+  have hconsQ : ConsistentQ Γ := by
+    obtain ⟨ψ, hψ⟩ := hcons
+    exact ⟨ψ, fun h => hψ (ProvableMetricQ.of_provableQ h)⟩
+  exact maximal_consistent_sup_eq_inf hconsQ hmc.toMaximalConsistent hΓΔ φ
 
 end ContinuousFOL

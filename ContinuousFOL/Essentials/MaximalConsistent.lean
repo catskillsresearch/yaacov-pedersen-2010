@@ -244,8 +244,9 @@ lemma ProvableQ.one_of_dyadic_pos {L : Signature} {Γ : Set (Formula L)} (d : Dy
   exact ProvableQ.cancel_iterSub h k ht
 
 /-- Lemma 8.12: Dedekind cut equality of dyadic lower and upper bounds in `Δ`. -/
-theorem maximal_consistent_sup_eq_inf {L : Signature} {Δ : Set (Formula L)}
-    (hmc : MaximalConsistent Δ) (φ : Formula L) :
+theorem maximal_consistent_sup_eq_inf {L : Signature} {Γ Δ : Set (Formula L)}
+    (_hcons : ConsistentQ Γ) (hmc : MaximalConsistent Δ) (_hΓΔ : Γ ⊆ Δ)
+    (φ : Formula L) :
     sSup {r : ℝ | ∃ p : DyadicCode, r = p.val ∧ Formula.tsub (Formula.dyadic L p) φ ∈ Δ} =
     sInf {r : ℝ | ∃ q : DyadicCode, r = q.val ∧ Formula.tsub φ (Formula.dyadic L q) ∈ Δ} := by
   set A := {r : ℝ | ∃ p : DyadicCode, r = p.val ∧ Formula.tsub (Formula.dyadic L p) φ ∈ Δ}
@@ -280,9 +281,9 @@ theorem maximal_consistent_sup_eq_inf {L : Signature} {Δ : Set (Formula L)}
     · exact absurd (le_csSup hAbdd ⟨r, rfl, h⟩) (not_le.mpr hr1)
     · exact absurd (csInf_le hBbdd ⟨r, rfl, h⟩) (not_le.mpr hr2)
 
-/-- Lemma 8.6: Maximal elements of `E(Γ)` coincide with `MaximalConsistent`. -/
-theorem maximal_in_consistent_extensions_iff {L : Signature} {Γ Δ : Set (Formula L)}
-    (_hΓ : ConsistentQ Γ) :
+/-- Helper: Lemma 8.6 with the right-hand side packaged as `MaximalConsistent`. -/
+theorem maximal_in_consistent_extensions_iff_maximalConsistent
+    {L : Signature} {Γ Δ : Set (Formula L)} (_hΓ : ConsistentQ Γ) :
     Maximal (fun Γ' => Γ ⊆ Γ' ∧ ConsistentQ Γ') Δ ↔ (Γ ⊆ Δ ∧ MaximalConsistent Δ) := by
   constructor
   · rintro ⟨⟨hsub, hcons⟩, hmax⟩
@@ -313,6 +314,21 @@ theorem maximal_in_consistent_extensions_iff {L : Signature} {Γ Δ : Set (Formu
         ProvableQ.mp (.hyp hφ) (.hyp (hΔΓ' hge))
       exact (inconsistent_iff_provable_one Γ').mpr
         (ProvableQ.one_of_pow2Neg n hpow) hΓ'cons
+
+/-- Lemma 8.6: `Δ` is maximal in `E(Γ)` iff the paper's clauses (i)–(iii) hold. -/
+theorem maximal_in_consistent_extensions_iff {L : Signature} {Γ Δ : Set (Formula L)}
+    (hΓ : ConsistentQ Γ) :
+    Maximal (fun Γ' => Γ ⊆ Γ' ∧ ConsistentQ Γ') Δ ↔
+      (Γ ⊆ Δ ∧ ConsistentQ Δ ∧
+        (∀ φ, (∀ n : ℕ, ProvableQ Δ (.tsub φ (Formula.pow2Neg L n))) → φ ∈ Δ) ∧
+        (∀ φ ψ, Formula.tsub φ ψ ∈ Δ ∨ Formula.tsub ψ φ ∈ Δ)) := by
+  constructor
+  · intro h
+    obtain ⟨hsub, hmc⟩ := (maximal_in_consistent_extensions_iff_maximalConsistent hΓ).mp h
+    exact ⟨hsub, hmc.consistent, hmc.archimedean, hmc.comparable⟩
+  · intro ⟨hsub, hcons, harch, hcomp⟩
+    exact (maximal_in_consistent_extensions_iff_maximalConsistent hΓ).mpr
+      ⟨hsub, ⟨hcons, harch, hcomp⟩⟩
 
 /-- Theorem 8.10: Lindenbaum's Lemma via Zorn's Lemma. -/
 theorem exists_maximal_consistent {L : Signature} {Γ : Set (Formula L)}
@@ -349,6 +365,6 @@ theorem exists_maximal_consistent {L : Signature} {Γ : Set (Formula L)}
       exact ht_incons (hcE htc).2
   have hΓE : Γ ∈ E := ⟨Set.Subset.rfl, hcons⟩
   obtain ⟨Δ, hΓΔ, hmax⟩ := zorn_subset_nonempty E hchain Γ hΓE
-  exact ⟨Δ, (maximal_in_consistent_extensions_iff hcons).mp hmax⟩
+  exact ⟨Δ, (maximal_in_consistent_extensions_iff_maximalConsistent hcons).mp hmax⟩
 
 end ContinuousFOL

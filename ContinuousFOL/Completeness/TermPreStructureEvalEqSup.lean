@@ -76,7 +76,7 @@ lemma bddBelow_upperCut (φ : Formula L) : BddBelow (upperCut Δ φ) :=
 
 lemma sSup_lowerCut_eq (hmc : MaximalConsistent Δ) (φ : Formula L) :
     sSup (lowerCut Δ φ) = sInf (upperCut Δ φ) :=
-  maximal_consistent_sup_eq_inf hmc φ
+  maximal_consistent_sup_eq_inf hmc.consistent hmc (Set.Subset.rfl) φ
 
 lemma le_sSup_lowerCut (hmc : MaximalConsistent Δ) {φ : Formula L} {p : DyadicCode}
     (h : Formula.tsub (Formula.dyadic L p) φ ∈ Δ) : p.val ≤ sSup (lowerCut Δ φ) := by

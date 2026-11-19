@@ -80,6 +80,18 @@ Recorded in `scripts/ai_model_cards.py` and `formalization.yaml` → `automation
 
 ## Proof-hole board
 
+Dependency graph of paper-facing theorems. The graph JSON is **embedded** in
+`holes.html` (file:// works), or serve locally:
+
 ```bash
-python3 scripts/build_holes.py   # refreshes HOLES.md / holes-graph.json / holes.html
+python3 scripts/build_holes.py   # refreshes HOLES.md / holes-graph.json / embeds into holes.html
+python3 -m http.server 8765 --bind 127.0.0.1
+# open http://localhost:8765/holes.html
+```
+
+| File | Role |
+|------|------|
+| [`holes.html`](holes.html) | Interactive board (embedded graph) |
+| [`holes-graph.json`](holes-graph.json) | Node/edge data (also embedded) |
+| [`HOLES.md`](HOLES.md) | Markdown inventory |
 ```

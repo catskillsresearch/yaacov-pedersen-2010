@@ -58,10 +58,39 @@ def reductPre {L₁ L₂ : Signature} (e : SignatureExtension L₁ L₂) (M : Pr
     M.relInterp (e.relEquiv P) (fun i => args (Fin.cast (e.relArity_eq P) i))
   rel_in_Icc := fun P _args => M.rel_in_Icc (e.relEquiv P) _
 
+lemma mapTerm_eval {L₁ L₂ : Signature} (e : SignatureExtension L₁ L₂) (M : PreStructure L₂)
+    (σ : Var → M.Carrier) (t : Term L₁) :
+    (e.mapTerm t).eval M σ = t.eval (e.reductPre M) σ := by
+  induction t with
+  | var x => rfl
+  | func f args ih =>
+    simp only [mapTerm, Term.eval, reductPre]
+    congr 1
+    ext i
+    exact ih _
+
 lemma eval_reduct {L₁ L₂ : Signature} (e : SignatureExtension L₁ L₂) (M : PreStructure L₂)
     (σ : Var → M.Carrier) (φ : Formula L₁) :
     φ.eval (e.reductPre M) σ = (e.mapFormula φ).eval M σ := by
-  sorry
+  induction φ generalizing σ with
+  | rel P args =>
+    simp only [Formula.eval, mapFormula, reductPre]
+    congr 1
+    ext i
+    exact (mapTerm_eval e M σ (args _)).symm
+  | tsub α β ihα ihβ => simp [Formula.eval, mapFormula, ihα, ihβ]
+  | neg α ih => simp [Formula.eval, mapFormula, ih]
+  | half α ih => simp [Formula.eval, mapFormula, ih]
+  | sup x α ih =>
+    simp only [Formula.eval, mapFormula]
+    congr 1
+    ext r
+    simp only [Set.mem_range]
+    constructor
+    · rintro ⟨a, rfl⟩
+      exact ⟨a, (ih (updateAssign σ x a)).symm⟩
+    · rintro ⟨a, rfl⟩
+      exact ⟨a, ih (updateAssign σ x a)⟩
 
 end SignatureExtension
 

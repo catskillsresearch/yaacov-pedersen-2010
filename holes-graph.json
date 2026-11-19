@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T19:54:58Z",
+  "updated": "2026-11-19T20:01:14Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -123,6 +123,15 @@
       "status": "done",
       "blocker": null,
       "detail": "Lemma 6.4: by a sequence of bound substitutions, \u03c6 \u2261 \u03c6' with x\u2080..x_{n-1} not bound."
+    },
+    {
+      "id": "bound_substitution_lemma_metric",
+      "label": "Bound subst met",
+      "section": 6,
+      "file": "ContinuousFOL/SubstitutionAndCompletions/BoundSubstitutionLemma.lean:389",
+      "status": "done",
+      "blocker": null,
+      "detail": "Lemma 6.4 for a signature with a metric: \u03c6 \u2261 \u03c6' is over MetricPreStructure."
     },
     {
       "id": "surjective_morphism_elementary",
@@ -371,7 +380,7 @@
       "id": "maximal_consistent_sup_instantiate_metric",
       "label": "sup instantiate met",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:178",
+      "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:197",
       "status": "done",
       "blocker": null,
       "detail": "Lemma 8.11 for a signature with a metric."
@@ -398,7 +407,7 @@
       "id": "maximal_consistent_sup_eq_inf_metric",
       "label": "sup = Inf met",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:188",
+      "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:210",
       "status": "done",
       "blocker": null,
       "detail": "Lemma 8.12 for a signature with a metric."
@@ -407,7 +416,7 @@
       "id": "maximal_in_consistent_extensions_iff",
       "label": "Max \u2194 no ext",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:284",
+      "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:319",
       "status": "done",
       "blocker": null,
       "detail": "Maximal among consistent extensions characterization."
@@ -416,7 +425,7 @@
       "id": "maximal_in_consistent_extensions_iff_metric",
       "label": "Max \u2194 no ext met",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:142",
+      "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:180",
       "status": "done",
       "blocker": null,
       "detail": "Lemma 8.6 for a signature with a metric."
@@ -425,7 +434,7 @@
       "id": "exists_maximal_consistent",
       "label": "Thm 8.10 Lindenbaum",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:318",
+      "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:334",
       "status": "done",
       "blocker": null,
       "detail": "Lindenbaum: every consistent set has a maximal extension."
@@ -850,7 +859,17 @@
     },
     {
       "from": "bound_substitution_lemma",
+      "to": "bound_substitution_lemma_metric",
+      "kind": "soft"
+    },
+    {
+      "from": "bound_substitution_lemma",
       "to": "provable_bound_subst",
+      "kind": "soft"
+    },
+    {
+      "from": "bound_substitution_lemma_metric",
+      "to": "maximal_consistent_sup_instantiate_metric",
       "kind": "soft"
     },
     {

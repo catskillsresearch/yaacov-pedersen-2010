@@ -199,9 +199,12 @@ theorem maximal_consistent_sup_instantiate_metric {LM : MetricSignature}
     (hmc : MaximalConsistentMetric Δ) (hΓΔ : Γ ⊆ Δ) (t : Term LM.toSignature)
     (p : DyadicCode) (x : Var) (φ : Formula LM.toSignature) :
     Formula.tsub (.sup x φ) (Formula.dyadic LM.toSignature p) ∈ Δ →
-      ∃ φ' : Formula LM.toSignature, (φ ≡ᶠ φ') ∧
-        Formula.tsub (φ'.freeSubst t x) (Formula.dyadic LM.toSignature p) ∈ Δ :=
-  maximal_consistent_sup_instantiate Γ hmc.toMaximalConsistent hΓΔ t p x φ
+      ∃ φ' : Formula LM.toSignature, (φ ≡ᵐ φ') ∧
+        Formula.tsub (φ'.freeSubst t x) (Formula.dyadic LM.toSignature p) ∈ Δ := by
+  intro hmem
+  obtain ⟨φ', heq, hmem'⟩ :=
+    maximal_consistent_sup_instantiate Γ hmc.toMaximalConsistent hΓΔ t p x φ hmem
+  exact ⟨φ', heq.toMetric, hmem'⟩
 
 /-- Lemma 8.12 for a signature with a metric. -/
 theorem maximal_consistent_sup_eq_inf_metric {LM : MetricSignature}

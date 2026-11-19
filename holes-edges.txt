@@ -47,7 +47,9 @@ cl_finite_strong_completeness -soft-> cl_approx_strong_completeness
 luk_consistent_iff_satisfiable -soft-> luk_weak_completeness
 cl_approx_strong_completeness -soft-> approximated_strong_completeness_pre
 substitution_lemma -soft-> bound_substitution_lemma
+bound_substitution_lemma -soft-> bound_substitution_lemma_metric
 bound_substitution_lemma -soft-> provable_bound_subst
+bound_substitution_lemma_metric -soft-> maximal_consistent_sup_instantiate_metric
 surjective_morphism_elementary -soft-> eval_uniformly_continuous
 eval_uniformly_continuous -soft-> exists_metric_completion
 soundness_pre -soft-> soundness_metric

@@ -109,6 +109,12 @@ NODES: dict[str, dict] = {
         "file": "ContinuousFOL/SubstitutionAndCompletions/BoundSubstitutionLemma.lean",
         "detail": "Lemma 6.4: by a sequence of bound substitutions, φ ≡ φ' with x₀..x_{n-1} not bound.",
     },
+    "bound_substitution_lemma_metric": {
+        "label": "Bound subst met",
+        "section": 6,
+        "file": "ContinuousFOL/SubstitutionAndCompletions/BoundSubstitutionLemma.lean",
+        "detail": "Lemma 6.4 for a signature with a metric: φ ≡ φ' is over MetricPreStructure.",
+    },
     "surjective_morphism_elementary": {
         "label": "Thm 6.6 elem.",
         "section": 6,
@@ -493,7 +499,9 @@ SOFT_EDGES: list[tuple[str, str]] = [
     ("luk_consistent_iff_satisfiable", "luk_weak_completeness"),
     ("cl_approx_strong_completeness", "approximated_strong_completeness_pre"),
     ("substitution_lemma", "bound_substitution_lemma"),
+    ("bound_substitution_lemma", "bound_substitution_lemma_metric"),
     ("bound_substitution_lemma", "provable_bound_subst"),
+    ("bound_substitution_lemma_metric", "maximal_consistent_sup_instantiate_metric"),
     ("surjective_morphism_elementary", "eval_uniformly_continuous"),
     ("eval_uniformly_continuous", "exists_metric_completion"),
     ("soundness_pre", "soundness_metric"),

@@ -384,4 +384,13 @@ theorem bound_substitution_lemma {L : Signature} (φ : Formula L) (n : ℕ) (xs 
   exact ⟨φ', hr, fun i h => Finset.disjoint_left.mp hd
     (Finset.mem_image_of_mem xs (Finset.mem_univ i)) h, he⟩
 
+/-- Lemma 6.4 for a signature with a metric: `φ ≡ φ'` is Def 5.14 over
+    continuous metric pre-structures. -/
+theorem bound_substitution_lemma_metric {LM : MetricSignature}
+    (φ : Formula LM.toSignature) (n : ℕ) (xs : Fin n → Var) :
+    ∃ φ' : Formula LM.toSignature,
+      φ.BoundSubstReach φ' ∧ (∀ i, xs i ∉ φ'.boundVars) ∧ (φ ≡ᵐ φ') := by
+  obtain ⟨φ', hr, hnb, he⟩ := bound_substitution_lemma φ n xs
+  exact ⟨φ', hr, hnb, he.toMetric⟩
+
 end ContinuousFOL

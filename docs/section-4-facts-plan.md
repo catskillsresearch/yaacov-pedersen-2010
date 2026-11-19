@@ -85,20 +85,38 @@ the polyhedral-cell argument for semantic iteration:
 The official Fact 4.1 / 4.5 statements are unchanged and still `sorry`.
 The board is still 5 open, 0 blocked, 62 done.
 
+## Progress after the MV-algebra checkpoint
+
+The first slice of Chang’s argument is done and `sorry`-free (this commit):
+
+- Chang’s axioms (MV1)–(MV6) as the class `MVAlgebra`, with derived
+  operations `⊖`, `⊙`, the lattice join, and the order `x ≤ y ↔ x ⊖ y = 0`
+  (`MVAlgebra.lean`, 114 lines).
+- The standard algebra on Mathlib’s `unitInterval`: `x ⊕ y = min(x+y, 1)`,
+  `¬x = 1-x`. The instance, the identity `(x ⊖ y : ℝ) = x ∸ y`, MV-evaluation
+  `evalMV`, agreement with `LukPropForm.eval`, and the reformulation
+  `Entails ∅ φ ↔ ∀ v, evalMV v φ = 0` (`StandardMVAlgebra.lean`, 204 lines).
+
+Together this is 318 compiling lines. The official Fact 4.1 / 4.5 statements
+are unchanged and still `sorry`. The board is still 5 open, 0 blocked, 62 done.
+
 ## Remaining work and size estimate
 
 | Step | What | Rough size | Sessions |
 |------|------|------------|----------|
 | 1 | Weak deduction theorems for both propositional calculi | done, ~500 lines | done |
 | 2 | Semantic iteration for finite premise sets | done, ~1,240 lines | done |
-| 3 | **Fact 4.1, converse.** Chang’s MV-algebra completeness: MV-algebra structure on `[0,1]` and on the Lindenbaum algebra; if a term is identically `0` on `[0,1]` then it is derivable. (Rose–Rosser’s original syntactic proof is the alternative, and is no smaller.) | 2,000–4,000 lines | 3–8 |
+| 3a | MV-algebra axioms, standard `[0,1]` instance, and `evalMV` agreement | done, 318 lines | done |
+| 3b | **Lindenbaum algebra.** Quotient formulae by `⊢ φ ∸ ψ ∧ ⊢ ψ ∸ φ`; show the quotient is an MV-algebra and `[[φ]] = 0 ↔ ⊢ φ`. | 500–1,000 lines | 1–2 |
+| 3c | **Chang representation.** Every MV-algebra is a subdirect product of chains, and a chain identity that holds on `[0,1]` holds in every MV-algebra. This is still the bulk and the main uncertainty. | 1,200–3,200 lines | 2–6 |
 | 4 | **Fact 4.5, converse.** Weak completeness for continuous logic, then the reduction in the previous section. This needs an extension of step 3 to a `½`-operation (divisible / product MV, or a McNaughton argument with dyadic coefficients). | 1,000–2,000 lines on top of step 3 | 2–4 |
 
-**Overall remaining:** on the order of 3,000–6,000 lines, spread across about
+**Overall remaining:** on the order of 2,700–6,200 lines, spread across about
 5–12 further runs if each run ends at a compiling checkpoint.
-Step 3 is the critical path and the main uncertainty: if Chang’s argument
-goes smoothly the lower end is realistic; if representation-theoretic
-lemmas balloon, the upper end is more likely.
+Chang’s remaining work (3b+3c) is about 1,700–4,200 lines / 3–8 runs; the
+range is essentially unchanged because representation is still ahead.
+If Lindenbaum is routine the lower end of 3b is realistic; 3c is the
+critical path.
 
 The other three §4 Facts (4.2–4.4) are not needed for any main theorem.
 They would typically follow from the same Lindenbaum / maximal-consistent
@@ -107,6 +125,7 @@ machinery once 4.1 and 4.5 are in place, and should stay last.
 ## Suggested order on resume
 
 1. Keep the official statements fixed.
-2. Start Chang’s completeness for Łukasiewicz (Fact 4.1), committing
-   MV-algebra / Lindenbaum infrastructure as it compiles.
-3. Extend the argument by `½` and finish Fact 4.5.
+2. Build the Lindenbaum MV-algebra for Łukasiewicz logic and prove
+   `[[φ]] = 0 ↔ ⊢ φ`, committing as it compiles.
+3. Formalize Chang’s representation theorem and close Fact 4.1.
+4. Extend the argument by `½` and finish Fact 4.5.

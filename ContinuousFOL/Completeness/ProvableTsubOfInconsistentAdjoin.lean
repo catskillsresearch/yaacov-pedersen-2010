@@ -93,6 +93,18 @@ lemma provable_tsub_of_inconsistent_adjoin_metric {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) (p : DyadicCode)
     (hincons : ¬ ConsistentMetricQ (Γ ∪ {.tsub (Formula.dyadic LM.toSignature p) φ})) :
     ProvableMetricQ Γ (.tsub φ (Formula.dyadic LM.toSignature p)) := by
-  sorry
+  -- Metric inconsistency is `¬ ∃ φ, ¬ ProvableMetricQ`, equivalently `⊢ 1`,
+  -- by the same ex-falso transport used for `ProvableQ`.
+  have hone : ProvableMetricQ (Γ ∪ {.tsub (Formula.dyadic LM.toSignature p) φ})
+      (Formula.one LM.toSignature) := by
+    classical
+    by_contra hnot
+    exact hincons ⟨Formula.one LM.toSignature, hnot⟩
+  obtain ⟨n, hn⟩ :=
+    (deduction_theorem_metric Γ (Formula.one LM.toSignature)
+      (.tsub (Formula.dyadic LM.toSignature p) φ)).mp hone
+  exact ProvableMetricQ.mp hn
+    (ProvableMetricQ.of_provableQ
+      (ProvableQ.swap_one_iter Γ φ (Formula.dyadic LM.toSignature p) n))
 
 end ContinuousFOL

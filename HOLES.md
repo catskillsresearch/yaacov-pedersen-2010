@@ -2,7 +2,7 @@
 
 Inventory of paper-facing Lean holes, ordered **prove-first**.
 
-**Updated:** 2026-11-19T19:18:17Z
+**Updated:** 2026-11-19T19:21:07Z
 **Holes:** 10 open+blocked · 8 open · 2 blocked · 44 done.
 
 **Live board:** [`holes.html`](holes.html) (graph embedded; open the file directly).
@@ -24,7 +24,7 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 | `luk_weak_completeness` | Fact 4.5 weak | `ContinuousFOL/BlackBox/LukWeakCompleteness.lean:20` |
 | `exists_metric_completion` | Metric completion | `ContinuousFOL/SubstitutionAndCompletions/ExistsMetricCompletion.lean:21` |
 | `eval_uniformly_continuous` | eval unif. cont. | `ContinuousFOL/SubstitutionAndCompletions/EvalUniformlyContinuous.lean:21` |
-| `complete_re_theory_decidable` | RE ⇒ decidable | `ContinuousFOL/Completeness/UniformlyComputableDegree.lean:33` |
+| `complete_re_theory_decidable` | Cor 9.11 RE ⇒ dec. | `ContinuousFOL/Completeness/UniformlyComputableDegree.lean:54` |
 
 ## By section
 
@@ -120,7 +120,7 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 | done | `pavelka_completeness_metric` | Cor 9.8 metric | `ContinuousFOL/Completeness/PavelkaCompleteness.lean:103` |
 | done | `compactness_pre` | Cor 9.12 compact | `ContinuousFOL/Completeness/CompactnessPre.lean:21` |
 | done | `compactness_metric` | Cor 9.12 metric | `ContinuousFOL/Completeness/CompactnessMetric.lean:22` |
-| open | `complete_re_theory_decidable` | RE ⇒ decidable | `ContinuousFOL/Completeness/UniformlyComputableDegree.lean:33` |
+| open | `complete_re_theory_decidable` | Cor 9.11 RE ⇒ dec. | `ContinuousFOL/Completeness/UniformlyComputableDegree.lean:54` |
 
 ## Dependency sketch
 

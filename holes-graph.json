@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T19:18:17Z",
+  "updated": "2026-11-19T19:21:07Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -495,12 +495,12 @@
     },
     {
       "id": "complete_re_theory_decidable",
-      "label": "RE \u21d2 decidable",
+      "label": "Cor 9.11 RE \u21d2 dec.",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/UniformlyComputableDegree.lean:33",
+      "file": "ContinuousFOL/Completeness/UniformlyComputableDegree.lean:54",
       "status": "open",
       "blocker": null,
-      "detail": "Complete RE theories have decidable degree of truth."
+      "detail": "Complete theory with recursive or r.e. axiomatization is decidable (Mathlib computability)."
     }
   ],
   "edges": [

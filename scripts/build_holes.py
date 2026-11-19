@@ -359,10 +359,10 @@ NODES: dict[str, dict] = {
         "detail": "Finite complete-satisfiability ⇒ CompletelySatisfiable.",
     },
     "complete_re_theory_decidable": {
-        "label": "RE ⇒ decidable",
+        "label": "Cor 9.11 RE ⇒ dec.",
         "section": 9,
         "file": "ContinuousFOL/Completeness/UniformlyComputableDegree.lean",
-        "detail": "Complete RE theories have decidable degree of truth.",
+        "detail": "Complete theory with recursive or r.e. axiomatization is decidable (Mathlib computability).",
     },
 }
 

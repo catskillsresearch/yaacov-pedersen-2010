@@ -22,14 +22,24 @@ open Classical
 
 namespace ContinuousFOL
 
-/-- Corollary 9.8 (Pavelka-style Completeness): `φ°_Γ = φ^⊛_Γ`. -/
+/-- Corollary 9.8 (Pavelka-style Completeness): `φ°_Γ = φ^⊛_Γ`.
+
+    The paper states this for every `Γ ⊆ For(L)`, with no consistency hypothesis.
+    Its written proof treats (i) soundness in any model and (ii) a consistent
+    extension when `p < φ^⊛_Γ`. It is silent on inconsistent `Γ`, where there
+    are no models and `φ°_Γ` is `sSup ∅`. The equality still holds because
+    Mathlib's convention `Real.sSup_empty : sSup (∅ : Set ℝ) = 0` gives
+    `φ°_Γ = 0`, while an inconsistent `Γ` proves `φ ∸ 0`, so `φ^⊛_Γ = 0`
+    as well. (If one instead took `sSup ∅ = -∞`, the paper's unrestricted
+    statement would fail in this case.) -/
 theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) :
     degreeOfTruthPre Γ φ = degreeOfProvabilityPre Γ φ := by
   unfold degreeOfTruthPre degreeOfProvabilityPre
   by_cases hcons : ConsistentQ Γ
   swap
-  · -- Inconsistent `Γ`: no models, so the degree of truth is `sSup ∅ = 0`; and `Γ ⊢ φ ∸ 0`,
-    -- so the degree of provability is `0` as well.
+  · -- Inconsistent `Γ` (not discussed in the paper's proof of Corollary 9.8).
+    -- No models, so `φ°_Γ = sSup ∅`. We use Mathlib's `Real.sSup_empty`,
+    -- `sSup (∅ : Set ℝ) = 0`. Also `Γ ⊢ φ ∸ 0`, so `φ^⊛_Γ = 0`.
     have hall : ∀ ψ, ProvableQ Γ ψ := fun ψ => by
       by_contra h
       exact hcons ⟨ψ, h⟩
@@ -100,6 +110,10 @@ theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Fo
     have h2 := le_csSup hTbdd ⟨M, σ, hMΓ, rfl⟩
     linarith
 
+/-- Corollary 9.8 for a signature with a metric: `φ°_Γ = φ^⊛_Γ`, now over
+    continuous `𝓛`-pre-structures and metric provability. As in the
+    non-metric case, the paper does not discuss inconsistent `Γ`; the
+    empty-sup identity is again Mathlib's `Real.sSup_empty : sSup (∅ : Set ℝ) = 0`. -/
 theorem pavelka_completeness_metric {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
     degreeOfTruthMetric Γ φ = degreeOfProvabilityMetric Γ φ := by
@@ -121,8 +135,9 @@ theorem pavelka_completeness_metric {LM : MetricSignature}
     exact (φ.eval_in_Icc M.toPreStructure σ).2
   by_cases hcons : ConsistentMetricQ Γ
   swap
-  · -- Inconsistent `Γ`: no metric pre-structure models, so the degree of truth is
-    -- `sSup ∅ = 0`; and `Γ ⊢ φ ∸ 0`, so the degree of provability is `0` as well.
+  · -- Inconsistent `Γ` (not discussed in the paper's proof of Corollary 9.8).
+    -- No metric pre-structure models, so `φ°_Γ = sSup ∅`. We use Mathlib's
+    -- `Real.sSup_empty`, `sSup (∅ : Set ℝ) = 0`. Also `Γ ⊢ φ ∸ 0`, so `φ^⊛_Γ = 0`.
     have hall : ∀ ψ, ProvableMetricQ Γ ψ := fun ψ => by
       by_contra h
       exact hcons ⟨ψ, h⟩

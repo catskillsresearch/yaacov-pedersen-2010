@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T19:40:23Z",
+  "updated": "2026-11-19T19:41:58Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -470,7 +470,7 @@
       "id": "pavelka_completeness_pre",
       "label": "Cor 9.8 Pavelka",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:26",
+      "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:35",
       "status": "done",
       "blocker": null,
       "detail": "degreeOfTruthPre = degreeOfProvabilityPre."
@@ -479,7 +479,7 @@
       "id": "pavelka_completeness_metric",
       "label": "Cor 9.8 metric",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:103",
+      "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:117",
       "status": "done",
       "blocker": null,
       "detail": "degreeOfTruthMetric = degreeOfProvabilityMetric (sup over metric pre-structures)."

@@ -13,6 +13,7 @@ public import ContinuousFOL.Essentials.ProvableBoundSubst
 public import ContinuousFOL.Group1Axioms.DyadicCode.Val
 public import ContinuousFOL.Group1Axioms.CLPropForm.Dyadic
 public import ContinuousFOL.Group1Axioms.CLPropForm.IterSub
+public import ContinuousFOL.LukasiewiczAndContinuous.CLPropFormDeduction
 public import ContinuousFOL.Group1Axioms.DyadicCode.Pow2Neg
 
 @[expose] public section
@@ -40,12 +41,6 @@ lemma CLPropForm.toFormula_dyadic {I : Type*} {L : Signature} (f : I → Formula
   | tsub d e ihd ihe =>
     simp [CLPropForm.dyadic, CLPropForm.toFormula, Formula.dyadic, ihd, ihe]
   | half d ih => simp [CLPropForm.dyadic, CLPropForm.toFormula, Formula.dyadic, ih]
-
-lemma CLPropForm.eval_iterSub {I : Type*} (v : I → ℝ) (ψ φ : CLPropForm I) (k : ℕ) :
-    (CLPropForm.iterSub ψ φ k).eval v = iterSubR (ψ.eval v) (φ.eval v) k := by
-  induction k with
-  | zero => simp [CLPropForm.iterSub, iterSubR]
-  | succ k ih => simp [CLPropForm.iterSub, iterSubR, CLPropForm.eval, ih]
 
 lemma CLPropForm.toFormula_iterSub {I : Type*} {L : Signature} (f : I → Formula L)
     (ψ φ : CLPropForm I) (k : ℕ) :

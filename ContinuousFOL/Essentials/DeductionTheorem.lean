@@ -13,6 +13,8 @@ public import ContinuousFOL.Essentials.ProvableQMono
 public import Mathlib.Data.Finset.Basic
 public import ContinuousFOL.Essentials.InconsistentIffProvableOne
 public import ContinuousFOL.BlackBox.LukWeakCompleteness
+public import ContinuousFOL.Group1Axioms.LukPropForm.IterSub
+public import ContinuousFOL.LukasiewiczAndContinuous.LukPropFormDeduction
 public import Mathlib.Tactic.Linarith
 public import Mathlib.Tactic.Ring
 
@@ -22,40 +24,6 @@ noncomputable section
 open Classical
 
 namespace ContinuousFOL
-
-/-- Iterated truncated subtraction on `ℝ`. -/
-def iterSubR (b a : ℝ) : ℕ → ℝ
-  | 0 => b
-  | n + 1 => iterSubR b a n ∸ a
-
-lemma iterSubR_eq {b a : ℝ} (hb : 0 ≤ b) (ha : 0 ≤ a) (k : ℕ) :
-    iterSubR b a k = max (b - (k : ℝ) * a) 0 := by
-  induction k with
-  | zero =>
-    simp [iterSubR, max_eq_left hb]
-  | succ k ih =>
-    rw [iterSubR, ih, tsubR.def_eq]
-    by_cases h : b ≤ (k : ℝ) * a
-    · have hnonpos : b - (k : ℝ) * a ≤ 0 := by linarith
-      rw [max_eq_right hnonpos]
-      have hsub : (0 : ℝ) - a ≤ 0 := by linarith
-      rw [max_eq_right hsub]
-      have htail : b - ((k + 1 : ℕ) : ℝ) * a ≤ 0 := by
-        push_cast
-        linarith
-      exact (max_eq_right htail).symm
-    · push Not at h
-      have hpos : 0 ≤ b - (k : ℝ) * a := by linarith
-      rw [max_eq_left hpos]
-      have hdiff : b - (k : ℝ) * a - a = b - ((k + 1 : ℕ) : ℝ) * a := by
-        push_cast
-        ring
-      rw [hdiff]
-
-lemma tsubR_zero {x : ℝ} (hx : 0 ≤ x) : x ∸ 0 = x := by
-  rw [tsubR.def_eq]
-  have : x - 0 = x := by ring
-  rw [this, max_eq_left hx]
 
 /-- Real form of the deduction-theorem schema. -/
 lemma deduction_schema_real {a b c : ℝ} (ha : 0 ≤ a) (hb : 0 ≤ b) (hc : 0 ≤ c)
@@ -138,22 +106,12 @@ lemma LukPropForm.toFormula_provable {I : Type*} {L : Signature} (f : I → Form
 
 namespace LukPropForm
 
-def iterSub {I : Type*} (ψ φ : LukPropForm I) : ℕ → LukPropForm I
-  | 0 => ψ
-  | n + 1 => .tsub (iterSub ψ φ n) φ
-
 /-- Schema `((β ⊖_{n+m} α) ∸ ((β ∸ γ) ⊖_n α)) ∸ (γ ⊖_m α)`. -/
 def deductionSchema (n m : ℕ) : LukPropForm (Fin 3) :=
   let α : LukPropForm (Fin 3) := .var 0
   let β : LukPropForm (Fin 3) := .var 1
   let γ : LukPropForm (Fin 3) := .var 2
   .tsub (.tsub (iterSub β α (n + m)) (iterSub (.tsub β γ) α n)) (iterSub γ α m)
-
-lemma eval_iterSub {I : Type*} (v : I → ℝ) (ψ φ : LukPropForm I) (k : ℕ) :
-    (iterSub ψ φ k).eval v = iterSubR (ψ.eval v) (φ.eval v) k := by
-  induction k with
-  | zero => simp [iterSub, iterSubR]
-  | succ k ih => simp [iterSub, iterSubR, eval, ih]
 
 lemma toFormula_iterSub {I : Type*} {L : Signature} (f : I → Formula L)
     (ψ φ : LukPropForm I) (k : ℕ) :

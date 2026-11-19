@@ -123,4 +123,38 @@ lemma half_tsub {x : ℝ} (hx : 0 ≤ x) : x ∸ (x / 2) = x / 2 := by
 
 end tsubR
 
+/-- Iterated truncated subtraction on `ℝ`. -/
+def iterSubR (b a : ℝ) : ℕ → ℝ
+  | 0 => b
+  | n + 1 => iterSubR b a n ∸ a
+
+lemma iterSubR_eq {b a : ℝ} (hb : 0 ≤ b) (ha : 0 ≤ a) (k : ℕ) :
+    iterSubR b a k = max (b - (k : ℝ) * a) 0 := by
+  induction k with
+  | zero =>
+    simp [iterSubR, max_eq_left hb]
+  | succ k ih =>
+    rw [iterSubR, ih, tsubR.def_eq]
+    by_cases h : b ≤ (k : ℝ) * a
+    · have hnonpos : b - (k : ℝ) * a ≤ 0 := by linarith
+      rw [max_eq_right hnonpos]
+      have hsub : (0 : ℝ) - a ≤ 0 := by linarith
+      rw [max_eq_right hsub]
+      have htail : b - ((k + 1 : ℕ) : ℝ) * a ≤ 0 := by
+        push_cast
+        linarith
+      exact (max_eq_right htail).symm
+    · push Not at h
+      have hpos : 0 ≤ b - (k : ℝ) * a := by linarith
+      rw [max_eq_left hpos]
+      have hdiff : b - (k : ℝ) * a - a = b - ((k + 1 : ℕ) : ℝ) * a := by
+        push_cast
+        ring
+      rw [hdiff]
+
+lemma tsubR_zero {x : ℝ} (hx : 0 ≤ x) : x ∸ 0 = x := by
+  rw [tsubR.def_eq]
+  have : x - 0 = x := by ring
+  rw [this, max_eq_left hx]
+
 end ContinuousFOL

@@ -37,8 +37,9 @@ theorem henkin_model_existence {L : Signature} {Γ : Set (Formula L)}
   · exact Set.Subset.trans Set.subset_union_left hsub
   · intro φ hφ
     rw [termPreStructure_eval_eq_sup hmc hhenkΔ φ, maximal_consistent_sup_eq_inf hmc φ]
-    have h0 : Formula.tsub φ (Formula.dyadic Lc .zero) ∈ Δ := by
-      sorry
+    have h0 : Formula.tsub φ (Formula.dyadic Lc .zero) ∈ Δ :=
+      -- (A1) and modus ponens.
+      (hmc.mem_iff_provable _).mpr (.mp (.hyp hφ) (ProvableQ.ax0 (.A1 _ _)))
     have hnonneg : ∀ r ∈ {r : ℝ | ∃ q : DyadicCode, r = q.val ∧
         Formula.tsub φ (Formula.dyadic Lc q) ∈ Δ}, 0 ≤ r := by
       rintro _ ⟨q, rfl, _⟩; exact (q.val_mem_Icc).1

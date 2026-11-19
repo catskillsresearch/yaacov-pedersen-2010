@@ -22,7 +22,7 @@ theorem completeness_metric {LM : MetricSignature} (Γ : Set (Formula LM.toSigna
     ConsistentMetricQ Γ ↔ CompletelySatisfiable Γ := by
   refine ⟨?_, satisfiable_consistent_metric Γ⟩
   intro hcons
-  obtain ⟨M, σ, hM⟩ := henkin_model_existence_metric hcons
+  obtain ⟨M, σ, hM⟩ := metric_prestructure_model_of_consistent hcons
   exact (satisfiable_metric_iff_complete Γ).mp ⟨M, σ, hM⟩
 
 end ContinuousFOL

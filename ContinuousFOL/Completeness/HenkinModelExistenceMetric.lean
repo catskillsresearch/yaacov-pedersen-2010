@@ -152,7 +152,9 @@ def ofMetricAxioms {LM : MetricSignature} (N : PreStructure LM.toSignature)
 
 end HenkinMetric
 
-theorem henkin_model_existence_metric {LM : MetricSignature}
+/-- Helper for Theorem 9.5 (metric): a metric-consistent `Γ` is modelled by some continuous
+metric `𝓛`-pre-structure (first step of the proof of Theorem 9.5; not a paper statement). -/
+theorem metric_prestructure_model_of_consistent {LM : MetricSignature}
     {Γ : Set (Formula LM.toSignature)} (hcons : ConsistentMetricQ Γ) :
     ∃ (M : MetricPreStructure LM) (σ : Var → M.Carrier),
       ModelsPre M.toPreStructure σ Γ := by
@@ -167,5 +169,54 @@ theorem henkin_model_existence_metric {LM : MetricSignature}
     exact hMΔ _ (hΓΔ ⟨φ, hφ, rfl⟩)
   refine ⟨HenkinMetric.ofMetricAxioms (ext.reductPre M) σ
     (fun φ hφ => hN φ (Or.inr hφ)), σ, fun φ hφ => hN φ (Or.inl hφ)⟩
+
+/-- Theorem 9.4 (for a signature with a metric): if `Γ` is consistent, there is a continuous
+signature `𝓛ᶜ ⊇ 𝓛` (with the same metric symbol), a maximal consistent and Henkin complete
+`Δ ⊆ For(𝓛ᶜ)` with `Δ ⊇ Γ`, a continuous `𝓛ᶜ`-pre-structure `𝔐` and an `𝔐`-assignment `σ`
+such that `(𝔐, σ) ⊨_Q Δ`. -/
+theorem henkin_model_existence_metric {LM : MetricSignature}
+    {Γ : Set (Formula LM.toSignature)} (hcons : ConsistentMetricQ Γ) :
+    ∃ (LMc : MetricSignature) (ext : SignatureExtension LM.toSignature LMc.toSignature)
+      (_ : ext.relEquiv LM.distSym = LMc.distSym)
+      (Δ : Set (Formula LMc.toSignature)) (M : MetricPreStructure LMc) (σ : Var → M.Carrier),
+      MaximalConsistentMetric Δ ∧ HenkinComplete Δ ∧
+      (ext.mapFormula '' Γ) ⊆ Δ ∧ ModelsPre M.toPreStructure σ Δ := by
+  obtain ⟨LMc, ext, hdist, Γc, hhenk, hcons_ext⟩ := exists_henkin_extension_metric LM
+  -- Extend `ext Γ ∪ Γᶜ ∪ {metric axioms of 𝓛ᶜ}` to a maximal consistent set (Theorem 8.10).
+  have hcons' : ConsistentQ ((ext.mapFormula '' Γ ∪ Γc) ∪ metricAxiomSet LMc) := by
+    obtain ⟨φ, hφ⟩ := hcons_ext Γ hcons
+    exact ⟨φ, fun h => hφ ((provableMetricQ_iff_provableQ _ φ).mpr h)⟩
+  obtain ⟨Δ, hsub, hmc⟩ := exists_maximal_consistent hcons'
+  have key : ∀ φ, ProvableMetricQ Δ φ ↔ ProvableQ Δ φ := fun φ =>
+    (provableMetricQ_iff_provableQ Δ φ).trans
+      ⟨fun h => h.mono (Set.union_subset subset_rfl fun _ hm => hsub (Or.inr hm)),
+        fun h => h.mono Set.subset_union_left⟩
+  have hmcm : MaximalConsistentMetric Δ := by
+    refine ⟨?_, ?_, hmc.comparable⟩
+    · obtain ⟨φ, hφ⟩ := hmc.consistent
+      exact ⟨φ, fun h => hφ ((key φ).mp h)⟩
+    · exact fun φ h => hmc.archimedean φ fun n => (key _).mp (h n)
+  have hhenkΔ : HenkinComplete Δ := by
+    intro φ x p q hpq
+    obtain ⟨c, hc, hmem⟩ := hhenk Γ φ x p q hpq
+    exact ⟨c, hc, hsub (Or.inl hmem)⟩
+  -- The term pre-structure of `Δ` models `Δ` (truth lemma).
+  have hM : ModelsPre (termPreStructure Δ) (idTermAssign LMc.toSignature) Δ := by
+    intro φ hφ
+    rw [termPreStructure_eval_eq_sup hmc hhenkΔ φ, maximal_consistent_sup_eq_inf hmc φ]
+    have h0 : Formula.tsub φ (Formula.dyadic LMc.toSignature .zero) ∈ Δ :=
+      (hmc.mem_iff_provable _).mpr (.mp (.hyp hφ) (ProvableQ.ax0 (.A1 _ _)))
+    have hnonneg : ∀ r ∈ {r : ℝ | ∃ q : DyadicCode, r = q.val ∧
+        Formula.tsub φ (Formula.dyadic LMc.toSignature q) ∈ Δ}, 0 ≤ r := by
+      rintro _ ⟨q, rfl, _⟩; exact (q.val_mem_Icc).1
+    apply le_antisymm
+    · exact le_trans (csInf_le ⟨0, hnonneg⟩ ⟨.zero, DyadicCode.val_zero.symm, h0⟩) (by simp)
+    · exact le_csInf ⟨0, .zero, DyadicCode.val_zero.symm, h0⟩ hnonneg
+  -- Since `Δ` contains the metric axioms of `𝓛ᶜ`, it is a metric pre-structure.
+  refine ⟨LMc, ext, hdist, Δ,
+    HenkinMetric.ofMetricAxioms (termPreStructure Δ) (idTermAssign LMc.toSignature)
+      (fun φ hφ => hM φ (hsub (Or.inr hφ))),
+    idTermAssign LMc.toSignature, hmcm, hhenkΔ,
+    fun φ hφ => hsub (Or.inl (Or.inl hφ)), hM⟩
 
 end ContinuousFOL

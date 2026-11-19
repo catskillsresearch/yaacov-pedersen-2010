@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T18:43:40Z",
+  "updated": "2026-11-19T19:18:17Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -389,10 +389,19 @@
       "id": "henkin_model_existence_metric",
       "label": "Thm 9.4 metric",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/HenkinModelExistenceMetric.lean:155",
+      "file": "ContinuousFOL/Completeness/HenkinModelExistenceMetric.lean:177",
       "status": "done",
       "blocker": null,
-      "detail": "Metric Henkin model existence."
+      "detail": "Consistent \u21d2 metric term-model of a maximal consistent Henkin complete \u0394 \u2287 \u0393."
+    },
+    {
+      "id": "metric_prestructure_model_of_consistent",
+      "label": "9.5 met helper",
+      "section": 9,
+      "file": "ContinuousFOL/Completeness/HenkinModelExistenceMetric.lean:157",
+      "status": "done",
+      "blocker": null,
+      "detail": "Helper: metric-consistent \u0393 has a metric pre-structure model."
     },
     {
       "id": "completeness_pre",
@@ -611,12 +620,22 @@
       "kind": "hard"
     },
     {
-      "from": "exists_maximal_consistent_metric",
+      "from": "exists_maximal_consistent",
       "to": "henkin_model_existence_metric",
       "kind": "hard"
     },
     {
-      "from": "henkin_model_existence_metric",
+      "from": "termPreStructure_eval_eq_sup",
+      "to": "henkin_model_existence_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "henkin_model_existence",
+      "to": "metric_prestructure_model_of_consistent",
+      "kind": "hard"
+    },
+    {
+      "from": "metric_prestructure_model_of_consistent",
       "to": "completeness_metric",
       "kind": "hard"
     },

@@ -21,8 +21,10 @@ eval_reduct -hard-> completeness_pre
 henkin_model_existence -hard-> completeness_pre
 satisfiable_consistent_pre -hard-> completeness_pre
 exists_henkin_extension_metric -hard-> henkin_model_existence_metric
-exists_maximal_consistent_metric -hard-> henkin_model_existence_metric
-henkin_model_existence_metric -hard-> completeness_metric
+exists_maximal_consistent -hard-> henkin_model_existence_metric
+termPreStructure_eval_eq_sup -hard-> henkin_model_existence_metric
+henkin_model_existence -hard-> metric_prestructure_model_of_consistent
+metric_prestructure_model_of_consistent -hard-> completeness_metric
 satisfiable_consistent_metric -hard-> completeness_metric
 completeness_pre -hard-> compactness_pre
 inconsistent_iff_provable_one -hard-> compactness_pre

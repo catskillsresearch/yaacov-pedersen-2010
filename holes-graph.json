@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-19T18:35:55Z",
-  "sorryCount": 15,
+  "updated": "2026-11-19T18:41:47Z",
+  "sorryCount": 12,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
     "blocked": "Waiting on incomplete required proof-deps",
@@ -13,7 +13,7 @@
     "\u00a74 axioms are intentional black boxes and stay open until discharged.",
     "Blue = done. Green = open. Grey = blocked.",
     "Regenerate with: python3 scripts/build_holes.py",
-    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, exists_metric_completion, eval_uniformly_continuous, henkin_model_existence_metric."
+    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, exists_metric_completion, eval_uniformly_continuous, approximated_strong_completeness_metric, pavelka_completeness_metric."
   ],
   "nodes": [
     {
@@ -389,8 +389,8 @@
       "id": "henkin_model_existence_metric",
       "label": "Thm 9.4 metric",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/HenkinModelExistenceMetric.lean:19",
-      "status": "open",
+      "file": "ContinuousFOL/Completeness/HenkinModelExistenceMetric.lean:155",
+      "status": "done",
       "blocker": null,
       "detail": "Metric Henkin model existence."
     },
@@ -408,8 +408,8 @@
       "label": "Thm 9.5 metric",
       "section": 9,
       "file": "ContinuousFOL/Completeness/CompletenessMetric.lean:21",
-      "status": "blocked",
-      "blocker": "needs henkin_model_existence_metric",
+      "status": "done",
+      "blocker": null,
       "detail": "ConsistentMetricQ \u2194 CompletelySatisfiable."
     },
     {
@@ -444,8 +444,8 @@
       "label": "Cor 9.6 metric",
       "section": 9,
       "file": "ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean:53",
-      "status": "blocked",
-      "blocker": "needs completeness_metric",
+      "status": "open",
+      "blocker": null,
       "detail": "EntailsComplete \u2194 \u2200n ProvableMetricQ (\u03c6\u22382\u207b\u207f)."
     },
     {
@@ -462,8 +462,8 @@
       "label": "Cor 9.8 metric",
       "section": 9,
       "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:101",
-      "status": "blocked",
-      "blocker": "needs completeness_metric",
+      "status": "open",
+      "blocker": null,
       "detail": "degreeOfTruthComplete = degreeOfProvabilityMetric."
     },
     {
@@ -480,8 +480,8 @@
       "label": "Cor 9.12 metric",
       "section": 9,
       "file": "ContinuousFOL/Completeness/CompactnessMetric.lean:22",
-      "status": "blocked",
-      "blocker": "needs completeness_metric",
+      "status": "done",
+      "blocker": null,
       "detail": "Finite complete-satisfiability \u21d2 CompletelySatisfiable."
     },
     {

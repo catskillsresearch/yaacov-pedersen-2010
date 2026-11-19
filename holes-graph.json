@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T22:45:01Z",
+  "updated": "2026-11-19T23:16:44Z",
   "sorryCount": 5,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -227,7 +227,7 @@
       "id": "deduction_theorem",
       "label": "Deduction",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/DeductionTheorem.lean:209",
+      "file": "ContinuousFOL/Essentials/DeductionTheorem.lean:167",
       "status": "done",
       "blocker": null,
       "detail": "Deduction theorem (pre)."
@@ -236,7 +236,7 @@
       "id": "deduction_theorem_metric",
       "label": "Deduction met",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/DeductionTheorem.lean:277",
+      "file": "ContinuousFOL/Essentials/DeductionTheorem.lean:235",
       "status": "done",
       "blocker": null,
       "detail": "Deduction theorem (metric)."
@@ -326,7 +326,7 @@
       "id": "consistent_adjoin_approx",
       "label": "Adjoin approx",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:136",
+      "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:131",
       "status": "done",
       "blocker": null,
       "detail": "Consistent adjunction of approximate inequalities."
@@ -335,7 +335,7 @@
       "id": "consistent_adjoin_approx_metric",
       "label": "Adjoin approx met",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:188",
+      "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:183",
       "status": "done",
       "blocker": null,
       "detail": "Lemma 8.5(i) for a signature with a metric."
@@ -344,7 +344,7 @@
       "id": "consistent_adjoin_comparable",
       "label": "Adjoin comparable",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:158",
+      "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:153",
       "status": "done",
       "blocker": null,
       "detail": "Consistent adjunction of comparability."
@@ -353,7 +353,7 @@
       "id": "consistent_adjoin_comparable_metric",
       "label": "Adjoin comparable met",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:209",
+      "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:204",
       "status": "done",
       "blocker": null,
       "detail": "Lemma 8.5(ii) for a signature with a metric."

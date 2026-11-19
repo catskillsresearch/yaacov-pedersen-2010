@@ -71,17 +71,31 @@ explicit tautology families (`deductionSchema`, `swapOneIter`) and Fact 4.5
 at \(\Sigma = \emptyset\). The official statements will still be proved in
 full strength.
 
+## Progress after the WDT + semantic-iteration checkpoint
+
+Steps 1 and 2 are done and `sorry`-free (commits `c7c1508` and this one).
+Actual size was larger than the 600–1,100 line preview, mainly because of
+the polyhedral-cell argument for semantic iteration:
+
+- Weak deduction theorems (both directions, both calculi): about 500 lines
+  (`LukPropFormDeduction`, `CLPropFormDeduction`, plus moving `iterSub`).
+- Semantic iteration for finite premise sets, both calculi: about 1,240 lines
+  (`AffineFn`, `PolyCell`, `HasPL`, and the two `*SemanticIteration` files).
+
+The official Fact 4.1 / 4.5 statements are unchanged and still `sorry`.
+The board is still 5 open, 0 blocked, 62 done.
+
 ## Remaining work and size estimate
 
 | Step | What | Rough size | Sessions |
 |------|------|------------|----------|
-| 1 | Weak deduction theorems for both propositional calculi (the first-order Theorem 8.1 is already proved, and is a guide) | 300–500 lines | 1 |
-| 2 | Semantic iteration / compactness on \([0,1]^k\) | 300–600 lines | 1 |
-| 3 | **Fact 4.1, converse.** Chang’s MV-algebra completeness: MV-algebra structure on \([0,1]\) and on the Lindenbaum algebra; if a term is identically \(0\) on \([0,1]\) then it is derivable. (Rose–Rosser’s original syntactic proof is the alternative, and is no smaller.) | 2,000–4,000 lines | 3–8 |
-| 4 | **Fact 4.5, converse.** Weak completeness for continuous logic, then the reduction in the previous section. This needs an extension of step 3 to a \(\frac12\)-operation (divisible / product MV, or a McNaughton argument with dyadic coefficients). | 1,000–2,000 lines on top of step 3 | 2–4 |
+| 1 | Weak deduction theorems for both propositional calculi | done, ~500 lines | done |
+| 2 | Semantic iteration for finite premise sets | done, ~1,240 lines | done |
+| 3 | **Fact 4.1, converse.** Chang’s MV-algebra completeness: MV-algebra structure on `[0,1]` and on the Lindenbaum algebra; if a term is identically `0` on `[0,1]` then it is derivable. (Rose–Rosser’s original syntactic proof is the alternative, and is no smaller.) | 2,000–4,000 lines | 3–8 |
+| 4 | **Fact 4.5, converse.** Weak completeness for continuous logic, then the reduction in the previous section. This needs an extension of step 3 to a `½`-operation (divisible / product MV, or a McNaughton argument with dyadic coefficients). | 1,000–2,000 lines on top of step 3 | 2–4 |
 
-**Overall:** on the order of 4,000–7,000 lines after this checkpoint, spread
-across about 6–14 further runs if each run ends at a compiling checkpoint.
+**Overall remaining:** on the order of 3,000–6,000 lines, spread across about
+5–12 further runs if each run ends at a compiling checkpoint.
 Step 3 is the critical path and the main uncertainty: if Chang’s argument
 goes smoothly the lower end is realistic; if representation-theoretic
 lemmas balloon, the upper end is more likely.
@@ -93,8 +107,6 @@ machinery once 4.1 and 4.5 are in place, and should stay last.
 ## Suggested order on resume
 
 1. Keep the official statements fixed.
-2. Formalize the two weak deduction theorems and the semantic iteration
-   lemmas (shared infrastructure, useful for both Facts).
-3. Start Chang’s completeness for Łukasiewicz (Fact 4.1), committing
+2. Start Chang’s completeness for Łukasiewicz (Fact 4.1), committing
    MV-algebra / Lindenbaum infrastructure as it compiles.
-4. Extend the argument by \(\frac12\) and finish Fact 4.5.
+3. Extend the argument by `½` and finish Fact 4.5.

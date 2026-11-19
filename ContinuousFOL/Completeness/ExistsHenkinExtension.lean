@@ -13,6 +13,7 @@ public import ContinuousFOL.LanguageAndSemantics.MetricSignature
 public import ContinuousFOL.Completeness.ProvableTsubOfInconsistentAdjoin
 public import ContinuousFOL.Essentials.GeneralizeFreshConst
 public import ContinuousFOL.Essentials.MaximalConsistent
+public import ContinuousFOL.Essentials.MaximalConsistentMetric
 
 @[expose] public section
 
@@ -779,6 +780,27 @@ lemma consistent_finite (Γ : Set (Formula L)) (hΓ : ConsistentQ Γ) (T : Finse
   exact henkin_adjoin_consistent ih' τ.1 τ.2.1 τ.2.2.1 τ.2.2.2 (hT τ hτT) (hconst τ)
     (hconst_arity τ) hcΓ hcφ
 
+/-- Proposition 9.2(ii) in the form used for both the plain and the metric case. -/
+lemma consistent_union (Γ : Set (Formula L)) (hΓ : ConsistentQ Γ) :
+    ConsistentQ ((henkinExt L).mapFormula '' Γ ∪ henkinSet L) := by
+  by_contra hinc
+  rw [inconsistent_iff_provable_one] at hinc
+  obtain ⟨Γ₀, hΓ₀, hpr⟩ := ProvableQ.compact hinc
+  have hF : (↑(Γ₀.filter (· ∈ henkinSet L)) : Set (Formula (henkinSig L))) ⊆
+      henkinAx '' {τ : HTup L | τ.2.2.1.val < τ.2.2.2.val} :=
+    fun θ hθ => (Finset.mem_filter.mp hθ).2
+  obtain ⟨T, hT, hTimg⟩ := Finset.subset_set_image_iff.mp hF
+  have hcons := consistent_finite Γ hΓ T (fun τ h => hT (Finset.mem_coe.mpr h))
+  refine (inconsistent_iff_provable_one _).mpr (ProvableQ.mono ?_ hpr) hcons
+  intro θ hθ
+  by_cases h : θ ∈ henkinSet L
+  · right
+    rw [hTimg]
+    exact Finset.mem_coe.mpr (Finset.mem_filter.mpr ⟨hθ, h⟩)
+  · rcases hΓ₀ hθ with h' | h'
+    · exact Or.inl h'
+    · exact absurd h' h
+
 end HenkinExt
 
 /-- Proposition 9.2: Existence of a conservative Henkin completion `(L^c, Γ^c)`. -/
@@ -792,23 +814,120 @@ theorem exists_henkin_extension (L : Signature) :
     exact ⟨HenkinExt.hconst (φ, x, p, q), HenkinExt.hconst_arity _,
       Or.inr ⟨(φ, x, p, q), hpq, rfl⟩⟩
   · -- (ii): compactness reduces to finitely many Henkin axioms.
-    by_contra hinc
-    rw [inconsistent_iff_provable_one] at hinc
-    obtain ⟨Γ₀, hΓ₀, hpr⟩ := ProvableQ.compact hinc
-    have hF : (↑(Γ₀.filter (· ∈ HenkinExt.henkinSet L)) : Set (Formula (henkinSig L))) ⊆
-        HenkinExt.henkinAx '' {τ : HenkinExt.HTup L | τ.2.2.1.val < τ.2.2.2.val} :=
-      fun θ hθ => (Finset.mem_filter.mp hθ).2
-    obtain ⟨T, hT, hTimg⟩ := Finset.subset_set_image_iff.mp hF
-    have hcons := HenkinExt.consistent_finite Γ hΓ T (fun τ h => hT (Finset.mem_coe.mpr h))
-    refine (inconsistent_iff_provable_one _).mpr (ProvableQ.mono ?_ hpr) hcons
-    intro θ hθ
-    by_cases h : θ ∈ HenkinExt.henkinSet L
-    · right
-      rw [hTimg]
-      exact Finset.mem_coe.mpr (Finset.mem_filter.mpr ⟨hθ, h⟩)
-    · rcases hΓ₀ hθ with h' | h'
-      · exact Or.inl h'
-      · exact absurd h' h
+    exact HenkinExt.consistent_union Γ hΓ
+
+namespace HenkinExt
+
+/-- Replace hypotheses by sets proving them. -/
+lemma ProvableQ.replace_hyps {L : Signature} {A B : Set (Formula L)} {φ : Formula L}
+    (h : ProvableQ A φ) (hAB : ∀ ψ ∈ A, ProvableQ B ψ) : ProvableQ B φ := by
+  induction h with
+  | ax hax => exact .ax hax
+  | hyp hm => exact hAB _ hm
+  | mp _ _ ih₁ ih₂ => exact .mp ih₁ ih₂
+
+/-- `L^c` with the metric symbol of `LM`. -/
+abbrev henkinMSig (LM : MetricSignature) : MetricSignature where
+  toSignature := henkinSig LM.toSignature
+  distSym := LM.distSym
+  distArity := LM.distArity
+
+lemma mapFormula_genList {L : Signature} (xs : List Var) (φ : Formula L) :
+    (henkinExt L).mapFormula (Formula.genList xs φ) =
+      Formula.genList xs ((henkinExt L).mapFormula φ) := by
+  induction xs with
+  | nil => rfl
+  | cons y ys ih => simp only [Formula.genList, SignatureExtension.mapFormula, ih]
+
+lemma mapFormula_dyadic {L : Signature} (d : DyadicCode) :
+    (henkinExt L).mapFormula (Formula.dyadic L d) = Formula.dyadic (henkinSig L) d := by
+  induction d with
+  | one => rfl
+  | neg d ih => simp only [Formula.dyadic, SignatureExtension.mapFormula, ih]
+  | tsub a b iha ihb => simp only [Formula.dyadic, SignatureExtension.mapFormula, iha, ihb]
+  | half d ih => simp only [Formula.dyadic, SignatureExtension.mapFormula, ih]
+
+variable {LM : MetricSignature}
+
+lemma mapFormula_dist (t₀ t₁ : Term LM.toSignature) :
+    (henkinExt LM.toSignature).mapFormula (Formula.dist (LM := LM) t₀ t₁) =
+      Formula.dist (LM := henkinMSig LM) ((henkinExt _).mapTerm t₀)
+        ((henkinExt _).mapTerm t₁) := by
+  simp only [Formula.dist, SignatureExtension.mapFormula]
+  congr 1
+  funext i
+  split_ifs with h1 h2 h2 <;> first | rfl | exact absurd h1 h2 | exact absurd h2 h1
+
+lemma mapTerm_func_replaceArg (f : LM.Func) (v : Fin (LM.funcArity f) → Var)
+    (i : Fin (LM.funcArity f)) (z : Var) :
+    (henkinExt LM.toSignature).mapTerm (.func f (replaceArg (fun j => .var (v j)) i (.var z))) =
+      (Term.func (L := henkinSig LM.toSignature) (HCode.base f)
+        (replaceArg (fun j => .var (v j)) i (.var z))) := by
+  simp only [SignatureExtension.mapTerm]
+  congr 1
+  funext j
+  simp only [replaceArg]
+  split_ifs with h1 h2 h2 <;> first | rfl | exact absurd h1 h2 | exact absurd h2 h1
+
+lemma mapFormula_rel_replaceArg (P : LM.Rel) (v : Fin (LM.relArity P) → Var)
+    (i : Fin (LM.relArity P)) (z : Var) :
+    (henkinExt LM.toSignature).mapFormula (.rel P (replaceArg (fun j => .var (v j)) i (.var z))) =
+      (Formula.rel (L := henkinSig LM.toSignature) P
+        (replaceArg (fun j => .var (v j)) i (.var z))) := by
+  simp only [SignatureExtension.mapFormula]
+  congr 1
+  funext j
+  simp only [replaceArg]
+  split_ifs with h1 h2 h2 <;> first | rfl | exact absurd h1 h2 | exact absurd h2 h1
+
+/-- Every metric axiom of `L^c` is provable from the images of the metric axioms of `L`. -/
+lemma metric_ax_provable {ψ : Formula (henkinMSig LM).toSignature}
+    (h : ψ ∈ metricAxiomSet (henkinMSig LM)) :
+    ProvableQ ((henkinExt LM.toSignature).mapFormula '' metricAxiomSet LM) ψ := by
+  obtain ⟨xs, χ, hχ, rfl⟩ := h
+  have img : ∀ χ₀ : Formula LM.toSignature, MetricAxiomSchema (LM := LM) χ₀ →
+      (henkinExt LM.toSignature).mapFormula χ₀ = χ →
+      ProvableQ ((henkinExt LM.toSignature).mapFormula '' metricAxiomSet LM)
+        (Formula.genList xs χ) := by
+    rintro χ₀ h₀ rfl
+    exact .hyp ⟨Formula.genList xs χ₀, ⟨xs, χ₀, h₀, rfl⟩, mapFormula_genList xs χ₀⟩
+  cases hχ with
+  | base h => exact .ax h
+  | A10 x => exact img _ (.A10 x) (mapFormula_dist _ _)
+  | A11 x y =>
+    exact img _ (.A11 x y) (by simp only [SignatureExtension.mapFormula, mapFormula_dist]; rfl)
+  | A12 x y z =>
+    exact img _ (.A12 x y z) (by simp only [SignatureExtension.mapFormula, mapFormula_dist]; rfl)
+  | A13 f i ε r q v z w h0 h1 hr hq =>
+    cases f
+    case base f₀ =>
+      exact img _ (.A13 (LM := LM) f₀ i ε r q v z w h0 h1 hr hq) (by
+        simp only [Formula.minF, SignatureExtension.mapFormula, mapFormula_dist,
+          mapFormula_dyadic]
+        erw [mapTerm_func_replaceArg f₀ v i z, mapTerm_func_replaceArg f₀ v i w]
+        rfl)
+    all_goals exact Fin.elim0 i
+  | A14 P i ε r q v z w h0 h1 hr hq =>
+    exact img (Formula.minF
+        (.tsub (Formula.dyadic LM.toSignature q) (Formula.dist (LM := LM) (.var z) (.var w)))
+        (.tsub (.tsub (.rel P (replaceArg (fun j => .var (v j)) i (.var z)))
+                      (.rel P (replaceArg (fun j => .var (v j)) i (.var w))))
+               (Formula.dyadic LM.toSignature r)))
+      (.A14 (LM := LM) P i ε r q v z w h0 h1 hr hq) (by
+        have e1 := mapFormula_rel_replaceArg (LM := LM) P v i z
+        have e2 := mapFormula_rel_replaceArg (LM := LM) P v i w
+        have e3 := mapFormula_dist (LM := LM) (.var z) (.var w)
+        have e4 := mapFormula_dyadic (L := LM.toSignature) q
+        have e5 := mapFormula_dyadic (L := LM.toSignature) r
+        show Formula.minF (.tsub ((henkinExt LM.toSignature).mapFormula (Formula.dyadic LM.toSignature q))
+            ((henkinExt LM.toSignature).mapFormula (Formula.dist (LM := LM) (.var z) (.var w))))
+          (.tsub (.tsub ((henkinExt LM.toSignature).mapFormula (.rel P (replaceArg (fun j => .var (v j)) i (.var z))))
+              ((henkinExt LM.toSignature).mapFormula (.rel P (replaceArg (fun j => .var (v j)) i (.var w)))))
+            ((henkinExt LM.toSignature).mapFormula (Formula.dyadic LM.toSignature r))) = _
+        rw [e1, e2, e3, e4, e5]
+        rfl)
+
+end HenkinExt
 
 theorem exists_henkin_extension_metric (LM : MetricSignature) :
     ∃ (LMc : MetricSignature) (ext : SignatureExtension LM.toSignature LMc.toSignature)
@@ -817,6 +936,27 @@ theorem exists_henkin_extension_metric (LM : MetricSignature) :
       (∀ Γ : Set (Formula LM.toSignature), HenkinComplete ((ext.mapFormula '' Γ) ∪ Γc)) ∧
       (∀ Γ : Set (Formula LM.toSignature),
         ConsistentMetricQ Γ → ConsistentMetricQ ((ext.mapFormula '' Γ) ∪ Γc)) := by
-  sorry
+  refine ⟨HenkinExt.henkinMSig LM, henkinExt LM.toSignature, rfl,
+    HenkinExt.henkinSet LM.toSignature, fun Γ => ?_, fun Γ hΓ => ?_⟩
+  · -- (i): as in the non-metric case.
+    intro φ x p q hpq
+    exact ⟨HenkinExt.hconst (φ, x, p, q), HenkinExt.hconst_arity _,
+      Or.inr ⟨(φ, x, p, q), hpq, rfl⟩⟩
+  · -- (ii): apply the non-metric case to `Γ ∪ {metric axioms}`; the metric axioms of
+    -- `L^c` follow from the images of those of `L`.
+    have hΓ' : ConsistentQ (Γ ∪ metricAxiomSet LM) := by
+      obtain ⟨φ, hφ⟩ := hΓ
+      exact ⟨φ, fun h => hφ ((provableMetricQ_iff_provableQ Γ φ).mpr h)⟩
+    obtain ⟨φ, hφ⟩ := HenkinExt.consistent_union _ hΓ'
+    refine ⟨φ, fun h => hφ ?_⟩
+    rw [provableMetricQ_iff_provableQ] at h
+    refine HenkinExt.ProvableQ.replace_hyps h ?_
+    rintro ψ ((hψ | hψ) | hψ)
+    · obtain ⟨ψ₀, h₀, rfl⟩ := hψ
+      exact .hyp (Or.inl ⟨ψ₀, Or.inl h₀, rfl⟩)
+    · exact .hyp (Or.inr hψ)
+    · refine ProvableQ.mono ?_ (HenkinExt.metric_ax_provable hψ)
+      rintro θ ⟨θ₀, h₀, e⟩
+      exact Or.inl ⟨θ₀, Or.inr h₀, e⟩
 
 end ContinuousFOL

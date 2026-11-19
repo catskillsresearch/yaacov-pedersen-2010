@@ -230,10 +230,59 @@ theorem deduction_theorem {L : Signature} (Γ : Set (Formula L)) (φ ψ : Formul
     exact ProvableQ.cancel_iterSub (.hyp (Set.mem_union_right _ (Set.mem_singleton _))) n
       (hn.mono (by intro θ hθ; exact Set.mem_union_left _ hθ))
 
+lemma ProvableMetricQ.of_provableQ {LM : MetricSignature}
+    {Γ : Set (Formula LM.toSignature)} {φ : Formula LM.toSignature}
+    (h : ProvableQ Γ φ) : ProvableMetricQ Γ φ := by
+  induction h with
+  | @ax xs ψ hax => exact .ax (xs := xs) (.base hax)
+  | hyp hmem => exact .hyp hmem
+  | mp _ _ ih₁ ih₂ => exact .mp ih₁ ih₂
+
+lemma ProvableMetricQ.mono {LM : MetricSignature}
+    {Γ Γ' : Set (Formula LM.toSignature)} (hsub : Γ ⊆ Γ')
+    {φ : Formula LM.toSignature} (h : ProvableMetricQ Γ φ) : ProvableMetricQ Γ' φ := by
+  induction h with
+  | ax hax => exact .ax hax
+  | hyp hmem => exact .hyp (hsub hmem)
+  | mp h₁ h₂ ih₁ ih₂ => exact .mp ih₁ ih₂
+
+lemma ProvableMetricQ.cancel_iterSub {LM : MetricSignature}
+    {Γ : Set (Formula LM.toSignature)} {φ ψ : Formula LM.toSignature}
+    (hψ : ProvableMetricQ Γ ψ) (n : ℕ)
+    (h : ProvableMetricQ Γ (Formula.iterSub φ ψ n)) : ProvableMetricQ Γ φ := by
+  induction n generalizing φ with
+  | zero => simpa [Formula.iterSub] using h
+  | succ n ih =>
+    exact ih (by simpa [Formula.iterSub] using ProvableMetricQ.mp hψ h)
+
 theorem deduction_theorem_metric {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ ψ : Formula LM.toSignature) :
     ProvableMetricQ (Γ ∪ {ψ}) φ ↔
       ∃ n : ℕ, ProvableMetricQ Γ (Formula.iterSub φ ψ n) := by
-  sorry
+  constructor
+  · intro h
+    induction h with
+    | ax hax =>
+      exact ⟨0, by simpa [Formula.iterSub] using (ProvableMetricQ.ax (Γ := Γ) hax)⟩
+    | @hyp θ hmem =>
+      rcases (Set.mem_union θ Γ {ψ}).mp hmem with hΓ | hsing
+      · exact ⟨0, by simpa [Formula.iterSub] using ProvableMetricQ.hyp hΓ⟩
+      · have hθeq : θ = ψ := by simpa [Set.mem_singleton_iff] using hsing
+        exact ⟨1, by
+          simpa [hθeq, Formula.iterSub] using
+            (ProvableMetricQ.of_provableQ (ProvableQ.imp_refl (Γ := Γ) θ))⟩
+    | @mp α β _hα _himp ihα ihimp =>
+      obtain ⟨n, hn⟩ := ihα
+      obtain ⟨m, hm⟩ := ihimp
+      have hsch := ProvableMetricQ.of_provableQ
+        (ProvableQ.deduction_schema (Γ := Γ) β α ψ m n)
+      have hstep : ProvableMetricQ Γ
+          (.tsub (Formula.iterSub β ψ (m + n)) (Formula.iterSub (.tsub β α) ψ m)) :=
+        ProvableMetricQ.mp hn (by simpa [Nat.add_comm] using hsch)
+      exact ⟨m + n, ProvableMetricQ.mp hm hstep⟩
+  · rintro ⟨n, hn⟩
+    exact ProvableMetricQ.cancel_iterSub
+      (.hyp (Set.mem_union_right _ (Set.mem_singleton _))) n
+      (hn.mono (by intro θ hθ; exact Set.mem_union_left _ hθ))
 
 end ContinuousFOL

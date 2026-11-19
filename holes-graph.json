@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T19:23:32Z",
+  "updated": "2026-11-19T19:27:16Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -119,10 +119,10 @@
       "id": "bound_substitution_lemma",
       "label": "Bound subst",
       "section": 6,
-      "file": "ContinuousFOL/SubstitutionAndCompletions/BoundSubstitutionLemma.lean:193",
+      "file": "ContinuousFOL/SubstitutionAndCompletions/BoundSubstitutionLemma.lean:381",
       "status": "done",
       "blocker": null,
-      "detail": "Bound variable renaming lemma."
+      "detail": "Lemma 6.4: by a sequence of bound substitutions, \u03c6 \u2261 \u03c6' with x\u2080..x_{n-1} not bound."
     },
     {
       "id": "surjective_morphism_elementary",

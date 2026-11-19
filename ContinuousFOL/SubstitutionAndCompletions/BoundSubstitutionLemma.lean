@@ -189,11 +189,199 @@ lemma Formula.eval_renameBound {L : Signature} (M : PreStructure L) (avoid : Fin
       · rintro ⟨a, rfl⟩
         exact ⟨a, ih (updateAssign σ x a)⟩
 
-/-- Lemma 6.4 (Bound Substitution Lemma). -/
-theorem bound_substitution_lemma {L : Signature} (φ : Formula L) (xs : Finset Var) :
-    ∃ φ' : Formula L, Disjoint xs φ'.boundVars ∧ (φ ≡ᶠ φ') := by
-  refine ⟨φ.renameBound xs, Formula.boundVars_renameBound xs φ, ?_⟩
-  intro M σ
-  exact (Formula.eval_renameBound M xs φ σ).symm
+/-- `φ'` is obtained from `φ` by a (finite, possibly empty) sequence of bound substitutions
+`· {y/x}` (Definition 6.3). -/
+def Formula.BoundSubstReach {L : Signature} : Formula L → Formula L → Prop :=
+  Relation.ReflTransGen (fun φ ψ => ∃ y x : Var, ψ = φ.boundSubst y x)
+
+namespace BoundSubstAux
+
+variable {L : Signature}
+
+lemma term_not_mem_vars_subst_var (s : Term L) {x y : Var} (hyx : y ≠ x) :
+    x ∉ (s.subst (.var y) x).vars := by
+  induction s with
+  | var z =>
+    by_cases hz : z = x
+    · simp [Term.subst, hz, Term.vars, Ne.symm hyx]
+    · simp [Term.subst, hz, Term.vars, Ne.symm hz]
+  | func f args ih =>
+    simp only [Term.subst, Term.vars, Finset.mem_biUnion, Finset.mem_univ, true_and, not_exists]
+    exact ih
+
+lemma not_mem_freeVars_freeSubst_var (φ : Formula L) {x y : Var} (hyx : y ≠ x) :
+    x ∉ (φ.freeSubst (.var y) x).freeVars := by
+  induction φ with
+  | rel P args =>
+    simp only [Formula.freeSubst, Formula.freeVars, Finset.mem_biUnion, Finset.mem_univ,
+      true_and, not_exists]
+    exact fun i => term_not_mem_vars_subst_var _ hyx
+  | tsub α β ihα ihβ => simp [Formula.freeSubst, Formula.freeVars, ihα, ihβ]
+  | neg α ih => simpa [Formula.freeSubst, Formula.freeVars] using ih
+  | half α ih => simpa [Formula.freeSubst, Formula.freeVars] using ih
+  | sup z α ih =>
+    by_cases hz : z = x
+    · simp [Formula.freeSubst, Formula.freeVars, hz]
+    · simp [Formula.freeSubst, Formula.freeVars, hz, ih]
+
+lemma freeSubstCorrect_of_not_mem_freeVars (φ : Formula L) (t : Term L) {x : Var}
+    (hx : x ∉ φ.freeVars) : φ.FreeSubstCorrect t x := by
+  induction φ with
+  | rel _ _ => simp [Formula.FreeSubstCorrect]
+  | tsub α β ihα ihβ =>
+    simp only [Formula.freeVars, Finset.mem_union, not_or] at hx
+    exact ⟨ihα hx.1, ihβ hx.2⟩
+  | neg α ih => exact ih (by simpa [Formula.freeVars] using hx)
+  | half α ih => exact ih (by simpa [Formula.freeVars] using hx)
+  | sup z α ih =>
+    unfold Formula.FreeSubstCorrect
+    by_cases hz : z = x
+    · simp [hz]
+    · have hx' : x ∉ α.freeVars := by
+        intro h
+        exact hx (Finset.mem_erase.mpr ⟨Ne.symm hz, h⟩)
+      simp only [hz, ite_false]
+      exact ⟨fun h => absurd h hx', ih hx'⟩
+
+lemma freeSubstCorrect_boundSubst (φ : Formula L) {x y : Var} (hy : y ∉ φ.allVars) :
+    (φ.boundSubst y x).FreeSubstCorrect (.var y) x := by
+  induction φ with
+  | rel _ _ => simp [Formula.boundSubst, Formula.FreeSubstCorrect]
+  | tsub α β ihα ihβ =>
+    simp only [Formula.allVars, Finset.mem_union, not_or] at hy
+    exact ⟨ihα hy.1, ihβ hy.2⟩
+  | neg α ih => exact ih (by simpa [Formula.allVars] using hy)
+  | half α ih => exact ih (by simpa [Formula.allVars] using hy)
+  | sup z α ih =>
+    simp only [Formula.allVars, Finset.mem_insert, not_or] at hy
+    simp only [Formula.boundSubst]
+    split_ifs with hz
+    · subst hz
+      unfold Formula.FreeSubstCorrect
+      simp only [hy.1, ite_false]
+      exact ⟨fun h => absurd h (not_mem_freeVars_freeSubst_var _ hy.1),
+        freeSubstCorrect_of_not_mem_freeVars _ _ (not_mem_freeVars_freeSubst_var _ hy.1)⟩
+    · unfold Formula.FreeSubstCorrect
+      simp only [hz, ite_false]
+      refine ⟨fun _ hzv => ?_, ih hy.2⟩
+      have : z = y := by simpa [Term.vars] using hzv
+      exact hy.1 this.symm
+
+lemma eval_boundSubst (M : PreStructure L) (φ : Formula L) {x y : Var}
+    (hy : y ∉ φ.allVars) (σ : Var → M.Carrier) :
+    (φ.boundSubst y x).eval M σ = φ.eval M σ := by
+  induction φ generalizing σ with
+  | rel _ _ => rfl
+  | tsub α β ihα ihβ =>
+    simp only [Formula.allVars, Finset.mem_union, not_or] at hy
+    simp [Formula.boundSubst, Formula.eval, ihα hy.1 σ, ihβ hy.2 σ]
+  | neg α ih =>
+    simp [Formula.boundSubst, Formula.eval, ih (by simpa [Formula.allVars] using hy) σ]
+  | half α ih =>
+    simp [Formula.boundSubst, Formula.eval, ih (by simpa [Formula.allVars] using hy) σ]
+  | sup z α ih =>
+    simp only [Formula.allVars, Finset.mem_insert, not_or] at hy
+    have ih' := ih hy.2
+    simp only [Formula.boundSubst, Formula.eval]
+    split_ifs with hz
+    · subst hz
+      have hyx : y ≠ z := hy.1
+      have hy_free : y ∉ α.freeVars := fun h => hy.2 (Formula.freeVars_subset_allVars α h)
+      have hcorr := freeSubstCorrect_boundSubst α (x := z) hy.2
+      apply congrArg sSup
+      apply congrArg Set.range
+      funext a
+      rw [substitution_lemma M (updateAssign σ y a) (.var y) z _ hcorr]
+      have hvar : ((Term.var y).eval M (updateAssign σ y a)) = a := by simp [Term.eval]
+      rw [hvar, ih', ← updateAssign_comm σ hyx a a,
+        Formula.eval_update_of_not_mem_freeVars M (updateAssign σ z a) y a α hy_free]
+    · simp only [Formula.eval]
+      apply congrArg sSup
+      apply congrArg Set.range
+      funext a
+      exact ih' _
+
+lemma not_mem_boundVars_boundSubst (φ : Formula L) {x y : Var} (hyx : y ≠ x) :
+    x ∉ (φ.boundSubst y x).boundVars := by
+  induction φ with
+  | rel _ _ => simp [Formula.boundSubst, Formula.boundVars]
+  | tsub α β ihα ihβ => simp [Formula.boundSubst, Formula.boundVars, ihα, ihβ]
+  | neg α ih => simpa [Formula.boundSubst, Formula.boundVars] using ih
+  | half α ih => simpa [Formula.boundSubst, Formula.boundVars] using ih
+  | sup z α ih =>
+    simp only [Formula.boundSubst]
+    split_ifs with hz
+    · simp [Formula.boundVars, Formula.boundVars_freeSubst, Ne.symm hyx, ih]
+    · simp [Formula.boundVars, Ne.symm hz, ih]
+
+lemma boundVars_boundSubst_subset (φ : Formula L) (x y : Var) :
+    (φ.boundSubst y x).boundVars ⊆ insert y φ.boundVars := by
+  induction φ with
+  | rel _ _ => simp [Formula.boundSubst, Formula.boundVars]
+  | tsub α β ihα ihβ =>
+    simp only [Formula.boundSubst, Formula.boundVars]
+    intro v hv
+    rcases Finset.mem_union.mp hv with h | h
+    · rcases Finset.mem_insert.mp (ihα h) with h' | h'
+      · exact Finset.mem_insert.mpr (Or.inl h')
+      · exact Finset.mem_insert_of_mem (Finset.mem_union_left _ h')
+    · rcases Finset.mem_insert.mp (ihβ h) with h' | h'
+      · exact Finset.mem_insert.mpr (Or.inl h')
+      · exact Finset.mem_insert_of_mem (Finset.mem_union_right _ h')
+  | neg α ih => simpa [Formula.boundSubst, Formula.boundVars] using ih
+  | half α ih => simpa [Formula.boundSubst, Formula.boundVars] using ih
+  | sup z α ih =>
+    simp only [Formula.boundSubst]
+    split_ifs with hz
+    · simp only [Formula.boundVars, Formula.boundVars_freeSubst]
+      intro v hv
+      rcases Finset.mem_insert.mp hv with h | h
+      · exact Finset.mem_insert.mpr (Or.inl h)
+      · rcases Finset.mem_insert.mp (ih h) with h' | h'
+        · exact Finset.mem_insert.mpr (Or.inl h')
+        · exact Finset.mem_insert_of_mem (Finset.mem_insert_of_mem h')
+    · simp only [Formula.boundVars]
+      intro v hv
+      rcases Finset.mem_insert.mp hv with h | h
+      · exact Finset.mem_insert_of_mem (Finset.mem_insert.mpr (Or.inl h))
+      · rcases Finset.mem_insert.mp (ih h) with h' | h'
+        · exact Finset.mem_insert.mpr (Or.inl h')
+        · exact Finset.mem_insert_of_mem (Finset.mem_insert_of_mem h')
+
+/-- Finset form of Lemma 6.4. -/
+lemma exists_reach (s : Finset Var) (φ : Formula L) :
+    ∃ φ' : Formula L, φ.BoundSubstReach φ' ∧ Disjoint s φ'.boundVars ∧ (φ ≡ᶠ φ') := by
+  induction s using Finset.induction_on with
+  | empty => exact ⟨φ, Relation.ReflTransGen.refl, Finset.disjoint_empty_left _, fun _ _ => rfl⟩
+  | insert a s _ ih =>
+    obtain ⟨φ₁, hr, hd, he⟩ := ih
+    set y := freshAbove (insert a s ∪ φ₁.allVars)
+    have hy1 : y ∉ φ₁.allVars := fun h =>
+      freshAbove_not_mem (insert a s ∪ φ₁.allVars) (Finset.mem_union_right _ h)
+    have hys : y ∉ insert a s := fun h =>
+      freshAbove_not_mem (insert a s ∪ φ₁.allVars) (Finset.mem_union_left _ h)
+    have hya : y ≠ a := fun h => hys (h ▸ Finset.mem_insert_self _ _)
+    refine ⟨φ₁.boundSubst y a, hr.tail ⟨y, a, rfl⟩, ?_, ?_⟩
+    · rw [Finset.disjoint_left]
+      intro v hv hvb
+      rcases Finset.mem_insert.mp hv with rfl | hvs
+      · exact not_mem_boundVars_boundSubst φ₁ hya hvb
+      · rcases Finset.mem_insert.mp (boundVars_boundSubst_subset φ₁ a y hvb) with h | h
+        · subst h
+          exact hys (Finset.mem_insert_of_mem hvs)
+        · exact Finset.disjoint_left.mp hd hvs h
+    · intro M σ
+      rw [he M σ, eval_boundSubst M φ₁ hy1 σ]
+
+end BoundSubstAux
+
+/-- Lemma 6.4 (Bound Substitution Lemma): Let `φ` be a formula, and let `x₀, …, x_{n-1}` be a
+finite sequence of variables. Then by a sequence of bound substitutions there is a formula `φ'`
+in which `x₀, …, x_{n-1}` are not bound and `φ ≡ φ'`. -/
+theorem bound_substitution_lemma {L : Signature} (φ : Formula L) (n : ℕ) (xs : Fin n → Var) :
+    ∃ φ' : Formula L, φ.BoundSubstReach φ' ∧ (∀ i, xs i ∉ φ'.boundVars) ∧ (φ ≡ᶠ φ') := by
+  obtain ⟨φ', hr, hd, he⟩ := BoundSubstAux.exists_reach (Finset.univ.image xs) φ
+  exact ⟨φ', hr, fun i h => Finset.disjoint_left.mp hd
+    (Finset.mem_image_of_mem xs (Finset.mem_univ i)) h, he⟩
 
 end ContinuousFOL

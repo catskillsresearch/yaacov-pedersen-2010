@@ -107,7 +107,7 @@ NODES: dict[str, dict] = {
         "label": "Bound subst",
         "section": 6,
         "file": "ContinuousFOL/SubstitutionAndCompletions/BoundSubstitutionLemma.lean",
-        "detail": "Bound variable renaming lemma.",
+        "detail": "Lemma 6.4: by a sequence of bound substitutions, φ ≡ φ' with x₀..x_{n-1} not bound.",
     },
     "surjective_morphism_elementary": {
         "label": "Thm 6.6 elem.",

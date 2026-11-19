@@ -17,7 +17,8 @@ open Classical
 namespace ContinuousFOL
 
 /-- Fact 4.3: Consistency ↔ Satisfiability for Continuous Propositional Logic [Ben]. -/
-axiom cl_consistent_iff_satisfiable {I : Type*} (hypSet : Set (CLPropForm I)) :
-    CLPropForm.Consistent hypSet ↔ CLPropForm.Satisfiable hypSet
+theorem cl_consistent_iff_satisfiable {I : Type*} (hypSet : Set (CLPropForm I)) :
+    CLPropForm.Consistent hypSet ↔ CLPropForm.Satisfiable hypSet := by
+  sorry
 
 end ContinuousFOL

@@ -18,9 +18,10 @@ open Classical
 namespace ContinuousFOL
 
 /-- Fact 4.5: Finite Strong Completeness for Continuous Propositional Logic. -/
-axiom cl_finite_strong_completeness {I : Type*} (hypSet : Finset (CLPropForm I))
+theorem cl_finite_strong_completeness {I : Type*} (hypSet : Finset (CLPropForm I))
     (φ : CLPropForm I) :
     CLPropForm.Entails (hypSet : Set (CLPropForm I)) φ ↔
-      CLPropForm.Provable (hypSet : Set (CLPropForm I)) φ
+      CLPropForm.Provable (hypSet : Set (CLPropForm I)) φ := by
+  sorry
 
 end ContinuousFOL

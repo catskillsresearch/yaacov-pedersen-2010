@@ -17,7 +17,8 @@ open Classical
 namespace ContinuousFOL
 
 /-- Fact 4.2: Consistency ↔ Satisfiability for Łukasiewicz Logic. -/
-axiom luk_consistent_iff_satisfiable {I : Type*} (hypSet : Set (LukPropForm I)) :
-    LukPropForm.Consistent hypSet ↔ LukPropForm.Satisfiable hypSet
+theorem luk_consistent_iff_satisfiable {I : Type*} (hypSet : Set (LukPropForm I)) :
+    LukPropForm.Consistent hypSet ↔ LukPropForm.Satisfiable hypSet := by
+  sorry
 
 end ContinuousFOL

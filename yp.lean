@@ -208,16 +208,19 @@ end CLPropForm
 section BlackBoxTheorems
 
 /-- Fact 4.1: Weak Completeness for Łukasiewicz Logic [Cha59, RR58]. -/
-axiom luk_weak_completeness {I : Type*} (φ : LukPropForm I) :
-    LukPropForm.Entails ∅ φ ↔ LukPropForm.Provable ∅ φ
+theorem luk_weak_completeness {I : Type*} (φ : LukPropForm I) :
+    LukPropForm.Entails ∅ φ ↔ LukPropForm.Provable ∅ φ := by
+  sorry
 
 /-- Fact 4.2: Consistency ↔ Satisfiability for Łukasiewicz Logic. -/
-axiom luk_consistent_iff_satisfiable {I : Type*} (Σ_set : Set (LukPropForm I)) :
-    LukPropForm.Consistent Σ_set ↔ LukPropForm.Satisfiable Σ_set
+theorem luk_consistent_iff_satisfiable {I : Type*} (Σ_set : Set (LukPropForm I)) :
+    LukPropForm.Consistent Σ_set ↔ LukPropForm.Satisfiable Σ_set := by
+  sorry
 
 /-- Fact 4.3: Consistency ↔ Satisfiability for Continuous Propositional Logic [Ben]. -/
-axiom cl_consistent_iff_satisfiable {I : Type*} (Σ_set : Set (CLPropForm I)) :
-    CLPropForm.Consistent Σ_set ↔ CLPropForm.Satisfiable Σ_set
+theorem cl_consistent_iff_satisfiable {I : Type*} (Σ_set : Set (CLPropForm I)) :
+    CLPropForm.Consistent Σ_set ↔ CLPropForm.Satisfiable Σ_set := by
+  sorry
 
 /-- Fact 4.4: Approximated Strong Completeness for Continuous Propositional Logic. -/
 theorem cl_approx_strong_completeness {I : Type*} [Inhabited I]
@@ -228,10 +231,11 @@ theorem cl_approx_strong_completeness {I : Type*} [Inhabited I]
   sorry
 
 /-- Fact 4.5: Finite Strong Completeness for Continuous Propositional Logic. -/
-axiom cl_finite_strong_completeness {I : Type*} (Σ_set : Finset (CLPropForm I))
+theorem cl_finite_strong_completeness {I : Type*} (Σ_set : Finset (CLPropForm I))
     (φ : CLPropForm I) :
     CLPropForm.Entails (Σ_set : Set (CLPropForm I)) φ ↔
-      CLPropForm.Provable (Σ_set : Set (CLPropForm I)) φ
+      CLPropForm.Provable (Σ_set : Set (CLPropForm I)) φ := by
+  sorry
 
 end BlackBoxTheorems
 

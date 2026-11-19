@@ -6,6 +6,7 @@ exists_metric_completion -hard-> entails_metric_iff_complete
 exists_metric_completion -hard-> satisfiable_metric_iff_complete
 soundness_pre -hard-> satisfiable_consistent_pre
 soundness_metric -hard-> satisfiable_consistent_metric
+ProvableQ.tsub_one -hard-> inconsistent_iff_provable_one
 inconsistent_iff_provable_one -hard-> exists_maximal_consistent
 mem_iff_provable -hard-> maximal_consistent_sup_eq_inf
 maximal_consistent_sup_instantiate -hard-> maximal_consistent_sup_eq_inf

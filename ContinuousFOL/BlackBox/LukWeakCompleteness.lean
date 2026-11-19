@@ -17,7 +17,8 @@ open Classical
 namespace ContinuousFOL
 
 /-- Fact 4.1: Weak Completeness for Łukasiewicz Logic [Cha59, RR58]. -/
-axiom luk_weak_completeness {I : Type*} (φ : LukPropForm I) :
-    LukPropForm.Entails ∅ φ ↔ LukPropForm.Provable ∅ φ
+theorem luk_weak_completeness {I : Type*} (φ : LukPropForm I) :
+    LukPropForm.Entails ∅ φ ↔ LukPropForm.Provable ∅ φ := by
+  sorry
 
 end ContinuousFOL

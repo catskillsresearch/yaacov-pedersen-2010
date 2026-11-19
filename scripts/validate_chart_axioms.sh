@@ -5,8 +5,10 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
 python3 - <<'PY'
-import json, pathlib, re, subprocess, tempfile
+import json, pathlib, re, subprocess, tempfile, os
 
+# Prefer a local tmp; some environments point TMPDIR at unreadable mounts.
+os.environ.setdefault("TMPDIR", "/tmp")
 g = json.load(open("holes-graph.json"))
 names = [n["id"] for n in g["nodes"]]
 if not names:
@@ -16,10 +18,15 @@ if not names:
 lean = "import ContinuousFOL\nopen ContinuousFOL\n" + "".join(
     f"#print axioms {n}\n" for n in names
 )
-path = pathlib.Path(tempfile.mkstemp(suffix=".lean")[1])
+path = pathlib.Path(tempfile.mkstemp(suffix=".lean", dir="/tmp")[1])
 path.write_text(lean)
-out = subprocess.check_output(["lake", "env", "lean", str(path)], text=True)
+proc = subprocess.run(
+    ["lake", "env", "lean", str(path)],
+    text=True,
+    capture_output=True,
+)
 path.unlink(missing_ok=True)
+out = (proc.stdout or "") + (proc.stderr or "")
 
 permitted = {"propext", "Classical.choice", "Quot.sound"}
 bad = []

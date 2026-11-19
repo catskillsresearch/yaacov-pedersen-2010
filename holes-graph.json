@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-19T15:47:36Z",
-  "sorryCount": 44,
+  "updated": "2026-11-19T16:03:38Z",
+  "sorryCount": 43,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
     "blocked": "Waiting on incomplete required proof-deps",
@@ -13,7 +13,7 @@
     "\u00a74 axioms are intentional black boxes and stay open until discharged.",
     "Blue = done. Green = open. Grey = blocked.",
     "Regenerate with: python3 scripts/build_holes.py",
-    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, bound_substitution_lemma, exists_metric_completion, eval_uniformly_continuous, soundness_pre, soundness_metric, deduction_theorem, deduction_theorem_metric, generalization_theorem, generalize_fresh_const, inconsistent_iff_provable_one, provable_bound_subst, consistent_adjoin_approx, consistent_adjoin_comparable, mem_iff_provable, maximal_consistent_sup_instantiate, maximal_in_consistent_extensions_iff, exists_henkin_extension, exists_henkin_extension_metric, termPreStructure_eval_eq_sup, provable_tsub_of_inconsistent_adjoin, provable_tsub_of_inconsistent_adjoin_metric."
+    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, bound_substitution_lemma, exists_metric_completion, eval_uniformly_continuous, soundness_pre, soundness_metric, deduction_theorem, deduction_theorem_metric, generalization_theorem, generalize_fresh_const, provable_bound_subst, consistent_adjoin_approx, consistent_adjoin_comparable, mem_iff_provable, maximal_consistent_sup_instantiate, maximal_in_consistent_extensions_iff, exists_henkin_extension, exists_henkin_extension_metric, termPreStructure_eval_eq_sup, provable_tsub_of_inconsistent_adjoin, provable_tsub_of_inconsistent_adjoin_metric."
   ],
   "nodes": [
     {
@@ -242,11 +242,20 @@
       "detail": "Generalize over a fresh constant."
     },
     {
+      "id": "ProvableQ.tsub_one",
+      "label": "\u22a2 \u03c6 \u2238 1",
+      "section": 8,
+      "file": "ContinuousFOL/Essentials/InconsistentIffProvableOne.lean:90",
+      "status": "done",
+      "blocker": null,
+      "detail": "\u0141ukasiewicz tautology \u03c6 \u2238 1 from A1\u2013A4 + MP."
+    },
+    {
       "id": "inconsistent_iff_provable_one",
       "label": "Incons \u2194 \u22a21",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/InconsistentIffProvableOne.lean:20",
-      "status": "open",
+      "file": "ContinuousFOL/Essentials/InconsistentIffProvableOne.lean:104",
+      "status": "done",
       "blocker": null,
       "detail": "\u00acConsistentQ \u2194 ProvableQ \u0393 1."
     },
@@ -319,7 +328,7 @@
       "section": 8,
       "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:90",
       "status": "blocked",
-      "blocker": "needs inconsistent_iff_provable_one, maximal_in_consistent_extensions_iff",
+      "blocker": "needs maximal_in_consistent_extensions_iff",
       "detail": "Lindenbaum: every consistent set has a maximal extension."
     },
     {
@@ -463,7 +472,7 @@
       "section": 9,
       "file": "ContinuousFOL/Completeness/CompactnessPre.lean:21",
       "status": "blocked",
-      "blocker": "needs completeness_pre, inconsistent_iff_provable_one",
+      "blocker": "needs completeness_pre",
       "detail": "Finite satisfiability \u21d2 SatisfiablePre."
     },
     {
@@ -524,6 +533,11 @@
     {
       "from": "soundness_metric",
       "to": "satisfiable_consistent_metric",
+      "kind": "hard"
+    },
+    {
+      "from": "ProvableQ.tsub_one",
+      "to": "inconsistent_iff_provable_one",
       "kind": "hard"
     },
     {

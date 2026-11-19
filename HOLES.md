@@ -2,8 +2,8 @@
 
 Inventory of paper-facing Lean holes, ordered **prove-first**.
 
-**Updated:** 2026-11-19T15:47:36Z
-**Holes:** 44 open+blocked · 26 open · 18 blocked · 8 done.
+**Updated:** 2026-11-19T16:03:38Z
+**Holes:** 43 open+blocked · 25 open · 18 blocked · 10 done.
 
 **Live board:** [`holes.html`](holes.html) (graph embedded; open the file directly).
 
@@ -31,7 +31,6 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 | `deduction_theorem_metric` | Deduction met | `ContinuousFOL/Essentials/DeductionTheorem.lean:25` |
 | `generalization_theorem` | Generalization | `ContinuousFOL/Essentials/GeneralizationTheorem.lean:20` |
 | `generalize_fresh_const` | Fresh const gen | `ContinuousFOL/Essentials/GeneralizeFreshConst.lean:20` |
-| `inconsistent_iff_provable_one` | Incons ↔ ⊢1 | `ContinuousFOL/Essentials/InconsistentIffProvableOne.lean:20` |
 | `provable_bound_subst` | ⊢ bound subst | `ContinuousFOL/Essentials/ProvableBoundSubst.lean:20` |
 | `consistent_adjoin_approx` | Adjoin approx | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:20` |
 | `consistent_adjoin_comparable` | Adjoin comparable | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:26` |
@@ -97,7 +96,7 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 | open | `soundness_metric` | Thm 7.2 metric | `ContinuousFOL/Group2Axioms/SoundnessMetric.lean:21` |
 | blocked | `satisfiable_consistent_metric` | Sat ⇒ Cons (met) | `ContinuousFOL/Group2Axioms/SoundnessMetric.lean:26` |
 
-### §8 — 14 hole(s)
+### §8 — 13 hole(s)
 
 | Status | Id | Label | File |
 |---|---|---|---|
@@ -105,7 +104,8 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 | open | `deduction_theorem_metric` | Deduction met | `ContinuousFOL/Essentials/DeductionTheorem.lean:25` |
 | open | `generalization_theorem` | Generalization | `ContinuousFOL/Essentials/GeneralizationTheorem.lean:20` |
 | open | `generalize_fresh_const` | Fresh const gen | `ContinuousFOL/Essentials/GeneralizeFreshConst.lean:20` |
-| open | `inconsistent_iff_provable_one` | Incons ↔ ⊢1 | `ContinuousFOL/Essentials/InconsistentIffProvableOne.lean:20` |
+| done | `ProvableQ.tsub_one` | ⊢ φ ∸ 1 | `ContinuousFOL/Essentials/InconsistentIffProvableOne.lean:90` |
+| done | `inconsistent_iff_provable_one` | Incons ↔ ⊢1 | `ContinuousFOL/Essentials/InconsistentIffProvableOne.lean:104` |
 | open | `provable_bound_subst` | ⊢ bound subst | `ContinuousFOL/Essentials/ProvableBoundSubst.lean:20` |
 | open | `consistent_adjoin_approx` | Adjoin approx | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:20` |
 | open | `consistent_adjoin_comparable` | Adjoin comparable | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:26` |

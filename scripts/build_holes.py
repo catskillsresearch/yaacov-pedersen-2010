@@ -189,6 +189,12 @@ NODES: dict[str, dict] = {
         "file": "ContinuousFOL/Essentials/GeneralizeFreshConst.lean",
         "detail": "Generalize over a fresh constant.",
     },
+    "ProvableQ.tsub_one": {
+        "label": "⊢ φ ∸ 1",
+        "section": 8,
+        "file": "ContinuousFOL/Essentials/InconsistentIffProvableOne.lean",
+        "detail": "Łukasiewicz tautology φ ∸ 1 from A1–A4 + MP.",
+    },
     "inconsistent_iff_provable_one": {
         "label": "Incons ↔ ⊢1",
         "section": 8,
@@ -369,6 +375,7 @@ HARD_EDGES: list[tuple[str, str]] = [
     ("soundness_pre", "satisfiable_consistent_pre"),
     ("soundness_metric", "satisfiable_consistent_metric"),
     # §8 Lindenbaum chain
+    ("ProvableQ.tsub_one", "inconsistent_iff_provable_one"),
     ("inconsistent_iff_provable_one", "exists_maximal_consistent"),
     ("mem_iff_provable", "maximal_consistent_sup_eq_inf"),
     ("maximal_consistent_sup_instantiate", "maximal_consistent_sup_eq_inf"),

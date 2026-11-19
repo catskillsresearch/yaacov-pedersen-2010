@@ -59,6 +59,12 @@ NODES: dict[str, dict] = {
         "file": "ContinuousFOL/Group1Axioms/DyadicCode/Val.lean",
         "detail": "Dyadics dense in (x,y) ∩ [0,1].",
     },
+    "DyadicCode.val_range_eq_dyadics": {
+        "label": "Rem 3.4 {v(d)}=𝔻",
+        "section": 3,
+        "file": "ContinuousFOL/Group1Axioms/DyadicCode/Val.lean",
+        "detail": "Image of DyadicCode.val equals the dyadic numbers in [0,1].",
+    },
     # §4 black boxes (axioms / approx completeness)
     "cl_consistent_iff_satisfiable": {
         "label": "Fact 4.1 CL",

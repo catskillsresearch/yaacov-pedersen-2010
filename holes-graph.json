@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T20:09:41Z",
+  "updated": "2026-11-19T20:15:15Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -47,10 +47,19 @@
       "id": "DyadicCode.dense_in_Icc",
       "label": "Rem 3.4 denseness",
       "section": 3,
-      "file": "ContinuousFOL/Group1Axioms/DyadicCode/Val.lean:91",
+      "file": "ContinuousFOL/Group1Axioms/DyadicCode/Val.lean:172",
       "status": "done",
       "blocker": null,
       "detail": "Dyadics dense in (x,y) \u2229 [0,1]."
+    },
+    {
+      "id": "DyadicCode.val_range_eq_dyadics",
+      "label": "Rem 3.4 {v(d)}=\ud835\udd3b",
+      "section": 3,
+      "file": "ContinuousFOL/Group1Axioms/DyadicCode/Val.lean:162",
+      "status": "done",
+      "blocker": null,
+      "detail": "Image of DyadicCode.val equals the dyadic numbers in [0,1]."
     },
     {
       "id": "cl_consistent_iff_satisfiable",

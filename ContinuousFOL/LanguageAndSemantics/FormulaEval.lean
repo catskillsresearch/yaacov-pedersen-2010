@@ -58,4 +58,9 @@ lemma Formula.eval_in_Icc {L : Signature} (M : PreStructure L) (σ : Var → M.C
   | tsub a b iha ihb => simp [Formula.dyadic, Formula.eval, DyadicCode.val, iha, ihb]
   | half d ih => simp [Formula.dyadic, Formula.eval, DyadicCode.val, ih]
 
+/-- Remark 3.4 under an arbitrary assignment: `{M(d, σ) : d ∈ 𝒟} = 𝔻`. -/
+theorem Formula.eval_dyadic_range {L : Signature} (M : PreStructure L) (σ : Var → M.Carrier) :
+    (Set.range fun d : DyadicCode => (Formula.dyadic L d).eval M σ) = DyadicCode.dyadics := by
+  simp [Formula.eval_dyadic, DyadicCode.val_range_eq_dyadics]
+
 end ContinuousFOL

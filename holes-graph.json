@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-19T17:30:32Z",
-  "sorryCount": 34,
+  "updated": "2026-11-19T17:31:29Z",
+  "sorryCount": 33,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
     "blocked": "Waiting on incomplete required proof-deps",
@@ -13,7 +13,7 @@
     "\u00a74 axioms are intentional black boxes and stay open until discharged.",
     "Blue = done. Green = open. Grey = blocked.",
     "Regenerate with: python3 scripts/build_holes.py",
-    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, exists_metric_completion, eval_uniformly_continuous, soundness_metric, generalize_fresh_const, provable_bound_subst, consistent_adjoin_approx, consistent_adjoin_comparable, maximal_consistent_sup_instantiate, exists_maximal_consistent_metric, exists_henkin_extension, exists_henkin_extension_metric, termPreStructure_eval_eq_sup, provable_tsub_of_inconsistent_adjoin, provable_tsub_of_inconsistent_adjoin_metric."
+    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, exists_metric_completion, eval_uniformly_continuous, soundness_metric, generalize_fresh_const, provable_bound_subst, consistent_adjoin_approx, consistent_adjoin_comparable, maximal_consistent_sup_instantiate, exists_maximal_consistent_metric, exists_henkin_extension, exists_henkin_extension_metric, termPreStructure_eval_eq_sup, provable_tsub_of_inconsistent_adjoin_metric."
   ],
   "nodes": [
     {
@@ -416,8 +416,8 @@
       "id": "provable_tsub_of_inconsistent_adjoin",
       "label": "\u22a2 \u03c6\u2238p from \u22a5",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean:21",
-      "status": "open",
+      "file": "ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean:81",
+      "status": "done",
       "blocker": null,
       "detail": "Inconsistent adjunction of p\u2238\u03c6 yields ProvableQ \u0393 (\u03c6\u2238p)."
     },
@@ -425,7 +425,7 @@
       "id": "provable_tsub_of_inconsistent_adjoin_metric",
       "label": "\u22a2 \u03c6\u2238p met",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean:27",
+      "file": "ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean:92",
       "status": "open",
       "blocker": null,
       "detail": "Metric variant of inconsistent-adjunction rule."
@@ -436,7 +436,7 @@
       "section": 9,
       "file": "ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean:24",
       "status": "blocked",
-      "blocker": "needs completeness_pre, provable_tsub_of_inconsistent_adjoin",
+      "blocker": "needs completeness_pre",
       "detail": "EntailsPre \u2194 \u2200n ProvableQ (\u03c6\u22382\u207b\u207f)."
     },
     {

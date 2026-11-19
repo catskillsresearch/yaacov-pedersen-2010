@@ -7,6 +7,8 @@ Paper pin: §9 Corollary 9.8; vision.md page 24–25
 module
 
 public import ContinuousFOL.Completeness.CompletenessPre
+public import ContinuousFOL.Completeness.CompletenessMetric
+public import ContinuousFOL.Essentials.MaximalConsistentMetric
 public import ContinuousFOL.Completeness.DegreeOfTruth
 public import ContinuousFOL.Completeness.DegreeOfProvability
 public import ContinuousFOL.Completeness.ProvableTsubOfInconsistentAdjoin
@@ -101,6 +103,79 @@ theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Fo
 theorem pavelka_completeness_metric {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
     degreeOfTruthComplete Γ φ = degreeOfProvabilityMetric Γ φ := by
-  sorry
+  unfold degreeOfTruthComplete degreeOfProvabilityMetric
+  have hone : ProvableMetricQ Γ (.tsub φ (Formula.dyadic LM.toSignature .one)) :=
+    (provableMetricQ_iff_provableQ Γ _).mpr (ProvableQ.tsub_one _ φ)
+  have hPbdd : BddBelow {r : ℝ | ∃ p : DyadicCode, r = p.val ∧
+      ProvableMetricQ Γ (.tsub φ (Formula.dyadic LM.toSignature p))} := by
+    refine ⟨0, ?_⟩
+    rintro _ ⟨p, rfl, -⟩
+    exact (DyadicCode.val_mem_Icc p).1
+  have hPne : {r : ℝ | ∃ p : DyadicCode, r = p.val ∧
+      ProvableMetricQ Γ (.tsub φ (Formula.dyadic LM.toSignature p))}.Nonempty :=
+    ⟨1, .one, DyadicCode.val_one.symm, hone⟩
+  have hTbdd : BddAbove {r : ℝ | ∃ (M : ContinuousStructure LM) (σ : Var → M.Carrier),
+      ModelsPre M.toPreStructure σ Γ ∧ r = φ.eval M.toPreStructure σ} := by
+    refine ⟨1, ?_⟩
+    rintro _ ⟨M, σ, -, rfl⟩
+    exact (φ.eval_in_Icc M.toPreStructure σ).2
+  by_cases hcons : ConsistentMetricQ Γ
+  swap
+  · -- Inconsistent `Γ`: no complete models, so the degree of truth is `sSup ∅ = 0`; and
+    -- `Γ ⊢ φ ∸ 0`, so the degree of provability is `0` as well.
+    have hall : ∀ ψ, ProvableMetricQ Γ ψ := fun ψ => by
+      by_contra h
+      exact hcons ⟨ψ, h⟩
+    have hT : {r : ℝ | ∃ (M : ContinuousStructure LM) (σ : Var → M.Carrier),
+        ModelsPre M.toPreStructure σ Γ ∧ r = φ.eval M.toPreStructure σ} = ∅ := by
+      ext r
+      simp only [Set.mem_ofPred_eq, Set.mem_empty_iff_false, iff_false]
+      rintro ⟨M, σ, hM, -⟩
+      exact hcons (satisfiable_consistent_metric Γ ⟨M, σ, hM⟩)
+    rw [hT, Real.sSup_empty]
+    have h0 : (0 : ℝ) ∈ {r : ℝ | ∃ p : DyadicCode, r = p.val ∧
+        ProvableMetricQ Γ (.tsub φ (Formula.dyadic LM.toSignature p))} :=
+      ⟨.zero, DyadicCode.val_zero.symm, hall _⟩
+    refine le_antisymm ?_ (csInf_le hPbdd h0)
+    refine le_csInf ⟨0, h0⟩ ?_
+    rintro _ ⟨p, rfl, -⟩
+    exact (DyadicCode.val_mem_Icc p).1
+  -- Consistent `Γ`: a complete model exists (Theorem 9.5, metric).
+  obtain ⟨M₀, σ₀, hM₀⟩ := (completeness_metric Γ).mp hcons
+  have hTne : {r : ℝ | ∃ (M : ContinuousStructure LM) (σ : Var → M.Carrier),
+      ModelsPre M.toPreStructure σ Γ ∧ r = φ.eval M.toPreStructure σ}.Nonempty :=
+    ⟨_, M₀, σ₀, hM₀, rfl⟩
+  apply le_antisymm
+  · -- (i) Soundness.
+    apply csSup_le hTne
+    rintro _ ⟨M, σ, hM, rfl⟩
+    apply le_csInf hPne
+    rintro _ ⟨p, rfl, hp⟩
+    have h := soundness_metric Γ _ hp M σ hM
+    simp only [Formula.eval, Formula.eval_dyadic, tsubR] at h
+    have := le_max_left (φ.eval M.toPreStructure σ - p.val) 0
+    linarith
+  · -- (ii) Completeness (Theorem 9.5, metric).
+    by_contra hlt
+    push Not at hlt
+    have hT0 : 0 ≤ sSup {r : ℝ | ∃ (M : ContinuousStructure LM) (σ : Var → M.Carrier),
+        ModelsPre M.toPreStructure σ Γ ∧ r = φ.eval M.toPreStructure σ} :=
+      le_trans (φ.eval_in_Icc M₀.toPreStructure σ₀).1 (le_csSup hTbdd ⟨M₀, σ₀, hM₀, rfl⟩)
+    have hP1 : sInf {r : ℝ | ∃ p : DyadicCode, r = p.val ∧
+        ProvableMetricQ Γ (.tsub φ (Formula.dyadic LM.toSignature p))} ≤ 1 :=
+      csInf_le hPbdd ⟨.one, DyadicCode.val_one.symm, hone⟩
+    obtain ⟨p, hTp, hpP⟩ := DyadicCode.dense_in_Icc hT0 hP1 hlt
+    have hnot : ¬ ProvableMetricQ Γ (.tsub φ (Formula.dyadic LM.toSignature p)) := fun hp =>
+      absurd (csInf_le hPbdd ⟨p, rfl, hp⟩) (not_le.mpr hpP)
+    have hcons' : ConsistentMetricQ (Γ ∪ {.tsub (Formula.dyadic LM.toSignature p) φ}) := by
+      by_contra h
+      exact hnot (provable_tsub_of_inconsistent_adjoin_metric Γ φ p h)
+    obtain ⟨M, σ, hM⟩ := (completeness_metric _).mp hcons'
+    have hMΓ : ModelsPre M.toPreStructure σ Γ := fun ψ hψ => hM ψ (Set.mem_union_left _ hψ)
+    have h := hM _ (Set.mem_union_right _ (Set.mem_singleton _))
+    simp only [Formula.eval, Formula.eval_dyadic, tsubR] at h
+    have h1 := le_max_left (p.val - φ.eval M.toPreStructure σ) 0
+    have h2 := le_csSup hTbdd ⟨M, σ, hMΓ, rfl⟩
+    linarith
 
 end ContinuousFOL

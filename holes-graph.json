@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T16:13:37Z",
+  "updated": "2026-11-19T16:31:57Z",
   "sorryCount": 41,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -263,7 +263,7 @@
       "id": "provable_bound_subst",
       "label": "\u22a2 bound subst",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/ProvableBoundSubst.lean:20",
+      "file": "ContinuousFOL/Essentials/ProvableBoundSubst.lean:99",
       "status": "open",
       "blocker": null,
       "detail": "Bound substitution is provable."

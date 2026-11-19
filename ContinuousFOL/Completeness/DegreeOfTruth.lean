@@ -24,32 +24,32 @@ namespace ContinuousFOL
     signature (possibly without a metric). This is
     `sup { 𝔐(φ, σ) : (𝔐, σ) ⊨ Γ }`, the supremum ranging over continuous
     `𝓛`-pre-structures. -/
-def degreeOfTruthPre {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) : ℝ :=
-  sSup {r : ℝ | ∃ (M : PreStructure L) (σ : Var → M.Carrier),
+def degreeOfTruthPre.{u} {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) : ℝ :=
+  sSup {r : ℝ | ∃ (M : PreStructure.{u} L) (σ : Var → M.Carrier),
     ModelsPre M σ Γ ∧ r = φ.eval M σ}
 
 /-- Definition 9.7 (i) when `𝓛` has a metric: the same supremum
     `φ°_Γ := sup { 𝔐(φ, σ) : (𝔐, σ) ⊨ Γ }`, ranging over continuous
     `𝓛`-pre-structures (not merely complete `𝓛`-structures). -/
-def degreeOfTruthMetric {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
+def degreeOfTruthMetric.{u} {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
     (φ : Formula LM.toSignature) : ℝ :=
-  sSup {r : ℝ | ∃ (M : MetricPreStructure LM) (σ : Var → M.Carrier),
+  sSup {r : ℝ | ∃ (M : MetricPreStructure.{u} LM) (σ : Var → M.Carrier),
     ModelsPre M.toPreStructure σ Γ ∧ r = φ.eval M.toPreStructure σ}
 
 /-- Helper (not a paper definition): the supremum of `𝔐(φ, σ)` restricted to complete
     continuous `𝓛`-structures. Agrees with `degreeOfTruthMetric` by Theorem 6.9;
     see `degreeOfTruthMetric_eq_complete`. -/
-def degreeOfTruthComplete {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
+def degreeOfTruthComplete.{u} {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
     (φ : Formula LM.toSignature) : ℝ :=
-  sSup {r : ℝ | ∃ (M : ContinuousStructure LM) (σ : Var → M.Carrier),
+  sSup {r : ℝ | ∃ (M : ContinuousStructure.{u} LM) (σ : Var → M.Carrier),
     ModelsPre M.toPreStructure σ Γ ∧ r = φ.eval M.toPreStructure σ}
 
 /-- The paper's degree of truth over metric pre-structures equals the helper supremum
     over complete structures, by Theorem 6.9 (an elementary embedding into a completion
     preserves the value of `φ`). -/
-theorem degreeOfTruthMetric_eq_complete {LM : MetricSignature}
+theorem degreeOfTruthMetric_eq_complete.{u} {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
-    degreeOfTruthMetric Γ φ = degreeOfTruthComplete Γ φ := by
+    degreeOfTruthMetric.{u} Γ φ = degreeOfTruthComplete.{u} Γ φ := by
   unfold degreeOfTruthMetric degreeOfTruthComplete
   congr 1
   ext r

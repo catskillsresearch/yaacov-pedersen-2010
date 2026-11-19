@@ -19,9 +19,9 @@ namespace ContinuousFOL
 
 /-- Corollary 6.11: Pre-structure entailment/satisfiability coincides with complete metric
     entailment/satisfiability. -/
-theorem entails_metric_iff_complete {LM : MetricSignature}
+theorem entails_metric_iff_complete.{u} {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
-    EntailsMetricPre Γ φ ↔ EntailsComplete Γ φ := by
+    EntailsMetricPre.{u} Γ φ ↔ EntailsComplete.{u} Γ φ := by
   constructor
   · intro h M σ hM
     exact h M.toMetricPreStructure σ hM
@@ -34,9 +34,9 @@ theorem entails_metric_iff_complete {LM : MetricSignature}
     rw [e.map_eval σ φ]
     exact h Mhat (e.toFun ∘ σ) hMhat
 
-theorem satisfiable_metric_iff_complete {LM : MetricSignature}
+theorem satisfiable_metric_iff_complete.{u} {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) :
-    SatisfiableMetricPre Γ ↔ CompletelySatisfiable Γ := by
+    SatisfiableMetricPre.{u} Γ ↔ CompletelySatisfiable.{u} Γ := by
   constructor
   · rintro ⟨M, σ, hM⟩
     obtain ⟨Mhat, ⟨e⟩⟩ := exists_metric_completion M

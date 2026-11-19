@@ -20,8 +20,8 @@ namespace ContinuousFOL
 /-- Corollary 9.12 (Compactness — without metric). -/
 theorem compactness_pre {L : Signature} (Γ : Set (Formula L))
     (hfin : ∀ Γ₀ : Finset (Formula L), (Γ₀ : Set (Formula L)) ⊆ Γ →
-      SatisfiablePre (Γ₀ : Set (Formula L))) :
-    SatisfiablePre Γ := by
+      SatisfiablePre.{0} (Γ₀ : Set (Formula L))) :
+    SatisfiablePre.{0} Γ := by
   rw [← completeness_pre_iff]
   by_contra hincons
   rw [inconsistent_iff_provable_one] at hincons

@@ -16,12 +16,12 @@ open Classical
 namespace ContinuousFOL
 
 /-- Logical entailment `Γ ⊨_Q φ` over pre-structures (Definition 5.13). -/
-def EntailsPre {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) : Prop :=
-  ∀ (M : PreStructure L) (σ : Var → M.Carrier), ModelsPre M σ Γ → φ.eval M σ = 0
+def EntailsPre.{u} {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) : Prop :=
+  ∀ (M : PreStructure.{u} L) (σ : Var → M.Carrier), ModelsPre M σ Γ → φ.eval M σ = 0
 
-def EntailsMetricPre {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
+def EntailsMetricPre.{u} {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
     (φ : Formula LM.toSignature) : Prop :=
-  ∀ (M : MetricPreStructure LM) (σ : Var → M.Carrier),
+  ∀ (M : MetricPreStructure.{u} LM) (σ : Var → M.Carrier),
     ModelsPre M.toPreStructure σ Γ → φ.eval M.toPreStructure σ = 0
 
 end ContinuousFOL

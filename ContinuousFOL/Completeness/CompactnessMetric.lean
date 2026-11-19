@@ -24,8 +24,8 @@ namespace ContinuousFOL
 theorem compactness_metric_pre {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
     (hfin : ∀ Γ₀ : Finset (Formula LM.toSignature),
       (Γ₀ : Set (Formula LM.toSignature)) ⊆ Γ →
-        SatisfiableMetricPre (Γ₀ : Set (Formula LM.toSignature))) :
-    SatisfiableMetricPre Γ := by
+        SatisfiableMetricPre.{0} (Γ₀ : Set (Formula LM.toSignature))) :
+    SatisfiableMetricPre.{0} Γ := by
   by_contra hsat
   have hincons : ¬ ConsistentMetricQ Γ := fun hcons =>
     hsat (metric_prestructure_model_of_consistent hcons)
@@ -41,8 +41,8 @@ theorem compactness_metric_pre {LM : MetricSignature} (Γ : Set (Formula LM.toSi
 theorem compactness_metric_complete {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
     (hfin : ∀ Γ₀ : Finset (Formula LM.toSignature),
       (Γ₀ : Set (Formula LM.toSignature)) ⊆ Γ →
-        CompletelySatisfiable (Γ₀ : Set (Formula LM.toSignature))) :
-    CompletelySatisfiable Γ := by
+        CompletelySatisfiable.{0} (Γ₀ : Set (Formula LM.toSignature))) :
+    CompletelySatisfiable.{0} Γ := by
   rw [← completeness_metric_iff]
   by_contra hincons
   have hprov1 : ProvableMetricQ Γ (Formula.one LM.toSignature) := by
@@ -58,12 +58,12 @@ theorem compactness_metric_complete {LM : MetricSignature} (Γ : Set (Formula LM
 theorem compactness_metric {LM : MetricSignature} (Γ : Set (Formula LM.toSignature)) :
     ((∀ Γ₀ : Finset (Formula LM.toSignature),
         (Γ₀ : Set (Formula LM.toSignature)) ⊆ Γ →
-          SatisfiableMetricPre (Γ₀ : Set (Formula LM.toSignature))) →
-      SatisfiableMetricPre Γ) ∧
+          SatisfiableMetricPre.{0} (Γ₀ : Set (Formula LM.toSignature))) →
+      SatisfiableMetricPre.{0} Γ) ∧
     ((∀ Γ₀ : Finset (Formula LM.toSignature),
         (Γ₀ : Set (Formula LM.toSignature)) ⊆ Γ →
-          CompletelySatisfiable (Γ₀ : Set (Formula LM.toSignature))) →
-      CompletelySatisfiable Γ) :=
+          CompletelySatisfiable.{0} (Γ₀ : Set (Formula LM.toSignature))) →
+      CompletelySatisfiable.{0} Γ) :=
   ⟨compactness_metric_pre Γ, compactness_metric_complete Γ⟩
 
 end ContinuousFOL

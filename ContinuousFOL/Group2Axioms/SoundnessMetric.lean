@@ -110,9 +110,9 @@ lemma metricAxiom_eval_zero {LM : MetricSignature} {ψ : Formula LM.toSignature}
 
 /-- Theorem 7.2 (Soundness) over continuous `𝓛`-pre-structures, for a signature with
     a metric: `Γ ⊢_Q φ` implies `Γ ⊨_Q φ`. -/
-theorem soundness_metric_pre {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
+theorem soundness_metric_pre.{u} {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
     (φ : Formula LM.toSignature) :
-    ProvableMetricQ Γ φ → EntailsMetricPre Γ φ := by
+    ProvableMetricQ Γ φ → EntailsMetricPre.{u} Γ φ := by
   intro hprov
   induction hprov with
   | @ax xs ψ hax =>
@@ -135,33 +135,33 @@ theorem soundness_metric_pre {LM : MetricSignature} (Γ : Set (Formula LM.toSign
 
 /-- Theorem 7.2 (Soundness) for signatures with a metric, restricted to complete
     structures (follows from `soundness_metric_pre`). -/
-theorem soundness_metric {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
+theorem soundness_metric.{u} {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
     (φ : Formula LM.toSignature) :
-    ProvableMetricQ Γ φ → EntailsComplete Γ φ :=
-  fun hprov M σ hM => soundness_metric_pre Γ φ hprov M.toMetricPreStructure σ hM
+    ProvableMetricQ Γ φ → EntailsComplete.{u} Γ φ :=
+  fun hprov M σ hM => soundness_metric_pre.{u} Γ φ hprov M.toMetricPreStructure σ hM
 
-theorem satisfiable_consistent_metric_pre {LM : MetricSignature}
+theorem satisfiable_consistent_metric_pre.{u} {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) :
-    SatisfiableMetricPre Γ → ConsistentMetricQ Γ := by
+    SatisfiableMetricPre.{u} Γ → ConsistentMetricQ Γ := by
   rintro ⟨M, σ, hM⟩
   refine ⟨Formula.one LM.toSignature, fun hprov => ?_⟩
   have hval := soundness_metric_pre Γ (Formula.one LM.toSignature) hprov M σ hM
   simp at hval
 
-theorem satisfiable_consistent_metric {LM : MetricSignature}
+theorem satisfiable_consistent_metric.{u} {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) :
-    CompletelySatisfiable Γ → ConsistentMetricQ Γ := by
+    CompletelySatisfiable.{u} Γ → ConsistentMetricQ Γ := by
   rintro ⟨M, σ, hM⟩
   exact satisfiable_consistent_metric_pre Γ ⟨M.toMetricPreStructure, σ, hM⟩
 
 /-- Theorem 7.2 (Soundness) for a continuous signature with a metric, in the
     paper's form: (i) if `Γ ⊢_Q φ`, then `Γ ⊨_Q φ` (`Γ ⊨_QC φ`);
     (ii) if `Γ` is (completely) satisfiable, then `Γ` is consistent. -/
-theorem soundness_metric_full {LM : MetricSignature}
+theorem soundness_metric_full.{u} {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
-    (ProvableMetricQ Γ φ → EntailsMetricPre Γ φ ∧ EntailsComplete Γ φ) ∧
-    (SatisfiableMetricPre Γ → ConsistentMetricQ Γ) ∧
-    (CompletelySatisfiable Γ → ConsistentMetricQ Γ) :=
+    (ProvableMetricQ Γ φ → EntailsMetricPre.{u} Γ φ ∧ EntailsComplete.{u} Γ φ) ∧
+    (SatisfiableMetricPre.{u} Γ → ConsistentMetricQ Γ) ∧
+    (CompletelySatisfiable.{u} Γ → ConsistentMetricQ Γ) :=
   ⟨fun h => ⟨soundness_metric_pre Γ φ h, soundness_metric Γ φ h⟩,
     satisfiable_consistent_metric_pre Γ,
     satisfiable_consistent_metric Γ⟩

@@ -220,8 +220,8 @@ lemma baseAxiom_eval_zero {L : Signature} {ψ : Formula L} (h : BaseAxiomSchema 
     exact (tsubR.eq_zero_iff _ _).mpr le_rfl
 
 /-- Theorem 7.2 (Soundness) for signatures without metric. -/
-theorem soundness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) :
-    ProvableQ Γ φ → EntailsPre Γ φ := by
+theorem soundness_pre.{u} {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) :
+    ProvableQ Γ φ → EntailsPre.{u} Γ φ := by
   intro hprov
   induction hprov with
   | @ax xs ψ hax =>
@@ -241,8 +241,8 @@ theorem soundness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) :
     have hle0 : ψ.eval M σ ≤ 0 := by simpa [hφ0] using hle
     exact le_antisymm hle0 (Formula.eval_in_Icc M σ ψ).1
 
-theorem satisfiable_consistent_pre {L : Signature} (Γ : Set (Formula L)) :
-    SatisfiablePre Γ → ConsistentQ Γ := by
+theorem satisfiable_consistent_pre.{u} {L : Signature} (Γ : Set (Formula L)) :
+    SatisfiablePre.{u} Γ → ConsistentQ Γ := by
   rintro ⟨M, σ, hM⟩
   refine ⟨Formula.one L, fun hprov => ?_⟩
   have hval := soundness_pre Γ (Formula.one L) hprov M σ hM

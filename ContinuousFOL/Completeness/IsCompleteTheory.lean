@@ -25,8 +25,8 @@ namespace ContinuousFOL
     intersects with `IsSentence`. Without that restriction the right-hand side
     would contain open formulae that always evaluate to 0 (for example `d x x`),
     and could not be a theory. -/
-def IsCompleteTheory {LM : MetricSignature} (T : Set (Formula LM.toSignature)) : Prop :=
-  IsTheory T ∧ ∃ (M : ContinuousStructure LM) (σ : Var → M.Carrier),
+def IsCompleteTheory.{u} {LM : MetricSignature} (T : Set (Formula LM.toSignature)) : Prop :=
+  IsTheory T ∧ ∃ (M : ContinuousStructure.{u} LM) (σ : Var → M.Carrier),
     T = {φ | IsSentence φ ∧ φ.eval M.toPreStructure σ = 0}
 
 end ContinuousFOL

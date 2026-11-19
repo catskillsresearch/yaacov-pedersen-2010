@@ -30,7 +30,7 @@ def DegreeUniformlyComputable {LM : MetricSignature} (P : RecursivePresentation 
     (T : Set (Formula LM.toSignature)) : Prop :=
   ∃ f : ℕ → ℕ → ℤ, Computable₂ f ∧
     ∀ φ : Formula LM.toSignature, IsSentence φ → ∀ n : ℕ,
-      |(f (P.code φ) n : ℝ) / 2 ^ n - degreeOfTruthMetric T φ| ≤ (2 : ℝ) ^ (-(n : ℤ))
+      |(f (P.code φ) n : ℝ) / 2 ^ n - degreeOfTruthMetric.{0} T φ| ≤ (2 : ℝ) ^ (-(n : ℤ))
 
 /-- Definition 9.10: decidability of a theory `T`.
 (i) If `T` is complete, `T` is decidable if for every sentence `φ`, `φ°_T` is a recursive real
@@ -41,19 +41,19 @@ recursive from `φ`.
 each value a recursive real.) -/
 def IsDecidableTheory {LM : MetricSignature} (P : RecursivePresentation LM)
     (T : Set (Formula LM.toSignature)) : Prop :=
-  (IsCompleteTheory T → DegreeUniformlyComputable P T) ∧
-  (¬ IsCompleteTheory T → DegreeUniformlyComputable P T)
+  (IsCompleteTheory.{0} T → DegreeUniformlyComputable P T) ∧
+  (¬ IsCompleteTheory.{0} T → DegreeUniformlyComputable P T)
 
 /-- `Ax` is an *axiomatization* of the theory `T`: `Ax` is a set of sentences and the
 sentences of `T` are exactly the sentences entailed by `Ax`. -/
 def IsAxiomatization {LM : MetricSignature} (Ax T : Set (Formula LM.toSignature)) : Prop :=
-  IsTheory Ax ∧ ∀ φ, IsSentence φ → (φ ∈ T ↔ EntailsComplete Ax φ)
+  IsTheory Ax ∧ ∀ φ, IsSentence φ → (φ ∈ T ↔ EntailsComplete.{0} Ax φ)
 
 /-- Corollary 9.11: Every complete theory with a recursive or recursively enumerable
 axiomatization is decidable. -/
 theorem complete_re_theory_decidable {LM : MetricSignature}
     (P : RecursivePresentation LM) (T : Set (Formula LM.toSignature))
-    (hcomp : IsCompleteTheory T)
+    (hcomp : IsCompleteTheory.{0} T)
     (hax : ∃ Ax : Set (Formula LM.toSignature), IsAxiomatization Ax T ∧
       (ComputablePred (fun n : ℕ => ∃ φ ∈ Ax, P.code φ = n) ∨
         REPred (fun n : ℕ => ∃ φ ∈ Ax, P.code φ = n))) :

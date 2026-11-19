@@ -156,7 +156,7 @@ end HenkinMetric
 metric `𝓛`-pre-structure (first step of the proof of Theorem 9.5; not a paper statement). -/
 theorem metric_prestructure_model_of_consistent {LM : MetricSignature}
     {Γ : Set (Formula LM.toSignature)} (hcons : ConsistentMetricQ Γ) :
-    ∃ (M : MetricPreStructure LM) (σ : Var → M.Carrier),
+    ∃ (M : MetricPreStructure.{0} LM) (σ : Var → M.Carrier),
       ModelsPre M.toPreStructure σ Γ := by
   -- Apply Theorem 9.4 to `Γ ∪ {metric axioms}` and take the reduct to `L`.
   have hcons' : ConsistentQ (Γ ∪ metricAxiomSet LM) := by
@@ -178,7 +178,7 @@ theorem henkin_model_existence_metric {LM : MetricSignature}
     {Γ : Set (Formula LM.toSignature)} (hcons : ConsistentMetricQ Γ) :
     ∃ (LMc : MetricSignature) (ext : SignatureExtension LM.toSignature LMc.toSignature)
       (_ : ext.relEquiv LM.distSym = LMc.distSym)
-      (Δ : Set (Formula LMc.toSignature)) (M : MetricPreStructure LMc) (σ : Var → M.Carrier),
+      (Δ : Set (Formula LMc.toSignature)) (M : MetricPreStructure.{0} LMc) (σ : Var → M.Carrier),
       MaximalConsistentMetric Δ ∧ HenkinComplete Δ ∧
       (ext.mapFormula '' Γ) ⊆ Δ ∧ ModelsPre M.toPreStructure σ Δ := by
   obtain ⟨LMc, ext, hdist, Γc, hhenk, hcons_ext⟩ := exists_henkin_extension_metric LM

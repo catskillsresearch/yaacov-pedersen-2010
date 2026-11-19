@@ -33,7 +33,7 @@ namespace ContinuousFOL
     as well. (If one instead took `sSup ∅ = -∞`, the paper's unrestricted
     statement would fail in this case.) -/
 theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) :
-    degreeOfTruthPre Γ φ = degreeOfProvabilityPre Γ φ := by
+    degreeOfTruthPre.{0} Γ φ = degreeOfProvabilityPre Γ φ := by
   unfold degreeOfTruthPre degreeOfProvabilityPre
   by_cases hcons : ConsistentQ Γ
   swap
@@ -43,7 +43,7 @@ theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Fo
     have hall : ∀ ψ, ProvableQ Γ ψ := fun ψ => by
       by_contra h
       exact hcons ⟨ψ, h⟩
-    have hT : {r : ℝ | ∃ (M : PreStructure L) (σ : Var → M.Carrier),
+    have hT : {r : ℝ | ∃ (M : PreStructure.{0} L) (σ : Var → M.Carrier),
         ModelsPre M σ Γ ∧ r = φ.eval M σ} = ∅ := by
       ext r
       simp only [Set.mem_ofPred_eq, Set.mem_empty_iff_false, iff_false]
@@ -61,9 +61,9 @@ theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Fo
       exact (DyadicCode.val_mem_Icc p).1
   -- The set of truth values in models of `Γ` is nonempty (Theorem 9.5) and bounded by `1`.
   obtain ⟨M₀, σ₀, hM₀⟩ := completeness_pre Γ hcons
-  have hTne : {r : ℝ | ∃ (M : PreStructure L) (σ : Var → M.Carrier),
+  have hTne : {r : ℝ | ∃ (M : PreStructure.{0} L) (σ : Var → M.Carrier),
       ModelsPre M σ Γ ∧ r = φ.eval M σ}.Nonempty := ⟨_, M₀, σ₀, hM₀, rfl⟩
-  have hTbdd : BddAbove {r : ℝ | ∃ (M : PreStructure L) (σ : Var → M.Carrier),
+  have hTbdd : BddAbove {r : ℝ | ∃ (M : PreStructure.{0} L) (σ : Var → M.Carrier),
       ModelsPre M σ Γ ∧ r = φ.eval M σ} := by
     refine ⟨1, ?_⟩
     rintro _ ⟨M, σ, -, rfl⟩
@@ -90,7 +90,7 @@ theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Fo
   · -- (ii) Completeness (Theorem 9.5).
     by_contra hlt
     push Not at hlt
-    have hT0 : 0 ≤ sSup {r : ℝ | ∃ (M : PreStructure L) (σ : Var → M.Carrier),
+    have hT0 : 0 ≤ sSup {r : ℝ | ∃ (M : PreStructure.{0} L) (σ : Var → M.Carrier),
         ModelsPre M σ Γ ∧ r = φ.eval M σ} :=
       le_trans (φ.eval_in_Icc M₀ σ₀).1 (le_csSup hTbdd ⟨M₀, σ₀, hM₀, rfl⟩)
     have hP1 : sInf {r : ℝ | ∃ p : DyadicCode, r = p.val ∧
@@ -116,7 +116,7 @@ theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Fo
     empty-sup identity is again Mathlib's `Real.sSup_empty : sSup (∅ : Set ℝ) = 0`. -/
 theorem pavelka_completeness_metric {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
-    degreeOfTruthMetric Γ φ = degreeOfProvabilityMetric Γ φ := by
+    degreeOfTruthMetric.{0} Γ φ = degreeOfProvabilityMetric Γ φ := by
   unfold degreeOfTruthMetric degreeOfProvabilityMetric
   have hone : ProvableMetricQ Γ (.tsub φ (Formula.dyadic LM.toSignature .one)) :=
     (provableMetricQ_iff_provableQ Γ _).mpr (ProvableQ.tsub_one _ φ)
@@ -128,7 +128,7 @@ theorem pavelka_completeness_metric {LM : MetricSignature}
   have hPne : {r : ℝ | ∃ p : DyadicCode, r = p.val ∧
       ProvableMetricQ Γ (.tsub φ (Formula.dyadic LM.toSignature p))}.Nonempty :=
     ⟨1, .one, DyadicCode.val_one.symm, hone⟩
-  have hTbdd : BddAbove {r : ℝ | ∃ (M : MetricPreStructure LM) (σ : Var → M.Carrier),
+  have hTbdd : BddAbove {r : ℝ | ∃ (M : MetricPreStructure.{0} LM) (σ : Var → M.Carrier),
       ModelsPre M.toPreStructure σ Γ ∧ r = φ.eval M.toPreStructure σ} := by
     refine ⟨1, ?_⟩
     rintro _ ⟨M, σ, -, rfl⟩
@@ -141,7 +141,7 @@ theorem pavelka_completeness_metric {LM : MetricSignature}
     have hall : ∀ ψ, ProvableMetricQ Γ ψ := fun ψ => by
       by_contra h
       exact hcons ⟨ψ, h⟩
-    have hT : {r : ℝ | ∃ (M : MetricPreStructure LM) (σ : Var → M.Carrier),
+    have hT : {r : ℝ | ∃ (M : MetricPreStructure.{0} LM) (σ : Var → M.Carrier),
         ModelsPre M.toPreStructure σ Γ ∧ r = φ.eval M.toPreStructure σ} = ∅ := by
       ext r
       simp only [Set.mem_ofPred_eq, Set.mem_empty_iff_false, iff_false]
@@ -158,7 +158,7 @@ theorem pavelka_completeness_metric {LM : MetricSignature}
   -- Consistent `Γ`: a metric pre-structure model exists
   -- (`metric_prestructure_model_of_consistent`, the first step of Theorem 9.5).
   obtain ⟨M₀, σ₀, hM₀⟩ := metric_prestructure_model_of_consistent hcons
-  have hTne : {r : ℝ | ∃ (M : MetricPreStructure LM) (σ : Var → M.Carrier),
+  have hTne : {r : ℝ | ∃ (M : MetricPreStructure.{0} LM) (σ : Var → M.Carrier),
       ModelsPre M.toPreStructure σ Γ ∧ r = φ.eval M.toPreStructure σ}.Nonempty :=
     ⟨_, M₀, σ₀, hM₀, rfl⟩
   apply le_antisymm
@@ -174,7 +174,7 @@ theorem pavelka_completeness_metric {LM : MetricSignature}
   · -- (ii) Completeness (Theorem 9.5, via a metric pre-structure model).
     by_contra hlt
     push Not at hlt
-    have hT0 : 0 ≤ sSup {r : ℝ | ∃ (M : MetricPreStructure LM) (σ : Var → M.Carrier),
+    have hT0 : 0 ≤ sSup {r : ℝ | ∃ (M : MetricPreStructure.{0} LM) (σ : Var → M.Carrier),
         ModelsPre M.toPreStructure σ Γ ∧ r = φ.eval M.toPreStructure σ} :=
       le_trans (φ.eval_in_Icc M₀.toPreStructure σ₀).1 (le_csSup hTbdd ⟨M₀, σ₀, hM₀, rfl⟩)
     have hP1 : sInf {r : ℝ | ∃ p : DyadicCode, r = p.val ∧

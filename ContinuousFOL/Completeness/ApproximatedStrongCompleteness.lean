@@ -23,7 +23,7 @@ namespace ContinuousFOL
 /-- Corollary 9.6 (Approximated Strong Completeness — without metric). -/
 theorem approximated_strong_completeness_pre {L : Signature}
     (Γ : Set (Formula L)) (φ : Formula L) :
-    EntailsPre Γ φ ↔ ∀ n : ℕ, ProvableQ Γ (.tsub φ (Formula.pow2Neg L n)) := by
+    EntailsPre.{0} Γ φ ↔ ∀ n : ℕ, ProvableQ Γ (.tsub φ (Formula.pow2Neg L n)) := by
   constructor
   · intro hent n
     apply provable_tsub_of_inconsistent_adjoin Γ φ (.pow2Neg n)
@@ -53,7 +53,7 @@ theorem approximated_strong_completeness_pre {L : Signature}
     `Γ ⊢_Q φ ∸ 2^{-n}` for all `n`. -/
 theorem approximated_strong_completeness_metric_pre {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
-    EntailsMetricPre Γ φ ↔
+    EntailsMetricPre.{0} Γ φ ↔
       ∀ n : ℕ, ProvableMetricQ Γ (.tsub φ (Formula.pow2Neg LM.toSignature n)) := by
   constructor
   · intro hent n
@@ -83,7 +83,7 @@ theorem approximated_strong_completeness_metric_pre {LM : MetricSignature}
 /-- Corollary 9.6, `⊨_QC` clause (the paper's "moreover"). -/
 theorem approximated_strong_completeness_metric_complete {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
-    EntailsComplete Γ φ ↔
+    EntailsComplete.{0} Γ φ ↔
       ∀ n : ℕ, ProvableMetricQ Γ (.tsub φ (Formula.pow2Neg LM.toSignature n)) := by
   constructor
   · intro hent n
@@ -115,9 +115,9 @@ theorem approximated_strong_completeness_metric_complete {LM : MetricSignature}
     `Γ ⊢_Q φ ∸ 2^{-n}` for all `n`. -/
 theorem approximated_strong_completeness_metric {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
-    (EntailsMetricPre Γ φ ↔
+    (EntailsMetricPre.{0} Γ φ ↔
       ∀ n : ℕ, ProvableMetricQ Γ (.tsub φ (Formula.pow2Neg LM.toSignature n))) ∧
-    (EntailsComplete Γ φ ↔
+    (EntailsComplete.{0} Γ φ ↔
       ∀ n : ℕ, ProvableMetricQ Γ (.tsub φ (Formula.pow2Neg LM.toSignature n))) :=
   ⟨approximated_strong_completeness_metric_pre Γ φ,
     approximated_strong_completeness_metric_complete Γ φ⟩

@@ -22,10 +22,10 @@ def ModelsPre {L : Signature} (M : PreStructure L) (σ : Var → M.Carrier)
     (Γ : Set (Formula L)) : Prop :=
   ∀ φ ∈ Γ, φ.eval M σ = 0
 
-def SatisfiablePre {L : Signature} (Γ : Set (Formula L)) : Prop :=
-  ∃ (M : PreStructure L) (σ : Var → M.Carrier), ModelsPre M σ Γ
+def SatisfiablePre.{u} {L : Signature} (Γ : Set (Formula L)) : Prop :=
+  ∃ (M : PreStructure.{u} L) (σ : Var → M.Carrier), ModelsPre M σ Γ
 
-def SatisfiableMetricPre {LM : MetricSignature} (Γ : Set (Formula LM.toSignature)) : Prop :=
-  ∃ (M : MetricPreStructure LM) (σ : Var → M.Carrier), ModelsPre M.toPreStructure σ Γ
+def SatisfiableMetricPre.{u} {LM : MetricSignature} (Γ : Set (Formula LM.toSignature)) : Prop :=
+  ∃ (M : MetricPreStructure.{u} LM) (σ : Var → M.Carrier), ModelsPre M.toPreStructure σ Γ
 
 end ContinuousFOL

@@ -17,12 +17,12 @@ open Classical
 namespace ContinuousFOL
 
 /-- Complete satisfiability and entailment `Γ ⊨_{QC} φ` (Definition 6.10). -/
-def CompletelySatisfiable {LM : MetricSignature} (Γ : Set (Formula LM.toSignature)) : Prop :=
-  ∃ (M : ContinuousStructure LM) (σ : Var → M.Carrier), ModelsPre M.toPreStructure σ Γ
+def CompletelySatisfiable.{u} {LM : MetricSignature} (Γ : Set (Formula LM.toSignature)) : Prop :=
+  ∃ (M : ContinuousStructure.{u} LM) (σ : Var → M.Carrier), ModelsPre M.toPreStructure σ Γ
 
-def EntailsComplete {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
+def EntailsComplete.{u} {LM : MetricSignature} (Γ : Set (Formula LM.toSignature))
     (φ : Formula LM.toSignature) : Prop :=
-  ∀ (M : ContinuousStructure LM) (σ : Var → M.Carrier),
+  ∀ (M : ContinuousStructure.{u} LM) (σ : Var → M.Carrier),
     ModelsPre M.toPreStructure σ Γ → φ.eval M.toPreStructure σ = 0
 
 end ContinuousFOL

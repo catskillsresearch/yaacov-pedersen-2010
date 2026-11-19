@@ -24,7 +24,7 @@ namespace ContinuousFOL
 theorem henkin_model_existence {L : Signature} {Γ : Set (Formula L)}
     (hcons : ConsistentQ Γ) :
     ∃ (Lc : Signature) (ext : SignatureExtension L Lc) (Δ : Set (Formula Lc))
-      (M : PreStructure Lc) (σ : Var → M.Carrier),
+      (M : PreStructure.{0} Lc) (σ : Var → M.Carrier),
       MaximalConsistent Δ ∧ HenkinComplete Δ ∧
       (ext.mapFormula '' Γ) ⊆ Δ ∧ ModelsPre M σ Δ := by
   obtain ⟨Lc, ext, Γc, hhenk, hcons_ext⟩ := exists_henkin_extension L

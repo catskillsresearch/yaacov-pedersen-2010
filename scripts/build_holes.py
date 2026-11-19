@@ -25,7 +25,8 @@ OUT_EDGES = ROOT / "holes-edges.txt"
 SORRY_RE = re.compile(r"(?<![\w-])sorry(?![\w-])")
 # Residual `axiom` counts as unfinished (intentional §4 black boxes stay open).
 AXIOM_RE = re.compile(r"^axiom\s+([A-Za-z0-9_'.]+)")
-DECL_RE = re.compile(r"^(theorem|lemma)\s+([A-Za-z0-9_'.]+)")
+# Optional `.{u}` universe annotation is not part of the declaration name.
+DECL_RE = re.compile(r"^(theorem|lemma)\s+([A-Za-z0-9_'.]+?)(?:\.\{\w+\})?(?=\s|$)")
 NS_OPEN_RE = re.compile(r"^namespace\s+([A-Za-z0-9_'.]+)")
 NS_END_RE = re.compile(r"^end(?:\s+([A-Za-z0-9_'.]+))?\s*$")
 

@@ -24,6 +24,7 @@ public import ContinuousFOL.Completeness.CompactnessPre
 public import ContinuousFOL.Completeness.CompletenessMetric
 public import ContinuousFOL.Completeness.CompletenessPre
 public import ContinuousFOL.Completeness.DegreeOfProvability
+public import ContinuousFOL.Completeness.DecidableTheory
 public import ContinuousFOL.Completeness.DegreeOfTruth
 public import ContinuousFOL.Completeness.ExistsHenkinExtension
 public import ContinuousFOL.Completeness.HenkinComplete

@@ -1,7 +1,21 @@
 {
   "challenge_module": "ContinuousFOLComparator.Challenge",
   "solution_module": "ContinuousFOLComparator.Solution",
-  "theorem_names": [],
+  "theorem_names": [
+    "ContinuousFOL.soundness_pre",
+    "ContinuousFOL.soundness_metric_full",
+    "ContinuousFOL.henkin_model_existence",
+    "ContinuousFOL.henkin_model_existence_metric",
+    "ContinuousFOL.completeness_pre",
+    "ContinuousFOL.completeness_metric",
+    "ContinuousFOL.approximated_strong_completeness_pre",
+    "ContinuousFOL.approximated_strong_completeness_metric",
+    "ContinuousFOL.pavelka_completeness_pre",
+    "ContinuousFOL.pavelka_completeness_metric",
+    "ContinuousFOL.complete_re_theory_decidable",
+    "ContinuousFOL.compactness_pre",
+    "ContinuousFOL.compactness_metric"
+  ],
   "definition_names": [],
   "permitted_axioms": [
     "propext",

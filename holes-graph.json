@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T20:29:45Z",
+  "updated": "2026-11-19T20:35:40Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -614,7 +614,7 @@
       "id": "complete_re_theory_decidable",
       "label": "Cor 9.11 RE \u21d2 dec.",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/UniformlyComputableDegree.lean:54",
+      "file": "ContinuousFOL/Completeness/UniformlyComputableDegree.lean:21",
       "status": "open",
       "blocker": null,
       "detail": "Complete theory with recursive or r.e. axiomatization is decidable (Mathlib computability)."

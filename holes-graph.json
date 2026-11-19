@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T22:38:59Z",
+  "updated": "2026-11-19T22:45:01Z",
   "sorryCount": 5,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -191,7 +191,7 @@
       "id": "soundness_pre",
       "label": "Thm 7.2 sound",
       "section": 7,
-      "file": "ContinuousFOL/Group2Axioms/SoundnessPre.lean:223",
+      "file": "ContinuousFOL/Group2Axioms/SoundnessPre.lean:137",
       "status": "done",
       "blocker": null,
       "detail": "ProvableQ \u21d2 EntailsPre."
@@ -200,7 +200,7 @@
       "id": "satisfiable_consistent_pre",
       "label": "Sat \u21d2 Cons (pre)",
       "section": 7,
-      "file": "ContinuousFOL/Group2Axioms/SoundnessPre.lean:244",
+      "file": "ContinuousFOL/Group2Axioms/SoundnessPre.lean:158",
       "status": "done",
       "blocker": null,
       "detail": "SatisfiablePre \u21d2 ConsistentQ."

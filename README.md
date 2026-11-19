@@ -31,6 +31,7 @@ Toolchain: Lean `v4.35.0` (see `lean-toolchain`), Mathlib pin in `lakefile.toml`
 | `ContinuousFOLComparator/` | Palomar Challenge / Solution pair |
 
 See `docs/recursive-presentation-cor-9.11.md` for why `RecursivePresentation` includes a computable sup-closure on formula codes (Corollary 9.11 / “countable, recursive language”).
+See `docs/section-4-facts-plan.md` for the plan and size estimate for Facts 4.1 and 4.5 (`luk_weak_completeness`, `cl_finite_strong_completeness`).
 
 ## Status
 

@@ -40,7 +40,11 @@ namespace MaximalConsistent
 lemma mem_iff_provable {L : Signature} {Δ : Set (Formula L)}
     (hmc : MaximalConsistent Δ) (φ : Formula L) :
     φ ∈ Δ ↔ ProvableQ Δ φ := by
-  sorry
+  constructor
+  · exact fun h => .hyp h
+  · intro hprov
+    exact hmc.archimedean φ fun n =>
+      ProvableQ.mp hprov (ProvableQ.ax0 (.A1 φ (Formula.pow2Neg L n)))
 
 end MaximalConsistent
 

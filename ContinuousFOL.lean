@@ -39,6 +39,7 @@ public import ContinuousFOL.Completeness.SignatureExtension
 public import ContinuousFOL.Completeness.TermPreStructure
 public import ContinuousFOL.Completeness.TermPreStructureEvalEqSup
 public import ContinuousFOL.Completeness.UniformlyComputableDegree
+public import ContinuousFOL.Completeness.UniverseTransport
 public import ContinuousFOL.Essentials.ConsistentAdjoin
 public import ContinuousFOL.Essentials.DeductionTheorem
 public import ContinuousFOL.Essentials.GeneralizationTheorem
@@ -89,6 +90,7 @@ public import ContinuousFOL.LanguageAndSemantics.ReplaceArg
 public import ContinuousFOL.LanguageAndSemantics.Signature
 public import ContinuousFOL.LanguageAndSemantics.Term
 public import ContinuousFOL.LanguageAndSemantics.TermEval
+public import ContinuousFOL.LanguageAndSemantics.UliftPreStructure
 public import ContinuousFOL.LanguageAndSemantics.UpdateAssign
 public import ContinuousFOL.LanguageAndSemantics.Var
 public import ContinuousFOL.LukasiewiczAndContinuous.CLPropForm

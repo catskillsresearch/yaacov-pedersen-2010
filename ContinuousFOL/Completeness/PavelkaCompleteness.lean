@@ -14,6 +14,7 @@ public import ContinuousFOL.Completeness.DegreeOfProvability
 public import ContinuousFOL.Completeness.ProvableTsubOfInconsistentAdjoin
 public import ContinuousFOL.Group2Axioms.SoundnessPre
 public import ContinuousFOL.Group1Axioms.DyadicCode.Val
+public import ContinuousFOL.Completeness.UniverseTransport
 
 @[expose] public section
 
@@ -32,7 +33,7 @@ namespace ContinuousFOL
     `φ°_Γ = 0`, while an inconsistent `Γ` proves `φ ∸ 0`, so `φ^⊛_Γ = 0`
     as well. (If one instead took `sSup ∅ = -∞`, the paper's unrestricted
     statement would fail in this case.) -/
-theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) :
+lemma pavelka_completeness_pre_zero {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) :
     degreeOfTruthPre.{0} Γ φ = degreeOfProvabilityPre Γ φ := by
   unfold degreeOfTruthPre degreeOfProvabilityPre
   by_cases hcons : ConsistentQ Γ
@@ -114,7 +115,7 @@ theorem pavelka_completeness_pre {L : Signature} (Γ : Set (Formula L)) (φ : Fo
     continuous `𝓛`-pre-structures and metric provability. As in the
     non-metric case, the paper does not discuss inconsistent `Γ`; the
     empty-sup identity is again Mathlib's `Real.sSup_empty : sSup (∅ : Set ℝ) = 0`. -/
-theorem pavelka_completeness_metric {LM : MetricSignature}
+lemma pavelka_completeness_metric_zero {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
     degreeOfTruthMetric.{0} Γ φ = degreeOfProvabilityMetric Γ φ := by
   unfold degreeOfTruthMetric degreeOfProvabilityMetric
@@ -193,5 +194,20 @@ theorem pavelka_completeness_metric {LM : MetricSignature}
     have h1 := le_max_left (p.val - φ.eval M.toPreStructure σ) 0
     have h2 := le_csSup hTbdd ⟨M, σ, hMΓ, rfl⟩
     linarith
+
+/-- Corollary 9.8 (Pavelka-style Completeness): `φ°_Γ = φ^⊛_Γ`, for pre-structures
+    in an arbitrary universe. -/
+theorem pavelka_completeness_pre.{u} {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) :
+    degreeOfTruthPre.{u} Γ φ = degreeOfProvabilityPre Γ φ := by
+  rw [degreeOfTruthPre_eq_universe]
+  exact pavelka_completeness_pre_zero Γ φ
+
+/-- Corollary 9.8 for a signature with a metric, for metric pre-structures in an
+    arbitrary universe. -/
+theorem pavelka_completeness_metric.{u} {LM : MetricSignature}
+    (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
+    degreeOfTruthMetric.{u} Γ φ = degreeOfProvabilityMetric Γ φ := by
+  rw [degreeOfTruthMetric_eq_universe]
+  exact pavelka_completeness_metric_zero Γ φ
 
 end ContinuousFOL

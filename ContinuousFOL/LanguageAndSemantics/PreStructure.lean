@@ -20,9 +20,12 @@ namespace ContinuousFOL
 
     The paper takes the underlying universe M to be "a non-empty set", with no
     bound on its size. `Carrier` is therefore in an arbitrary universe `Type u`
-    and is required to be nonempty. Paper-facing completeness, compactness, and
-    degree-of-truth statements are instantiated at universe 0, which is where
-    the term-model constructions live; soundness is universe-polymorphic. -/
+    and is required to be nonempty. Paper-facing soundness, completeness
+    (as an iff), compactness, entailment, degree of truth, and Def 9.10 / Cor 9.11
+    are universe-polymorphic: a universe-0 term/Henkin model lifts by `ULift` to
+    any universe, so satisfiability, entailment and degree of truth do not depend
+    on the universe. The existence half of Theorem 9.5 still exhibits a
+    universe-0 model. -/
 structure PreStructure.{u} (L : Signature) where
   Carrier    : Type u
   nonempty   : Nonempty Carrier

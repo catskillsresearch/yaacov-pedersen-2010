@@ -21,9 +21,9 @@ open Classical
 namespace ContinuousFOL
 
 /-- Corollary 9.6 (Approximated Strong Completeness — without metric). -/
-theorem approximated_strong_completeness_pre {L : Signature}
+theorem approximated_strong_completeness_pre.{u} {L : Signature}
     (Γ : Set (Formula L)) (φ : Formula L) :
-    EntailsPre.{0} Γ φ ↔ ∀ n : ℕ, ProvableQ Γ (.tsub φ (Formula.pow2Neg L n)) := by
+    EntailsPre.{u} Γ φ ↔ ∀ n : ℕ, ProvableQ Γ (.tsub φ (Formula.pow2Neg L n)) := by
   constructor
   · intro hent n
     apply provable_tsub_of_inconsistent_adjoin Γ φ (.pow2Neg n)
@@ -51,15 +51,17 @@ theorem approximated_strong_completeness_pre {L : Signature}
 
 /-- Corollary 9.6, metric pre-structure clause: `Γ ⊨_Q φ` iff
     `Γ ⊢_Q φ ∸ 2^{-n}` for all `n`. -/
-theorem approximated_strong_completeness_metric_pre {LM : MetricSignature}
+theorem approximated_strong_completeness_metric_pre.{u} {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
-    EntailsMetricPre.{0} Γ φ ↔
+    EntailsMetricPre.{u} Γ φ ↔
       ∀ n : ℕ, ProvableMetricQ Γ (.tsub φ (Formula.pow2Neg LM.toSignature n)) := by
   constructor
   · intro hent n
     apply provable_tsub_of_inconsistent_adjoin_metric Γ φ (.pow2Neg n)
     intro hcons
-    obtain ⟨M, σ, hM⟩ := metric_prestructure_model_of_consistent hcons
+    obtain ⟨M, σ, hM⟩ :=
+      (satisfiableMetricPre_iff_universe.{u} _).mpr
+        (metric_prestructure_model_of_consistent hcons)
     have hφ0 : φ.eval M.toPreStructure σ = 0 :=
       hent M σ (fun ψ hψ => hM ψ (Set.mem_union_left _ hψ))
     have hmem : Formula.tsub (Formula.dyadic LM.toSignature (.pow2Neg n)) φ ∈
@@ -81,9 +83,9 @@ theorem approximated_strong_completeness_metric_pre {LM : MetricSignature}
     linarith [hle n]
 
 /-- Corollary 9.6, `⊨_QC` clause (the paper's "moreover"). -/
-theorem approximated_strong_completeness_metric_complete {LM : MetricSignature}
+theorem approximated_strong_completeness_metric_complete.{u} {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
-    EntailsComplete.{0} Γ φ ↔
+    EntailsComplete.{u} Γ φ ↔
       ∀ n : ℕ, ProvableMetricQ Γ (.tsub φ (Formula.pow2Neg LM.toSignature n)) := by
   constructor
   · intro hent n
@@ -113,13 +115,13 @@ theorem approximated_strong_completeness_metric_complete {LM : MetricSignature}
 /-- Corollary 9.6 for a signature with a metric: `Γ ⊨_Q φ` if and only if
     `Γ ⊢_Q φ ∸ 2^{-n}` for all `n`, and moreover `Γ ⊨_QC φ` if and only if
     `Γ ⊢_Q φ ∸ 2^{-n}` for all `n`. -/
-theorem approximated_strong_completeness_metric {LM : MetricSignature}
+theorem approximated_strong_completeness_metric.{u} {LM : MetricSignature}
     (Γ : Set (Formula LM.toSignature)) (φ : Formula LM.toSignature) :
-    (EntailsMetricPre.{0} Γ φ ↔
+    (EntailsMetricPre.{u} Γ φ ↔
       ∀ n : ℕ, ProvableMetricQ Γ (.tsub φ (Formula.pow2Neg LM.toSignature n))) ∧
-    (EntailsComplete.{0} Γ φ ↔
+    (EntailsComplete.{u} Γ φ ↔
       ∀ n : ℕ, ProvableMetricQ Γ (.tsub φ (Formula.pow2Neg LM.toSignature n))) :=
-  ⟨approximated_strong_completeness_metric_pre Γ φ,
-    approximated_strong_completeness_metric_complete Γ φ⟩
+  ⟨approximated_strong_completeness_metric_pre.{u} Γ φ,
+    approximated_strong_completeness_metric_complete.{u} Γ φ⟩
 
 end ContinuousFOL

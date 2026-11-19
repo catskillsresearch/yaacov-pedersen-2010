@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T20:15:15Z",
+  "updated": "2026-11-19T20:29:45Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -524,7 +524,7 @@
       "id": "completeness_pre",
       "label": "Thm 9.5 complete",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/CompletenessPre.lean:20",
+      "file": "ContinuousFOL/Completeness/CompletenessPre.lean:21",
       "status": "done",
       "blocker": null,
       "detail": "ConsistentQ \u2192 SatisfiablePre (iff helper: completeness_pre_iff)."
@@ -533,7 +533,7 @@
       "id": "completeness_metric",
       "label": "Thm 9.5 metric",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/CompletenessMetric.lean:21",
+      "file": "ContinuousFOL/Completeness/CompletenessMetric.lean:22",
       "status": "done",
       "blocker": null,
       "detail": "ConsistentMetricQ \u2192 CompletelySatisfiable (iff helper: completeness_metric_iff)."
@@ -569,7 +569,7 @@
       "id": "approximated_strong_completeness_metric",
       "label": "Cor 9.6 metric",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean:116",
+      "file": "ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean:118",
       "status": "done",
       "blocker": null,
       "detail": "Corollary 9.6 metric: EntailsMetricPre and EntailsComplete iff \u22a2 \u03c6 \u2238 2^{-n} for all n."
@@ -578,7 +578,7 @@
       "id": "pavelka_completeness_pre",
       "label": "Cor 9.8 Pavelka",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:35",
+      "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:200",
       "status": "done",
       "blocker": null,
       "detail": "degreeOfTruthPre = degreeOfProvabilityPre."
@@ -587,7 +587,7 @@
       "id": "pavelka_completeness_metric",
       "label": "Cor 9.8 metric",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:117",
+      "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:207",
       "status": "done",
       "blocker": null,
       "detail": "degreeOfTruthMetric = degreeOfProvabilityMetric (sup over metric pre-structures)."
@@ -605,7 +605,7 @@
       "id": "compactness_metric",
       "label": "Cor 9.12 metric",
       "section": 9,
-      "file": "ContinuousFOL/Completeness/CompactnessMetric.lean:58",
+      "file": "ContinuousFOL/Completeness/CompactnessMetric.lean:59",
       "status": "done",
       "blocker": null,
       "detail": "Corollary 9.12 metric: finite (complete) satisfiability \u21d2 (complete) satisfiability."

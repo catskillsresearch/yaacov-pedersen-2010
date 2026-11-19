@@ -18,10 +18,10 @@ open Classical
 namespace ContinuousFOL
 
 /-- Corollary 9.12 (Compactness — without metric). -/
-theorem compactness_pre {L : Signature} (Γ : Set (Formula L))
+theorem compactness_pre.{u} {L : Signature} (Γ : Set (Formula L))
     (hfin : ∀ Γ₀ : Finset (Formula L), (Γ₀ : Set (Formula L)) ⊆ Γ →
-      SatisfiablePre.{0} (Γ₀ : Set (Formula L))) :
-    SatisfiablePre.{0} Γ := by
+      SatisfiablePre.{u} (Γ₀ : Set (Formula L))) :
+    SatisfiablePre.{u} Γ := by
   rw [← completeness_pre_iff]
   by_contra hincons
   rw [inconsistent_iff_provable_one] at hincons

@@ -6,8 +6,7 @@ Paper pin: §6 Theorem 6.9; vision.md page 13
 -/
 module
 
-public import ContinuousFOL.SubstitutionAndCompletions.ElementaryLMorphism
-public import ContinuousFOL.LanguageAndSemantics.ContinuousStructure
+public import ContinuousFOL.SubstitutionAndCompletions.MetricPreStructureCompletion
 
 @[expose] public section
 
@@ -18,9 +17,9 @@ namespace ContinuousFOL
 
 /-- Theorem 6.9 (Existence of Metric Completion): Every metric pre-structure admits an
     elementary morphism into a complete continuous `𝓛`-structure `𝔐̂`. -/
-theorem exists_metric_completion {LM : MetricSignature} (M : MetricPreStructure LM) :
-    ∃ (Mhat : ContinuousStructure LM),
-      Nonempty (ElementaryLMorphism M.toPreStructure Mhat.toPreStructure) := by
-  sorry
+theorem exists_metric_completion.{u} {LM : MetricSignature} (M : MetricPreStructure.{u} LM) :
+    ∃ (Mhat : ContinuousStructure.{u} LM),
+      Nonempty (ElementaryLMorphism M.toPreStructure Mhat.toPreStructure) :=
+  ⟨metricCompletion.{u} M, ⟨metricCompletionElementary.{u} M⟩⟩
 
 end ContinuousFOL

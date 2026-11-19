@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-19T21:14:49Z",
-  "sorryCount": 9,
+  "updated": "2026-11-19T21:32:42Z",
+  "sorryCount": 6,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
     "blocked": "Waiting on incomplete required proof-deps",
@@ -13,7 +13,7 @@
     "\u00a74 axioms are intentional black boxes and stay open until discharged.",
     "Blue = done. Green = open. Grey = blocked.",
     "Regenerate with: python3 scripts/build_holes.py",
-    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, exists_metric_completion, complete_re_theory_decidable."
+    "Open tips: cl_consistent_iff_satisfiable, cl_finite_strong_completeness, cl_approx_strong_completeness, luk_consistent_iff_satisfiable, luk_weak_completeness, complete_re_theory_decidable."
   ],
   "nodes": [
     {
@@ -155,8 +155,8 @@
       "id": "exists_metric_completion",
       "label": "Metric completion",
       "section": 6,
-      "file": "ContinuousFOL/SubstitutionAndCompletions/ExistsMetricCompletion.lean:21",
-      "status": "open",
+      "file": "ContinuousFOL/SubstitutionAndCompletions/ExistsMetricCompletion.lean:20",
+      "status": "done",
       "blocker": null,
       "detail": "Every MetricPreStructure embeds in a ContinuousStructure."
     },
@@ -174,8 +174,8 @@
       "label": "Entails \u2194 complete",
       "section": 6,
       "file": "ContinuousFOL/SubstitutionAndCompletions/EntailsMetricIffComplete.lean:22",
-      "status": "blocked",
-      "blocker": "needs exists_metric_completion",
+      "status": "done",
+      "blocker": null,
       "detail": "Metric entails iff complete-structure entails."
     },
     {
@@ -183,8 +183,8 @@
       "label": "Sat \u2194 complete",
       "section": 6,
       "file": "ContinuousFOL/SubstitutionAndCompletions/EntailsMetricIffComplete.lean:37",
-      "status": "blocked",
-      "blocker": "needs exists_metric_completion",
+      "status": "done",
+      "blocker": null,
       "detail": "Metric satisfiable iff completely satisfiable."
     },
     {

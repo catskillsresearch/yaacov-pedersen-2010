@@ -414,7 +414,7 @@ theorem termPreStructure_eval_eq_sup {L : Signature} {Δ : Set (Formula L)}
       intro q hq
       apply csSup_le hne
       rintro _ ⟨t, rfl⟩
-      obtain ⟨ψ', heq, hrank, hcorr, hmem⟩ := maximal_consistent_sup_instantiate hmc t x ψ q hq
+      obtain ⟨ψ', heq, hrank, hcorr, hmem⟩ := maximal_consistent_sup_instantiate_aux hmc t x ψ q hq
       have h1 := hmc.sSup_lowerCut_le hmem
       have e0 := IH _ ((Formula.rank_freeSubst ψ' t x).trans hrank)
       have e := substitution_lemma (termPreStructure Δ) (idTermAssign L) t x ψ' hcorr

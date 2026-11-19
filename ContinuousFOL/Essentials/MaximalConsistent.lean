@@ -167,8 +167,10 @@ lemma ProvableQ.renameBound {L : Signature} (avoid : Finset Var) (φ : Formula L
         ProvableQ.tsub_trans b2 (ProvableQ.sup_cong0 z ih.2)⟩
     · exact ⟨ProvableQ.sup_cong0 z ih.1, ProvableQ.sup_cong0 z ih.2⟩
 
-/-- Lemma 8.11: Instantiation inside maximal consistent sets after bound renaming. -/
-theorem maximal_consistent_sup_instantiate {L : Signature} {Δ : Set (Formula L)}
+/-- Helper for Lemma 8.11 (used by the truth lemma): the paper's conclusion together with the
+facts its proof provides, namely `rank φ' = rank φ` and correctness of `φ'[t/x]`.
+Not a paper statement; see `maximal_consistent_sup_instantiate`. -/
+theorem maximal_consistent_sup_instantiate_aux {L : Signature} {Δ : Set (Formula L)}
     (hmc : MaximalConsistent Δ) (t : Term L) (x : Var) (φ : Formula L) (p : DyadicCode)
     (hmem : Formula.tsub (.sup x φ) (Formula.dyadic L p) ∈ Δ) :
     ∃ φ' : Formula L, (φ ≡ᶠ φ') ∧ φ'.rank = φ.rank ∧
@@ -190,6 +192,19 @@ theorem maximal_consistent_sup_instantiate {L : Signature} {Δ : Set (Formula L)
   have h3 : ProvableQ Δ (.tsub (.sup x φ) (Formula.dyadic L p)) := .hyp hmem
   exact (hmc.mem_iff_provable _).mpr
     (ProvableQ.tsub_trans (ProvableQ.tsub_trans h2 h1) h3)
+
+/-- Lemma 8.11: Let `Γ ⊆ For(𝓛)`, let `Δ` be a maximal consistent set of formulae containing
+`Γ`, let `t` be a term, and let `p ∈ 𝔻`. Then if `sup_x φ ∸ p ∈ Δ`, there is a formula `φ'`
+such that `φ ≡ φ'` and `φ'[t/x] ∸ p ∈ Δ`. -/
+theorem maximal_consistent_sup_instantiate {L : Signature} (Γ : Set (Formula L))
+    {Δ : Set (Formula L)} (hmc : MaximalConsistent Δ) (_hΓΔ : Γ ⊆ Δ) (t : Term L)
+    (p : DyadicCode) (x : Var) (φ : Formula L) :
+    Formula.tsub (.sup x φ) (Formula.dyadic L p) ∈ Δ →
+      ∃ φ' : Formula L, (φ ≡ᶠ φ') ∧
+        Formula.tsub (φ'.freeSubst t x) (Formula.dyadic L p) ∈ Δ := by
+  intro hmem
+  obtain ⟨φ', heq, -, -, hmem'⟩ := maximal_consistent_sup_instantiate_aux hmc t x φ p hmem
+  exact ⟨φ', heq, hmem'⟩
 
 /-- CL: `⊢ 0 ∸ φ`. -/
 lemma ProvableQ.zero_tsub {L : Signature} (Γ : Set (Formula L)) (φ : Formula L) :

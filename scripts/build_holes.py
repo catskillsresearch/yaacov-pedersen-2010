@@ -229,7 +229,13 @@ NODES: dict[str, dict] = {
         "label": "sup instantiate",
         "section": 8,
         "file": "ContinuousFOL/Essentials/MaximalConsistent.lean",
-        "detail": "Maximal consistent: ∃-instantation for sup.",
+        "detail": "Lemma 8.11: sup_x φ ∸ p ∈ Δ ⇒ ∃ φ' ≡ φ, φ'[t/x] ∸ p ∈ Δ.",
+    },
+    "maximal_consistent_sup_instantiate_aux": {
+        "label": "8.11 helper",
+        "section": 8,
+        "file": "ContinuousFOL/Essentials/MaximalConsistent.lean",
+        "detail": "Helper: Lemma 8.11 plus rank and substitution correctness of φ'.",
     },
     "maximal_consistent_sup_eq_inf": {
         "label": "sup = Inf",
@@ -384,7 +390,8 @@ HARD_EDGES: list[tuple[str, str]] = [
     ("ProvableQ.tsub_one", "inconsistent_iff_provable_one"),
     ("inconsistent_iff_provable_one", "exists_maximal_consistent"),
     ("mem_iff_provable", "maximal_consistent_sup_eq_inf"),
-    ("maximal_consistent_sup_instantiate", "maximal_consistent_sup_eq_inf"),
+    ("maximal_consistent_sup_instantiate_aux", "maximal_consistent_sup_instantiate"),
+    ("maximal_consistent_sup_instantiate_aux", "termPreStructure_eval_eq_sup"),
     ("maximal_in_consistent_extensions_iff", "exists_maximal_consistent"),
     ("exists_maximal_consistent", "exists_maximal_consistent_metric"),
     # §9 Henkin → completeness → corollaries

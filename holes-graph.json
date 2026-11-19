@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T19:22:20Z",
+  "updated": "2026-11-19T19:23:32Z",
   "sorryCount": 10,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -299,16 +299,25 @@
       "id": "maximal_consistent_sup_instantiate",
       "label": "sup instantiate",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:171",
+      "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:199",
       "status": "done",
       "blocker": null,
-      "detail": "Maximal consistent: \u2203-instantation for sup."
+      "detail": "Lemma 8.11: sup_x \u03c6 \u2238 p \u2208 \u0394 \u21d2 \u2203 \u03c6' \u2261 \u03c6, \u03c6'[t/x] \u2238 p \u2208 \u0394."
+    },
+    {
+      "id": "maximal_consistent_sup_instantiate_aux",
+      "label": "8.11 helper",
+      "section": 8,
+      "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:173",
+      "status": "done",
+      "blocker": null,
+      "detail": "Helper: Lemma 8.11 plus rank and substitution correctness of \u03c6'."
     },
     {
       "id": "maximal_consistent_sup_eq_inf",
       "label": "sup = Inf",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:232",
+      "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:247",
       "status": "done",
       "blocker": null,
       "detail": "Degree of truth via Inf of dyadic approximations."
@@ -317,7 +326,7 @@
       "id": "maximal_in_consistent_extensions_iff",
       "label": "Max \u2194 no ext",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:269",
+      "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:284",
       "status": "done",
       "blocker": null,
       "detail": "Maximal among consistent extensions characterization."
@@ -326,7 +335,7 @@
       "id": "exists_maximal_consistent",
       "label": "Thm 8.10 Lindenbaum",
       "section": 8,
-      "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:303",
+      "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:318",
       "status": "done",
       "blocker": null,
       "detail": "Lindenbaum: every consistent set has a maximal extension."
@@ -560,8 +569,13 @@
       "kind": "hard"
     },
     {
-      "from": "maximal_consistent_sup_instantiate",
-      "to": "maximal_consistent_sup_eq_inf",
+      "from": "maximal_consistent_sup_instantiate_aux",
+      "to": "maximal_consistent_sup_instantiate",
+      "kind": "hard"
+    },
+    {
+      "from": "maximal_consistent_sup_instantiate_aux",
+      "to": "termPreStructure_eval_eq_sup",
       "kind": "hard"
     },
     {

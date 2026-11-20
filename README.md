@@ -47,7 +47,8 @@ repository are the intended statement stubs in
 board (`HOLES.md`) has 75 nodes, all done. One paper statement carries an added
 premise (Facts 4.2/4.3, see the deviations table below). Full machine-readable
 list of results, files, axioms and verbatim paper quotes: `formalization.yaml`
-(`status.main_results`, `alignment.statements`, `fidelity.divergences`).
+(`status.main_results` for the Comparator chart, `status.library_results` /
+`alignment.statements` for the rest of the library, `fidelity.divergences`).
 
 ## Results
 

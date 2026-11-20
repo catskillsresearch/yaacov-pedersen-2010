@@ -32,7 +32,7 @@ decidability consequences for recursively axiomatized theories (paper §9).
 The paper-facing proof chart (`holes-graph.json` / `HOLES.md`) has 75 nodes,
 all proved (`sorry`-free). The full list of proved results with Lean names,
 files, axioms and verbatim paper quotes is in `formalization.yaml`
-(`status.main_results`, `alignment.statements`). Packaging:
+(`status.main_results` / `status.library_results`, `alignment.statements`). Packaging:
 
 - Compared declarations live in namespace `ContinuousFOL`.
 - `Challenge.lean` is the statement-of-record file (deliberate `sorry` holes).

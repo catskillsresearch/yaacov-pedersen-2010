@@ -10,6 +10,7 @@ public import ContinuousFOL.Group1Axioms.CLPropForm.Provable
 public import ContinuousFOL.Group1Axioms.CLPropForm.Dyadic
 public import ContinuousFOL.Group1Axioms.DyadicCode.Pow2Neg
 public import ContinuousFOL.LukasiewiczAndContinuous.CLPropFormModels
+public import ContinuousFOL.LukasiewiczAndContinuous.PropCompactness
 
 @[expose] public section
 
@@ -28,7 +29,7 @@ theorem cl_approx_strong_completeness {I : Type*}
     (hypSet : Set (CLPropForm I)) (φ : CLPropForm I) :
     CLPropForm.Entails hypSet φ ↔
       ∀ n : ℕ, CLPropForm.Provable hypSet
-        (.tsub φ (CLPropForm.dyadic φ (.pow2Neg n))) := by
-  sorry
+        (.tsub φ (CLPropForm.dyadic φ (.pow2Neg n))) :=
+  CLPropForm.entails_iff_forall_provable_tsub_pow2Neg hypSet φ
 
 end ContinuousFOL

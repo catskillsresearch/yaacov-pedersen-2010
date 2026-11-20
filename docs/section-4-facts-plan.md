@@ -186,3 +186,38 @@ All sorry-free; the official Fact 4.1 / 4.5 statements are unchanged.
 
 Estimate for steps 1–4: about 1,200–2,000 lines. Step 3 (associativity of the
 carry addition) is the largest remaining piece.
+
+## Progress after the completeness checkpoint (Facts 4.1, 4.4, 4.5 proved)
+
+All of the following is `sorry`-free; `#print axioms` shows only `propext`,
+`Classical.choice`, `Quot.sound`. Official statements unchanged.
+
+- **Fact 4.1** (`luk_weak_completeness`), by Chang's route without the
+  subdirect-representation theorem:
+  `MVBasic`, `MVChain` (digit identities), `LukLinearTheory` (linear extension),
+  `ChainGroup` (ordered group of an MV-chain, embedding `A → [0, u]`),
+  `GroupEval` + `LinearTransfer` (Fourier–Motzkin transfer to `[0, 1]`),
+  assembled in `LukChang`.
+- **Łukasiewicz finite strong completeness** (`LukFiniteStrong`), from 4.1,
+  semantic iteration and the weak deduction theorem.
+- **Fact 4.5** (`cl_finite_strong_completeness`), in `CLFromLuk`: read a
+  continuous formula as a Łukasiewicz formula over atoms for its `½χ`
+  subformulas; the occurring (A5)/(A6) instances force those atoms to `χ/2` on
+  `[0, 1]`; apply Łukasiewicz finite strong completeness and substitute back.
+- **Fact 4.4** (`cl_approx_strong_completeness`), in `PropCompactness`, by
+  Tychonoff compactness of `[0, 1]^I` plus Fact 4.5.
+- **Facts 4.2 / 4.3, proved for nonempty `I`**:
+  `LukPropForm.consistent_iff_satisfiable` and
+  `CLPropForm.consistent_iff_satisfiable` (`[Nonempty I]`), and the direction
+  consistent ⇒ satisfiable for every `I`.
+
+### Fidelity issue in the official Facts 4.2 and 4.3
+
+As stated in Lean (`∀ I`), Facts 4.2 and 4.3 are false at `I = Empty`: there are
+no formulas, so `∅` is satisfiable (vacuously) but not consistent
+(`Consistent Σ := ∃ φ, ¬ Σ ⊢ φ`). This is proved in
+`LukPropForm.consistent_iff_satisfiable_fails_empty` and
+`CLPropForm.consistent_iff_satisfiable_fails_empty`. The paper tacitly has at
+least one propositional variable. The official statements are left unchanged,
+still `sorry`; the decision on how to restate them (for example adding
+`[Nonempty I]`) is for the project owner.

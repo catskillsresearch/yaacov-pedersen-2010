@@ -2,8 +2,8 @@
 
 Inventory of paper-facing Lean holes, ordered **prove-first**.
 
-**Updated:** 2026-11-20T11:09:45Z
-**Holes:** 3 open+blocked · 3 open · 0 blocked · 72 done.
+**Updated:** 2026-11-20T11:12:59Z
+**Holes:** 2 open+blocked · 2 open · 0 blocked · 73 done.
 
 **Live board:** [`holes.html`](holes.html) (graph embedded; open the file directly).
 
@@ -19,7 +19,6 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 |---|---|---|
 | `luk_consistent_iff_satisfiable` | Fact 4.2 Łuk cons | `ContinuousFOL/BlackBox/LukConsistentIffSatisfiable.lean:20` |
 | `cl_consistent_iff_satisfiable` | Fact 4.3 CL cons | `ContinuousFOL/BlackBox/CLConsistentIffSatisfiable.lean:20` |
-| `cl_approx_strong_completeness` | Fact 4.4 CL approx | `ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:27` |
 
 ## By section
 
@@ -38,14 +37,14 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 | done | `DyadicCode.dense_in_Icc` | Rem 3.4 denseness | `ContinuousFOL/Group1Axioms/DyadicCode/Val.lean:172` |
 | done | `DyadicCode.val_range_eq_dyadics` | Rem 3.4 {v(d)}=𝔻 | `ContinuousFOL/Group1Axioms/DyadicCode/Val.lean:162` |
 
-### §4 — 3 hole(s)
+### §4 — 2 hole(s)
 
 | Status | Id | Label | File |
 |---|---|---|---|
 | done | `luk_weak_completeness` | Fact 4.1 Łuk weak | `ContinuousFOL/BlackBox/LukWeakCompleteness.lean:21` |
 | open | `luk_consistent_iff_satisfiable` | Fact 4.2 Łuk cons | `ContinuousFOL/BlackBox/LukConsistentIffSatisfiable.lean:20` |
 | open | `cl_consistent_iff_satisfiable` | Fact 4.3 CL cons | `ContinuousFOL/BlackBox/CLConsistentIffSatisfiable.lean:20` |
-| open | `cl_approx_strong_completeness` | Fact 4.4 CL approx | `ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:27` |
+| done | `cl_approx_strong_completeness` | Fact 4.4 CL approx | `ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:28` |
 | done | `cl_finite_strong_completeness` | Fact 4.5 CL finite | `ContinuousFOL/BlackBox/CLFiniteStrongCompleteness.lean:22` |
 | done | `entails_empty_iff_evalMV` | MV eval on [0,1] | `ContinuousFOL/LukasiewiczAndContinuous/StandardMVAlgebra.lean:183` |
 | done | `LukLind.mk_eq_zero_iff` | Lindenbaum [[φ]]=0 | `ContinuousFOL/LukasiewiczAndContinuous/LukLindenbaum.lean:381` |

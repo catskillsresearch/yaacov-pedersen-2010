@@ -7,11 +7,11 @@ first-order logic*, Journal of Symbolic Logic **75** (2010) 168–190
 independent formalization.
 
 **Itaï Ben Yaacov and Arthur Paul Pedersen did not participate in, review, or
-endorse this formalization.** Dana Scott has contacted Pedersen about it; no
-reply has been received yet. There are no other human collaborators. The Lean
-development was produced by Lars Warren Ericson with AI-agent assistance under
-his direction and review. The source paper is cited as literature only and is
-not licensed under this repository's Apache-2.0 terms (see `NOTICE`).
+endorse this formalization.** They have not been contacted about it. There are
+no other human collaborators. The Lean development was produced by Lars Warren
+Ericson with AI-agent assistance under his direction and review. The source
+paper is cited as literature only and is not licensed under this repository's
+Apache-2.0 terms (see `NOTICE`).
 
 **This repository is intended for standalone Palomar registration**, for the
 Ben Yaacov–Pedersen 2010 continuous-logic completeness development alone,

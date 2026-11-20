@@ -7,14 +7,16 @@ project:
     of completeness for continuous first-order logic", Journal of Symbolic Logic 75 (2010) 168–190 (arXiv:0903.4051).
     Framing: rigorous reconstruction/verification of continuous propositional and first-order syntax/semantics,
     Group 1 / Group 2 axioms, black-box theorems, and the completeness / approximated strong-completeness
-    results. Project rule: no Lean `axiom` declarations. Itaï Ben Yaacov and Arthur Paul Pedersen did
-    not participate in or endorse this formalization. Lean is written with AI-agent assistance under Lars
-    Warren Ericson’s direction and review. Mathlib is the Lake dependency. Palomar registration pending;
-    packaging follows the Challenge / Solution / comparator.json pattern. Deviation from the paper: Facts
-    4.2 and 4.3 (consistency iff satisfiability, Łukasiewicz and continuous propositional logic) needed
-    the added premise that there is at least one propositional variable (`[Nonempty I]`). As literally
-    stated they fail when there are no variables (the empty set is then satisfiable but inconsistent);
-    this counterexample is proved in Lean (`LukPropForm.consistent_iff_satisfiable_fails_empty`, `CLPropForm.consistent_iff_satisfiable_fails_empty`).'
+    results, together with the selected decidability (Corollary 9.11) and compactness (Corollary 9.12)
+    consequences. Project rule: no Lean `axiom` declarations. Itaï Ben Yaacov and Arthur Paul Pedersen did
+    not participate in or endorse this formalization; they have not been contacted about it. Lean is written
+    with AI-agent assistance under Lars Warren Ericson’s direction and review. Mathlib is the Lake dependency.
+    Palomar registration pending; packaging follows the Challenge / Solution / comparator.json pattern.
+    Deviation from the paper: Facts 4.2 and 4.3 (consistency iff satisfiability, Łukasiewicz and continuous
+    propositional logic) needed the added premise that there is at least one propositional variable
+    (`[Nonempty I]`). As literally stated they fail when there are no variables (the empty set is then
+    satisfiable but inconsistent); this counterexample is proved in Lean
+    (`LukPropForm.consistent_iff_satisfiable_fails_empty`, `CLPropForm.consistent_iff_satisfiable_fails_empty`).'
   authors:
     - Lars Warren Ericson
   license: Apache-2.0
@@ -45,8 +47,8 @@ sources:
     arxiv: '0903.4051'
     relationship: formalizes
     author_endorsement: not-contacted
-    note: Primary source. Ben Yaacov and Pedersen did not participate in or endorse this 
-      formalization.
+    note: Primary source. Ben Yaacov and Pedersen have not been contacted about this formalization
+      and did not participate in or endorse it.
 related_formalizations: []
 automation:
   methods:

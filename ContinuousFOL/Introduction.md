@@ -81,5 +81,4 @@ paraphrased paper boxes and the mathematical-English module summaries
 guidance [@COPE24], no AI system is listed as an author.
 
 Itaï Ben Yaacov and Arthur Paul Pedersen did not participate in, review or
-endorse this formalization. Dana Scott has contacted Pedersen about it, and no
-reply has been received so far.
+endorse this formalization. They have not been contacted about it.

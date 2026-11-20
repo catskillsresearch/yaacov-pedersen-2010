@@ -1,6 +1,6 @@
 {
-  "updated": "2026-11-20T11:04:08Z",
-  "sorryCount": 37,
+  "updated": "2026-11-20T11:05:51Z",
+  "sorryCount": 26,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
     "blocked": "Waiting on incomplete required proof-deps",
@@ -13,7 +13,7 @@
     "\u00a74 axioms are intentional black boxes and stay open until discharged.",
     "Blue = done. Green = open. Grey = blocked.",
     "Regenerate with: python3 scripts/build_holes.py",
-    "Open tips: luk_weak_completeness, luk_consistent_iff_satisfiable, cl_consistent_iff_satisfiable, cl_approx_strong_completeness, cl_finite_strong_completeness."
+    "Open tips: luk_consistent_iff_satisfiable, cl_consistent_iff_satisfiable, cl_approx_strong_completeness, cl_finite_strong_completeness."
   ],
   "nodes": [
     {
@@ -65,8 +65,8 @@
       "id": "luk_weak_completeness",
       "label": "Fact 4.1 \u0141uk weak",
       "section": 4,
-      "file": "ContinuousFOL/BlackBox/LukWeakCompleteness.lean:20",
-      "status": "open",
+      "file": "ContinuousFOL/BlackBox/LukWeakCompleteness.lean:21",
+      "status": "done",
       "blocker": null,
       "detail": "Fact 4.1: \u22a8 \u03c6 iff \u22a2 \u03c6, for \u0141ukasiewicz propositional logic."
     },
@@ -300,8 +300,8 @@
       "label": "Deduction",
       "section": 8,
       "file": "ContinuousFOL/Essentials/DeductionTheorem.lean:167",
-      "status": "blocked",
-      "blocker": "needs luk_weak_completeness",
+      "status": "done",
+      "blocker": null,
       "detail": "Deduction theorem (pre)."
     },
     {
@@ -309,8 +309,8 @@
       "label": "Deduction met",
       "section": 8,
       "file": "ContinuousFOL/Essentials/DeductionTheorem.lean:235",
-      "status": "blocked",
-      "blocker": "needs luk_weak_completeness",
+      "status": "done",
+      "blocker": null,
       "detail": "Deduction theorem (metric)."
     },
     {
@@ -399,8 +399,8 @@
       "label": "Adjoin approx",
       "section": 8,
       "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:131",
-      "status": "blocked",
-      "blocker": "needs luk_weak_completeness, deduction_theorem",
+      "status": "done",
+      "blocker": null,
       "detail": "Consistent adjunction of approximate inequalities."
     },
     {
@@ -408,8 +408,8 @@
       "label": "Adjoin approx met",
       "section": 8,
       "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:183",
-      "status": "blocked",
-      "blocker": "needs luk_weak_completeness, deduction_theorem_metric",
+      "status": "done",
+      "blocker": null,
       "detail": "Lemma 8.5(i) for a signature with a metric."
     },
     {
@@ -417,8 +417,8 @@
       "label": "Adjoin comparable",
       "section": 8,
       "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:153",
-      "status": "blocked",
-      "blocker": "needs luk_weak_completeness, deduction_theorem",
+      "status": "done",
+      "blocker": null,
       "detail": "Consistent adjunction of comparability."
     },
     {
@@ -426,8 +426,8 @@
       "label": "Adjoin comparable met",
       "section": 8,
       "file": "ContinuousFOL/Essentials/ConsistentAdjoin.lean:204",
-      "status": "blocked",
-      "blocker": "needs luk_weak_completeness, deduction_theorem_metric",
+      "status": "done",
+      "blocker": null,
       "detail": "Lemma 8.5(ii) for a signature with a metric."
     },
     {
@@ -516,8 +516,8 @@
       "label": "Thm 8.10 Lindenbaum",
       "section": 8,
       "file": "ContinuousFOL/Essentials/MaximalConsistent.lean:334",
-      "status": "blocked",
-      "blocker": "needs consistent_adjoin_approx, consistent_adjoin_comparable",
+      "status": "done",
+      "blocker": null,
       "detail": "Lindenbaum: every consistent set has a maximal extension."
     },
     {
@@ -525,8 +525,8 @@
       "label": "Thm 8.10 metric",
       "section": 8,
       "file": "ContinuousFOL/Essentials/MaximalConsistentMetric.lean:55",
-      "status": "blocked",
-      "blocker": "needs consistent_adjoin_approx_metric, consistent_adjoin_comparable_metric, exists_maximal_consistent",
+      "status": "done",
+      "blocker": null,
       "detail": "Metric Lindenbaum lemma."
     },
     {
@@ -544,7 +544,7 @@
       "section": 9,
       "file": "ContinuousFOL/Completeness/ExistsHenkinExtension.lean:807",
       "status": "blocked",
-      "blocker": "needs provable_tsub_of_inconsistent_adjoin, generalize_fresh_const",
+      "blocker": "needs generalize_fresh_const",
       "detail": "Consistent theories admit Henkin extensions."
     },
     {
@@ -553,7 +553,7 @@
       "section": 9,
       "file": "ContinuousFOL/Completeness/ExistsHenkinExtension.lean:932",
       "status": "blocked",
-      "blocker": "needs provable_tsub_of_inconsistent_adjoin, generalize_fresh_const",
+      "blocker": "needs generalize_fresh_const",
       "detail": "Metric Henkin extension."
     },
     {
@@ -571,7 +571,7 @@
       "section": 9,
       "file": "ContinuousFOL/Completeness/HenkinModelExistence.lean:24",
       "status": "blocked",
-      "blocker": "needs exists_henkin_extension, exists_maximal_consistent, termPreStructure_eval_eq_sup",
+      "blocker": "needs exists_henkin_extension, termPreStructure_eval_eq_sup",
       "detail": "Consistent \u21d2 term-model of a maximal Henkin extension."
     },
     {
@@ -580,7 +580,7 @@
       "section": 9,
       "file": "ContinuousFOL/Completeness/HenkinModelExistenceMetric.lean:177",
       "status": "blocked",
-      "blocker": "needs exists_henkin_extension_metric, exists_maximal_consistent, termPreStructure_eval_eq_sup",
+      "blocker": "needs exists_henkin_extension_metric, termPreStructure_eval_eq_sup",
       "detail": "Consistent \u21d2 metric term-model of a maximal consistent Henkin complete \u0394 \u2287 \u0393."
     },
     {
@@ -615,8 +615,8 @@
       "label": "\u22a2 \u03c6\u2238p from \u22a5",
       "section": 9,
       "file": "ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean:81",
-      "status": "blocked",
-      "blocker": "needs luk_weak_completeness, deduction_theorem",
+      "status": "done",
+      "blocker": null,
       "detail": "Inconsistent adjunction of p\u2238\u03c6 yields ProvableQ \u0393 (\u03c6\u2238p)."
     },
     {
@@ -624,8 +624,8 @@
       "label": "\u22a2 \u03c6\u2238p met",
       "section": 9,
       "file": "ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean:92",
-      "status": "blocked",
-      "blocker": "needs luk_weak_completeness, deduction_theorem_metric",
+      "status": "done",
+      "blocker": null,
       "detail": "Metric variant of inconsistent-adjunction rule."
     },
     {
@@ -634,7 +634,7 @@
       "section": 9,
       "file": "ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean:24",
       "status": "blocked",
-      "blocker": "needs completeness_pre, provable_tsub_of_inconsistent_adjoin",
+      "blocker": "needs completeness_pre",
       "detail": "EntailsPre \u2194 \u2200n ProvableQ (\u03c6\u22382\u207b\u207f)."
     },
     {
@@ -643,7 +643,7 @@
       "section": 9,
       "file": "ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean:118",
       "status": "blocked",
-      "blocker": "needs completeness_metric, provable_tsub_of_inconsistent_adjoin_metric",
+      "blocker": "needs completeness_metric",
       "detail": "Corollary 9.6 metric: EntailsMetricPre and EntailsComplete iff \u22a2 \u03c6 \u2238 2^{-n} for all n."
     },
     {
@@ -652,7 +652,7 @@
       "section": 9,
       "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:200",
       "status": "blocked",
-      "blocker": "needs provable_tsub_of_inconsistent_adjoin, completeness_pre",
+      "blocker": "needs completeness_pre",
       "detail": "degreeOfTruthPre = degreeOfProvabilityPre."
     },
     {
@@ -661,7 +661,7 @@
       "section": 9,
       "file": "ContinuousFOL/Completeness/PavelkaCompleteness.lean:207",
       "status": "blocked",
-      "blocker": "needs provable_tsub_of_inconsistent_adjoin_metric, metric_prestructure_model_of_consistent",
+      "blocker": "needs metric_prestructure_model_of_consistent",
       "detail": "degreeOfTruthMetric = degreeOfProvabilityMetric (sup over metric pre-structures)."
     },
     {

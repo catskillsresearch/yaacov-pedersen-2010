@@ -2,8 +2,8 @@
 
 Inventory of paper-facing Lean holes, ordered **prove-first**.
 
-**Updated:** 2026-11-20T11:04:08Z
-**Holes:** 37 open+blocked · 5 open · 32 blocked · 38 done.
+**Updated:** 2026-11-20T11:05:51Z
+**Holes:** 26 open+blocked · 4 open · 22 blocked · 49 done.
 
 **Live board:** [`holes.html`](holes.html) (graph embedded; open the file directly).
 
@@ -17,7 +17,6 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 
 | Id | Label | File |
 |---|---|---|
-| `luk_weak_completeness` | Fact 4.1 Łuk weak | `ContinuousFOL/BlackBox/LukWeakCompleteness.lean:20` |
 | `luk_consistent_iff_satisfiable` | Fact 4.2 Łuk cons | `ContinuousFOL/BlackBox/LukConsistentIffSatisfiable.lean:20` |
 | `cl_consistent_iff_satisfiable` | Fact 4.3 CL cons | `ContinuousFOL/BlackBox/CLConsistentIffSatisfiable.lean:20` |
 | `cl_approx_strong_completeness` | Fact 4.4 CL approx | `ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:27` |
@@ -40,11 +39,11 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 | done | `DyadicCode.dense_in_Icc` | Rem 3.4 denseness | `ContinuousFOL/Group1Axioms/DyadicCode/Val.lean:172` |
 | done | `DyadicCode.val_range_eq_dyadics` | Rem 3.4 {v(d)}=𝔻 | `ContinuousFOL/Group1Axioms/DyadicCode/Val.lean:162` |
 
-### §4 — 5 hole(s)
+### §4 — 4 hole(s)
 
 | Status | Id | Label | File |
 |---|---|---|---|
-| open | `luk_weak_completeness` | Fact 4.1 Łuk weak | `ContinuousFOL/BlackBox/LukWeakCompleteness.lean:20` |
+| done | `luk_weak_completeness` | Fact 4.1 Łuk weak | `ContinuousFOL/BlackBox/LukWeakCompleteness.lean:21` |
 | open | `luk_consistent_iff_satisfiable` | Fact 4.2 Łuk cons | `ContinuousFOL/BlackBox/LukConsistentIffSatisfiable.lean:20` |
 | open | `cl_consistent_iff_satisfiable` | Fact 4.3 CL cons | `ContinuousFOL/BlackBox/CLConsistentIffSatisfiable.lean:20` |
 | open | `cl_approx_strong_completeness` | Fact 4.4 CL approx | `ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:27` |
@@ -86,12 +85,12 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 | done | `soundness_metric` | Thm 7.2 metric | `ContinuousFOL/Group2Axioms/SoundnessMetric.lean:138` |
 | done | `satisfiable_consistent_metric` | Sat ⇒ Cons (met) | `ContinuousFOL/Group2Axioms/SoundnessMetric.lean:151` |
 
-### §8 — 15 hole(s)
+### §8 — 7 hole(s)
 
 | Status | Id | Label | File |
 |---|---|---|---|
-| blocked | `deduction_theorem` | Deduction | `ContinuousFOL/Essentials/DeductionTheorem.lean:167` |
-| blocked | `deduction_theorem_metric` | Deduction met | `ContinuousFOL/Essentials/DeductionTheorem.lean:235` |
+| done | `deduction_theorem` | Deduction | `ContinuousFOL/Essentials/DeductionTheorem.lean:167` |
+| done | `deduction_theorem_metric` | Deduction met | `ContinuousFOL/Essentials/DeductionTheorem.lean:235` |
 | done | `generalization_theorem` | Generalization | `ContinuousFOL/Essentials/GeneralizationTheorem.lean:21` |
 | done | `generalization_theorem_metric` | Generalization met | `ContinuousFOL/Essentials/GeneralizationTheorem.lean:39` |
 | blocked | `generalize_fresh_const` | Fresh const gen | `ContinuousFOL/Essentials/GeneralizeFreshConst.lean:310` |
@@ -101,10 +100,10 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 | done | `inconsistent_iff_provable_one_metric` | Incons ↔ ⊢1 met | `ContinuousFOL/Essentials/MaximalConsistentMetric.lean:83` |
 | blocked | `provable_bound_subst` | ⊢ bound subst | `ContinuousFOL/Essentials/ProvableBoundSubst.lean:439` |
 | blocked | `provable_bound_subst_metric` | ⊢ bound subst met | `ContinuousFOL/Essentials/ProvableBoundSubst.lean:498` |
-| blocked | `consistent_adjoin_approx` | Adjoin approx | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:131` |
-| blocked | `consistent_adjoin_approx_metric` | Adjoin approx met | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:183` |
-| blocked | `consistent_adjoin_comparable` | Adjoin comparable | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:153` |
-| blocked | `consistent_adjoin_comparable_metric` | Adjoin comparable met | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:204` |
+| done | `consistent_adjoin_approx` | Adjoin approx | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:131` |
+| done | `consistent_adjoin_approx_metric` | Adjoin approx met | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:183` |
+| done | `consistent_adjoin_comparable` | Adjoin comparable | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:153` |
+| done | `consistent_adjoin_comparable_metric` | Adjoin comparable met | `ContinuousFOL/Essentials/ConsistentAdjoin.lean:204` |
 | done | `mem_iff_provable` | ∈ ↔ ⊢ (max) | `ContinuousFOL/Essentials/MaximalConsistent.lean:40` |
 | done | `MaximalConsistentMetric.mem_iff_provable` | ∈ ↔ ⊢ (max) met | `ContinuousFOL/Essentials/MaximalConsistentMetric.lean:130` |
 | blocked | `maximal_consistent_sup_instantiate` | sup instantiate | `ContinuousFOL/Essentials/MaximalConsistent.lean:199` |
@@ -114,10 +113,10 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 | done | `maximal_consistent_sup_eq_inf_metric` | sup = Inf met | `ContinuousFOL/Essentials/MaximalConsistentMetric.lean:210` |
 | done | `maximal_in_consistent_extensions_iff` | Max ↔ no ext | `ContinuousFOL/Essentials/MaximalConsistent.lean:319` |
 | done | `maximal_in_consistent_extensions_iff_metric` | Max ↔ no ext met | `ContinuousFOL/Essentials/MaximalConsistentMetric.lean:180` |
-| blocked | `exists_maximal_consistent` | Thm 8.10 Lindenbaum | `ContinuousFOL/Essentials/MaximalConsistent.lean:334` |
-| blocked | `exists_maximal_consistent_metric` | Thm 8.10 metric | `ContinuousFOL/Essentials/MaximalConsistentMetric.lean:55` |
+| done | `exists_maximal_consistent` | Thm 8.10 Lindenbaum | `ContinuousFOL/Essentials/MaximalConsistent.lean:334` |
+| done | `exists_maximal_consistent_metric` | Thm 8.10 metric | `ContinuousFOL/Essentials/MaximalConsistentMetric.lean:55` |
 
-### §9 — 17 hole(s)
+### §9 — 15 hole(s)
 
 | Status | Id | Label | File |
 |---|---|---|---|
@@ -130,8 +129,8 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 | blocked | `metric_prestructure_model_of_consistent` | 9.5 met helper | `ContinuousFOL/Completeness/HenkinModelExistenceMetric.lean:157` |
 | blocked | `completeness_pre` | Thm 9.5 complete | `ContinuousFOL/Completeness/CompletenessPre.lean:21` |
 | blocked | `completeness_metric` | Thm 9.5 metric | `ContinuousFOL/Completeness/CompletenessMetric.lean:22` |
-| blocked | `provable_tsub_of_inconsistent_adjoin` | ⊢ φ∸p from ⊥ | `ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean:81` |
-| blocked | `provable_tsub_of_inconsistent_adjoin_metric` | ⊢ φ∸p met | `ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean:92` |
+| done | `provable_tsub_of_inconsistent_adjoin` | ⊢ φ∸p from ⊥ | `ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean:81` |
+| done | `provable_tsub_of_inconsistent_adjoin_metric` | ⊢ φ∸p met | `ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean:92` |
 | blocked | `approximated_strong_completeness_pre` | Cor 9.6 approx | `ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean:24` |
 | blocked | `approximated_strong_completeness_metric` | Cor 9.6 metric | `ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean:118` |
 | blocked | `pavelka_completeness_pre` | Cor 9.8 Pavelka | `ContinuousFOL/Completeness/PavelkaCompleteness.lean:200` |

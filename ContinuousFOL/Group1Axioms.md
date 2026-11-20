@@ -14,4 +14,5 @@ Paper pin: vision.md pages 5–6.
 - [`Group1Axioms/DyadicCode/Val.lean`](Group1Axioms/DyadicCode/Val.lean)
 - [`Group1Axioms/DyadicCode/Zero.lean`](Group1Axioms/DyadicCode/Zero.lean)
 - [`Group1Axioms/LukPropForm/IsAxiom.lean`](Group1Axioms/LukPropForm/IsAxiom.lean)
+- [`Group1Axioms/LukPropForm/IterSub.lean`](Group1Axioms/LukPropForm/IterSub.lean)
 - [`Group1Axioms/LukPropForm/Provable.lean`](Group1Axioms/LukPropForm/Provable.lean)

@@ -15,21 +15,23 @@ not licensed under this repository's Apache-2.0 terms (see `NOTICE`).
 **This repository is intended for standalone Palomar registration**, for the
 Ben Yaacov–Pedersen 2010 continuous-logic completeness development alone,
 following the Challenge / Solution / `comparator.json` / `formalization.yaml`
-pattern used in sibling formalization packages. Registry id will be recorded
-here after submission.
+pattern. Registration is pending; the registry id will be recorded here once
+assigned.
 
 ## Framing
 
 Primary story: **rigorous reconstruction / verification** of Ben Yaacov–Pedersen
-2010 (§1–§9), including continuous propositional axioms (Group 1), black-box
-theorems, continuous first-order language and semantics, Group 2 axioms, and
+2010 (§1–§9), including continuous propositional axioms (Group 1), the §4 propositional
+Facts 4.1–4.5 (proved in Lean, not assumed), continuous first-order language and semantics, Group 2 axioms, and
 the completeness / approximated strong-completeness theorems. Secondary story:
 decidability consequences for recursively axiomatized theories (paper §9).
 
 ## Proof chart and Comparator
 
-The paper-facing proof chart (`holes-graph.json` / `HOLES.md`) is populated as
-formalization proceeds. Packaging:
+The paper-facing proof chart (`holes-graph.json` / `HOLES.md`) has 75 nodes,
+all proved (`sorry`-free). The full list of proved results with Lean names,
+files, axioms and verbatim paper quotes is in `formalization.yaml`
+(`status.main_results`, `alignment.statements`). Packaging:
 
 - Compared declarations live in namespace `ContinuousFOL`.
 - `ContinuousFOLComparator/Challenge.lean` is a Mathlib-only statement file

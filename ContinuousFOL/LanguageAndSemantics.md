@@ -24,5 +24,6 @@ Paper pin: vision.md pages 7–11.
 - [`LanguageAndSemantics/Signature.lean`](LanguageAndSemantics/Signature.lean)
 - [`LanguageAndSemantics/Term.lean`](LanguageAndSemantics/Term.lean)
 - [`LanguageAndSemantics/TermEval.lean`](LanguageAndSemantics/TermEval.lean)
+- [`LanguageAndSemantics/UliftPreStructure.lean`](LanguageAndSemantics/UliftPreStructure.lean)
 - [`LanguageAndSemantics/UpdateAssign.lean`](LanguageAndSemantics/UpdateAssign.lean)
 - [`LanguageAndSemantics/Var.lean`](LanguageAndSemantics/Var.lean)

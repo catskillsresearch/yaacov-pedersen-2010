@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-20T11:19:56Z",
+  "updated": "2026-11-20T11:56:42Z",
   "sorryCount": 0,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -10,7 +10,7 @@
     "Hard edge B\u2192A: Lean proof of A still needs B \u2014 A cannot be done while B is unfinished.",
     "Soft edge B\u2192A: paper-order aspiration only (drawn dashed); does not affect status.",
     "Done = no local sorry and every hard predecessor is done (no unproven\u2192proven).",
-    "\u00a74 axioms are intentional black boxes and stay open until discharged.",
+    "\u00a74 Facts are proved in Lean (Facts 4.2/4.3 with the added premise [Nonempty I]; see README deviations).",
     "Blue = done. Green = open. Grey = blocked.",
     "Regenerate with: python3 scripts/build_holes.py",
     "Open tips: (none)."
@@ -239,7 +239,7 @@
       "file": "ContinuousFOL/SubstitutionAndCompletions/EvalUniformlyContinuous.lean:609",
       "status": "done",
       "blocker": null,
-      "detail": "Theorem 6.8: induced maps of terms and formulae on M^n are uniformly continuous (term half proved)."
+      "detail": "Theorem 6.8: induced maps of terms and formulae on M^n are uniformly continuous (terms and formulae)."
     },
     {
       "id": "entails_metric_iff_complete",
@@ -694,6 +694,71 @@
   ],
   "edges": [
     {
+      "from": "LukPropForm.soundness",
+      "to": "luk_weak_completeness",
+      "kind": "hard"
+    },
+    {
+      "from": "LukLind.mk_eq_zero_iff",
+      "to": "luk_weak_completeness",
+      "kind": "hard"
+    },
+    {
+      "from": "luk_weak_completeness",
+      "to": "cl_finite_strong_completeness",
+      "kind": "hard"
+    },
+    {
+      "from": "LukPropForm.deduction_theorem",
+      "to": "cl_finite_strong_completeness",
+      "kind": "hard"
+    },
+    {
+      "from": "LukPropForm.semantic_iteration",
+      "to": "cl_finite_strong_completeness",
+      "kind": "hard"
+    },
+    {
+      "from": "CLPropForm.soundness",
+      "to": "cl_finite_strong_completeness",
+      "kind": "hard"
+    },
+    {
+      "from": "cl_finite_strong_completeness",
+      "to": "cl_approx_strong_completeness",
+      "kind": "hard"
+    },
+    {
+      "from": "luk_weak_completeness",
+      "to": "luk_consistent_iff_satisfiable",
+      "kind": "hard"
+    },
+    {
+      "from": "LukPropForm.deduction_theorem",
+      "to": "luk_consistent_iff_satisfiable",
+      "kind": "hard"
+    },
+    {
+      "from": "LukPropForm.semantic_iteration",
+      "to": "luk_consistent_iff_satisfiable",
+      "kind": "hard"
+    },
+    {
+      "from": "LukPropForm.soundness",
+      "to": "luk_consistent_iff_satisfiable",
+      "kind": "hard"
+    },
+    {
+      "from": "cl_finite_strong_completeness",
+      "to": "cl_consistent_iff_satisfiable",
+      "kind": "hard"
+    },
+    {
+      "from": "CLPropForm.soundness",
+      "to": "cl_consistent_iff_satisfiable",
+      "kind": "hard"
+    },
+    {
       "from": "luk_weak_completeness",
       "to": "deduction_theorem",
       "kind": "hard"
@@ -1059,33 +1124,8 @@
       "kind": "hard"
     },
     {
-      "from": "LukPropForm.soundness",
-      "to": "luk_weak_completeness",
-      "kind": "soft"
-    },
-    {
       "from": "entails_empty_iff_evalMV",
       "to": "luk_weak_completeness",
-      "kind": "soft"
-    },
-    {
-      "from": "LukLind.mk_eq_zero_iff",
-      "to": "luk_weak_completeness",
-      "kind": "soft"
-    },
-    {
-      "from": "LukPropForm.deduction_theorem",
-      "to": "luk_weak_completeness",
-      "kind": "soft"
-    },
-    {
-      "from": "LukPropForm.semantic_iteration",
-      "to": "luk_weak_completeness",
-      "kind": "soft"
-    },
-    {
-      "from": "CLPropForm.soundness",
-      "to": "cl_finite_strong_completeness",
       "kind": "soft"
     },
     {

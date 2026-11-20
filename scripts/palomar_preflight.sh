@@ -31,7 +31,7 @@ missing = [k for k in required if k not in cfg]
 if missing:
     raise SystemExit(f"Missing comparator keys: {', '.join(missing)}")
 if not cfg["theorem_names"]:
-    print("NOTE: theorem_names empty (scaffold stage); skipping chart audits")
+    print("NOTE: theorem_names empty; skipping chart audits")
 else:
     names = cfg["theorem_names"] + cfg.get("definition_names", [])
     dup = sorted({n for n in names if names.count(n) > 1})
@@ -57,7 +57,7 @@ step "Build Lean project (ContinuousFOL + ContinuousFOLComparator Challenge/Solu
 lake build
 
 # Palomar/Verso rejects a Challenge or Solution module whose top-level name is
-# also a top-level entry of a Lake dependency (e.g. MathFin ships Challenge.lean).
+# also a top-level entry of a Lake dependency (e.g. a dependency that ships its own Challenge.lean).
 step "Challenge/Solution module names vs Lake dependency top-level entries"
 python3 scripts/check_module_name_clash.py
 

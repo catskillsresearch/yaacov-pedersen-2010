@@ -1,29 +1,20 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
-# yaacov-pedersen-2010 — Palomar packaging scaffold (Challenge/Solution/comparator).
+# yaacov-pedersen-2010: Lean 4 formalization of Ben Yaacov & Pedersen (JSL 2010), complete and sorry-free.
 version: v0.4
 project:
   name: Ben Yaacov–Pedersen 2010 continuous FOL completeness in Lean 4
-  description: >-
-    A Lean 4 / Mathlib formalization of Itaï Ben Yaacov and Arthur Paul
-    Pedersen, "A proof of completeness for continuous first-order logic",
-    Journal of Symbolic Logic 75 (2010) 168–190 (arXiv:0903.4051). Framing:
-    rigorous reconstruction/verification of continuous propositional and
-    first-order syntax/semantics, Group 1 / Group 2 axioms, black-box
-    theorems, and the completeness / approximated strong-completeness
-    results. Project rule: no Lean `axiom` declarations. Itaï Ben Yaacov
-    and Arthur Paul Pedersen did not participate in or endorse this
-    formalization. Lean is written with AI-agent assistance under Lars
-    Warren Ericson’s direction and review. Mathlib is the Lake dependency.
-    Palomar registration pending; packaging follows the Challenge /
-    Solution / comparator.json pattern.
-    Deviation from the paper: Facts 4.2 and 4.3 (consistency iff
-    satisfiability, Łukasiewicz and continuous propositional logic) needed
-    the added premise that there is at least one propositional variable
-    (`[Nonempty I]`). As literally stated they fail when there are no
-    variables (the empty set is then satisfiable but inconsistent); this
-    counterexample is proved in Lean
-    (`LukPropForm.consistent_iff_satisfiable_fails_empty`,
-    `CLPropForm.consistent_iff_satisfiable_fails_empty`).
+  description: 'A Lean 4 / Mathlib formalization of Itaï Ben Yaacov and Arthur Paul Pedersen, "A proof
+    of completeness for continuous first-order logic", Journal of Symbolic Logic 75 (2010) 168–190 (arXiv:0903.4051).
+    Framing: rigorous reconstruction/verification of continuous propositional and first-order syntax/semantics,
+    Group 1 / Group 2 axioms, black-box theorems, and the completeness / approximated strong-completeness
+    results. Project rule: no Lean `axiom` declarations. Itaï Ben Yaacov and Arthur Paul Pedersen did
+    not participate in or endorse this formalization. Lean is written with AI-agent assistance under Lars
+    Warren Ericson’s direction and review. Mathlib is the Lake dependency. Palomar registration pending;
+    packaging follows the Challenge / Solution / comparator.json pattern. Deviation from the paper: Facts
+    4.2 and 4.3 (consistency iff satisfiability, Łukasiewicz and continuous propositional logic) needed
+    the added premise that there is at least one propositional variable (`[Nonempty I]`). As literally
+    stated they fail when there are no variables (the empty set is then satisfiable but inconsistent);
+    this counterexample is proved in Lean (`LukPropForm.consistent_iff_satisfiable_fails_empty`, `CLPropForm.consistent_iff_satisfiable_fails_empty`).'
   authors:
   - Lars Warren Ericson
   license: Apache-2.0
@@ -36,53 +27,34 @@ classification:
   - math.LO
   - cs.LO
   msc2020:
-  - '03B50'
-  - '03C66'
-  - '03B10'
-  - '68V20'
-status:
-  scope: >-
-    Scaffold stage. Comparator family in comparator.json will list
-    axioms-clean proof-chart theorems as the ContinuousFOL library is
-    developed. No Lean `axiom`. Intermediate lemmas remain library-only
-    until promoted to the chart.
-  sorry_count: 0
-  sorry_in_definitions: 0
-  axioms:
-  - propext
-  - Classical.choice
-  - Quot.sound
-  main_results: []
-
+  - 03B50
+  - 03C66
+  - 03B10
+  - 68V20
 sources:
-  - title: "A proof of completeness for continuous first-order logic"
-    authors:
-    - Itaï Ben Yaacov
-    - Arthur Paul Pedersen
-    type: article
-    venue: Journal of Symbolic Logic
-    year: 2010
-    volume: '75'
-    pages: 168–190
-    id: https://doi.org/10.2178/jsl/1264433914
-    arxiv: '0903.4051'
-    relationship: formalizes
-    author_endorsement: none
-    note: >-
-      Primary source. Ben Yaacov and Pedersen did not participate in or
-      endorse this formalization.
-
+- title: A proof of completeness for continuous first-order logic
+  authors:
+  - Itaï Ben Yaacov
+  - Arthur Paul Pedersen
+  type: article
+  venue: Journal of Symbolic Logic
+  year: 2010
+  volume: '75'
+  pages: 168–190
+  id: https://doi.org/10.2178/jsl/1264433914
+  arxiv: '0903.4051'
+  relationship: formalizes
+  author_endorsement: not-contacted
+  note: Primary source. Ben Yaacov and Pedersen did not participate in or endorse this formalization.
 related_formalizations: []
-
 automation:
   methods:
   - method: agent
     models:
     - Cursor Grok 4.7
     framework: Cursor
-    role: >-
-      Primary agent for Lean 4 / Mathlib formalization, lake build repair,
-      vision-OCR alignment, ContinuousFOL writeup, and Palomar packaging.
+    role: Primary agent for Lean 4 / Mathlib formalization, lake build repair, vision-OCR alignment, ContinuousFOL
+      writeup, and Palomar packaging.
   - method: agent
     models:
     - Cursor Composer 2.5
@@ -97,49 +69,1362 @@ automation:
     models:
     - Google Gemini 4 Carbon
     framework: Cursor
-    role: >-
-      Agent and support passes (gemini-4-carbon). Required model card for
-      this project; listed in scripts/ai_model_cards.py.
+    role: Agent and support passes (gemini-4-carbon). Required model card for this project; listed in
+      scripts/ai_model_cards.py.
   - method: manual
     models: []
-    role: >-
-      Lars Warren Ericson chose the formalization route and reviewed the
-      Lean development. The human author takes responsibility for the
-      report's mathematical claims.
-  notes: >-
-    Palomar Challenge / Solution / comparator / formalization.yaml packaging.
-    Model-card registry: scripts/ai_model_cards.py (includes Gemini 4 Carbon).
-    No other human collaborators. Source authors had no involvement.
+    role: Lars Warren Ericson chose the formalization route and reviewed the Lean development. The human
+      author takes responsibility for the report's mathematical claims.
+  notes: 'Challenge / Solution / comparator.json / formalization.yaml packaging. Model-card registry:
+    scripts/ai_model_cards.py. No other human collaborators. Source authors had no involvement.'
+status:
+  scope: 'Complete. Every numbered result of the paper that the formalization targets is proved in Lean
+    4 / Mathlib: Remark 3.4; the §4 propositional Facts 4.1–4.5 (proved in Lean, not assumed); Lemmas
+    6.2 and 6.4, Theorems 6.6, 6.8, 6.9 and Corollary 6.11; Soundness (Theorem 7.2); Theorem 8.1, Lemmas
+    8.2–8.6, Remark 8.9, Theorem 8.10, Lemmas 8.11–8.12; Proposition 9.2, Theorem 9.4, Completeness (Theorem
+    9.5), Corollaries 9.6, 9.8, 9.11 and 9.12. The ContinuousFOL library is sorry-free and declares no
+    Lean `axiom`; every listed theorem depends only on propext, Classical.choice and Quot.sound (some
+    on a subset). The only `sorry`s in the repository are the intended statement stubs in ContinuousFOLComparator/Challenge.lean
+    (the comparator Challenge), whose proofs are in ContinuousFOLComparator/Solution.lean. The proof chart
+    (scripts/build_holes.py → HOLES.md) has 75 nodes, all done. Facts 4.2 and 4.3 carry one added premise
+    ([Nonempty I]); see fidelity.divergences.'
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms:
+  - propext
+  - Classical.choice
+  - Quot.sound
+  main_results:
+  - declaration: ContinuousFOL.DyadicCode.val_range_eq_dyadics
+    file: ContinuousFOL/Group1Axioms/DyadicCode/Val.lean
+    paper_ref: Remark 3.4
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.DyadicCode.val_mem_Icc
+    file: ContinuousFOL/Group1Axioms/DyadicCode/Val.lean
+    paper_ref: Remark 3.4
+    kind: supporting
+    note: supporting lemma for Remark 3.4
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.DyadicCode.dense_in_Icc
+    file: ContinuousFOL/Group1Axioms/DyadicCode/Val.lean
+    paper_ref: Remark 3.4
+    kind: supporting
+    note: 'supporting lemma: the dyadic numbers of Remark 3.4 are dense in [0,1]'
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.luk_weak_completeness
+    file: ContinuousFOL/BlackBox/LukWeakCompleteness.lean
+    paper_ref: Fact 4.1
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.entails_empty_iff_evalMV
+    file: ContinuousFOL/LukasiewiczAndContinuous/StandardMVAlgebra.lean
+    paper_ref: Fact 4.1
+    kind: supporting
+    note: 'supporting lemma: ⊨ φ in MV-algebra form on the standard algebra [0,1]'
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.LukLind.mk_eq_zero_iff
+    file: ContinuousFOL/LukasiewiczAndContinuous/LukLindenbaum.lean
+    paper_ref: Fact 4.1
+    kind: supporting
+    note: supporting lemma for the proof of Fact 4.1 (Lindenbaum algebra)
+    sorry_count: 0
+    axioms:
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.LukPropForm.soundness
+    file: ContinuousFOL/LukasiewiczAndContinuous/LukPropFormSoundness.lean
+    paper_ref: Fact 4.1
+    kind: supporting
+    note: soundness half of Facts 4.1/4.2
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.luk_consistent_iff_satisfiable
+    file: ContinuousFOL/BlackBox/LukConsistentIffSatisfiable.lean
+    paper_ref: Fact 4.2
+    kind: statement
+    note: with the added premise [Nonempty I] (at least one propositional variable); see fidelity.divergences
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.cl_consistent_iff_satisfiable
+    file: ContinuousFOL/BlackBox/CLConsistentIffSatisfiable.lean
+    paper_ref: Fact 4.3
+    kind: statement
+    note: with the added premise [Nonempty I] (at least one propositional variable); see fidelity.divergences
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.cl_approx_strong_completeness
+    file: ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean
+    paper_ref: Fact 4.4
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.cl_finite_strong_completeness
+    file: ContinuousFOL/BlackBox/CLFiniteStrongCompleteness.lean
+    paper_ref: Fact 4.5
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.LukPropForm.semantic_iteration
+    file: ContinuousFOL/LukasiewiczAndContinuous/LukPropFormSemanticIteration.lean
+    paper_ref: Fact 4.5
+    kind: supporting
+    note: 'supporting lemma: semantic half of the weak deduction theorem, finite premise sets'
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.CLPropForm.semantic_iteration
+    file: ContinuousFOL/LukasiewiczAndContinuous/CLPropFormSemanticIteration.lean
+    paper_ref: Fact 4.5
+    kind: supporting
+    note: 'supporting lemma: semantic half of the weak deduction theorem, finite premise sets'
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.CLPropForm.soundness
+    file: ContinuousFOL/LukasiewiczAndContinuous/CLPropFormSoundness.lean
+    paper_ref: Fact 4.5
+    kind: supporting
+    note: soundness half of Facts 4.3–4.5
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.Formula.eval_in_Icc
+    file: ContinuousFOL/LanguageAndSemantics/FormulaEval.lean
+    paper_ref: Definition 5.11
+    kind: supporting
+    note: 'supporting lemma: values of Definition 5.11 lie in [0,1]'
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.substitution_lemma
+    file: ContinuousFOL/SubstitutionAndCompletions/SubstitutionLemma.lean
+    paper_ref: Lemma 6.2
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.bound_substitution_lemma
+    file: ContinuousFOL/SubstitutionAndCompletions/BoundSubstitutionLemma.lean
+    paper_ref: Lemma 6.4
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.bound_substitution_lemma_metric
+    file: ContinuousFOL/SubstitutionAndCompletions/BoundSubstitutionLemma.lean
+    paper_ref: Lemma 6.4
+    kind: metric-variant
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.surjective_morphism_elementary
+    file: ContinuousFOL/SubstitutionAndCompletions/LMorphism.lean
+    paper_ref: Theorem 6.6
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.eval_uniformly_continuous
+    file: ContinuousFOL/SubstitutionAndCompletions/EvalUniformlyContinuous.lean
+    paper_ref: Theorem 6.8
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.exists_metric_completion
+    file: ContinuousFOL/SubstitutionAndCompletions/ExistsMetricCompletion.lean
+    paper_ref: Theorem 6.9
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.entails_metric_iff_complete
+    file: ContinuousFOL/SubstitutionAndCompletions/EntailsMetricIffComplete.lean
+    paper_ref: Corollary 6.11
+    kind: statement
+    note: clause (i)
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.satisfiable_metric_iff_complete
+    file: ContinuousFOL/SubstitutionAndCompletions/EntailsMetricIffComplete.lean
+    paper_ref: Corollary 6.11
+    kind: statement
+    note: clause (ii)
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.soundness_pre
+    file: ContinuousFOL/Group2Axioms/SoundnessPre.lean
+    paper_ref: Theorem 7.2
+    kind: statement
+    note: clause (i), signature without metric
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+    comparator_config: comparator.json
+  - declaration: ContinuousFOL.satisfiable_consistent_pre
+    file: ContinuousFOL/Group2Axioms/SoundnessPre.lean
+    paper_ref: Theorem 7.2
+    kind: statement
+    note: clause (ii), signature without metric
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.soundness_metric
+    file: ContinuousFOL/Group2Axioms/SoundnessMetric.lean
+    paper_ref: Theorem 7.2
+    kind: metric-variant
+    note: clause (i), signature with a metric
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.satisfiable_consistent_metric
+    file: ContinuousFOL/Group2Axioms/SoundnessMetric.lean
+    paper_ref: Theorem 7.2
+    kind: metric-variant
+    note: clause (ii), signature with a metric
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.soundness_metric_full
+    file: ContinuousFOL/Group2Axioms/SoundnessMetric.lean
+    paper_ref: Theorem 7.2
+    kind: metric-variant
+    note: clauses (i) and (ii), signature with a metric, both readings (pre-structures and complete structures)
+      in one statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+    comparator_config: comparator.json
+  - declaration: ContinuousFOL.deduction_theorem
+    file: ContinuousFOL/Essentials/DeductionTheorem.lean
+    paper_ref: Theorem 8.1
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.deduction_theorem_metric
+    file: ContinuousFOL/Essentials/DeductionTheorem.lean
+    paper_ref: Theorem 8.1
+    kind: metric-variant
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.LukPropForm.deduction_theorem
+    file: ContinuousFOL/LukasiewiczAndContinuous/LukPropFormDeduction.lean
+    paper_ref: Theorem 8.1
+    kind: supporting
+    note: propositional (Łukasiewicz) analogue of Theorem 8.1, used for Facts 4.2 and 4.5
+    sorry_count: 0
+    axioms:
+    - propext
+  - declaration: ContinuousFOL.CLPropForm.deduction_theorem
+    file: ContinuousFOL/LukasiewiczAndContinuous/CLPropFormDeduction.lean
+    paper_ref: Theorem 8.1
+    kind: supporting
+    note: propositional (continuous) analogue of Theorem 8.1
+    sorry_count: 0
+    axioms:
+    - propext
+  - declaration: ContinuousFOL.generalization_theorem
+    file: ContinuousFOL/Essentials/GeneralizationTheorem.lean
+    paper_ref: Lemma 8.2
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.generalization_theorem_metric
+    file: ContinuousFOL/Essentials/GeneralizationTheorem.lean
+    paper_ref: Lemma 8.2
+    kind: metric-variant
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.provable_bound_subst
+    file: ContinuousFOL/Essentials/ProvableBoundSubst.lean
+    paper_ref: Lemma 8.3
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.provable_bound_subst_metric
+    file: ContinuousFOL/Essentials/ProvableBoundSubst.lean
+    paper_ref: Lemma 8.3
+    kind: metric-variant
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.generalize_fresh_const
+    file: ContinuousFOL/Essentials/GeneralizeFreshConst.lean
+    paper_ref: Lemma 8.4
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.generalize_fresh_const_metric
+    file: ContinuousFOL/Essentials/GeneralizeFreshConst.lean
+    paper_ref: Lemma 8.4
+    kind: metric-variant
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.consistent_adjoin_approx
+    file: ContinuousFOL/Essentials/ConsistentAdjoin.lean
+    paper_ref: Lemma 8.5
+    kind: statement
+    note: clause (i)
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.consistent_adjoin_comparable
+    file: ContinuousFOL/Essentials/ConsistentAdjoin.lean
+    paper_ref: Lemma 8.5
+    kind: statement
+    note: clause (ii)
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.consistent_adjoin_approx_metric
+    file: ContinuousFOL/Essentials/ConsistentAdjoin.lean
+    paper_ref: Lemma 8.5
+    kind: metric-variant
+    note: clause (i)
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.consistent_adjoin_comparable_metric
+    file: ContinuousFOL/Essentials/ConsistentAdjoin.lean
+    paper_ref: Lemma 8.5
+    kind: metric-variant
+    note: clause (ii)
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.maximal_in_consistent_extensions_iff
+    file: ContinuousFOL/Essentials/MaximalConsistent.lean
+    paper_ref: Lemma 8.6
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.maximal_in_consistent_extensions_iff_metric
+    file: ContinuousFOL/Essentials/MaximalConsistentMetric.lean
+    paper_ref: Lemma 8.6
+    kind: metric-variant
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.MaximalConsistent.mem_iff_provable
+    file: ContinuousFOL/Essentials/MaximalConsistent.lean
+    paper_ref: Remark 8.9
+    kind: statement
+    note: first sentence of Remark 8.9
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.MaximalConsistentMetric.mem_iff_provable
+    file: ContinuousFOL/Essentials/MaximalConsistentMetric.lean
+    paper_ref: Remark 8.9
+    kind: metric-variant
+    note: first sentence of Remark 8.9
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.exists_maximal_consistent
+    file: ContinuousFOL/Essentials/MaximalConsistent.lean
+    paper_ref: Theorem 8.10
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.exists_maximal_consistent_metric
+    file: ContinuousFOL/Essentials/MaximalConsistentMetric.lean
+    paper_ref: Theorem 8.10
+    kind: metric-variant
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.maximal_consistent_sup_instantiate
+    file: ContinuousFOL/Essentials/MaximalConsistent.lean
+    paper_ref: Lemma 8.11
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.maximal_consistent_sup_instantiate_metric
+    file: ContinuousFOL/Essentials/MaximalConsistentMetric.lean
+    paper_ref: Lemma 8.11
+    kind: metric-variant
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.maximal_consistent_sup_instantiate_aux
+    file: ContinuousFOL/Essentials/MaximalConsistent.lean
+    paper_ref: Lemma 8.11
+    kind: supporting
+    note: 'helper: Lemma 8.11 plus facts from its proof (not a paper statement)'
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.maximal_consistent_sup_eq_inf
+    file: ContinuousFOL/Essentials/MaximalConsistent.lean
+    paper_ref: Lemma 8.12
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.maximal_consistent_sup_eq_inf_metric
+    file: ContinuousFOL/Essentials/MaximalConsistentMetric.lean
+    paper_ref: Lemma 8.12
+    kind: metric-variant
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.exists_henkin_extension
+    file: ContinuousFOL/Completeness/ExistsHenkinExtension.lean
+    paper_ref: Proposition 9.2
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.exists_henkin_extension_metric
+    file: ContinuousFOL/Completeness/ExistsHenkinExtension.lean
+    paper_ref: Proposition 9.2
+    kind: metric-variant
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.henkin_model_existence
+    file: ContinuousFOL/Completeness/HenkinModelExistence.lean
+    paper_ref: Theorem 9.4
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+    comparator_config: comparator.json
+  - declaration: ContinuousFOL.henkin_model_existence_metric
+    file: ContinuousFOL/Completeness/HenkinModelExistenceMetric.lean
+    paper_ref: Theorem 9.4
+    kind: metric-variant
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+    comparator_config: comparator.json
+  - declaration: ContinuousFOL.termPreStructure_eval_eq_sup
+    file: ContinuousFOL/Completeness/TermPreStructureEvalEqSup.lean
+    paper_ref: Theorem 9.4
+    kind: supporting
+    note: 'truth lemma: the core induction in the proof of Theorem 9.4'
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.completeness_pre
+    file: ContinuousFOL/Completeness/CompletenessPre.lean
+    paper_ref: Theorem 9.5
+    kind: statement
+    note: first sentence (signature without metric)
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+    comparator_config: comparator.json
+  - declaration: ContinuousFOL.completeness_metric
+    file: ContinuousFOL/Completeness/CompletenessMetric.lean
+    paper_ref: Theorem 9.5
+    kind: metric-variant
+    note: second sentence (signature with a metric)
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+    comparator_config: comparator.json
+  - declaration: ContinuousFOL.metric_prestructure_model_of_consistent
+    file: ContinuousFOL/Completeness/HenkinModelExistenceMetric.lean
+    paper_ref: Theorem 9.5
+    kind: supporting
+    note: 'helper: first step of the proof of Theorem 9.5 (not a paper statement)'
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.approximated_strong_completeness_pre
+    file: ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean
+    paper_ref: Corollary 9.6
+    kind: statement
+    note: first sentence
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+    comparator_config: comparator.json
+  - declaration: ContinuousFOL.approximated_strong_completeness_metric
+    file: ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean
+    paper_ref: Corollary 9.6
+    kind: metric-variant
+    note: '"Moreover" sentence (signature with a metric)'
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+    comparator_config: comparator.json
+  - declaration: ContinuousFOL.pavelka_completeness_pre
+    file: ContinuousFOL/Completeness/PavelkaCompleteness.lean
+    paper_ref: Corollary 9.8
+    kind: statement
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+    comparator_config: comparator.json
+  - declaration: ContinuousFOL.pavelka_completeness_metric
+    file: ContinuousFOL/Completeness/PavelkaCompleteness.lean
+    paper_ref: Corollary 9.8
+    kind: metric-variant
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+    comparator_config: comparator.json
+  - declaration: ContinuousFOL.complete_re_theory_decidable
+    file: ContinuousFOL/Completeness/UniformlyComputableDegree.lean
+    paper_ref: Corollary 9.11
+    kind: statement
+    note: with RecursivePresentation (supClosureCode); see fidelity.divergences
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+    comparator_config: comparator.json
+  - declaration: ContinuousFOL.compactness_pre
+    file: ContinuousFOL/Completeness/CompactnessPre.lean
+    paper_ref: Corollary 9.12
+    kind: statement
+    note: satisfiable reading
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+    comparator_config: comparator.json
+  - declaration: ContinuousFOL.compactness_metric
+    file: ContinuousFOL/Completeness/CompactnessMetric.lean
+    paper_ref: Corollary 9.12
+    kind: metric-variant
+    note: completely satisfiable reading (signature with a metric)
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+    comparator_config: comparator.json
+  - declaration: ContinuousFOL.unit_closed_neg
+    file: ContinuousFOL/Introduction/UnitInterval.lean
+    paper_ref: none (supporting lemma)
+    kind: supporting
+    note: supporting lemma for truth values staying in [0,1] (Definitions 2.2, 2.5)
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.unit_closed_half
+    file: ContinuousFOL/Introduction/UnitInterval.lean
+    paper_ref: none (supporting lemma)
+    kind: supporting
+    note: supporting lemma for truth values staying in [0,1] (Definition 2.5)
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.ProvableQ.tsub_one
+    file: ContinuousFOL/Essentials/InconsistentIffProvableOne.lean
+    paper_ref: none (supporting lemma)
+    kind: supporting
+    note: 'supporting lemma (§8): ⊢ φ ∸ 1'
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.inconsistent_iff_provable_one
+    file: ContinuousFOL/Essentials/InconsistentIffProvableOne.lean
+    paper_ref: none (supporting lemma)
+    kind: supporting
+    note: 'supporting lemma (§8): Γ inconsistent iff Γ ⊢_Q 1'
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.inconsistent_iff_provable_one_metric
+    file: ContinuousFOL/Essentials/MaximalConsistentMetric.lean
+    paper_ref: none (supporting lemma)
+    kind: supporting
+    note: supporting lemma (§8), signature with a metric
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.SignatureExtension.eval_reduct
+    file: ContinuousFOL/Completeness/SignatureExtension.lean
+    paper_ref: none (supporting lemma)
+    kind: supporting
+    note: supporting lemma (§9 signature extensions)
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.provable_tsub_of_inconsistent_adjoin
+    file: ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean
+    paper_ref: none (supporting lemma)
+    kind: supporting
+    note: auxiliary lemma used for Corollary 9.6 (cf. proof of Lemma 8.5)
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+  - declaration: ContinuousFOL.provable_tsub_of_inconsistent_adjoin_metric
+    file: ContinuousFOL/Completeness/ProvableTsubOfInconsistentAdjoin.lean
+    paper_ref: none (supporting lemma)
+    kind: supporting
+    note: auxiliary lemma used for Corollary 9.6, signature with a metric
+    sorry_count: 0
+    axioms:
+    - Classical.choice
+    - Quot.sound
+    - propext
+fidelity:
+  divergences: '1. Facts 4.2 and 4.3 (consistent iff satisfiable, Łukasiewicz and continuous propositional
+    logic) needed an added premise to go through: there is at least one propositional variable (`[Nonempty
+    I]`). As literally stated they are false when there are no variables (the empty set is then satisfiable
+    but inconsistent); the counterexample is proved in Lean as `LukPropForm.consistent_iff_satisfiable_fails_empty`
+    and `CLPropForm.consistent_iff_satisfiable_fails_empty`. Facts 4.1, 4.4 and 4.5 need no such premise
+    (in Fact 4.4 the constant 2^{-n} is built from φ itself via Notation 3.3). This is the only change
+    to a paper statement and was approved by the author of the formalization.
 
+    2. Corollary 9.11 (`complete_re_theory_decidable`): "recursive or recursively enumerable axiomatization"
+    is read as the structure `RecursivePresentation` (Completeness/RecursivePresentation.lean), which
+    besides a computable enumeration of the axioms records a computable map `supClosureCode` on formula
+    codes sending the code of φ to the code of its universal (sup-)closure (`supClosureCode_computable`,
+    `supClosureCode_spec`). This makes explicit the effectivity of formula codes that the paper uses implicitly;
+    see docs/recursive-presentation-cor-9.11.md.
+
+    3. Definition 9.9(ii): `IsCompleteTheory` (Completeness/IsCompleteTheory.lean) quantifies over sentences
+    (`IsSentence`), following the paper''s definition of a theory as a set of sentences.
+
+    4. Corollary 9.8 (`pavelka_completeness_pre`/`_metric`): for inconsistent Γ the supremum over the
+    empty set is Mathlib''s `Real.sSup_empty` value 0, a convention the paper leaves implicit.
+
+    5. Statements involving "(with a metric)" / "(completely) satisfiable" are given in two Lean forms:
+    a `_pre` / unsuffixed version for continuous signatures and pre-structures, and a `_metric` version
+    for signatures with a metric and complete structures (Theorem 7.2, Corollaries 9.6 and 9.12, and the
+    §8–9 lemmas). Model-existence and entailment statements are universe-polymorphic (`.{u}`).
+
+    6. Some paper statements are split across several Lean theorems (Theorem 7.2 (i)/(ii), Lemma 8.5 (i)/(ii),
+    Corollary 6.11 (i)/(ii)); Remark 8.9 is formalized for its first sentence only.'
 review:
   status: self-assessed
   reviewers:
   - Lars Warren Ericson
-  notes: >-
-    Lars Warren Ericson directed and reviewed the Lean development. This is
-    not recorded as an independent external review. Comparator proofs will be
-    checked by the Lean kernel.
-
-known_gaps:
-  - >-
-    Scaffold only: ContinuousFOL/ library and Comparator chart are not yet
-    populated with paper-facing theorems.
-  - >-
-    Vision OCR (`sources/yaacov_pedersen_2010_vision.md`) is in progress;
-    prefer it over pdftotext when aligning Lean to the paper.
-
+  notes: Lars Warren Ericson directed and reviewed the Lean development. This is not recorded as an independent
+    external review. All listed theorems are checked by the Lean kernel; the comparator theorems in comparator.json
+    are checked against the Challenge statements.
 limitations:
-  - >-
-    Deviation: Facts 4.2 and 4.3 carry the added premise `[Nonempty I]`
-    (at least one propositional variable). The literal statements are false
-    without it; see `LukPropForm.consistent_iff_satisfiable_fails_empty` and
-    `CLPropForm.consistent_iff_satisfiable_fails_empty`, and the deviations
-    table in README.md.
-  - >-
-    No external mathematical review has been performed.
-  - >-
-    Source PDF and OCR transcriptions are not Apache-2.0; see NOTICE.
-
+- No external mathematical review has been performed; review is self-assessed.
+- Source PDF and OCR transcriptions are not Apache-2.0; see NOTICE.
+- 'Supporting entries in status.main_results (kind: supporting) are intermediate lemmas on the proof chart,
+  not numbered paper results.'
 alignment:
   namespace: ContinuousFOL
-  statements: []
+  statements:
+  - paper_ref: Remark 3.4
+    lean: ContinuousFOL.DyadicCode.val_range_eq_dyadics
+    file: ContinuousFOL/Group1Axioms/DyadicCode/Val.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 131
+    quote: '**Remark 3.4.** *Observe that on any truth assignment $v$ the set $\mathcal{D}$ generated
+      from $1$ by applying the operations $\neg$, $\dot{-}$, and $\frac{1}{2}$ is such that $\{v(d) :
+      d \in \mathcal{D}\} = \mathbb{D}$, the set of dyadic numbers, i.e., numbers of the form $\frac{k}{2^n}$,
+      where $k, n < \omega$ and $k \leq 2^n$. For simplicity of notation, we do not distinguish between
+      the syntactic set $\mathcal{D}$ thus generated and $\mathbb{D}$.*'
+  - paper_ref: Fact 4.1
+    lean: ContinuousFOL.luk_weak_completeness
+    file: ContinuousFOL/BlackBox/LukWeakCompleteness.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 137
+    quote: '**Fact 4.1 (Weak Completeness for Łukasiewicz Logic [Cha59, RR58]).** *Let $\mathcal{S}$ be
+      a Łukasiewicz propositional logic and $\varphi \in \mathcal{S}$. Then $\models \varphi$ if and only
+      if $\vdash \varphi$.*'
+  - paper_ref: Fact 4.2
+    lean: ContinuousFOL.luk_consistent_iff_satisfiable
+    file: ContinuousFOL/BlackBox/LukConsistentIffSatisfiable.lean
+    kind: statement
+    note: with the added premise [Nonempty I] (at least one propositional variable); see fidelity.divergences
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 139
+    quote: '**Fact 4.2.** *Let $\mathcal{S}$ be a Łukasiewicz propositional logic, and $\Sigma \subseteq
+      \mathcal{S}$. Then $\Sigma$ is consistent if and only if it is satisfiable.*'
+  - paper_ref: Fact 4.3
+    lean: ContinuousFOL.cl_consistent_iff_satisfiable
+    file: ContinuousFOL/BlackBox/CLConsistentIffSatisfiable.lean
+    kind: statement
+    note: with the added premise [Nonempty I] (at least one propositional variable); see fidelity.divergences
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 141
+    quote: '**Fact 4.3.** *Let $\mathcal{S}$ be a continuous propositional logic and $\Sigma \subseteq
+      \mathcal{S}$. Then $\Sigma$ is consistent if and only if it is satisfiable.*'
+  - paper_ref: Fact 4.4
+    lean: ContinuousFOL.cl_approx_strong_completeness
+    file: ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 145
+    quote: '**Fact 4.4 (Approximated Strong Completeness for Continuous Logic).** *Let $\mathcal{S}$ be
+      a continuous propositional logic, $\Sigma \subseteq \mathcal{S}$, and $\varphi \in \mathcal{S}$.
+      Then $\Sigma \models \varphi$ if and only if $\Sigma \vdash \varphi \dot{-} 2^{-n}$ for all $n <
+      \omega$.*'
+  - paper_ref: Fact 4.5
+    lean: ContinuousFOL.cl_finite_strong_completeness
+    file: ContinuousFOL/BlackBox/CLFiniteStrongCompleteness.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 151
+    quote: '**Fact 4.5 (Finite Strong Completeness for Continuous Logic).** *Let $\mathcal{S}$ be a continuous
+      propositional logic, $\Sigma \subseteq \mathcal{S}$ be finite, and $\varphi \in \mathcal{S}$. Then
+      $\Sigma \vDash \varphi$ if and only if $\Sigma \vdash \varphi$.*'
+  - paper_ref: Lemma 6.2
+    lean: ContinuousFOL.substitution_lemma
+    file: ContinuousFOL/SubstitutionAndCompletions/SubstitutionLemma.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 335
+    quote: '**Lemma 6.2** (*Substitution Lemma*). Let $\mathfrak{M}$ be a continuous $\mathcal{L}$-pre-structure,
+      and let $\sigma$ be an $\mathfrak{M}$-assignment. Let $t$ be a term, $x$ be a variable, and $\varphi$
+      be a formula. Put $a := t^{\mathfrak{M}, \sigma}$. Suppose $\varphi[t/x]$ is correct. Then $$\mathfrak{M}(\varphi[t/x],
+      \sigma) = \mathfrak{M}(\varphi, \sigma_x^a).$$'
+  - paper_ref: Lemma 6.4
+    lean: ContinuousFOL.bound_substitution_lemma
+    file: ContinuousFOL/SubstitutionAndCompletions/BoundSubstitutionLemma.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 345
+    quote: '**Lemma 6.4 (Bound Substitution Lemma).** *Let $\varphi$ be a formula, and let $x_0, \dots,
+      x_{n-1}$ be a finite sequence of variables. Then by a sequence of bound substitutions there is a
+      formula $\varphi''$ in which $x_0, \dots, x_{n-1}$ are not bound and $\varphi \equiv \varphi''$.*'
+  - paper_ref: Lemma 6.4
+    lean: ContinuousFOL.bound_substitution_lemma_metric
+    file: ContinuousFOL/SubstitutionAndCompletions/BoundSubstitutionLemma.lean
+    kind: metric-variant
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 345
+    quote: '**Lemma 6.4 (Bound Substitution Lemma).** *Let $\varphi$ be a formula, and let $x_0, \dots,
+      x_{n-1}$ be a finite sequence of variables. Then by a sequence of bound substitutions there is a
+      formula $\varphi''$ in which $x_0, \dots, x_{n-1}$ are not bound and $\varphi \equiv \varphi''$.*'
+  - paper_ref: Theorem 6.6
+    lean: ContinuousFOL.surjective_morphism_elementary
+    file: ContinuousFOL/SubstitutionAndCompletions/LMorphism.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 365
+    quote: '**Theorem 6.6.** *If $\mathfrak{M}$ and $\mathfrak{N}$ are continuous $\mathcal{L}$-pre-structures
+      and $h : M \to N$ is a surjective $\mathcal{L}$-morphism, then $h$ is an elementary $\mathcal{L}$-morphism
+      of $\mathfrak{M}$ onto $\mathfrak{N}$.*'
+  - paper_ref: Theorem 6.8
+    lean: ContinuousFOL.eval_uniformly_continuous
+    file: ContinuousFOL/SubstitutionAndCompletions/EvalUniformlyContinuous.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 378
+    quote: '**Theorem 6.8.** Let $\mathfrak{M}$ be a continuous $\mathcal{L}$-pre-structure. Then for
+      every term $t$ and formula $\varphi$ the mappings $\tilde{t}^{\mathfrak{M}, \bar{x}} : M^n \to M$
+      and $\tilde{\varphi}^{\mathfrak{M}, \bar{x}} : M^n \to [0, 1]$ are uniformly continuous.'
+  - paper_ref: Theorem 6.9
+    lean: ContinuousFOL.exists_metric_completion
+    file: ContinuousFOL/SubstitutionAndCompletions/ExistsMetricCompletion.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 384
+    quote: '**Theorem 6.9 (Existence of Metric Completion).** *Let $\mathcal{L}$ be a continuous signature
+      with a metric, and let $\mathfrak{M}$ be a continuous $\mathcal{L}$-pre-structure. Then there is
+      a continuous $\mathcal{L}$-structure $\widehat{\mathfrak{M}}$ and an elementary $\mathcal{L}$-morphism
+      of $\mathfrak{M}$ into $\widehat{\mathfrak{M}}$.*'
+  - paper_ref: Corollary 6.11
+    lean: ContinuousFOL.entails_metric_iff_complete
+    file: ContinuousFOL/SubstitutionAndCompletions/EntailsMetricIffComplete.lean
+    kind: statement
+    note: clause (i)
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 396
+    quote: '**Corollary 6.11.** *Let $\mathcal{L}$ be a continuous signature with a metric, and let $\Gamma
+      \subseteq \mathrm{For}(\mathcal{L})$. Then for every formula $\varphi$,* (i) $\Gamma \vDash_Q \varphi$
+      *if and only if* $\Gamma \vDash_{QC} \varphi$. (ii) $\Gamma$ *is satisfiable if and only if* $\Gamma$
+      *is completely satisfiable.*'
+  - paper_ref: Corollary 6.11
+    lean: ContinuousFOL.satisfiable_metric_iff_complete
+    file: ContinuousFOL/SubstitutionAndCompletions/EntailsMetricIffComplete.lean
+    kind: statement
+    note: clause (ii)
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 396
+    quote: '**Corollary 6.11.** *Let $\mathcal{L}$ be a continuous signature with a metric, and let $\Gamma
+      \subseteq \mathrm{For}(\mathcal{L})$. Then for every formula $\varphi$,* (i) $\Gamma \vDash_Q \varphi$
+      *if and only if* $\Gamma \vDash_{QC} \varphi$. (ii) $\Gamma$ *is satisfiable if and only if* $\Gamma$
+      *is completely satisfiable.*'
+  - paper_ref: Theorem 7.2
+    lean: ContinuousFOL.soundness_pre
+    file: ContinuousFOL/Group2Axioms/SoundnessPre.lean
+    kind: statement
+    note: clause (i), signature without metric
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 460
+    quote: '**Theorem 7.2 (Soundness).** Let $\mathcal{L}$ be a continuous signature (with a metric),
+      and let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$. Then for every formula $\varphi$, (i) If $\Gamma
+      \vdash_Q \varphi$, then $\Gamma \vDash_Q \varphi$ ($\Gamma \vDash_{QC} \varphi$). (ii) If $\Gamma$
+      is (completely) satisfiable, then $\Gamma$ is consistent.'
+  - paper_ref: Theorem 7.2
+    lean: ContinuousFOL.satisfiable_consistent_pre
+    file: ContinuousFOL/Group2Axioms/SoundnessPre.lean
+    kind: statement
+    note: clause (ii), signature without metric
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 460
+    quote: '**Theorem 7.2 (Soundness).** Let $\mathcal{L}$ be a continuous signature (with a metric),
+      and let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$. Then for every formula $\varphi$, (i) If $\Gamma
+      \vdash_Q \varphi$, then $\Gamma \vDash_Q \varphi$ ($\Gamma \vDash_{QC} \varphi$). (ii) If $\Gamma$
+      is (completely) satisfiable, then $\Gamma$ is consistent.'
+  - paper_ref: Theorem 7.2
+    lean: ContinuousFOL.soundness_metric
+    file: ContinuousFOL/Group2Axioms/SoundnessMetric.lean
+    kind: metric-variant
+    note: clause (i), signature with a metric
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 460
+    quote: '**Theorem 7.2 (Soundness).** Let $\mathcal{L}$ be a continuous signature (with a metric),
+      and let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$. Then for every formula $\varphi$, (i) If $\Gamma
+      \vdash_Q \varphi$, then $\Gamma \vDash_Q \varphi$ ($\Gamma \vDash_{QC} \varphi$). (ii) If $\Gamma$
+      is (completely) satisfiable, then $\Gamma$ is consistent.'
+  - paper_ref: Theorem 7.2
+    lean: ContinuousFOL.satisfiable_consistent_metric
+    file: ContinuousFOL/Group2Axioms/SoundnessMetric.lean
+    kind: metric-variant
+    note: clause (ii), signature with a metric
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 460
+    quote: '**Theorem 7.2 (Soundness).** Let $\mathcal{L}$ be a continuous signature (with a metric),
+      and let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$. Then for every formula $\varphi$, (i) If $\Gamma
+      \vdash_Q \varphi$, then $\Gamma \vDash_Q \varphi$ ($\Gamma \vDash_{QC} \varphi$). (ii) If $\Gamma$
+      is (completely) satisfiable, then $\Gamma$ is consistent.'
+  - paper_ref: Theorem 7.2
+    lean: ContinuousFOL.soundness_metric_full
+    file: ContinuousFOL/Group2Axioms/SoundnessMetric.lean
+    kind: metric-variant
+    note: clauses (i) and (ii), signature with a metric, both readings (pre-structures and complete structures)
+      in one statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 460
+    quote: '**Theorem 7.2 (Soundness).** Let $\mathcal{L}$ be a continuous signature (with a metric),
+      and let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$. Then for every formula $\varphi$, (i) If $\Gamma
+      \vdash_Q \varphi$, then $\Gamma \vDash_Q \varphi$ ($\Gamma \vDash_{QC} \varphi$). (ii) If $\Gamma$
+      is (completely) satisfiable, then $\Gamma$ is consistent.'
+  - paper_ref: Theorem 8.1
+    lean: ContinuousFOL.deduction_theorem
+    file: ContinuousFOL/Essentials/DeductionTheorem.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 486
+    quote: '**Theorem 8.1 (Deduction Theorem).** Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$, and
+      let $\varphi$, $\psi$ be formulae. Then $\Gamma \cup \{\psi\} \vdash_Q \varphi$ if and only if $\Gamma
+      \vdash_Q \varphi \dot{-} n\psi$ for some $n < \omega$.'
+  - paper_ref: Theorem 8.1
+    lean: ContinuousFOL.deduction_theorem_metric
+    file: ContinuousFOL/Essentials/DeductionTheorem.lean
+    kind: metric-variant
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 486
+    quote: '**Theorem 8.1 (Deduction Theorem).** Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$, and
+      let $\varphi$, $\psi$ be formulae. Then $\Gamma \cup \{\psi\} \vdash_Q \varphi$ if and only if $\Gamma
+      \vdash_Q \varphi \dot{-} n\psi$ for some $n < \omega$.'
+  - paper_ref: Lemma 8.2
+    lean: ContinuousFOL.generalization_theorem
+    file: ContinuousFOL/Essentials/GeneralizationTheorem.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 496
+    quote: '**Lemma 8.2 (Generalization Theorem).** Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$,
+      and let $\varphi$ be a formula. If $\Gamma \vdash \varphi$ and $x$ is not a free variable in $\Gamma$,
+      then $\Gamma \vdash \sup_x \varphi$.'
+  - paper_ref: Lemma 8.2
+    lean: ContinuousFOL.generalization_theorem_metric
+    file: ContinuousFOL/Essentials/GeneralizationTheorem.lean
+    kind: metric-variant
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 496
+    quote: '**Lemma 8.2 (Generalization Theorem).** Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$,
+      and let $\varphi$ be a formula. If $\Gamma \vdash \varphi$ and $x$ is not a free variable in $\Gamma$,
+      then $\Gamma \vdash \sup_x \varphi$.'
+  - paper_ref: Lemma 8.3
+    lean: ContinuousFOL.provable_bound_subst
+    file: ContinuousFOL/Essentials/ProvableBoundSubst.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 502
+    quote: '**Lemma 8.3.** Let $\varphi$ be a formula, and let $y$ be a variable which does not occur
+      in $\varphi$. Then (a) $\vdash_Q \varphi \dot{-} \varphi\{y/x\}$. (b) $\vdash_Q \varphi\{y/x\} \dot{-}
+      \varphi$.'
+  - paper_ref: Lemma 8.3
+    lean: ContinuousFOL.provable_bound_subst_metric
+    file: ContinuousFOL/Essentials/ProvableBoundSubst.lean
+    kind: metric-variant
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 502
+    quote: '**Lemma 8.3.** Let $\varphi$ be a formula, and let $y$ be a variable which does not occur
+      in $\varphi$. Then (a) $\vdash_Q \varphi \dot{-} \varphi\{y/x\}$. (b) $\vdash_Q \varphi\{y/x\} \dot{-}
+      \varphi$.'
+  - paper_ref: Lemma 8.4
+    lean: ContinuousFOL.generalize_fresh_const
+    file: ContinuousFOL/Essentials/GeneralizeFreshConst.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 579
+    quote: '**Lemma 8.4.** *Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$, and let $\varphi$ be a formula.
+      If $\Gamma \vdash_Q \varphi$, $c$ is a constant symbol that does not occur in $\Gamma$, and $x$
+      does not occur in $\varphi$, then $\Gamma \vdash_Q \sup_x \varphi[x/c]$.*'
+  - paper_ref: Lemma 8.4
+    lean: ContinuousFOL.generalize_fresh_const_metric
+    file: ContinuousFOL/Essentials/GeneralizeFreshConst.lean
+    kind: metric-variant
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 579
+    quote: '**Lemma 8.4.** *Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$, and let $\varphi$ be a formula.
+      If $\Gamma \vdash_Q \varphi$, $c$ is a constant symbol that does not occur in $\Gamma$, and $x$
+      does not occur in $\varphi$, then $\Gamma \vdash_Q \sup_x \varphi[x/c]$.*'
+  - paper_ref: Lemma 8.5
+    lean: ContinuousFOL.consistent_adjoin_approx
+    file: ContinuousFOL/Essentials/ConsistentAdjoin.lean
+    kind: statement
+    note: clause (i)
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 587
+    quote: '**Lemma 8.5.** Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$ be consistent. Then for all
+      formulae $\varphi$, $\psi$, (i) If $\Gamma \vdash_Q \varphi \dot{-} 2^{-n}$ for all $n < \omega$
+      then $\Gamma \cup \{\varphi\}$ is consistent. (ii) Either $\Gamma \cup \{\varphi \dot{-} \psi\}$
+      or $\Gamma \cup \{\psi \dot{-} \varphi\}$ is consistent.'
+  - paper_ref: Lemma 8.5
+    lean: ContinuousFOL.consistent_adjoin_comparable
+    file: ContinuousFOL/Essentials/ConsistentAdjoin.lean
+    kind: statement
+    note: clause (ii)
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 587
+    quote: '**Lemma 8.5.** Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$ be consistent. Then for all
+      formulae $\varphi$, $\psi$, (i) If $\Gamma \vdash_Q \varphi \dot{-} 2^{-n}$ for all $n < \omega$
+      then $\Gamma \cup \{\varphi\}$ is consistent. (ii) Either $\Gamma \cup \{\varphi \dot{-} \psi\}$
+      or $\Gamma \cup \{\psi \dot{-} \varphi\}$ is consistent.'
+  - paper_ref: Lemma 8.5
+    lean: ContinuousFOL.consistent_adjoin_approx_metric
+    file: ContinuousFOL/Essentials/ConsistentAdjoin.lean
+    kind: metric-variant
+    note: clause (i)
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 587
+    quote: '**Lemma 8.5.** Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$ be consistent. Then for all
+      formulae $\varphi$, $\psi$, (i) If $\Gamma \vdash_Q \varphi \dot{-} 2^{-n}$ for all $n < \omega$
+      then $\Gamma \cup \{\varphi\}$ is consistent. (ii) Either $\Gamma \cup \{\varphi \dot{-} \psi\}$
+      or $\Gamma \cup \{\psi \dot{-} \varphi\}$ is consistent.'
+  - paper_ref: Lemma 8.5
+    lean: ContinuousFOL.consistent_adjoin_comparable_metric
+    file: ContinuousFOL/Essentials/ConsistentAdjoin.lean
+    kind: metric-variant
+    note: clause (ii)
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 587
+    quote: '**Lemma 8.5.** Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$ be consistent. Then for all
+      formulae $\varphi$, $\psi$, (i) If $\Gamma \vdash_Q \varphi \dot{-} 2^{-n}$ for all $n < \omega$
+      then $\Gamma \cup \{\varphi\}$ is consistent. (ii) Either $\Gamma \cup \{\varphi \dot{-} \psi\}$
+      or $\Gamma \cup \{\psi \dot{-} \varphi\}$ is consistent.'
+  - paper_ref: Lemma 8.6
+    lean: ContinuousFOL.maximal_in_consistent_extensions_iff
+    file: ContinuousFOL/Essentials/MaximalConsistent.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 605
+    quote: '**Lemma 8.6.** Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$ be consistent, and let $E(\Gamma)
+      := \{\Gamma'' : \Gamma \subseteq \Gamma'' \subseteq \mathrm{For}(\mathcal{L}) \text{ and } \Gamma''
+      \text{ is consistent}\}$. Then $\Delta$ is a maximal member of $E(\Gamma)$ if and only if for all
+      formulae $\varphi$, $\psi$, (i) $\Gamma \subseteq \Delta$ and $\Delta$ is consistent. (ii) If $\Delta
+      \vdash_Q \varphi \dot{-} 2^{-n}$ for all $n < \omega$ then $\varphi \in \Delta$. (iii) $\varphi
+      \dot{-} \psi \in \Delta$ or $\psi \dot{-} \varphi \in \Delta$.'
+  - paper_ref: Lemma 8.6
+    lean: ContinuousFOL.maximal_in_consistent_extensions_iff_metric
+    file: ContinuousFOL/Essentials/MaximalConsistentMetric.lean
+    kind: metric-variant
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 605
+    quote: '**Lemma 8.6.** Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$ be consistent, and let $E(\Gamma)
+      := \{\Gamma'' : \Gamma \subseteq \Gamma'' \subseteq \mathrm{For}(\mathcal{L}) \text{ and } \Gamma''
+      \text{ is consistent}\}$. Then $\Delta$ is a maximal member of $E(\Gamma)$ if and only if for all
+      formulae $\varphi$, $\psi$, (i) $\Gamma \subseteq \Delta$ and $\Delta$ is consistent. (ii) If $\Delta
+      \vdash_Q \varphi \dot{-} 2^{-n}$ for all $n < \omega$ then $\varphi \in \Delta$. (iii) $\varphi
+      \dot{-} \psi \in \Delta$ or $\psi \dot{-} \varphi \in \Delta$.'
+  - paper_ref: Remark 8.9
+    lean: ContinuousFOL.MaximalConsistent.mem_iff_provable
+    file: ContinuousFOL/Essentials/MaximalConsistent.lean
+    kind: statement
+    note: first sentence of Remark 8.9
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 635
+    quote: '*Remark 8.9.* Observe that if $\Delta$ is a maximal consistent set of formulae, then $\varphi
+      \in \Delta$ if and only if $\Delta \vdash_Q \varphi$. It can be shown that in the above definition
+      condition (i) can be replaced by condition $(i'')$: If $\{\varphi \dot{-} 2^{-n} : n < \omega\}
+      \subseteq \Delta$, then $\varphi \in \Delta$. Indeed, condition $(i'')$ is also independent of (ii)
+      in continuous propositional logic.'
+  - paper_ref: Remark 8.9
+    lean: ContinuousFOL.MaximalConsistentMetric.mem_iff_provable
+    file: ContinuousFOL/Essentials/MaximalConsistentMetric.lean
+    kind: metric-variant
+    note: first sentence of Remark 8.9
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 635
+    quote: '*Remark 8.9.* Observe that if $\Delta$ is a maximal consistent set of formulae, then $\varphi
+      \in \Delta$ if and only if $\Delta \vdash_Q \varphi$. It can be shown that in the above definition
+      condition (i) can be replaced by condition $(i'')$: If $\{\varphi \dot{-} 2^{-n} : n < \omega\}
+      \subseteq \Delta$, then $\varphi \in \Delta$. Indeed, condition $(i'')$ is also independent of (ii)
+      in continuous propositional logic.'
+  - paper_ref: Theorem 8.10
+    lean: ContinuousFOL.exists_maximal_consistent
+    file: ContinuousFOL/Essentials/MaximalConsistent.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 639
+    quote: '**Theorem 8.10.** *If $\Gamma \subseteq \mathrm{For}(\mathcal{L})$ is consistent, then there
+      exists a maximal consistent set of formulae $\Delta \supseteq \Gamma$.*'
+  - paper_ref: Theorem 8.10
+    lean: ContinuousFOL.exists_maximal_consistent_metric
+    file: ContinuousFOL/Essentials/MaximalConsistentMetric.lean
+    kind: metric-variant
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 639
+    quote: '**Theorem 8.10.** *If $\Gamma \subseteq \mathrm{For}(\mathcal{L})$ is consistent, then there
+      exists a maximal consistent set of formulae $\Delta \supseteq \Gamma$.*'
+  - paper_ref: Lemma 8.11
+    lean: ContinuousFOL.maximal_consistent_sup_instantiate
+    file: ContinuousFOL/Essentials/MaximalConsistent.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 643
+    quote: '**Lemma 8.11.** *Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$, let $\Delta$ be a maximal
+      consistent set of formulae containing $\Gamma$, let $t$ be a term, and let $p \in \mathbb{D}$. Then
+      if $\sup_x \varphi \dot{-} p \in \Delta$, there is a formula $\varphi''$ such that $\varphi \equiv
+      \varphi''$ and $\varphi''[t/x] \dot{-} p \in \Delta$.*'
+  - paper_ref: Lemma 8.11
+    lean: ContinuousFOL.maximal_consistent_sup_instantiate_metric
+    file: ContinuousFOL/Essentials/MaximalConsistentMetric.lean
+    kind: metric-variant
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 643
+    quote: '**Lemma 8.11.** *Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$, let $\Delta$ be a maximal
+      consistent set of formulae containing $\Gamma$, let $t$ be a term, and let $p \in \mathbb{D}$. Then
+      if $\sup_x \varphi \dot{-} p \in \Delta$, there is a formula $\varphi''$ such that $\varphi \equiv
+      \varphi''$ and $\varphi''[t/x] \dot{-} p \in \Delta$.*'
+  - paper_ref: Lemma 8.12
+    lean: ContinuousFOL.maximal_consistent_sup_eq_inf
+    file: ContinuousFOL/Essentials/MaximalConsistent.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 651
+    quote: '**Lemma 8.12.** Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$ be consistent, let $\Delta$
+      be a maximal consistent set of formulae containing $\Gamma$, and let $\varphi$ be a formula. Then
+      $$ \sup\{p \in \mathbb{D} : p \dot{-} \varphi \in \Delta\} = \inf\{q \in \mathbb{D} : \varphi \dot{-}
+      q \in \Delta\}. $$'
+  - paper_ref: Lemma 8.12
+    lean: ContinuousFOL.maximal_consistent_sup_eq_inf_metric
+    file: ContinuousFOL/Essentials/MaximalConsistentMetric.lean
+    kind: metric-variant
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 651
+    quote: '**Lemma 8.12.** Let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$ be consistent, let $\Delta$
+      be a maximal consistent set of formulae containing $\Gamma$, and let $\varphi$ be a formula. Then
+      $$ \sup\{p \in \mathbb{D} : p \dot{-} \varphi \in \Delta\} = \inf\{q \in \mathbb{D} : \varphi \dot{-}
+      q \in \Delta\}. $$'
+  - paper_ref: Proposition 9.2
+    lean: ContinuousFOL.exists_henkin_extension
+    file: ContinuousFOL/Completeness/ExistsHenkinExtension.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 677
+    quote: '**Proposition 9.2.** Let $\mathcal{L}$ be a continuous signature. There exists a continuous
+      signature $\mathcal{L}^c$ with $\mathcal{L} \subseteq \mathcal{L}^c$ and a set $\Gamma^c \subseteq
+      \mathrm{For}(\mathcal{L}^c)$ such that for every $\Gamma \subseteq \mathrm{For}(\mathcal{L})$, (i)
+      $\Gamma \cup \Gamma^c$ is Henkin complete. (ii) If $\Gamma$ is consistent, then $\Gamma \cup \Gamma^c$
+      is consistent.'
+  - paper_ref: Proposition 9.2
+    lean: ContinuousFOL.exists_henkin_extension_metric
+    file: ContinuousFOL/Completeness/ExistsHenkinExtension.lean
+    kind: metric-variant
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 677
+    quote: '**Proposition 9.2.** Let $\mathcal{L}$ be a continuous signature. There exists a continuous
+      signature $\mathcal{L}^c$ with $\mathcal{L} \subseteq \mathcal{L}^c$ and a set $\Gamma^c \subseteq
+      \mathrm{For}(\mathcal{L}^c)$ such that for every $\Gamma \subseteq \mathrm{For}(\mathcal{L})$, (i)
+      $\Gamma \cup \Gamma^c$ is Henkin complete. (ii) If $\Gamma$ is consistent, then $\Gamma \cup \Gamma^c$
+      is consistent.'
+  - paper_ref: Theorem 9.4
+    lean: ContinuousFOL.henkin_model_existence
+    file: ContinuousFOL/Completeness/HenkinModelExistence.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 764
+    quote: '**Theorem 9.4.** Let $\mathcal{L}$ be a continuous signature (possibly with a metric), and
+      let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$. Assume $\Gamma$ is consistent. Then there is a
+      continuous signature $\mathcal{L}^c \supseteq \mathcal{L}$, a maximal consistent and Henkin complete
+      set $\Delta \subseteq \mathrm{For}(\mathcal{L}^c)$ with $\Delta \supseteq \Gamma$, a continuous
+      $\mathcal{L}^c$-prestructure $\mathfrak{M}$, and an $\mathfrak{M}$-assignment $\sigma$ such that
+      $(\mathfrak{M}, \sigma) \vDash_Q \Delta$.'
+  - paper_ref: Theorem 9.4
+    lean: ContinuousFOL.henkin_model_existence_metric
+    file: ContinuousFOL/Completeness/HenkinModelExistenceMetric.lean
+    kind: metric-variant
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 764
+    quote: '**Theorem 9.4.** Let $\mathcal{L}$ be a continuous signature (possibly with a metric), and
+      let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$. Assume $\Gamma$ is consistent. Then there is a
+      continuous signature $\mathcal{L}^c \supseteq \mathcal{L}$, a maximal consistent and Henkin complete
+      set $\Delta \subseteq \mathrm{For}(\mathcal{L}^c)$ with $\Delta \supseteq \Gamma$, a continuous
+      $\mathcal{L}^c$-prestructure $\mathfrak{M}$, and an $\mathfrak{M}$-assignment $\sigma$ such that
+      $(\mathfrak{M}, \sigma) \vDash_Q \Delta$.'
+  - paper_ref: Theorem 9.5
+    lean: ContinuousFOL.completeness_pre
+    file: ContinuousFOL/Completeness/CompletenessPre.lean
+    kind: statement
+    note: first sentence (signature without metric)
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 800
+    quote: '**Theorem 9.5 (Completeness for Continuous First-Order Logic).** *Let $\mathcal{L}$ be a continuous
+      signature, and let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$. Then $\Gamma$ is consistent only
+      if $\Gamma$ is satisfiable. Furthermore, if $\mathcal{L}$ is a continuous signature with a metric,
+      then $\Gamma$ is consistent only if $\Gamma$ is completely satisfiable.*'
+  - paper_ref: Theorem 9.5
+    lean: ContinuousFOL.completeness_metric
+    file: ContinuousFOL/Completeness/CompletenessMetric.lean
+    kind: metric-variant
+    note: second sentence (signature with a metric)
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 800
+    quote: '**Theorem 9.5 (Completeness for Continuous First-Order Logic).** *Let $\mathcal{L}$ be a continuous
+      signature, and let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$. Then $\Gamma$ is consistent only
+      if $\Gamma$ is satisfiable. Furthermore, if $\mathcal{L}$ is a continuous signature with a metric,
+      then $\Gamma$ is consistent only if $\Gamma$ is completely satisfiable.*'
+  - paper_ref: Corollary 9.6
+    lean: ContinuousFOL.approximated_strong_completeness_pre
+    file: ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean
+    kind: statement
+    note: first sentence
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 810
+    quote: '**Corollary 9.6 (Approximated Strong Completeness for Continuous Logic).** *Let $\mathcal{L}$
+      be a continuous signature, let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$, and let $\varphi$ be
+      a formula. Then $\Gamma \vDash_Q \varphi$ if and only if $\Gamma \vdash_Q \varphi \dot{-} 2^{-n}$
+      for all $n < \omega$. Moreover, if $\mathcal{L}$ is a continuous signature with a metric, then $\Gamma
+      \vDash_{QC} \varphi$ if and only if $\Gamma \vdash_Q \varphi \dot{-} 2^{-n}$ for all $n < \omega$.*'
+  - paper_ref: Corollary 9.6
+    lean: ContinuousFOL.approximated_strong_completeness_metric
+    file: ContinuousFOL/Completeness/ApproximatedStrongCompleteness.lean
+    kind: metric-variant
+    note: '"Moreover" sentence (signature with a metric)'
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 810
+    quote: '**Corollary 9.6 (Approximated Strong Completeness for Continuous Logic).** *Let $\mathcal{L}$
+      be a continuous signature, let $\Gamma \subseteq \mathrm{For}(\mathcal{L})$, and let $\varphi$ be
+      a formula. Then $\Gamma \vDash_Q \varphi$ if and only if $\Gamma \vdash_Q \varphi \dot{-} 2^{-n}$
+      for all $n < \omega$. Moreover, if $\mathcal{L}$ is a continuous signature with a metric, then $\Gamma
+      \vDash_{QC} \varphi$ if and only if $\Gamma \vdash_Q \varphi \dot{-} 2^{-n}$ for all $n < \omega$.*'
+  - paper_ref: Corollary 9.8
+    lean: ContinuousFOL.pavelka_completeness_pre
+    file: ContinuousFOL/Completeness/PavelkaCompleteness.lean
+    kind: statement
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 826
+    quote: '**Corollary 9.8.** *Let $\mathcal{L}$ be a continuous signature, and let $\Gamma \subseteq
+      \mathrm{For}(\mathcal{L})$. Then for every formula $\varphi$, the degree of truth of $\varphi$ with
+      respect to $\Gamma$ equals the degree of provability of $\varphi$ with respect to $\Gamma$. In other
+      words,* $$\varphi^{\circ}_{\Gamma} = \varphi^{\circledcirc}_{\Gamma}.$$'
+  - paper_ref: Corollary 9.8
+    lean: ContinuousFOL.pavelka_completeness_metric
+    file: ContinuousFOL/Completeness/PavelkaCompleteness.lean
+    kind: metric-variant
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 826
+    quote: '**Corollary 9.8.** *Let $\mathcal{L}$ be a continuous signature, and let $\Gamma \subseteq
+      \mathrm{For}(\mathcal{L})$. Then for every formula $\varphi$, the degree of truth of $\varphi$ with
+      respect to $\Gamma$ equals the degree of provability of $\varphi$ with respect to $\Gamma$. In other
+      words,* $$\varphi^{\circ}_{\Gamma} = \varphi^{\circledcirc}_{\Gamma}.$$'
+  - paper_ref: Corollary 9.11
+    lean: ContinuousFOL.complete_re_theory_decidable
+    file: ContinuousFOL/Completeness/UniformlyComputableDegree.lean
+    kind: statement
+    note: with RecursivePresentation (supClosureCode); see fidelity.divergences
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 851
+    quote: '**Corollary 9.11.** *Every complete theory with a recursive or recursively enumerable axiomatization
+      is decidable.*'
+  - paper_ref: Corollary 9.12
+    lean: ContinuousFOL.compactness_pre
+    file: ContinuousFOL/Completeness/CompactnessPre.lean
+    kind: statement
+    note: satisfiable reading
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 855
+    quote: '**Corollary 9.12 (Compactness).** *Let $\mathcal{L}$ be a continuous signature, and let $\Gamma
+      \subseteq \mathrm{For}(\mathcal{L})$. If every finite subset $\Gamma_0$ of $\Gamma$ is (completely)
+      satisfiable, then $\Gamma$ is (completely) satisfiable.*'
+  - paper_ref: Corollary 9.12
+    lean: ContinuousFOL.compactness_metric
+    file: ContinuousFOL/Completeness/CompactnessMetric.lean
+    kind: metric-variant
+    note: completely satisfiable reading (signature with a metric)
+    source: sources/yaacov_pedersen_2010_vision.md
+    source_line: 855
+    quote: '**Corollary 9.12 (Compactness).** *Let $\mathcal{L}$ be a continuous signature, and let $\Gamma
+      \subseteq \mathrm{For}(\mathcal{L})$. If every finite subset $\Gamma_0$ of $\Gamma$ is (completely)
+      satisfiable, then $\Gamma$ is (completely) satisfiable.*'

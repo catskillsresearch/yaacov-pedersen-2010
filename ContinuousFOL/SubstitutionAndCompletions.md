@@ -14,6 +14,8 @@ Paper pin: vision.md pages 11–14.
 - [`SubstitutionAndCompletions/FormulaFreeVars.lean`](SubstitutionAndCompletions/FormulaFreeVars.lean)
 - [`SubstitutionAndCompletions/FormulaHasFunc.lean`](SubstitutionAndCompletions/FormulaHasFunc.lean)
 - [`SubstitutionAndCompletions/LMorphism.lean`](SubstitutionAndCompletions/LMorphism.lean)
+- [`SubstitutionAndCompletions/MetricPreStructureCompletion.lean`](SubstitutionAndCompletions/MetricPreStructureCompletion.lean)
+- [`SubstitutionAndCompletions/PiCompletion.lean`](SubstitutionAndCompletions/PiCompletion.lean)
 - [`SubstitutionAndCompletions/SubstitutionLemma.lean`](SubstitutionAndCompletions/SubstitutionLemma.lean)
 - [`SubstitutionAndCompletions/TermSubst.lean`](SubstitutionAndCompletions/TermSubst.lean)
 - [`SubstitutionAndCompletions/TermVars.lean`](SubstitutionAndCompletions/TermVars.lean)

@@ -41,7 +41,8 @@ LISTING_CHUNK_LINES = 400
 AUTHOR = "Lars Warren Ericson"
 COMPANY = "Catskills Research Company"
 GITHUB_URL = r"https://github.com/catskillsresearch/yaacov-pedersen-2010"
-PALOMAR_URL = r"https://palomar-registry.org/entry.html?id=PALOMAR-2026-11-19-000018&version=1"
+# Set to the Palomar registry entry URL once this project is registered.
+PALOMAR_URL = ""
 ORCID = "0000-0001-8299-9361"
 EMAIL = "lars.ericson@catskillsresearch.com"
 
@@ -676,7 +677,7 @@ def cleanup_abstract_latex(latex: str) -> str:
 
 
 def build_title_page(abstract_latex: str) -> str:
-    palomar_latex = f"\\url{{{PALOMAR_URL}}}" if PALOMAR_URL else "TBD"
+    palomar_latex = f"\\url{{{PALOMAR_URL}}}" if PALOMAR_URL else "registration pending"
     return textwrap.dedent(
         f"""
         \\title{{\\textbf{{{TITLE}}}}}

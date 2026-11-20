@@ -23,7 +23,7 @@ OUT_EDGES = ROOT / "holes-edges.txt"
 
 # Bare tactic `sorry`, not the substring of "sorry-free".
 SORRY_RE = re.compile(r"(?<![\w-])sorry(?![\w-])")
-# Residual `axiom` counts as unfinished (intentional §4 black boxes stay open).
+# A residual `axiom` declaration counts as unfinished (the project uses none).
 AXIOM_RE = re.compile(r"^axiom\s+([A-Za-z0-9_'.]+)")
 # Optional `.{u}` universe annotation is not part of the declaration name.
 DECL_RE = re.compile(r"^(theorem|lemma)\s+([A-Za-z0-9_'.]+?)(?:\.\{\w+\})?(?=\s|$)")
@@ -65,7 +65,7 @@ NODES: dict[str, dict] = {
         "file": "ContinuousFOL/Group1Axioms/DyadicCode/Val.lean",
         "detail": "Image of DyadicCode.val equals the dyadic numbers in [0,1].",
     },
-    # §4 black boxes (axioms / approx completeness)
+    # §4 black-box Facts (proved in Lean)
     "luk_weak_completeness": {
         "label": "Fact 4.1 Łuk weak",
         "section": 4,
@@ -187,7 +187,7 @@ NODES: dict[str, dict] = {
         "label": "eval unif. cont.",
         "section": 6,
         "file": "ContinuousFOL/SubstitutionAndCompletions/EvalUniformlyContinuous.lean",
-        "detail": "Theorem 6.8: induced maps of terms and formulae on M^n are uniformly continuous (term half proved).",
+        "detail": "Theorem 6.8: induced maps of terms and formulae on M^n are uniformly continuous (terms and formulae).",
     },
     "entails_metric_iff_complete": {
         "label": "Entails ↔ complete",
@@ -496,6 +496,20 @@ NODES: dict[str, dict] = {
 
 # Hard edges: from → to means the current Lean proof of `to` still needs `from`.
 HARD_EDGES: list[tuple[str, str]] = [
+    # §4 Facts: lemmas actually used in their proofs.
+    ("LukPropForm.soundness", "luk_weak_completeness"),
+    ("LukLind.mk_eq_zero_iff", "luk_weak_completeness"),
+    ("luk_weak_completeness", "cl_finite_strong_completeness"),
+    ("LukPropForm.deduction_theorem", "cl_finite_strong_completeness"),
+    ("LukPropForm.semantic_iteration", "cl_finite_strong_completeness"),
+    ("CLPropForm.soundness", "cl_finite_strong_completeness"),
+    ("cl_finite_strong_completeness", "cl_approx_strong_completeness"),
+    ("luk_weak_completeness", "luk_consistent_iff_satisfiable"),
+    ("LukPropForm.deduction_theorem", "luk_consistent_iff_satisfiable"),
+    ("LukPropForm.semantic_iteration", "luk_consistent_iff_satisfiable"),
+    ("LukPropForm.soundness", "luk_consistent_iff_satisfiable"),
+    ("cl_finite_strong_completeness", "cl_consistent_iff_satisfiable"),
+    ("CLPropForm.soundness", "cl_consistent_iff_satisfiable"),
     # Fact 4.1 is used to prove the FOL deduction theorem, the 8.5-style
     # "inconsistent adjoin" cut, and the consistent-adjoin lemmas.
     ("luk_weak_completeness", "deduction_theorem"),
@@ -584,14 +598,9 @@ HARD_EDGES: list[tuple[str, str]] = [
 
 # Soft edges: paper/logical order only. Drawn dashed; do NOT force status.
 SOFT_EDGES: list[tuple[str, str]] = [
-    # Planned algebraic/deductive infrastructure for Facts 4.1 and 4.5
-    # (not yet imported into the official still-sorry statements).
-    ("LukPropForm.soundness", "luk_weak_completeness"),
+    # Propositional infrastructure built for §4 but not on the final proof path
+    # of Facts 4.1 / 4.5 (the used lemmas are hard edges above).
     ("entails_empty_iff_evalMV", "luk_weak_completeness"),
-    ("LukLind.mk_eq_zero_iff", "luk_weak_completeness"),
-    ("LukPropForm.deduction_theorem", "luk_weak_completeness"),
-    ("LukPropForm.semantic_iteration", "luk_weak_completeness"),
-    ("CLPropForm.soundness", "cl_finite_strong_completeness"),
     ("CLPropForm.deduction_theorem", "cl_finite_strong_completeness"),
     ("CLPropForm.semantic_iteration", "cl_finite_strong_completeness"),
     ("substitution_lemma", "bound_substitution_lemma"),
@@ -764,7 +773,7 @@ def build() -> dict:
             "Hard edge B→A: Lean proof of A still needs B — A cannot be done while B is unfinished.",
             "Soft edge B→A: paper-order aspiration only (drawn dashed); does not affect status.",
             "Done = no local sorry and every hard predecessor is done (no unproven→proven).",
-            "§4 axioms are intentional black boxes and stay open until discharged.",
+            "§4 Facts are proved in Lean (Facts 4.2/4.3 with the added premise [Nonempty I]; see README deviations).",
             "Blue = done. Green = open. Grey = blocked.",
             "Regenerate with: python3 scripts/build_holes.py",
             f"Open tips: {', '.join(open_ids) if open_ids else '(none)'}.",

@@ -1,9 +1,10 @@
-# Plan for Facts 4.1 and 4.5
+# Facts 4.1–4.5: development log
 
-The two §4 Facts that still feed the main theorems are left as `sorry` with
-their official statements unchanged. This note records the paper’s wording, the
-Lean, what is already proved, why one Fact does not simply reduce to the other,
-and a size estimate for the remaining work.
+**Status: complete.** All five §4 Facts are proved in Lean (Facts 4.2 and 4.3
+with the added premise `[Nonempty I]`; see the deviations table in README.md).
+No §4 Fact is assumed. This file is the development log kept while proving
+them (originally the plan for Facts 4.1 and 4.5); the "remaining work" sections
+below are historical.
 
 ## Paper wording (verbatim)
 

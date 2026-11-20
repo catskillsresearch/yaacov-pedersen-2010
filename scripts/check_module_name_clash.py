@@ -9,7 +9,7 @@ starts with a name that is also a top-level entry of a Lake dependency package
 package's own name, Palomar verification reports e.g.
 
     the Challenge module's top-level name 'Challenge' is also a top-level entry
-    of the dependency 'MathFin', which is where Verso would look for its source
+    of the dependency '<Dep>', which is where Verso would look for its source
 
 This check reproduces that rule locally. Packages come from lake-manifest.json
 (`dir` for path dependencies, otherwise `<packagesDir>/<name>`).

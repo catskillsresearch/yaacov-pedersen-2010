@@ -12,7 +12,7 @@ os.environ.setdefault("TMPDIR", "/tmp")
 g = json.load(open("holes-graph.json"))
 names = [n["id"] for n in g["nodes"]]
 if not names:
-    print("chart theorems: 0 (scaffold; nothing to audit)")
+    print("chart theorems: 0 (empty chart; nothing to audit)")
     print("OK: empty chart")
     raise SystemExit(0)
 lean = "import ContinuousFOL\nopen ContinuousFOL\n" + "".join(

@@ -4,4 +4,4 @@
 
 **Lemma** (`eval_reduct`). $t^{\mathfrak N|_{\mathcal L},\sigma}=e(t)^{\mathfrak N,\sigma}$ and $\mathfrak N|_{\mathcal L}(\varphi,\sigma)=\mathfrak N(e(\varphi),\sigma)$.
 
-*Proof.* Induction on terms and formulae.
+*Proof.* Terms by induction: variables have the same value on both sides. For $f(t_1,\dots,t_n)$ the reduct interprets $f$ as $\mathfrak N$ interprets $e(f)$, and the arguments agree by the induction hypothesis. Formulae by induction: atomic formulae use the term case and the same convention for relation symbols, and the connectives act on equal values. For $\sup_x\alpha$ both sides are suprema over the same carrier of the values at $\sigma^a_x$, which agree pointwise by the induction hypothesis.

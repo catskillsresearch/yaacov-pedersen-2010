@@ -4,6 +4,8 @@
 
 **Theorem** (`soundness_metric_pre`, `soundness_metric`). If $\Gamma\vdash_Q\varphi$ with the metric axioms, then $\Gamma\models_Q\varphi$ over metric pre-structures and hence $\Gamma\models_{QC}\varphi$ over complete structures.
 
+*Proof.* Induction on the metric derivation. A generalized axiom instance (base or metric) has value $0$ everywhere, because the instance itself does and a generalization of an everywhere-zero formula is zero (Lemma `eval_genList_eq_zero`). A premise is satisfied by assumption. For modus ponens, values $0$ for $\varphi$ and $\psi\dot-\varphi$ force $\psi\le\varphi=0$. A complete structure is in particular a metric pre-structure.
+
 **Theorem** (`soundness_metric_full`, Theorem 7.2). (i) $\Gamma\vdash_Q\varphi$ implies $\Gamma\models_Q\varphi$ and $\Gamma\models_{QC}\varphi$; (ii) if $\Gamma$ is satisfiable, or completely satisfiable, then $\Gamma$ is consistent.
 
 *Proof.* (i) by induction on derivations as before. (ii): in a model the formula $1$ has value $1$, so it is not provable.

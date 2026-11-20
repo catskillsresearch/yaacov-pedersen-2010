@@ -6,6 +6,10 @@
 
 **Lemmas.** From $\vdash\tfrac12\varphi$ infer $\vdash\varphi$, so a proof of $2^{-n}$, or of any dyadic constant with positive value, gives a proof of $1$; $\vdash0\dot-\varphi$. Bound renaming `renameBound` is provably two-way bounded with $\varphi$ and keeps the rank.
 
+*Proof.* From $\vdash\tfrac12\varphi$ and the axiom (A6) $(\varphi\dot-\tfrac12\varphi)\dot-\tfrac12\varphi$, two applications of modus ponens give $\vdash\varphi$. Since $2^{-(n+1)}$ is $\tfrac12\,2^{-n}$, induction on $n$ turns a proof of $2^{-n}$ into a proof of $2^0=1$. For a dyadic constant $d$ with positive value, choose $k$ with $k\,d\ge1$. Then $1\dot-kd$ takes the value $0$ under every valuation, so it is a valid propositional schema and provable by Fact 4.5. Removing the $k$ subtractions with `cancel_iterSub` gives $\vdash1$. The formula $0\dot-\varphi$ is also a valid propositional schema, because its value is $\max(0-\varphi,0)=0$, so it is provable.
+
+For the renaming, induct on $\varphi$. Connectives preserve two-way provable bounds by the congruence schemata. For $\sup_z\alpha$ the induction hypothesis passes under the quantifier. If $z$ itself must be renamed to a fresh $y$, Lemma 8.3 bounds $\sup_z\alpha'$ against $\sup_y\alpha'[y/z]$ in both directions, and transitivity of $\dot-$ combines these bounds. The rank is unchanged because renaming never alters the shape of the formula.
+
 **Theorem** (`maximal_consistent_sup_instantiate`, Lemma 8.11). If $\sup_x\varphi\dot-p\in\Delta$ then for every term $t$ there is $\varphi'\equiv\varphi$ (of the same rank, with $\varphi'[t/x]$ correct) such that $\varphi'[t/x]\dot-p\in\Delta$.
 
 *Proof.* Let $\varphi'$ rename the bound variables of $\varphi$ away from the variables of $t$ and from $x$. Then $\varphi'\equiv\varphi$, $\varphi'[t/x]$ is correct, and $\vdash\varphi'\dot-\varphi$. Generalizing and using (A7): $\vdash\sup_x\varphi'\dot-\sup_x\varphi$, so by (A2) $\Delta\vdash\sup_x\varphi'\dot-p$. (A8) gives $\varphi'[t/x]\dot-\sup_x\varphi'$, and (A2) once more gives $\Delta\vdash\varphi'[t/x]\dot-p$, which lies in $\Delta$ by deductive closure.

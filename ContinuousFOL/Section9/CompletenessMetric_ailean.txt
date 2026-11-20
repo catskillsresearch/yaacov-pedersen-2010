@@ -2,4 +2,6 @@
 
 *Proof.* Take a metric pre-structure model of $\Gamma$ (Henkin) and map it elementarily into its metric completion (Theorem 6.9); the completion is a continuous structure satisfying $\Gamma$.
 
-**Theorems.** Satisfiability in metric pre-structures and complete satisfiability do not depend on the universe, and $\Gamma$ is metrically consistent iff it is completely satisfiable in any universe (completeness plus soundness).
+**Theorems.** Satisfiability in metric pre-structures and complete satisfiability do not depend on the universe, and $\Gamma$ is metrically consistent iff it is completely satisfiable in any universe.
+
+*Proof.* A model in any universe makes $\Gamma$ metrically consistent, by metric soundness. A metrically consistent set has a metric pre-structure model in universe $0$ (Theorem 9.4), whose completion is a complete model in universe $0$ (Corollary 6.11). A model in universe $0$ lifts to any universe. Chaining these implications shows that metric consistency, satisfiability in a metric pre-structure (in any universe) and complete satisfiability (in any universe) are all equivalent.

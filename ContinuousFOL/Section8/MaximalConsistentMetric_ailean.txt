@@ -2,8 +2,12 @@
 
 **Lemma** (`consistentMetricQ_iff`). $\Gamma$ is metrically consistent iff $\Gamma\cup\mathrm{Ax}_{10\text{–}14}$ is consistent in the plain calculus, where $\mathrm{Ax}_{10\text{–}14}$ is the set of generalizations of metric axiom instances.
 
-*Proof.* A metric derivation is a plain derivation that uses metric axioms as premises, and conversely.
+*Proof.* First, $\Gamma\vdash_Q\varphi$ in the metric calculus iff $\Gamma\cup\mathrm{Ax}_{10\text{–}14}\vdash_Q\varphi$ in the plain calculus. This holds by induction on derivations in each direction: a metric axiom step becomes a premise step and vice versa, and all other steps are shared. Consistency means that some formula is not provable, so it transfers through this equivalence.
 
 **Lemmas.** Metric inconsistency iff proving $1$; a proof of $2^{-n}$ gives a proof of $1$; a metrically maximal consistent set is maximal consistent for the plain calculus (plain provability is weaker, so the archimedean clause still holds); and it is deductively closed.
 
-**Theorems.** Lemma 8.6, Theorem 8.10 (Zorn's lemma as before, with metric proof compactness), Lemma 8.11 and Lemma 8.12, all for the metric calculus, with the same proofs as in the plain case.
+*Proof.* The first three are proved exactly as in the plain calculus, using (A6) and induction on $n$. A metrically maximal consistent $\Delta$ is consistent in the plain sense because every plain proof is a metric proof. It is archimedean in the plain sense because plain proofs of $\varphi\dot-2^{-n}$ are metric proofs, and comparability is the same clause. For deductive closure: if $\Delta\vdash\varphi$, then (A1) gives $\Delta\vdash\varphi\dot-2^{-n}$ for every $n$, and the archimedean clause puts $\varphi$ in $\Delta$.
+
+**Theorems.** Lemma 8.6, Theorem 8.10 (Zorn's lemma as before, with metric proof compactness), Lemma 8.11 and Lemma 8.12, all for the metric calculus.
+
+*Proof.* Theorem 8.10 is reduced to the plain case. $\Gamma\cup\mathrm{Ax}_{10\text{–}14}$ is plainly consistent, so the plain Theorem 8.10 extends it to a maximal consistent $\Delta$. Because $\Delta$ contains the metric axioms, metric and plain provability from $\Delta$ coincide, and $\Delta$ is metrically maximal consistent. Lemmas 8.11 and 8.12 follow from their plain versions applied to $\Delta$, which is plainly maximal consistent by the previous lemma; equivalence is weakened to metric equivalence where needed. Lemma 8.6 repeats the plain argument with the metric adjunction lemmas. A maximal element satisfies the archimedean and comparability clauses because adjoining the relevant formula keeps consistency. Conversely, if $\Delta\subsetneq\Gamma'$ with $\varphi\in\Gamma'$ consistent, comparability with $2^{-n}$ either gives $\varphi\dot-2^{-n}\in\Delta$ for every $n$, so $\varphi\in\Delta$ by the archimedean clause, or gives $\Gamma'\vdash2^{-n}$ and hence $\Gamma'\vdash1$, which is impossible.

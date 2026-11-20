@@ -1,5 +1,7 @@
 **Lemmas** (bookkeeping). Replacing $c$ by $y$ does nothing if $c$ does not occur; it adds at most $y$ to the (free, all) variables; it commutes with free substitution of other variables; and replacing $c$ by $y$ and then $y$ by $x$ equals replacing $c$ by $x$, when $y$ was absent.
 
+*Proof.* Each statement is proved first for terms, by induction on the term, and then for formulae, by induction on the formula. Every term or formula constructor is rebuilt from the replaced parts, so each step is immediate from the induction hypotheses. The only real content is in the leaves. An occurrence of $c$ becomes $y$; a variable is left unchanged; and if $y$ does not occur, the variable $y$ produced by the first replacement is exactly what the second replacement turns into $x$.
+
 **Lemma** (`BaseAxiomSchema.substConstVar`). If $\psi$ is an instance of (A1)–(A9) and $y\notin\mathrm{AV}(\psi)$, then $\psi[y/c]$ is again an instance.
 
 *Proof.* Case by case; for (A8) and (A9) the side conditions (correctness, non-freeness) are preserved because $y$ is new.

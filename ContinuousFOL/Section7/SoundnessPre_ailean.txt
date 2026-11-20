@@ -1,6 +1,6 @@
 **Lemma** (`eval_genList_eq_zero`). If $\psi$ has value $0$ under every assignment in $\mathfrak M$, so does every generalization of $\psi$.
 
-*Proof.* Induction on the list: a supremum of zeros is zero.
+*Proof.* Induction on the list of variables. If $\chi$ is zero under every assignment, then the value of $\sup_x\chi$ at any $\sigma$ is the supremum of the values of $\chi$ at the assignments $\sigma^a_x$. All of these values are $0$, so the supremum is $0$.
 
 **Lemma** (`baseAxiom_eval_zero`). Every instance of (A1)–(A9) has value $0$ in every pre-structure under every assignment.
 
@@ -12,4 +12,4 @@
 
 **Theorem** (`satisfiable_consistent_pre`, Theorem 7.2(ii)). A satisfiable $\Gamma$ is consistent.
 
-*Proof.* The constant $1$ has value $1$ in the model, so by soundness it is not provable.
+*Proof.* Take a model of $\Gamma$. The formula $1$ has value $1$ in it, not $0$, so by soundness $\Gamma\not\vdash1$. Since some formula is unprovable, $\Gamma$ is consistent.

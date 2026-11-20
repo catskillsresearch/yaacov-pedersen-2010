@@ -1,6 +1,6 @@
 **Lemma** (`deduction_schema_real`). For reals $a,b,c\ge0$ and $n,m$: $\big((b\dot-(n+m)a)\dot-((b\dot-c)\dot-na)\big)\dot-(c\dot-ma)=0$.
 
-*Proof.* Unfold the iterated subtractions as $\max(x-ka,0)$ and check the cases.
+*Proof.* For $a\ge0$, subtracting $a$ $k$ times truncates once: $x\dot-ka=\max(x-ka,0)$. With $u=(b\dot-c)\dot-na$ and $v=c\dot-ma$ we must show $b\dot-(n+m)a\le u+v$. If $b\le(n+m)a$ the left side is $0$. Otherwise $b-(n+m)a=(b-c-na)+(c-ma)$, and each summand is at most the corresponding truncated value $u$ or $v$, because $u\ge b-c-na$ and $v\ge c-ma$. In every case the outer truncated subtraction is $0$.
 
 **Definition** (`LukPropForm.toFormula`). Substituting first-order formulae for the variables of a Łukasiewicz formula.
 
@@ -10,7 +10,7 @@
 
 **Lemma** (`cancel_iterSub`). If $\Gamma\vdash\psi$ and $\Gamma\vdash\varphi\dot-n\psi$ then $\Gamma\vdash\varphi$.
 
-*Proof.* Induction on $n$: from $\psi$ and $(\varphi\dot-k\psi)\dot-\psi$ modus ponens removes one subtraction at a time.
+*Proof.* Induction on $n$. For $n=0$ the hypothesis is $\Gamma\vdash\varphi$. For $n+1$ the hypothesis is $\Gamma\vdash(\varphi\dot-n\psi)\dot-\psi$. Together with $\Gamma\vdash\psi$, modus ponens gives $\Gamma\vdash\varphi\dot-n\psi$, and the induction hypothesis gives $\Gamma\vdash\varphi$.
 
 **Theorem** (`deduction_theorem`, Theorem 8.1). $\Gamma\cup\{\psi\}\vdash_Q\varphi$ iff $\Gamma\vdash_Q\varphi\dot-n\psi$ for some $n$.
 

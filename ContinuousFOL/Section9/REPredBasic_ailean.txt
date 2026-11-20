@@ -1,5 +1,7 @@
 **Lemma** (normal form). A predicate $p$ on a primcodable type is r.e. iff $p(a)\iff\exists n\ q(a,n)$ for some computable Boolean $q$.
 
+*Proof.* This is Kleene's normal form. If $p$ is r.e., it is the domain of a partial computable function, and $q(a,n)$ says that the computation on input $a$ halts within $n$ steps, which is decidable. Conversely, if $p(a)$ holds iff some $n$ has $q(a,n)$, the unbounded search for such an $n$ is a partial computable function whose domain is $p$.
+
 **Lemmas** (closure). R.e. predicates are closed under computable precomposition, $\vee$, $\wedge$, existential quantification over a primcodable type, and bounded universal quantification. Computable predicates are closed under $\wedge$, $\vee$, precomposition, equality of computable functions, bounded $\forall$ and $\exists$, and quantification over the members of a list.
 
 *Proof.* Standard: dovetail the search for witnesses through the pairing function, and decide bounded quantifiers by a primitive recursive loop.

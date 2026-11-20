@@ -1,6 +1,6 @@
 **Lemma** (`eval_of_genList`). If a generalization $\sup_{x_1}\cdots\sup_{x_n}\psi$ has value $0$ at $\sigma$, then $\psi$ has value $0$ at every assignment that agrees with $\sigma$ off $x_1,\dots,x_n$.
 
-*Proof.* Each supremum is $0$ only if all its instances are $0$ (values are nonnegative).
+*Proof.* Induction on the list $x_1,\dots,x_n$. The value of $\sup_{x_1}\chi$ at $\sigma$ is the supremum of the values of $\chi$ at the updated assignments $\sigma^a_{x_1}$. Since values are nonnegative, this supremum is $0$ only if every one of these values is $0$. So $\sup_{x_2}\cdots\sup_{x_n}\psi$ has value $0$ at every $\sigma^a_{x_1}$, and the induction hypothesis applies to each of them. An assignment that agrees with $\sigma$ off $x_1,\dots,x_n$ arises from $\sigma$ by updating these variables one at a time.
 
 **Definition** (`ofMetricAxioms`). If a pre-structure $\mathfrak N$ and an assignment satisfy every generalization of every instance of (A1)–(A14), then $\mathfrak N$ is a metric pre-structure.
 

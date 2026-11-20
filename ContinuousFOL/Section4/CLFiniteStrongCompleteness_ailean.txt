@@ -1,3 +1,3 @@
 **Theorem** (`cl_finite_strong_completeness`). For a finite set $\Sigma$ of continuous propositional formulae and any $\varphi$, $\Sigma\models\varphi$ iff $\Sigma\vdash\varphi$.
 
-*Proof.* This is `entails_finset_iff_provable` of the reduction module.
+*Proof.* The module that reduces continuous logic to Łukasiewicz logic (`CLFromLuk`) proves exactly this equivalence for finite premise sets, as `entails_finset_iff_provable`. The present theorem restates that result in the paper's notation.

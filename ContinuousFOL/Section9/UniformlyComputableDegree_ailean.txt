@@ -1,6 +1,10 @@
 **Lemma** (unbounded search). If $p$ is computable and for every $a$ some $n$ has $p(a,n)$, then the least such $n$ is a computable function of $a$.
 
+*Proof.* Test $p(a,0),p(a,1),\dots$ in turn and stop at the first success. This search is a partial computable function, and it is total because some $n$ always succeeds.
+
 **Lemma** (rounding). For $N\ge1$ there is an integer $\mathrm{approx}(k,N,n)$, computable from $k,N,n$, with $|k/2^N-\mathrm{approx}(k,N,n)/2^n|\le2^{-(n+1)}$.
+
+*Proof.* Take $\mathrm{approx}(k,N,n)$ to be the integer nearest to $k\,2^n/2^N$. It is computed from $k,N,n$ by integer arithmetic. Its distance from $k\,2^n/2^N$ is at most $\tfrac12$, and dividing by $2^n$ gives the bound.
 
 **Construction.** Given the code of a sentence $\varphi$ and $n$, let $\bar\varphi$ be its sup-closure and $\varepsilon=2^{-(n+2)}$. A *good witness* consists of a dyadic $d=k/2^N$ ($1\le N$, $k\le2^N$) and stages $s,t$ at which the proof enumeration from $\mathrm{Ax}$ has produced proofs of $((\bar\varphi\dot-d)\dot-\varepsilon)\dot-\varepsilon$ and $((d\dot-\bar\varphi)\dot-\varepsilon)\dot-\varepsilon$. Goodness is decidable; on non-codes, accept the trivial witness.
 

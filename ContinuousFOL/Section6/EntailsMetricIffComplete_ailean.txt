@@ -4,4 +4,4 @@
 
 **Theorem** (`satisfiable_metric_iff_complete`). $\Gamma$ is satisfiable in a metric pre-structure iff it is completely satisfiable.
 
-*Proof.* Push a model forward along the elementary morphism into its completion; the converse is trivial.
+*Proof.* Suppose $\mathfrak M,\sigma$ satisfies $\Gamma$ in a metric pre-structure. The completion map $\mathfrak M\to\widehat{\mathfrak M}$ is an L-morphism into a complete structure that preserves formula values. So $\widehat{\mathfrak M}$, with the assignment $\sigma$ followed by this map, gives every member of $\Gamma$ value $0$. Conversely, a complete structure is a metric pre-structure.

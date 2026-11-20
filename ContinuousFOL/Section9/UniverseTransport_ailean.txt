@@ -1,9 +1,15 @@
 **Lemma.** Degrees of truth are nonnegative.
 
+*Proof.* A degree of truth is the supremum of a set of formula values, all of which lie in $[0,1]$. If the set is empty its supremum is $0$ by convention. Otherwise it contains a nonnegative number and is bounded above by $1$, so its supremum is at least that number.
+
 **Theorem** (`degreeOfTruthPre_eq_universe` and variants). $\varphi^\circ_\Gamma$ computed in universe $u$ equals $\varphi^\circ_\Gamma$ computed in universe $0$; likewise for metric pre-structures and complete structures.
 
 *Proof.* Every universe-$0$ model lifts to universe $u$ with the same values, so the universe-$0$ supremum is at most the universe-$u$ one. Conversely, suppose some model in universe $u$ gives $\varphi$ a value $r$ above the universe-$0$ supremum $s$. Choose a dyadic $p$ with $s<p<r$. Then $\Gamma\cup\{p\dot-\varphi\}$ is satisfiable in universe $u$, hence (satisfiability does not depend on the universe) in universe $0$, by a model in which $\varphi\ge p>s$, a contradiction. Empty sets of models are handled by the same argument, since then both suprema are $0$.
 
-**Lemma** (`entailsPre_iff_degree_eq_zero` and variants). $\Gamma\models\varphi$ iff $\varphi^\circ_\Gamma=0$ (values are nonnegative and bounded by the supremum).
+**Lemma** (`entailsPre_iff_degree_eq_zero` and variants). $\Gamma\models\varphi$ iff $\varphi^\circ_\Gamma=0$.
 
-**Theorems.** Hence entailment, and being a complete theory, are independent of the universe.
+*Proof.* If every model of $\Gamma$ gives $\varphi$ the value $0$, the set of values is empty or $\{0\}$, and either way its supremum is $0$. Conversely, if the supremum is $0$, every value is at most $0$, and since values are nonnegative every value is $0$.
+
+**Theorems.** The degree of truth, and hence entailment and being a complete theory, are independent of the universe.
+
+*Proof.* Compare the suprema $S_u$ (models in universe $u$) and $S_0$. Suppose a model in universe $u$ gave $\varphi$ a value $r>\sup S_0$. Choose a dyadic $p$ with $\sup S_0<p\le r$. That model satisfies $\Gamma\cup\{p\dot-\varphi\}$. Since satisfiability does not depend on the universe, so does a model in universe $0$, and there $\varphi$ has value at least $p>\sup S_0$, which is a contradiction. The reverse inequality is symmetric. Entailment is "degree of truth $=0$" by the previous lemma, so it is universe-independent too. For complete theories: let $T$ be the set of sentences true in a complete structure $\mathfrak M$ (in universe $u$), and let $T'$ be the set of all formulae with value $0$ in $\mathfrak M$. $T'$ is completely satisfiable, so it has a complete model $\mathfrak N$ in universe $0$, and every sentence of $T$ is true in $\mathfrak N$. Conversely, suppose a sentence $\psi$ is true in $\mathfrak N$ but has a positive value in $\mathfrak M$. Choose a dyadic $p>0$ below that value. Then $p\dot-\psi$ has value $0$ in $\mathfrak M$, so it lies in $T'$ and has value $0$ in $\mathfrak N$, which forces $\psi\ge p>0$ in $\mathfrak N$. This is a contradiction, so $T$ is the theory of $\mathfrak N$. The converse direction lifts the model from universe $0$.

@@ -1,5 +1,7 @@
 **Lemma** (`mono`). If $\Gamma\subseteq\Gamma'$ and $\Gamma\vdash_Q\varphi$ then $\Gamma'\vdash_Q\varphi$.
 
+*Proof.* Induction on the derivation from $\Gamma$. Axiom and modus-ponens steps are unchanged, and a premise from $\Gamma$ is also a premise from $\Gamma'$.
+
 **Lemma** (`compact`). If $\Gamma\vdash_Q\varphi$ there is a finite $\Gamma_0\subseteq\Gamma$ with $\Gamma_0\vdash_Q\varphi$.
 
 *Proof.* Both by induction on the derivation; for finiteness take the union of the finite sets used by the two premises of each modus ponens step.

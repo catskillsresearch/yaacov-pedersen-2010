@@ -73,8 +73,8 @@ status:
     8.2–8.6, Remark 8.9, Theorem 8.10, Lemmas 8.11–8.12; Proposition 9.2, Theorem 9.4, Completeness (Theorem
     9.5), Corollaries 9.6, 9.8, 9.11 and 9.12. The ContinuousFOL library is sorry-free and declares no
     Lean `axiom`; every listed theorem depends only on propext, Classical.choice and Quot.sound (some
-    on a subset). The only `sorry`s in the repository are the intended statement stubs in ContinuousFOLComparator/Challenge.lean
-    (the comparator Challenge), whose proofs are in ContinuousFOLComparator/Solution.lean. The proof chart
+    on a subset). The only `sorry`s in the repository are the intended statement stubs in Challenge.lean
+    (the comparator Challenge), whose proofs are in Solution.lean. The proof chart
     (scripts/build_holes.py → HOLES.md) has 75 nodes, all done. Facts 4.2 and 4.3 carry one added premise
     ([Nonempty I]); see fidelity.divergences.'
   sorry_count: 0

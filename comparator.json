@@ -1,6 +1,6 @@
 {
-  "challenge_module": "ContinuousFOLComparator.Challenge",
-  "solution_module": "ContinuousFOLComparator.Solution",
+  "challenge_module": "Challenge",
+  "solution_module": "Solution",
   "theorem_names": [
     "ContinuousFOL.soundness_pre",
     "ContinuousFOL.soundness_metric_full",

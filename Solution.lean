@@ -10,8 +10,8 @@ public import ContinuousFOL
 # Palomar Solution
 
 Imports the `ContinuousFOL/` library. The comparator matches the compared
-declarations named in `ContinuousFOLComparator/Challenge.lean` /
-`comparator.json` against these proved definitions and theorems:
+declarations named in `Challenge.lean` / `comparator.json` against these
+proved definitions and theorems:
 
 * Theorem 7.2: `soundness_pre`, `soundness_metric_full`
 * Theorem 9.4: `henkin_model_existence`, `henkin_model_existence_metric`

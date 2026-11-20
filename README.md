@@ -15,7 +15,7 @@ Palomar Registration: TBD. See `PROVENANCE.md`.
 
 ```bash
 lake exe cache get          # fetch Mathlib build cache (optional, recommended)
-lake build                  # default targets: ContinuousFOL, ContinuousFOLChallenge, ContinuousFOLSolution
+lake build                  # default targets: ContinuousFOL, Challenge, Solution
 python3 scripts/build_holes.py   # regenerate the proof board (HOLES.md, holes-graph.json, holes.html)
 ```
 
@@ -30,7 +30,7 @@ Toolchain: Lean `v4.35.0` (see `lean-toolchain`), Mathlib pin in `lakefile.toml`
 | `ContinuousFOL/<Topic>/*.lean` | Lean library, one folder per topic (e.g. `Essentials/`, `Completeness/`); the writeup maps modules to the paper's §§1–9 |
 | `ContinuousFOL.lean` | Library root (imports every module) |
 | `ContinuousFOL.md` | Paper-facing writeup root (table of contents) |
-| `ContinuousFOLComparator/` | Palomar Challenge / Solution pair |
+| `Challenge.lean` / `Solution.lean` | Palomar Challenge / Solution pair |
 | `docs/` | Design notes (Corollary 9.11 presentation; development log for §4 Facts) |
 
 See `docs/recursive-presentation-cor-9.11.md` for why `RecursivePresentation` includes a computable sup-closure on formula codes (Corollary 9.11 / “countable, recursive language”).
@@ -43,7 +43,7 @@ including the §4 propositional Facts (proved, not assumed). The `ContinuousFOL`
 library is `sorry`-free and declares no `axiom`; all results depend only on
 `propext`, `Classical.choice` and `Quot.sound`. The only `sorry`s in the
 repository are the intended statement stubs in
-`ContinuousFOLComparator/Challenge.lean`, proved in `Solution.lean`. The proof
+`Challenge.lean`, proved in `Solution.lean`. The proof
 board (`HOLES.md`) has 75 nodes, all done. One paper statement carries an added
 premise (Facts 4.2/4.3, see the deviations table below). Full machine-readable
 list of results, files, axioms and verbatim paper quotes: `formalization.yaml`
@@ -115,8 +115,8 @@ mapped to LaTeX, and a BibTeX bibliography.
 
 | File | Role |
 |------|------|
-| [`ContinuousFOLComparator/Challenge.lean`](ContinuousFOLComparator/Challenge.lean) | Mathlib-only statement of record (`sorry` holes) |
-| [`ContinuousFOLComparator/Solution.lean`](ContinuousFOLComparator/Solution.lean) | Imports `ContinuousFOL/` |
+| [`Challenge.lean`](Challenge.lean) | Statement of record (`sorry` holes) |
+| [`Solution.lean`](Solution.lean) | Imports `ContinuousFOL/` |
 | [`comparator.json`](comparator.json) | Compared theorems / definitions |
 | [`formalization.yaml`](formalization.yaml) | v0.4 self-report |
 | [`PROVENANCE.md`](PROVENANCE.md) | Authorship; source-author non-involvement |
@@ -125,7 +125,7 @@ mapped to LaTeX, and a BibTeX bibliography.
 
 ```bash
 bash scripts/palomar_preflight.sh   # Palomar packaging checks
-lake build ContinuousFOLChallenge ContinuousFOLSolution
+lake build Challenge Solution
 ```
 
 Itaï Ben Yaacov and Arthur Paul Pedersen did not participate in or endorse this

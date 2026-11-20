@@ -35,9 +35,8 @@ files, axioms and verbatim paper quotes is in `formalization.yaml`
 (`status.main_results`, `alignment.statements`). Packaging:
 
 - Compared declarations live in namespace `ContinuousFOL`.
-- `ContinuousFOLComparator/Challenge.lean` is a Mathlib-only statement file
-  (deliberate `sorry` holes).
-- `ContinuousFOLComparator/Solution.lean` imports the `ContinuousFOL/` library.
+- `Challenge.lean` is the statement-of-record file (deliberate `sorry` holes).
+- `Solution.lean` imports the `ContinuousFOL/` library.
 
 **Project rule: no Lean `axiom`.** Compared Solution proofs use only `propext`,
 `Quot.sound`, and `Classical.choice`.
@@ -46,7 +45,7 @@ files, axioms and verbatim paper quotes is in `formalization.yaml`
 
 Proofs use Mathlib (Lake pin in `lakefile.toml` / `lake-manifest.json`). No
 project-defined `axiom`s. Intentional challenge stubs in
-`ContinuousFOLComparator/Challenge.lean` are unchanged by library completion.
+`Challenge.lean` are unchanged by library completion.
 
 ## AI assistance
 

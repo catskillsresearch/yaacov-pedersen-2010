@@ -1,5 +1,5 @@
 name = "yaacov-pedersen-2010"
-defaultTargets = ["ContinuousFOL", "ContinuousFOLChallenge", "ContinuousFOLSolution"]
+defaultTargets = ["ContinuousFOL", "Challenge", "Solution"]
 
 [leanOptions]
 pp.unicode.fun = true
@@ -16,9 +16,9 @@ name = "ContinuousFOL"
 globs = ["ContinuousFOL", "ContinuousFOL.+"]
 
 [[lean_lib]]
-name = "ContinuousFOLChallenge"
-roots = ["ContinuousFOLComparator.Challenge"]
+name = "Challenge"
+roots = ["Challenge"]
 
 [[lean_lib]]
-name = "ContinuousFOLSolution"
-roots = ["ContinuousFOLComparator.Solution"]
+name = "Solution"
+roots = ["Solution"]

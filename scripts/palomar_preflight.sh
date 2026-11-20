@@ -53,7 +53,7 @@ else
 fi
 
 # Build first: the type comparison reads the built Challenge/Solution oleans.
-step "Build Lean project (ContinuousFOL + ContinuousFOLComparator Challenge/Solution)"
+step "Build Lean project (ContinuousFOL + Challenge/Solution)"
 lake build
 
 # Palomar/Verso rejects a Challenge or Solution module whose top-level name is
@@ -70,7 +70,7 @@ fi
 
 if toolkit="$(find_toolkit "$ROOT")"; then
   step "Shared palomar-preflight toolkit"
-  SORRY_PATHS="ContinuousFOL ContinuousFOLComparator/Solution.lean"
+  SORRY_PATHS="ContinuousFOL Solution.lean"
   if bash "$toolkit/palomar_preflight.sh" --help 2>&1 | grep -q -- '--project-root'; then
     bash "$toolkit/palomar_preflight.sh" \
       --project-root "$ROOT" \

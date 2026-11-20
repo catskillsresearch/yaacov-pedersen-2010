@@ -60,7 +60,7 @@ they occur.
 All direct and transitive Lake repositories, with their pinned revisions, are
 credited in the bibliography
 [@gh-plausible; @gh-leansearchclient; @gh-importgraph; @gh-proofwidgets; @gh-aesop; @gh-qq; @gh-batteries; @gh-cli];
-the exact full hashes are in `lake-manifest.json` and `vendor/SOURCES`.
+the exact full hashes are in `lake-manifest.json`.
 
 Challenge/Solution packaging follows the scott_models and nowakowska1982
 repositories [@gh-scott-models; @gh-nowakowska1982], using the Palomar policy,

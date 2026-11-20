@@ -84,6 +84,57 @@ lemma not_imp_imp {ι : Type*} {Γ : Set (LukPropForm ι)} (φ ψ : LukPropForm 
     Provable Γ (Imp (.neg φ) (Imp φ ψ)) :=
   imp_trans (ax0 (.A1 (.neg φ) (.neg ψ))) (ax0 (.A4 ψ φ))
 
+/-- From (A2) and ex-falso: `((φ → ψ) → χ) → (¬φ → χ)`. -/
+lemma imp_neg_ante {ι : Type*} {Γ : Set (LukPropForm ι)} (φ ψ χ : LukPropForm ι) :
+    Provable Γ (Imp (Imp (Imp φ ψ) χ) (Imp (.neg φ) χ)) :=
+  imp_mp (not_imp_imp (Γ := Γ) φ ψ) (ax0 (.A2 (.neg φ) (Imp φ ψ) χ))
+
+/-- From permutation and (A4): `ψ → ((¬φ → ¬ψ) → φ)`. -/
+lemma imp_contrapose_ante {ι : Type*} {Γ : Set (LukPropForm ι)} (φ ψ : LukPropForm ι) :
+    Provable Γ (Imp ψ (Imp (Imp (.neg φ) (.neg ψ)) φ)) :=
+  imp_mp (imp_contrapose_conv (Γ := Γ) φ ψ)
+    (imp_perm_schema (Imp (.neg φ) (.neg ψ)) ψ φ)
+
+/-- Double-negation elimination: `⊢ ¬¬φ → φ`. -/
+lemma dn_elim {ι : Type*} {Γ : Set (LukPropForm ι)} (φ : LukPropForm ι) :
+    Provable Γ (Imp (.neg (.neg φ)) φ) := by
+  -- Any (A1) instance can play the role of `ψ` in `imp_contrapose_ante`.
+  let weak : LukPropForm ι := Imp φ (Imp φ φ)
+  have hseed : Provable Γ (Imp (Imp (.neg φ) (.neg weak)) φ) :=
+    imp_mp (ax0 (.A1 φ φ)) (imp_contrapose_ante (Γ := Γ) φ weak)
+  exact imp_mp hseed (imp_neg_ante (Γ := Γ) (.neg φ) (.neg weak) φ)
+
+/-- Double-negation introduction: `⊢ φ → ¬¬φ`. -/
+lemma dn_intro {ι : Type*} {Γ : Set (LukPropForm ι)} (φ : LukPropForm ι) :
+    Provable Γ (Imp φ (.neg (.neg φ))) :=
+  imp_mp (dn_elim (Γ := Γ) (.neg φ)) (imp_contrapose_conv (.neg (.neg φ)) φ)
+
+lemma ProvableEq.neg_neg {ι : Type*} (φ : LukPropForm ι) :
+    ProvableEq (.neg (.neg φ)) φ :=
+  ⟨dn_elim (Γ := ∅) φ, dn_intro (Γ := ∅) φ⟩
+
+/-- Direct contraposition: `(φ → ψ) → (¬ψ → ¬φ)`. -/
+lemma imp_contrapose {ι : Type*} {Γ : Set (LukPropForm ι)} (φ ψ : LukPropForm ι) :
+    Provable Γ (Imp (Imp φ ψ) (Imp (.neg ψ) (.neg φ))) := by
+  -- From `φ → ψ` and DN, get `¬¬φ → ¬¬ψ`, then (A4) yields `¬ψ → ¬φ`.
+  have h : Provable Γ
+      (Imp (Imp (.neg (.neg φ)) (.neg (.neg ψ))) (Imp (.neg ψ) (.neg φ))) :=
+    imp_contrapose_conv (Γ := Γ) (.neg φ) (.neg ψ)
+  -- suffix: (φ → ψ) → ((¬¬φ → φ) → (¬¬φ → ψ)), then to (¬¬φ → ¬¬ψ) via intro.
+  have h₁ : Provable Γ (Imp (Imp φ ψ) (Imp (Imp (.neg (.neg φ)) φ) (Imp (.neg (.neg φ)) ψ))) :=
+    imp_suffix φ ψ (.neg (.neg φ))
+  have h₂ : Provable Γ (Imp (Imp φ ψ) (Imp (.neg (.neg φ)) ψ)) :=
+    imp_mp (dn_elim (Γ := Γ) φ) (imp_perm h₁)
+  have h₃ : Provable Γ
+      (Imp (Imp (.neg (.neg φ)) ψ) (Imp (.neg (.neg φ)) (.neg (.neg ψ)))) :=
+    imp_mp (dn_intro (Γ := Γ) ψ) (imp_suffix ψ (.neg (.neg ψ)) (.neg (.neg φ)))
+  exact imp_trans (imp_trans h₂ h₃) h
+
+lemma ProvableEq.neg_congr {ι : Type*} {φ ψ : LukPropForm ι}
+    (h : ProvableEq φ ψ) : ProvableEq (.neg φ) (.neg ψ) :=
+  ⟨imp_mp h.2 (imp_contrapose (Γ := ∅) ψ φ),
+    imp_mp h.1 (imp_contrapose (Γ := ∅) φ ψ)⟩
+
 lemma ProvableEq.tsub_congr_left {ι : Type*} {φ φ' α : LukPropForm ι}
     (h : ProvableEq φ φ') : ProvableEq (φ.tsub α) (φ'.tsub α) :=
   ⟨imp_mp h.1 (imp_tsub_left φ φ' α), imp_mp h.2 (imp_tsub_left φ' φ α)⟩
@@ -96,6 +147,45 @@ lemma ProvableEq.tsub_congr {ι : Type*} {φ φ' α α' : LukPropForm ι}
     (hφ : ProvableEq φ φ') (hα : ProvableEq α α') :
     ProvableEq (φ.tsub α) (φ'.tsub α') :=
   (hφ.tsub_congr_left).trans (hα.tsub_congr_right)
+
+/-- Subtracting a theorem does nothing: if `⊢ α` then `β ∸ α ≡ β`. -/
+lemma ProvableEq.tsub_of_theorem {ι : Type*} {β α : LukPropForm ι}
+    (hα : Provable ∅ α) : ProvableEq (β.tsub α) β := by
+  refine ⟨?_, ?_⟩
+  · -- `⊢ α → ((β ∸ α) → β)`, from `⊢ α → (α ∨ β)`.
+    exact imp_mp hα (imp_or (Γ := ∅) α β)
+  · -- `⊢ β → (α → β)` is (A1).
+    exact ax0 (.A1 β α)
+
+/-- Every formula implies a theorem: `⊢ φ → (ψ ∸ ψ)`. -/
+lemma imp_theorem {ι : Type*} {Γ : Set (LukPropForm ι)} (φ ψ : LukPropForm ι) :
+    Provable Γ (Imp φ (ψ.tsub ψ)) :=
+  imp_mp (imp_refl (Γ := Γ) ψ) (ax0 (.A1 (ψ.tsub ψ) φ))
+
+/-- MV-addition at the formula level: `φ ⊕ ψ := ¬(ψ → ¬φ) = ¬(¬φ ∸ ψ)`. -/
+def mvadd {ι : Type*} (φ ψ : LukPropForm ι) : LukPropForm ι :=
+  LukPropForm.neg ((LukPropForm.neg φ).tsub ψ)
+
+lemma ProvableEq.mvadd_congr {ι : Type*} {φ φ' ψ ψ' : LukPropForm ι}
+    (hφ : ProvableEq φ φ') (hψ : ProvableEq ψ ψ') :
+    ProvableEq (mvadd φ ψ) (mvadd φ' ψ') := by
+  simpa [mvadd] using (hφ.neg_congr.tsub_congr hψ).neg_congr
+
+/-- `φ ⊕ 0 ≡ φ`, where `0` is any theorem. -/
+lemma ProvableEq.mvadd_tsub_self {ι : Type*} (φ ψ : LukPropForm ι) :
+    ProvableEq (mvadd φ (ψ.tsub ψ)) φ := by
+  simpa [mvadd] using
+    ((ProvableEq.tsub_of_theorem (β := LukPropForm.neg φ) (provable_tsub_self ψ)).neg_congr).trans
+      (ProvableEq.neg_neg φ)
+
+/-- `φ ⊕ 1 ≡ 1`, where `1 = ¬0` and `0` is any theorem. -/
+lemma ProvableEq.mvadd_neg_tsub_self {ι : Type*} (φ ψ : LukPropForm ι) :
+    ProvableEq (mvadd φ (LukPropForm.neg (ψ.tsub ψ))) (LukPropForm.neg (ψ.tsub ψ)) := by
+  -- `⊢ φ → 0`, so by contraposition `⊢ ¬0 → ¬φ`, i.e. `⊢ ¬φ ∸ ¬0`.
+  have h : Provable ∅ ((LukPropForm.neg φ).tsub (LukPropForm.neg (ψ.tsub ψ))) :=
+    imp_mp (imp_theorem (Γ := ∅) φ ψ) (imp_contrapose (Γ := ∅) φ (ψ.tsub ψ))
+  simpa [mvadd] using
+    (ProvableEq.of_provable h (provable_tsub_self ψ)).neg_congr
 
 end LukPropForm
 
@@ -129,6 +219,20 @@ theorem mk_eq_id_iff {ι : Type*} (φ ψ : LukPropForm ι) :
   rw [mk_eq_iff]
   exact ProvableEq.iff_provable
 
+def neg {ι : Type*} : LukLind ι → LukLind ι :=
+  Quotient.lift (fun φ => mk (LukPropForm.neg φ)) fun _φ _ψ h =>
+    (mk_eq_iff).2 (ProvableEq.neg_congr h)
+
+def add {ι : Type*} : LukLind ι → LukLind ι → LukLind ι :=
+  Quotient.lift₂ (fun φ ψ => mk (mvadd φ ψ)) fun _φ _ψ _φ' _ψ' hφ hψ =>
+    (mk_eq_iff).2 (ProvableEq.mvadd_congr hφ hψ)
+
+lemma neg_mk {ι : Type*} (φ : LukPropForm ι) : neg (mk φ) = mk (LukPropForm.neg φ) :=
+  rfl
+
+lemma add_mk {ι : Type*} (φ ψ : LukPropForm ι) : add (mk φ) (mk ψ) = mk (mvadd φ ψ) :=
+  rfl
+
 variable {ι : Type*} [Inhabited (LukPropForm ι)]
 
 /-- Zero is the class of theorems. The representative is `default ∸ default`. -/
@@ -155,6 +259,26 @@ theorem mk_eq_zero_iff (φ : LukPropForm ι) :
   · intro hφ
     rw [zero_eq_mk_tsub_self φ]
     exact mk_eq_of_provable hφ (provable_tsub_self φ)
+
+lemma add_zero (x : LukLind ι) : add x 0 = x := by
+  refine Quotient.inductionOn x fun φ => ?_
+  change add (mk φ) (mk ((default : LukPropForm ι).tsub default)) = mk φ
+  rw [add_mk]
+  exact (mk_eq_iff).2 (ProvableEq.mvadd_tsub_self φ (default : LukPropForm ι))
+
+omit [Inhabited (LukPropForm ι)] in
+lemma neg_neg (x : LukLind ι) : neg (neg x) = x := by
+  refine Quotient.inductionOn x fun φ => ?_
+  change neg (neg (mk φ)) = mk φ
+  rw [neg_mk, neg_mk]
+  exact (mk_eq_iff).2 (ProvableEq.neg_neg φ)
+
+lemma add_neg_zero (x : LukLind ι) : add x (neg 0) = neg 0 := by
+  refine Quotient.inductionOn x fun φ => ?_
+  change add (mk φ) (neg (mk ((default : LukPropForm ι).tsub default))) =
+    neg (mk ((default : LukPropForm ι).tsub default))
+  rw [neg_mk, add_mk]
+  exact (mk_eq_iff).2 (ProvableEq.mvadd_neg_tsub_self φ (default : LukPropForm ι))
 
 end LukLind
 

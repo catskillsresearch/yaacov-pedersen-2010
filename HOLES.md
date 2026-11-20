@@ -2,7 +2,7 @@
 
 Inventory of paper-facing Lean holes, ordered **prove-first**.
 
-**Updated:** 2026-11-19T23:37:13Z
+**Updated:** 2026-11-20T10:31:59Z
 **Holes:** 37 open+blocked · 5 open · 32 blocked · 38 done.
 
 **Live board:** [`holes.html`](holes.html) (graph embedded; open the file directly).
@@ -50,7 +50,7 @@ python3 scripts/build_holes.py   # refreshes HOLES.md, holes-graph.json, embeds 
 | open | `cl_approx_strong_completeness` | Fact 4.4 CL approx | `ContinuousFOL/BlackBox/CLApproxStrongCompleteness.lean:27` |
 | open | `cl_finite_strong_completeness` | Fact 4.5 CL finite | `ContinuousFOL/BlackBox/CLFiniteStrongCompleteness.lean:21` |
 | done | `entails_empty_iff_evalMV` | MV eval on [0,1] | `ContinuousFOL/LukasiewiczAndContinuous/StandardMVAlgebra.lean:183` |
-| done | `LukLind.mk_eq_zero_iff` | Lindenbaum [[φ]]=0 | `ContinuousFOL/LukasiewiczAndContinuous/LukLindenbaum.lean:147` |
+| done | `LukLind.mk_eq_zero_iff` | Lindenbaum [[φ]]=0 | `ContinuousFOL/LukasiewiczAndContinuous/LukLindenbaum.lean:251` |
 | done | `LukPropForm.deduction_theorem` | WDT Łuk | `ContinuousFOL/LukasiewiczAndContinuous/LukPropFormDeduction.lean:212` |
 | done | `CLPropForm.deduction_theorem` | WDT CL | `ContinuousFOL/LukasiewiczAndContinuous/CLPropFormDeduction.lean:212` |
 | done | `LukPropForm.semantic_iteration` | Sem. iter. Łuk | `ContinuousFOL/LukasiewiczAndContinuous/LukPropFormSemanticIteration.lean:101` |

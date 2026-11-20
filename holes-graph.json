@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T23:37:13Z",
+  "updated": "2026-11-20T10:31:59Z",
   "sorryCount": 37,
   "legend": {
     "open": "No unfinished required proof-deps \u2014 try next",
@@ -119,7 +119,7 @@
       "id": "LukLind.mk_eq_zero_iff",
       "label": "Lindenbaum [[\u03c6]]=0",
       "section": 4,
-      "file": "ContinuousFOL/LukasiewiczAndContinuous/LukLindenbaum.lean:147",
+      "file": "ContinuousFOL/LukasiewiczAndContinuous/LukLindenbaum.lean:251",
       "status": "done",
       "blocker": null,
       "detail": "In the Lindenbaum quotient, mk \u03c6 = 0 iff \u22a2 \u03c6."

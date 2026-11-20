@@ -99,7 +99,7 @@ lemma lin_lf_pt (φ : LukPropForm ι) (hs : vars φ ⊆ s) :
   induction φ with
   | var i =>
     have hi : i ∈ s := hs (by simp [vars])
-    simp only [lf, dif_pos hi, lin_single]
+    simp only [lf, dite_eq_left hi, lin_single]
     rfl
   | tsub φ ψ ihφ ihψ =>
     have hs' : vars φ ⊆ s ∧ vars ψ ⊆ s := by
@@ -141,13 +141,14 @@ lemma holds_cons_pt (φ : LukPropForm ι) (hs : vars φ ⊆ s) :
 def realVal (y : Option s → ℝ) : ι → ℝ :=
   fun i => if h : i ∈ s then y (some ⟨i, h⟩) / y none else 0
 
+omit [IsOrderedAddMonoid G] in
 lemma eval_realVal (y : Option s → ℝ) (hy : 0 < y none) (φ : LukPropForm ι)
     (hs : vars φ ⊆ s) (hcons : ∀ c ∈ cons u a s φ, c.Holds y) :
     eval (realVal s y) φ = lin (lf u a s φ) y / y none := by
   induction φ with
   | var i =>
     have hi : i ∈ s := hs (by simp [vars])
-    simp only [eval, realVal, dif_pos hi, lf, lin_single]
+    simp only [eval, realVal, dite_eq_left hi, lf, lin_single]
   | tsub φ ψ ihφ ihψ =>
     have hs' : vars φ ⊆ s ∧ vars ψ ⊆ s := by
       simpa [vars, Finset.union_subset_iff] using hs
@@ -157,11 +158,11 @@ lemma eval_realVal (y : Option s → ℝ) (hy : 0 < y none) (φ : LukPropForm ι
     simp only [eval, lf, tsubR.def_eq, hφ, hψ]
     unfold branchCon at hb
     split_ifs with h
-    · rw [if_pos h] at hb
+    · rw [ite_eq_left h] at hb
       simp only [KCon.Holds, KCon.eval_eq_lin, rel, Bool.false_eq_true, ite_false,
         lin_sub] at hb
       rw [lin_sub, ← sub_div, max_eq_left (div_nonneg (sub_nonneg.mpr (sub_nonneg.mp hb)) hy.le)]
-    · rw [if_neg h] at hb
+    · rw [ite_eq_right h] at hb
       simp only [KCon.Holds, KCon.eval_eq_lin, rel, ite_true, lin_sub] at hb
       rw [lin_zero, zero_div, ← sub_div]
       exact max_eq_right (div_nonpos_of_nonpos_of_nonneg (by linarith) hy.le)

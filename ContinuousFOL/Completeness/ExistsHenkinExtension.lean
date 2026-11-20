@@ -931,7 +931,7 @@ end HenkinExt
 
 theorem exists_henkin_extension_metric (LM : MetricSignature) :
     ∃ (LMc : MetricSignature) (ext : SignatureExtension LM.toSignature LMc.toSignature)
-      (hdist : ext.relEquiv LM.distSym = LMc.distSym)
+      (_hdist : ext.relEquiv LM.distSym = LMc.distSym)
       (Γc : Set (Formula LMc.toSignature)),
       (∀ Γ : Set (Formula LM.toSignature), HenkinComplete ((ext.mapFormula '' Γ) ∪ Γc)) ∧
       (∀ Γ : Set (Formula LM.toSignature),

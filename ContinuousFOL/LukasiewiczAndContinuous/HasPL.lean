@@ -126,7 +126,7 @@ lemma hasPL_const {n : ℕ} (c : ℝ) : HasPL (fun _ : Fin n → ℝ => c) := by
   · intro ch hch x hx
     simp only [List.mem_singleton] at hch
     subst hch
-    simp [AffineChart.Represents, AffineFn.eval_const]
+    simp [AffineFn.eval_const]
 
 lemma hasPL_proj {n : ℕ} (i : Fin n) : HasPL (fun x : Fin n → ℝ => x i) := by
   refine ⟨[{ cell := PolyCell.cube n, fn := AffineFn.proj i }], ?_, ?_⟩
@@ -136,7 +136,7 @@ lemma hasPL_proj {n : ℕ} (i : Fin n) : HasPL (fun x : Fin n → ℝ => x i) :=
   · intro ch hch x hx
     simp only [List.mem_singleton] at hch
     subst hch
-    simp [AffineChart.Represents, AffineFn.eval_proj]
+    simp [AffineFn.eval_proj]
 
 lemma hasPL_neg {n : ℕ} {f : (Fin n → ℝ) → ℝ} (hf : HasPL f) :
     HasPL (fun x => 1 - f x) := by
@@ -148,7 +148,7 @@ lemma hasPL_neg {n : ℕ} {f : (Fin n → ℝ) → ℝ} (hf : HasPL f) :
   · intro ch' hch' x hx
     obtain ⟨ch, hch, rfl⟩ := List.mem_map.1 hch'
     have := hrep ch hch x hx
-    simp [AffineChart.Represents, AffineFn.eval_sub, AffineFn.eval_const, this]
+    simp [AffineFn.eval_sub, AffineFn.eval_const, this]
 
 lemma hasPL_smul {n : ℕ} {f : (Fin n → ℝ) → ℝ} (c : ℝ) (hf : HasPL f) :
     HasPL (fun x => c * f x) := by
@@ -160,7 +160,7 @@ lemma hasPL_smul {n : ℕ} {f : (Fin n → ℝ) → ℝ} (c : ℝ) (hf : HasPL f
   · intro ch' hch' x hx
     obtain ⟨ch, hch, rfl⟩ := List.mem_map.1 hch'
     have := hrep ch hch x hx
-    simp [AffineChart.Represents, AffineFn.eval_smul, this]
+    simp [AffineFn.eval_smul, this]
 
 /-- Common refinement of two piecewise-linear covers. -/
 lemma HasPL.pair {n : ℕ} {f g : (Fin n → ℝ) → ℝ} (hf : HasPL f) (hg : HasPL g) :
@@ -223,7 +223,7 @@ lemma hasPL_tsub {n : ℕ} {f g : (Fin n → ℝ) → ℝ} (hf : HasPL f) (hg : 
       have hgval := (hrep ch hch).2 x hx'.1
       have hle : f x - g x ≤ 0 := by
         have := hx'.2
-        simp [AffineFn.eval_sub, hfval, hgval] at this
+        simp [AffineFn.eval_sub] at this
         linarith
       have : f x ∸ g x = 0 := (tsubR.eq_zero_iff _ _).2 (by linarith)
       simpa [AffineFn.eval_const] using this
@@ -233,7 +233,7 @@ lemma hasPL_tsub {n : ℕ} {f g : (Fin n → ℝ) → ℝ} (hf : HasPL f) (hg : 
       have hgval := (hrep ch hch).2 x hx'.1
       have hle : g x - f x ≤ 0 := by
         have := hx'.2
-        simp [AffineFn.eval_sub, hfval, hgval] at this
+        simp [AffineFn.eval_sub] at this
         linarith
       have hfg : f x ∸ g x = f x - g x := by
         rw [tsubR.def_eq, max_eq_left (by linarith)]

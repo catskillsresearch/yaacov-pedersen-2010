@@ -308,7 +308,7 @@ lemma ProvableQ.substConstVar_fresh {L : Signature} {Γ : Set (Formula L)} (c : 
 
 /-- Lemma 8.4: Generalizing over a fresh constant symbol `c`. -/
 theorem generalize_fresh_const {L : Signature} (Γ : Set (Formula L)) (φ : Formula L)
-    (c : L.Func) (hc0 : L.funcArity c = 0)
+    (c : L.Func) (_hc0 : L.funcArity c = 0)
     (hcΓ : ∀ ψ ∈ Γ, ¬ ψ.hasFunc c) (x : Var) (hxφ : x ∉ φ.allVars)
     (hprov : ProvableQ Γ φ) :
     ProvableQ Γ (.sup x (φ.substConstVar c x)) := by

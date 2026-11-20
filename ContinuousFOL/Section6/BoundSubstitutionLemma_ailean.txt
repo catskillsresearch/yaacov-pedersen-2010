@@ -2,11 +2,15 @@
 
 **Lemma.** $\mathrm{FV}(\varphi)\subseteq\mathrm{AV}(\varphi)$; free substitution does not change bound variables; substituting a variable $y\notin\mathrm{AV}(\varphi)$ is always correct, and so is any substitution for a variable not free in $\varphi$.
 
+*Proof.* All four claims are by induction on $\varphi$. Free variables are in particular variables that occur. Free substitution only rewrites terms inside atomic formulae and never touches a quantifier, so the set of bound variables is unchanged. Correctness of $\varphi[t/x]$ can fail only at a quantifier $\sup_z$ with $z$ occurring in $t$ and $x$ free below it. If $t=y$ with $y\notin\mathrm{AV}(\varphi)$, no quantifier binds $y$. If $x$ is not free in $\varphi$, there is no free occurrence of $x$ to capture.
+
 **Lemma** (`eval_boundSubst`). If $y\notin\mathrm{AV}(\varphi)$ then $\mathfrak M(\varphi\{y/x\},\sigma)=\mathfrak M(\varphi,\sigma)$ for all $\mathfrak M,\sigma$.
 
 *Proof.* Induction on $\varphi$. At $\sup_x\alpha$ the result is $\sup_y\alpha'[y/x]$; by the Substitution Lemma (correct because $y$ is fresh) the value at $\sigma^b_y$ is the value of $\alpha'$ at $(\sigma^b_y)^b_x$, which by coincidence ($y$ not free in $\alpha'$) is the value of $\alpha'$ at $\sigma^b_x$; and $\alpha'$ has the value of $\alpha$ by induction.
 
 **Lemma.** If $y\ne x$ then $x\notin\mathrm{BV}(\varphi\{y/x\})$, and $\mathrm{BV}(\varphi\{y/x\})\subseteq\mathrm{BV}(\varphi)\cup\{y\}$.
+
+*Proof.* Induction on $\varphi$. Bound substitution replaces each quantifier $\sup_x$ by $\sup_y$ and leaves every other quantifier $\sup_z$, $z\ne x$, as it is. So the bound variables of the result are those of $\varphi$ other than $x$, together with $y$ if $x$ was bound. Since $y\ne x$, the variable $x$ is not among them.
 
 **Definition** (`BoundSubstReach`). $\varphi'$ is reachable from $\varphi$ if it arises by a finite (possibly empty) sequence of bound substitutions.
 

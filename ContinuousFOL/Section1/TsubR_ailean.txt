@@ -19,3 +19,5 @@
 *Proof.* Induction on $k$. In the step, if $b\le ka$ both sides are $0$; otherwise $b-ka\ge0$ and subtracting $a$ once more gives $b-(k+1)a$ truncated at $0$.
 
 **Lemma.** $x\dot-0=x$ for $x\ge0$.
+
+*Proof.* $x\dot-0=\max(x,0)$, and this is $x$ because $x\ge0$.

@@ -1,3 +1,5 @@
 **Definition** (`updateAssign`). $\sigma^a_x(y)=a$ if $y=x$ and $\sigma(y)$ otherwise.
 
 **Lemma.** $\sigma^a_x(x)=a$, and $\sigma^a_x(y)=\sigma(y)$ for $y\neq x$.
+
+*Proof.* Both are the two branches of the definition: at $y=x$ the first branch applies, and at $y\ne x$ the second.

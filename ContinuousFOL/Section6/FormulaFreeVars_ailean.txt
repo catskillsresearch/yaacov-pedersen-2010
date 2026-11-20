@@ -4,4 +4,4 @@
 
 **Lemma.** $\overline\varphi$ has no free variables, and $\overline\varphi=\varphi$ when $\varphi$ is already a sentence.
 
-*Proof.* Prefixing $\sup_{x}$ for each $x$ in a list removes exactly those variables from the free variables.
+*Proof.* Since $\mathrm{FV}(\sup_x\alpha)=\mathrm{FV}(\alpha)\setminus\{x\}$, induction on a list $x_1,\dots,x_k$ shows $\mathrm{FV}(\sup_{x_1}\cdots\sup_{x_k}\varphi)=\mathrm{FV}(\varphi)\setminus\{x_1,\dots,x_k\}$. For the list of all free variables of $\varphi$ this set is empty. If $\varphi$ is a sentence the list is empty, so nothing is prefixed and $\overline\varphi=\varphi$.

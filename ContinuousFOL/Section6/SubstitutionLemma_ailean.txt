@@ -1,6 +1,10 @@
 **Lemma.** If $x\ne y$ then $(\sigma^a_y)^v_x=(\sigma^v_x)^a_y$.
 
+*Proof.* Compare the two assignments at a variable $z$. At $z=x$ both give $v$, and at $z=y$ both give $a$; this uses $x\ne y$, so that neither update overwrites the other. At any other $z$ both give $\sigma(z)$.
+
 **Lemma** (term substitution). $(s[t/x])^{\mathfrak M,\sigma}=s^{\mathfrak M,\sigma^a_x}$ with $a=t^{\mathfrak M,\sigma}$.
+
+*Proof.* Induction on $s$. If $s$ is the variable $x$, the left side is the value $a$ of $t$, and the right side is $\sigma^a_x(x)=a$. If $s$ is another variable $y$, substitution leaves it unchanged and both sides are $\sigma(y)$. If $s=f(s_1,\dots,s_n)$, substitution acts on each argument, so both sides apply $f^{\mathfrak M}$ to equal arguments by the induction hypothesis.
 
 **Lemma** (coincidence). If $y\notin\mathrm{vars}(t)$ then $t^{\mathfrak M,\sigma^a_y}=t^{\mathfrak M,\sigma}$; if $x\notin\mathrm{FV}(\varphi)$ then $\mathfrak M(\varphi,\sigma^a_x)=\mathfrak M(\varphi,\sigma)$.
 

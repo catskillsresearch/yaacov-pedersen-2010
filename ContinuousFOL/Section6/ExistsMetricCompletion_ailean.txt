@@ -1,3 +1,3 @@
 **Theorem** (`exists_metric_completion`, Theorem 6.9). For every metric pre-structure $\mathfrak M$ (in universe $u$) there is a continuous structure $\widehat{\mathfrak M}$ in the same universe and an elementary $\mathcal L$-morphism $\mathfrak M\to\widehat{\mathfrak M}$.
 
-*Proof.* Take the metric completion and its canonical elementary morphism.
+*Proof.* Take $\widehat{\mathfrak M}$ to be the metric completion. Its carrier, the completion of the carrier of $\mathfrak M$, lives in the same universe. It is a continuous structure: its metric is complete and the moduli hold. The canonical map $\iota$ is an $\mathcal L$-morphism, and it is elementary by `metricCompletionElementary`.

@@ -1,3 +1,5 @@
 **Definition.** $\varphi\equiv^f\psi$ iff $\mathfrak M(\varphi,\sigma)=\mathfrak M(\psi,\sigma)$ for every pre-structure and assignment; $\varphi\equiv^m\psi$ is the same over metric pre-structures.
 
-**Lemma.** $\varphi\equiv^f\psi$ implies $\varphi\equiv^m\psi$, because every metric pre-structure is a pre-structure.
+**Lemma.** $\varphi\equiv^f\psi$ implies $\varphi\equiv^m\psi$.
+
+*Proof.* A metric pre-structure is in particular a pre-structure, and the value of a formula in it is its value in the underlying pre-structure. So the hypothesis, applied to that pre-structure and the same assignment, gives equal values.

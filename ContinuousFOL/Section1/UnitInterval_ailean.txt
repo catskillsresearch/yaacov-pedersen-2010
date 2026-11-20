@@ -1,5 +1,7 @@
 **Lemma** (`unit_closed_neg`). If $0\le x\le1$ then $0\le1-x\le1$.
 
+*Proof.* Subtracting $x\le1$ from $1$ gives $1-x\ge0$, and $x\ge0$ gives $1-x\le1$.
+
 **Lemma** (`unit_closed_half`). If $0\le x\le1$ then $0\le x/2\le1$.
 
-*Proof.* Both are linear inequalities that follow immediately from the hypotheses.
+*Proof.* Halving the inequalities $0\le x\le1$ gives $0\le x/2\le\tfrac12$, and $\tfrac12\le1$.

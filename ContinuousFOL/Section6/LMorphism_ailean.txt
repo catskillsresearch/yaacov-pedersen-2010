@@ -1,6 +1,8 @@
 **Definition** (`LMorphism`). A map $h:M\to N$ with $h(f^{\mathfrak M}(\bar a))=f^{\mathfrak N}(h\bar a)$ and $P^{\mathfrak M}(\bar a)=P^{\mathfrak N}(h\bar a)$.
 
-**Lemma** (`map_term`). $h(t^{\mathfrak M,\sigma})=t^{\mathfrak N,h\circ\sigma}$, by induction on $t$.
+**Lemma** (`map_term`). $h(t^{\mathfrak M,\sigma})=t^{\mathfrak N,h\circ\sigma}$.
+
+*Proof.* Induction on $t$. For a variable $x$ both sides are $h(\sigma(x))$. For $f(t_1,\dots,t_n)$, $h$ commutes with $f$ by the morphism property, and with each $t_i$ by the induction hypothesis.
 
 **Theorem** (`surjective_morphism_elementary`, Theorem 6.6). If $h$ is surjective then $\mathfrak M(\varphi,\sigma)=\mathfrak N(\varphi,h\circ\sigma)$ for all $\varphi,\sigma$.
 

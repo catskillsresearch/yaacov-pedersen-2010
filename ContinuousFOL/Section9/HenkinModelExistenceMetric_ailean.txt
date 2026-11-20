@@ -10,4 +10,13 @@
 
 *Proof.* $\Gamma\cup\mathrm{Ax}_{10\text{–}14}$ is consistent in the plain calculus, so the plain Henkin model satisfies it; its reduct to $\mathcal L$ satisfies $\Gamma$ and all metric axioms, hence is a metric pre-structure.
 
-**Theorem** (`henkin_model_existence_metric`, Theorem 9.4). As in the plain case, with $\mathcal L^c$ a metric signature with the same metric symbol, $\Delta$ maximal consistent for the metric calculus and Henkin complete, and $\mathfrak M$ a metric pre-structure.
+**Theorem** (`henkin_model_existence_metric`, Theorem 9.4). If $\Gamma$ is consistent in the metric calculus, then there are:
+- a metric signature extension $\mathcal L\subseteq\mathcal L^c$ with the same metric symbol;
+- a set $\Delta$ of $\mathcal L^c$-formulae that is maximal consistent for the metric calculus, Henkin complete and contains $e[\Gamma]$;
+- a metric pre-structure $\mathfrak M$ (in universe $0$) with an assignment $\sigma$ such that $(\mathfrak M,\sigma)\models_Q\Delta$.
+
+*Proof.* Take $\mathcal L^c$, $e$ and $\Gamma^c$ from the metric Proposition 9.2, so $e[\Gamma]\cup\Gamma^c$ is metrically consistent and Henkin complete. Let $\mathrm{Ax}$ be the metric axioms of $\mathcal L^c$. Then $e[\Gamma]\cup\Gamma^c\cup\mathrm{Ax}$ is consistent in the plain calculus, because metric derivations are plain derivations with the metric axioms as extra premises. Theorem 8.10 extends it to a plainly maximal consistent $\Delta$.
+
+Since $\mathrm{Ax}\subseteq\Delta$, metric and plain provability from $\Delta$ coincide. So $\Delta$ is also consistent and maximal for the metric calculus: the comparability property of maximality carries over unchanged, and the Archimedean property transfers through the coincidence of provability. $\Delta$ is Henkin complete because it contains $\Gamma^c$.
+
+Let $\mathfrak M$ be the term pre-structure of $\Delta$ and $\sigma$ the identity assignment. For $\varphi\in\Delta$, axiom (A1) and modus ponens give $\varphi\dot-0\in\Delta$, so $0$ belongs to the set $B(\varphi)$ of dyadic upper bounds. By the truth lemma and Lemma 8.12, $\mathfrak M(\varphi,\sigma)=\sup A(\varphi)=\inf B(\varphi)$. This infimum is $0$, since $0\in B(\varphi)$ and every member of $B(\varphi)$ is nonnegative. Hence $(\mathfrak M,\sigma)\models_Q\Delta$. In particular the model satisfies every generalized metric axiom, so by `ofMetricAxioms` the underlying pre-structure is a metric pre-structure.

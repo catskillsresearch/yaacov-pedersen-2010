@@ -1,1 +1,1 @@
-Corollary 9.12 for pre-structures.
+Compactness over pre-structures (Corollary 9.12): a set of formulae is satisfiable as soon as each of its finite subsets is, obtained from completeness and soundness because a derivation of $1$ uses only finitely many premises.

@@ -1,1 +1,1 @@
-Lemma 8.2 with and without a metric.
+The generalization theorem (Lemma 8.2), with and without the metric axioms: if $x$ is not free in the premises, any consequence $\varphi$ can be generalized to $\sup_x\varphi$; the proof is an induction on derivations.

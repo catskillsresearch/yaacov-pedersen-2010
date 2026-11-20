@@ -1,1 +1,1 @@
-Sentences.
+Sentences (Definition 9.9): a formula is a sentence when its set of free variables is empty.

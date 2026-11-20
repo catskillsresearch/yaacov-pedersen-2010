@@ -1,1 +1,1 @@
-Definition 9.1.
+Henkin completeness (Definition 9.1): for every formula, variable and pair of dyadics $p<q$, the set contains a witnessing condition with a constant $c$ saying that either $\sup_x\varphi$ is at most $q$ or $\varphi[c/x]$ is already at least $p$.

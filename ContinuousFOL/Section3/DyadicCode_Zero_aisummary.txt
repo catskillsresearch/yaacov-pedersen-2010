@@ -1,1 +1,1 @@
-The code $0:=\neg1$.
+The dyadic code for $0$, defined as the negation of the constant $1$.

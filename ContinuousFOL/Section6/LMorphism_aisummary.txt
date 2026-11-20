@@ -1,1 +1,1 @@
-Definition 6.5 and Theorem 6.6.
+Morphisms of pre-structures (Definition 6.5) and Theorem 6.6: a surjective morphism preserves the value of every formula under every assignment.

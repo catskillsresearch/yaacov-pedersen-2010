@@ -1,1 +1,1 @@
-Theories.
+Theories (Definition 9.9): a theory over a metric signature is a set of formulae each of which is a sentence.

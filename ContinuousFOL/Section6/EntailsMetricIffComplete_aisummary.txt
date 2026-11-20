@@ -1,1 +1,1 @@
-Corollary 6.11 (i) and (ii).
+Corollary 6.11: entailment and satisfiability over metric pre-structures coincide with their versions over complete (continuous) structures, by passing to the metric completion along an elementary morphism.

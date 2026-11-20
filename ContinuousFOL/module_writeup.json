@@ -139,7 +139,7 @@
      "text": "A set of formulae all of whose finite subsets are (completely) satisfiable is itself (completely) satisfiable; the paper notes that ultraproducts would also give this."
     }
    ],
-   "summary": "Corollary 9.12 for pre-structures.",
+   "summary": "Compactness over pre-structures (Corollary 9.12): a set of formulae is satisfiable as soon as each of its finite subsets is, obtained from completeness and soundness because a derivation of $1$ uses only finitely many premises.",
    "english": "**Theorem** (`compactness_pre`). If every finite subset of $\\Gamma$ is satisfiable, $\\Gamma$ is satisfiable.\n\n*Proof.* If $\\Gamma$ were unsatisfiable it would be inconsistent by completeness, so $\\Gamma\\vdash1$; the proof uses a finite $\\Gamma_0\\subseteq\\Gamma$, which is then inconsistent and, by soundness, unsatisfiable.",
    "lean_sha256": "4a11cfebf9a0a9811c5d6400331c64cd04aee3ffdbc95f57f27ac98ec7ab2f53"
   },
@@ -223,7 +223,7 @@
      "text": "A set is Henkin complete if for every $\\varphi$, $x$ and dyadics $p<q$ there is a constant $c$ such that the set contains $(\\sup_x\\varphi\\dot-q)\\wedge(p\\dot-\\varphi[c/x])$: either the supremum is at most $q$, or the witness $c$ already pushes $\\varphi$ to at least $p$."
     }
    ],
-   "summary": "Definition 9.1.",
+   "summary": "Henkin completeness (Definition 9.1): for every formula, variable and pair of dyadics $p<q$, the set contains a witnessing condition with a constant $c$ saying that either $\\sup_x\\varphi$ is at most $q$ or $\\varphi[c/x]$ is already at least $p$.",
    "english": "**Definition** (`HenkinComplete`). $\\Gamma$ is Henkin complete if for every formula $\\varphi$, variable $x$ and dyadic codes $p,q$ with $p<q$ there is a $0$-ary function symbol $c$ with $(\\sup_x\\varphi\\dot-q)\\wedge(p\\dot-\\varphi[c/x])\\in\\Gamma$.",
    "lean_sha256": "22bf7afeea5051b24e7c7915fd0ff5079e945a0269ecd30cd69c62dbd9545593"
   },
@@ -271,7 +271,7 @@
      "text": "A sentence is a formula without free variables."
     }
    ],
-   "summary": "Sentences.",
+   "summary": "Sentences (Definition 9.9): a formula is a sentence when its set of free variables is empty.",
    "english": "**Definition** (`IsSentence`). $\\varphi$ is a sentence iff $\\mathrm{FV}(\\varphi)=\\emptyset$.",
    "lean_sha256": "b5e92338d0b306fb12a6eba3c37ecd6b630f97c6b2abb30c58443ed5e327ed52"
   },
@@ -283,7 +283,7 @@
      "text": "For a signature with a metric, a theory is a set of sentences."
     }
    ],
-   "summary": "Theories.",
+   "summary": "Theories (Definition 9.9): a theory over a metric signature is a set of formulae each of which is a sentence.",
    "english": "**Definition** (`IsTheory`). $T$ is a theory iff every member of $T$ is a sentence.",
    "lean_sha256": "68d039bf39f9ad4c144a573c696d58280bbcd6b8c420729e4a771d2eb3334f23"
   },
@@ -429,7 +429,7 @@
      "text": "If $\\Gamma$ proves $\\varphi$ and $x$ is not free in any premise, then $\\Gamma$ proves $\\sup_x\\varphi$; the argument is the classical one."
     }
    ],
-   "summary": "Lemma 8.2 with and without a metric.",
+   "summary": "The generalization theorem (Lemma 8.2), with and without the metric axioms: if $x$ is not free in the premises, any consequence $\\varphi$ can be generalized to $\\sup_x\\varphi$; the proof is an induction on derivations.",
    "english": "**Theorem** (`generalization_theorem`). If $x$ is free in no member of $\\Gamma$ and $\\Gamma\\vdash_Q\\varphi$, then $\\Gamma\\vdash_Q\\sup_x\\varphi$.\n\n*Proof.* Induction on the derivation. If $\\varphi$ is a generalization of an axiom, so is $\\sup_x\\varphi$. If $\\varphi\\in\\Gamma$, $x$ is not free in $\\varphi$, so (A9) gives $\\sup_x\\varphi\\dot-\\varphi$ and modus ponens gives $\\sup_x\\varphi$. If $\\psi$ came from $\\alpha$ and $\\psi\\dot-\\alpha$, the induction hypotheses give $\\sup_x\\alpha$ and $\\sup_x(\\psi\\dot-\\alpha)$, and (A7), $(\\sup_x\\psi\\dot-\\sup_x\\alpha)\\dot-\\sup_x(\\psi\\dot-\\alpha)$, with two modus ponens steps gives $\\sup_x\\psi$.",
    "lean_sha256": "65722a47ab9250122a3bb75e71d97188f5b537a11c7ae5714a0a75c23b2b7191"
   },
@@ -601,7 +601,7 @@
      "text": "$2^{-n}$ abbreviates $1$ with the connective $\\tfrac12$ applied $n$ times."
     }
    ],
-   "summary": "The code $2^{-n}$, by recursion on $n$.",
+   "summary": "The dyadic code for $2^{-n}$, defined by recursion on $n$ by starting from $1$ and halving.",
    "english": "**Definition** (`pow2Neg`). $2^{-0}:=1$ and $2^{-(n+1)}:=\\tfrac12\\,2^{-n}$.",
    "lean_sha256": "1c2bea32fa5f53607c811d0ae028d37e33eae70ac2d7a5ac7e30429ac501097e"
   },
@@ -625,7 +625,7 @@
      "text": "$0$ abbreviates $\\neg1$."
     }
    ],
-   "summary": "The code $0:=\\neg1$.",
+   "summary": "The dyadic code for $0$, defined as the negation of the constant $1$.",
    "english": "**Definition** (`DyadicCode.zero`). $0:=\\neg 1$.",
    "lean_sha256": "b2311dbf0f9c76979d38a9b56ff565d424e900a69604b47f44d9c5a4fcd547d7"
   },
@@ -1421,7 +1421,7 @@
      "text": "For signatures with a metric, nothing changes if one restricts to complete structures: entailment over pre-structures equals entailment over complete structures, and satisfiability equals complete satisfiability."
     }
    ],
-   "summary": "Corollary 6.11 (i) and (ii).",
+   "summary": "Corollary 6.11: entailment and satisfiability over metric pre-structures coincide with their versions over complete (continuous) structures, by passing to the metric completion along an elementary morphism.",
    "english": "**Theorem** (`entails_metric_iff_complete`). $\\Gamma\\models_Q\\varphi$ over metric pre-structures iff $\\Gamma\\models_{QC}\\varphi$.\n\n*Proof.* A continuous structure is a metric pre-structure, which gives one direction. Conversely let $(\\mathfrak M,\\sigma)\\models_Q\\Gamma$ and let $h:\\mathfrak M\\to\\widehat{\\mathfrak M}$ be elementary. Then $(\\widehat{\\mathfrak M},h\\circ\\sigma)\\models_Q\\Gamma$ because values are preserved, so $\\widehat{\\mathfrak M}(\\varphi,h\\circ\\sigma)=0$, and therefore $\\mathfrak M(\\varphi,\\sigma)=0$.\n\n**Theorem** (`satisfiable_metric_iff_complete`). $\\Gamma$ is satisfiable in a metric pre-structure iff it is completely satisfiable.\n\n*Proof.* Push a model forward along the elementary morphism into its completion; the converse is trivial.",
    "lean_sha256": "241cf495264595770beccb1773e7f263db2ddc799ab481a28233a80f0cba826c"
   },
@@ -1512,7 +1512,7 @@
      "text": "A surjective $\\mathcal L$-morphism is automatically elementary, by induction on formulae."
     }
    ],
-   "summary": "Definition 6.5 and Theorem 6.6.",
+   "summary": "Morphisms of pre-structures (Definition 6.5) and Theorem 6.6: a surjective morphism preserves the value of every formula under every assignment.",
    "english": "**Definition** (`LMorphism`). A map $h:M\\to N$ with $h(f^{\\mathfrak M}(\\bar a))=f^{\\mathfrak N}(h\\bar a)$ and $P^{\\mathfrak M}(\\bar a)=P^{\\mathfrak N}(h\\bar a)$.\n\n**Lemma** (`map_term`). $h(t^{\\mathfrak M,\\sigma})=t^{\\mathfrak N,h\\circ\\sigma}$, by induction on $t$.\n\n**Theorem** (`surjective_morphism_elementary`, Theorem 6.6). If $h$ is surjective then $\\mathfrak M(\\varphi,\\sigma)=\\mathfrak N(\\varphi,h\\circ\\sigma)$ for all $\\varphi,\\sigma$.\n\n*Proof.* Induction on $\\varphi$. Atomic formulae use `map_term` and preservation of relations; the connectives are immediate. For $\\sup_x\\alpha$: $h\\circ\\sigma^a_x=(h\\circ\\sigma)^{h(a)}_x$, so by induction the values on the left are the values $\\mathfrak N(\\alpha,(h\\circ\\sigma)^{h(a)}_x)$, $a\\in M$; by surjectivity these are all the values $\\mathfrak N(\\alpha,(h\\circ\\sigma)^b_x)$, $b\\in N$. The suprema of equal sets are equal.",
    "lean_sha256": "0da2791a7d7e6f57112b79c02ee254411b75e42d76dd1114a03655c4ba819514"
   },

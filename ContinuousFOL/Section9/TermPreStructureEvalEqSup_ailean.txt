@@ -1,12 +1,40 @@
-Let $\Delta$ be maximal consistent and Henkin complete, $\mathfrak M$ its term pre-structure and $\sigma$ the identity. Write $A(\varphi)=\{p:\ p\dot-\varphi\in\Delta\}$ and $B(\varphi)=\{q:\ \varphi\dot-q\in\Delta\}$ (dyadic values).
+Throughout, $\Delta$ is maximal consistent and Henkin complete, $\mathfrak M$ is its term pre-structure and $\sigma$ the identity assignment. For a formula $\varphi$ write
+$$A(\varphi)=\{p\ \text{dyadic}:\ p\dot-\varphi\in\Delta\},\qquad B(\varphi)=\{q\ \text{dyadic}:\ \varphi\dot-q\in\Delta\},\qquad a(\varphi)=\sup A(\varphi).$$
+Think of $A(\varphi)$ as the lower bounds and $B(\varphi)$ as the upper bounds that $\Delta$ asserts for the value of $\varphi$.
 
-**Lemma** (squeeze). If $r$ satisfies $p\le r$ for all $p\in A(\varphi)$ and $r\le q$ for all $q\in B(\varphi)$, then $r=\sup A(\varphi)$. This is Lemma 8.12. Also, no dyadic constant of positive value lies in $\Delta$.
+**Lemma** (basic properties of the cuts).
 
-**Lemmas** (connective cases). If the claim holds for $\alpha$ and $\beta$, it holds for $\neg\alpha$, $\tfrac12\alpha$ and $\alpha\dot-\beta$.
+1. *Closure.* If $\chi_1,\dots,\chi_k\in\Delta$ and $(\cdots(C\dot-\chi_1)\cdots)\dot-\chi_k$ is provable, then $C\in\Delta$. In particular this applies whenever that formula is an instance of a propositional schema that takes the value $0$ under every assignment of values in $[0,1]$, because such instances are provable (completeness of continuous propositional logic, Fact 4.5).
+2. *No positive constant.* If the dyadic constant $d$ lies in $\Delta$, then $d\le0$; otherwise $\Delta$ would prove $1$ and be inconsistent.
+3. *Bounds.* $0\in A(\varphi)$ and $1\in B(\varphi)$, so $a(\varphi)\in[0,1]$, and $\sup A(\varphi)=\inf B(\varphi)$ (Lemma 8.12).
+4. *Squeeze.* If a real $x$ satisfies $p\le x$ for every $p\in A(\varphi)$ and $x\le q$ for every $q\in B(\varphi)$, then $x=a(\varphi)$. This follows from (3).
+5. *Approximation.* For every $\delta>0$ there are $r\in B(\varphi)$ with $r<a(\varphi)+\delta$ and $s\in A(\varphi)$ with $s>a(\varphi)-\delta$. This follows from (3) and the definition of supremum and infimum.
 
-*Proof.* In each case show that the candidate value is squeezed by the cuts. For $\tfrac12\alpha$: if $p\dot-\tfrac12\alpha\in\Delta$ then, by a valid (hence provable, Fact 4.5) propositional schema and deductive closure, a dyadic $p'$ with $p\le\tfrac12p'$ lies in $A(\alpha)$, so $p\le\tfrac12\sup A(\alpha)$; symmetrically for upper bounds. $\neg$ and $\dot-$ are handled the same way, using that $\neg$ swaps lower and upper cuts and that bounds on $\alpha$ and $\beta$ give bounds on $\alpha\dot-\beta$ by monotonicity schemata.
+Each connective case below assumes that $a(\alpha)$ (and $a(\beta)$) is squeezed between its own cuts, and shows by the squeeze lemma that the expected value is $a$ of the compound formula.
 
-**Theorem** (`termPreStructure_eval_eq_sup`). $\mathfrak M(\varphi,\sigma)=\sup A(\varphi)$ for every $\varphi$.
+**Lemma** (negation case). $a(\neg\alpha)=1-a(\alpha)$.
+
+*Proof.* We check that $x=1-a(\alpha)$ is squeezed by the cuts of $\neg\alpha$. Let $p\in A(\neg\alpha)$, that is, $p\dot-\neg\alpha\in\Delta$. For reals in $[0,1]$ the quantities $p\dot-(1-u)$ and $u\dot-(1-p)$ are both $\max(p+u-1,0)$, so the schema $(\alpha\dot-\neg p)\dot-(p\dot-\neg\alpha)$ is valid, and closure gives $\alpha\dot-\neg p\in\Delta$. Thus $1-p\in B(\alpha)$, hence $a(\alpha)\le1-p$, that is, $p\le x$. Symmetrically, if $\neg\alpha\dot-q\in\Delta$, the valid schema $(\neg q\dot-\alpha)\dot-(\neg\alpha\dot-q)$ gives $\neg q\dot-\alpha\in\Delta$, so $1-q\in A(\alpha)$, $1-q\le a(\alpha)$, and $x\le q$. By the squeeze lemma, $x=a(\neg\alpha)$.
+
+**Lemma** (halving case). $a(\tfrac12\alpha)=\tfrac12a(\alpha)$.
+
+*Proof.* We check that $x=\tfrac12a(\alpha)$ is squeezed by the cuts of $\tfrac12\alpha$. For a dyadic $p$ let $p'=\neg(\neg p\dot-p)$; its value is $\min(2p,1)$.
+
+*Lower cut.* Let $p\dot-\tfrac12\alpha\in\Delta$. Two valid schemas apply. First, $\min(2p,1)\dot-u\le2(p\dot-\tfrac u2)$ for $u,p\in[0,1]$, so $((p'\dot-\alpha)\dot-(p\dot-\tfrac12\alpha))\dot-(p\dot-\tfrac12\alpha)$ is valid; using the hypothesis twice, closure gives $p'\dot-\alpha\in\Delta$, so $\min(2p,1)\le a(\alpha)$. Second, $p\dot-\tfrac12\le p\dot-\tfrac u2$, so $(p\dot-\tfrac12\cdot1)\dot-(p\dot-\tfrac12\alpha)$ is valid and the dyadic constant $p\dot-\tfrac12$ lies in $\Delta$. By (2) it is $\le0$, so $p\le\tfrac12$ and $\min(2p,1)=2p$. Together, $2p\le a(\alpha)$, so $p\le x$.
+
+*Upper cut.* Let $\tfrac12\alpha\dot-q\in\Delta$. Dually, $u\dot-\min(2q,1)\le2(\tfrac u2\dot-q)$, so closure applied twice gives $\alpha\dot-q'\in\Delta$ with $q'=\neg(\neg q\dot-q)$. Hence $a(\alpha)\le\min(2q,1)\le2q$, and $x\le q$. The squeeze lemma gives $x=a(\tfrac12\alpha)$.
+
+**Lemma** (truncated-subtraction case). $a(\alpha\dot-\beta)=a(\alpha)\dot-a(\beta)$.
+
+*Proof.* Write $a=a(\alpha)$ and $b=a(\beta)$, and check that $x=a\dot-b$ is squeezed by the cuts of $\alpha\dot-\beta$. Both halves argue by contradiction, using the approximation lemma to replace $\alpha$ and $\beta$ by nearby dyadic bounds.
+
+*Lower cut.* Let $p\dot-(\alpha\dot-\beta)\in\Delta$ and suppose $p>a\dot-b$. Put $\delta=\tfrac13(p-(a\dot-b))>0$, and choose $r\in B(\alpha)$ with $r<a+\delta$ and $s\in A(\beta)$ with $s>b-\delta$. For all reals in $[0,1]$,
+$$p\dot-(r\dot-s)\ \le\ \bigl(p\dot-(u\dot-v)\bigr)+(u\dot-r)+(s\dot-v),$$
+since $u\dot-v\le(r\dot-s)+(u\dot-r)+(s\dot-v)$. So the corresponding three-premise schema is valid, and closure, applied to $p\dot-(\alpha\dot-\beta)$, $\alpha\dot-r$ and $s\dot-\beta$, puts the dyadic constant $p\dot-(r\dot-s)$ in $\Delta$. By (2), $p\le r\dot-s$. But $r\dot-s<(a+\delta)\dot-(b-\delta)\le(a\dot-b)+2\delta<p$, a contradiction. Hence $p\le x$.
+
+*Upper cut.* Let $(\alpha\dot-\beta)\dot-q\in\Delta$ and suppose $q<a\dot-b$. Then $a\dot-b>0$, so $a\dot-b=a-b$. Put $\delta=\tfrac13(a-b-q)$, and choose $r\in A(\alpha)$ with $r>a-\delta$ and $s\in B(\beta)$ with $s<b+\delta$. The valid inequality $(r\dot-s)\dot-q\le((u\dot-v)\dot-q)+(r\dot-u)+(v\dot-s)$ puts the dyadic constant $(r\dot-s)\dot-q$ in $\Delta$, so $r-s\le q$. But $r-s>a-b-2\delta>q$, a contradiction. Hence $x\le q$, and the squeeze lemma finishes.
+
+**Theorem** (`termPreStructure_eval_eq_sup`, the truth lemma). For every formula $\varphi$, $\mathfrak M(\varphi,\sigma)=a(\varphi)$.
 
 *Proof.* Strong induction on the rank, for all formulae of that rank simultaneously (needed because Lemma 8.11 replaces $\varphi$ by an equivalent formula of the same rank). Atomic formulae hold by definition, since every term denotes itself. The connectives use the lemmas above. For $\varphi=\sup_x\psi$, both inequalities are needed.
 

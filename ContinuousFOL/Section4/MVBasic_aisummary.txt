@@ -1,0 +1,1 @@
+The standard elementary theory of MV-algebras (following Cignoli, D'Ottaviano and Mundici): De Morgan laws, the product $\odot$, the natural order as a bounded partial order compatible with the operations, residuation, the lattice operations, distributivity, prelinearity $(x\ominus y)\wedge(y\ominus x)=0$, and the multiples $nx$.

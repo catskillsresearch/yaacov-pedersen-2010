@@ -1,0 +1,23 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 6, Fact 4.2 (paraphrase)**
+
+For Łukasiewicz logic a set of formulae is consistent precisely when some truth assignment satisfies it.
+
+</div>
+
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 6, Fact 4.3 (paraphrase)**
+
+The same equivalence of consistency and satisfiability holds for continuous propositional logic.
+
+</div>
+
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 6, Fact 4.4 (paraphrase)**
+
+Approximated strong completeness: $\Sigma$ semantically implies $\varphi$ exactly when $\Sigma$ proves $\varphi\dot-2^{-n}$ for every $n$; in other words entailment is the limit of provable approximations, without requiring $\Sigma$ to prove $\varphi$ itself.
+
+</div>

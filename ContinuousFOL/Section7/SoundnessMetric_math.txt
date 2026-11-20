@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 15, Theorem 7.2 (paraphrase)**
+
+For a signature with a metric, soundness holds with respect to pre-structures and to complete structures; the validity of (A10)–(A14) is exactly the discussion following (A14): the pseudo-metric axioms hold because $d$ is a pseudo-metric, and (A13)–(A14) hold because the symbols obey their moduli.
+
+</div>

@@ -1,0 +1,3 @@
+**Theorem** (`generalization_theorem`). If $x$ is free in no member of $\Gamma$ and $\Gamma\vdash_Q\varphi$, then $\Gamma\vdash_Q\sup_x\varphi$.
+
+*Proof.* Induction on the derivation. If $\varphi$ is a generalization of an axiom, so is $\sup_x\varphi$. If $\varphi\in\Gamma$, $x$ is not free in $\varphi$, so (A9) gives $\sup_x\varphi\dot-\varphi$ and modus ponens gives $\sup_x\varphi$. If $\psi$ came from $\alpha$ and $\psi\dot-\alpha$, the induction hypotheses give $\sup_x\alpha$ and $\sup_x(\psi\dot-\alpha)$, and (A7), $(\sup_x\psi\dot-\sup_x\alpha)\dot-\sup_x(\psi\dot-\alpha)$, with two modus ponens steps gives $\sup_x\psi$.

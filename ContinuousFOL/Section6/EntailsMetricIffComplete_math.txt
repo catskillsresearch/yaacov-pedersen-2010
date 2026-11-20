@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 13, Corollary 6.11 (paraphrase)**
+
+For signatures with a metric, nothing changes if one restricts to complete structures: entailment over pre-structures equals entailment over complete structures, and satisfiability equals complete satisfiability.
+
+</div>

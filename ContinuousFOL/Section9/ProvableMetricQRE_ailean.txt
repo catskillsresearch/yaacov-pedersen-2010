@@ -1,0 +1,9 @@
+**Definition.** A finite list of formulae is a proof from $\Gamma$ if every entry is a member of $\Gamma$, a generalized logical axiom, or follows by modus ponens from two earlier entries.
+
+**Lemma.** $\Gamma\vdash_Q\varphi$ iff some proof from $\Gamma$ ends with $\varphi$.
+
+*Proof.* A derivation tree is flattened into a list by concatenating the lists for the premises; conversely each list entry is derivable by induction along the list.
+
+**Theorem.** If the codes of $\Gamma$ form an r.e. set, then so do the codes of formulae provable from $\Gamma$.
+
+*Proof.* A list of codes is a proof iff each entry is a genuine code that is in $\Gamma$ (r.e.), is a logical axiom (r.e. by the presentation), or is the code of $\psi$ where $\varphi$ and $\psi\dot-\varphi$ occur earlier (decidable using the computable $\dot-$ code). This condition is r.e. in the list; projecting out the list is r.e.

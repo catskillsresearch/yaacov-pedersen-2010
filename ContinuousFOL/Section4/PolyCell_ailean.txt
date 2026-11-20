@@ -1,0 +1,13 @@
+**Definition.** The unit cube $[0,1]^n$; it is compact and convex, and it is described by the $2n$ affine inequalities $x_i-1\le0$, $-x_i\le0$. A *polyhedral cell* is the set of points of the cube satisfying finitely many further affine inequalities $a(x)\le0$. Cells are closed, compact and convex subsets of the cube.
+
+**Lemma** (`tightSet_injOn_extremePoints`, `finite_extremePoints`). Distinct extreme points of a cell satisfy different sets of constraints with equality. Hence a cell has finitely many extreme points.
+
+*Proof.* Suppose two distinct extreme points $x\neq y$ have the same tight constraints. Every constraint not tight at $x$ or at $y$ is strict there, so for small $\varepsilon>0$ the points $x\pm\varepsilon(y-x)$ still satisfy all constraints (tight ones stay tight by affinity, strict ones stay strict by continuity). Then $x$ is the midpoint of two distinct points of the cell, contradicting extremality. Since there are finitely many sets of constraints, there are finitely many extreme points.
+
+**Lemma** (`exists_extreme_isMaxOn`). On a nonempty cell every affine function attains its maximum at an extreme point.
+
+*Proof.* The cell is compact, so the maximum is attained; the set of maximizers is a nonempty compact face, and by the Krein–Milman theorem it has an extreme point, which is extreme in the whole cell.
+
+**Lemma** (`affine_ratio_bound`). Let $f,g$ be affine, $g\ge0$ on a cell $C$, and suppose $f(x)=0$ whenever $x\in C$ and $g(x)=0$. Then there is $N\in\mathbb N$ with $f\le Ng$ on $C$.
+
+*Proof.* If $C$ is empty take $N=0$. Otherwise let $N$ be the maximum, over the finitely many extreme points $x$ with $g(x)>0$, of $\lceil f(x)/g(x)\rceil$. Then $f-Ng\le0$ at every extreme point (at those with $g=0$ we have $f=0$). The affine function $f-Ng$ attains its maximum on $C$ at an extreme point, so it is $\le0$ on all of $C$.

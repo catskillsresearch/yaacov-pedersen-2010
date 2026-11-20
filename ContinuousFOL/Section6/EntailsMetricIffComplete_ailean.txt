@@ -1,0 +1,7 @@
+**Theorem** (`entails_metric_iff_complete`). $\Gamma\models_Q\varphi$ over metric pre-structures iff $\Gamma\models_{QC}\varphi$.
+
+*Proof.* A continuous structure is a metric pre-structure, which gives one direction. Conversely let $(\mathfrak M,\sigma)\models_Q\Gamma$ and let $h:\mathfrak M\to\widehat{\mathfrak M}$ be elementary. Then $(\widehat{\mathfrak M},h\circ\sigma)\models_Q\Gamma$ because values are preserved, so $\widehat{\mathfrak M}(\varphi,h\circ\sigma)=0$, and therefore $\mathfrak M(\varphi,\sigma)=0$.
+
+**Theorem** (`satisfiable_metric_iff_complete`). $\Gamma$ is satisfiable in a metric pre-structure iff it is completely satisfiable.
+
+*Proof.* Push a model forward along the elementary morphism into its completion; the converse is trivial.

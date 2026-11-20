@@ -1,0 +1,1 @@
+Theorem 9.5 for signatures without a metric, and independence of satisfiability from the universe.

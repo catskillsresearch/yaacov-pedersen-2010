@@ -1,0 +1,1 @@
+Elementary morphisms as morphisms with value preservation.

@@ -1,0 +1,1 @@
+**Definition** (`IsTheory`). $T$ is a theory iff every member of $T$ is a sentence.

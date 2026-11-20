@@ -1,0 +1,15 @@
+Let $\mathfrak M$ be a metric pre-structure and $D(\bar a,\bar b)=\max_id(a_i,b_i)$.
+
+**Definition** (`tildeTerm`, `tildeFormula`). For distinct variables $\bar x$ and $\bar a\in M^n$, $\tilde t(\bar a)$ and $\tilde\varphi(\bar a)$ are the values of $t$ and $\varphi$ under an assignment with $x_i\mapsto a_i$ (arbitrary elsewhere). If the relevant variables are among $\bar x$, these values do not depend on the choice elsewhere.
+
+**Lemma** (Remark 5.8). For every function symbol $f$ and $\epsilon\in(0,1]$ there is $\delta>0$ such that $D(\bar u,\bar v)<\delta$ implies $d(f\bar u,f\bar v)\le\epsilon$; similarly, for a relation symbol, $|P\bar u-P\bar v|\le\epsilon$.
+
+*Proof.* Change one argument at a time: with $\delta=\min_i\delta_{f,i}(\epsilon/n)$, each step moves the value by at most $\epsilon/n$, and the triangle inequality bounds the total. For relations, the modulus bounds the truncated difference in each direction, hence the absolute difference.
+
+**Lemma.** $|(a\dot-b)-(c\dot-d)|\le|a-c|+|b-d|$, and if two bounded families of reals differ pointwise by at most $\epsilon$, so do their suprema.
+
+**Lemma** (`term_eval_unif_cont`, `formula_eval_unif_cont`). For every $\epsilon>0$ there is $\delta>0$ such that any two assignments that are $\delta$-close on the variables of $t$ (resp. the free variables of $\varphi$) give $\epsilon$-close values.
+
+*Proof.* Induction. Terms: compose the joint modulus of $f$ with the moduli of the arguments. Formulae: atomic as for terms; $\dot-$ splits $\epsilon$ between the two sides; $\neg$ and $\tfrac12$ do not increase distances; for $\sup_x\alpha$ use the same $\delta$ as for $\alpha$, since updating both assignments at $x$ with the same element keeps them $\delta$-close on $\mathrm{FV}(\alpha)$, and suprema of pointwise $\epsilon$-close families are $\epsilon$-close.
+
+**Theorem** (`eval_uniformly_continuous`, Theorem 6.8). The maps $\tilde t:M^n\to M$ and $\tilde\varphi:M^n\to[0,1]$ are uniformly continuous with respect to $D$.

@@ -1,0 +1,5 @@
+**Definition** (`LukPropForm.IsAxiom`). A formula is an axiom if it is an instance, for some formulae $\varphi,\psi,\chi$, of
+(A1) $(\varphi\dot-\psi)\dot-\varphi$,
+(A2) $((\chi\dot-\varphi)\dot-(\chi\dot-\psi))\dot-(\psi\dot-\varphi)$,
+(A3) $(\varphi\dot-(\varphi\dot-\psi))\dot-(\psi\dot-(\psi\dot-\varphi))$, or
+(A4) $(\varphi\dot-\psi)\dot-(\neg\psi\dot-\neg\varphi)$.

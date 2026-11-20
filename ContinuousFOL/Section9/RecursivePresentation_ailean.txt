@@ -1,0 +1,3 @@
+**Definition** (`RecursivePresentation`). A recursive presentation of a metric signature consists of an injective coding $\varphi\mapsto\ulcorner\varphi\urcorner\in\mathbb N$ such that: the set of codes is decidable; there is a computable function computing $\ulcorner\varphi\dot-\psi\urcorner$ from $\ulcorner\varphi\urcorner,\ulcorner\psi\urcorner$; there is a computable function giving the code of the dyadic constant $k/2^n$ from $k,n$; the set of codes of generalized logical axioms (A1)–(A14) is r.e.; and the code of the sup-closure of $\varphi$ is computable from $\ulcorner\varphi\urcorner$.
+
+*Remark.* These are standard properties of a Gödel numbering of a countable recursive language; they are listed explicitly because the paper leaves them implicit.

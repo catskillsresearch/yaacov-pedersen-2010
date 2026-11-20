@@ -1,0 +1,1 @@
+The paper's black-box Fact 4.1, stated as in the paper and proved by the Chang argument of §4 rather than assumed.

@@ -1,0 +1,1 @@
+Uniform computability of $\varphi^\circ_T$ from $\ulcorner\varphi\urcorner$, decidability, and axiomatizations.

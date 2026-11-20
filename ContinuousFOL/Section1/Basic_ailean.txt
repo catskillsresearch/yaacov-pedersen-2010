@@ -1,0 +1,1 @@
+This module contains no definitions or theorems. Importing it makes `tsubR`, `iterSubR` and the closure lemmas for $[0,1]$ available in one step.

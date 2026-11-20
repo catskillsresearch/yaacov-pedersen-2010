@@ -1,0 +1,1 @@
+**Definition.** $\Gamma$ is completely satisfiable iff some continuous structure $\mathfrak M$ and assignment $\sigma$ satisfy $(\mathfrak M,\sigma)\models_Q\Gamma$. $\Gamma\models_{QC}\varphi$ iff $\mathfrak M(\varphi,\sigma)=0$ for every continuous structure and assignment that model $\Gamma$.

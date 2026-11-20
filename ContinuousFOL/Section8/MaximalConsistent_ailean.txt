@@ -1,0 +1,23 @@
+**Definition** (`MaximalConsistent`). $\Delta$ is maximal consistent if it is consistent; whenever $\Delta\vdash\varphi\dot-2^{-n}$ for all $n$, $\varphi\in\Delta$; and for all $\varphi,\psi$, $\varphi\dot-\psi\in\Delta$ or $\psi\dot-\varphi\in\Delta$.
+
+**Lemma** (`mem_iff_provable`, Remark 8.9). If $\Delta$ is maximal consistent, $\varphi\in\Delta$ iff $\Delta\vdash\varphi$.
+
+*Proof.* If $\Delta\vdash\varphi$ then $\Delta\vdash\varphi\dot-2^{-n}$ for all $n$ (by (A1)), so $\varphi\in\Delta$ by the archimedean clause.
+
+**Lemmas.** From $\vdash\tfrac12\varphi$ infer $\vdash\varphi$, so a proof of $2^{-n}$, or of any dyadic constant with positive value, gives a proof of $1$; $\vdash0\dot-\varphi$. Bound renaming `renameBound` is provably two-way bounded with $\varphi$ and keeps the rank.
+
+**Theorem** (`maximal_consistent_sup_instantiate`, Lemma 8.11). If $\sup_x\varphi\dot-p\in\Delta$ then for every term $t$ there is $\varphi'\equiv\varphi$ (of the same rank, with $\varphi'[t/x]$ correct) such that $\varphi'[t/x]\dot-p\in\Delta$.
+
+*Proof.* Let $\varphi'$ rename the bound variables of $\varphi$ away from the variables of $t$ and from $x$. Then $\varphi'\equiv\varphi$, $\varphi'[t/x]$ is correct, and $\vdash\varphi'\dot-\varphi$. Generalizing and using (A7): $\vdash\sup_x\varphi'\dot-\sup_x\varphi$, so by (A2) $\Delta\vdash\sup_x\varphi'\dot-p$. (A8) gives $\varphi'[t/x]\dot-\sup_x\varphi'$, and (A2) once more gives $\Delta\vdash\varphi'[t/x]\dot-p$, which lies in $\Delta$ by deductive closure.
+
+**Theorem** (`maximal_consistent_sup_eq_inf`, Lemma 8.12). With $A=\{p:\ p\dot-\varphi\in\Delta\}$ and $B=\{q:\ \varphi\dot-q\in\Delta\}$ (dyadic values), $\sup A=\inf B$.
+
+*Proof.* $0\in A$ and $1\in B$. If $p\in A$ and $q\in B$ then $p\le q$: otherwise $\Delta$ proves the dyadic constant $p\dot-q$ of positive value, hence $1$. So $\sup A\le\inf B$. If $\sup A<\inf B$, choose a dyadic $r$ strictly between them (dyadics are dense); by comparability $r\dot-\varphi\in\Delta$ or $\varphi\dot-r\in\Delta$, i.e. $r\in A$ or $r\in B$, a contradiction.
+
+**Theorem** (`maximal_in_consistent_extensions_iff`, Lemma 8.6). If $\Gamma$ is consistent, $\Delta$ is a maximal member of the consistent extensions of $\Gamma$ iff $\Gamma\subseteq\Delta$, $\Delta$ is consistent, archimedean and comparable.
+
+*Proof.* A maximal consistent extension satisfies the archimedean and comparability clauses by Lemma 8.5: adding the formula, respectively one of the comparisons, keeps it consistent, so by maximality the formula was already in. Conversely, if $\Delta$ satisfies the clauses and $\Delta\subsetneq\Delta'$ with $\Delta'$ consistent, pick $\varphi\in\Delta'\setminus\Delta$. Since $\Delta$ is closed under the archimedean rule, some $\varphi\dot-2^{-n}\notin\Delta$; by comparability $2^{-n}\dot-\varphi\in\Delta\subseteq\Delta'$, and together with $\varphi\in\Delta'$ this proves $2^{-n}$, hence $1$, in $\Delta'$.
+
+**Theorem** (`exists_maximal_consistent`, Theorem 8.10). Every consistent $\Gamma$ extends to a maximal consistent $\Delta$.
+
+*Proof.* The union of a nonempty chain of consistent extensions is consistent, because a proof of $1$ uses finitely many premises, which all lie in one member of the chain. Zorn's lemma gives a maximal element, which is maximal consistent by Lemma 8.6.

@@ -1,0 +1,17 @@
+**Definition.** $(M,d^{\mathfrak M})$ is a pseudo-metric space; let $\hat M$ be its completion and $\iota:M\to\hat M$ the canonical map.
+
+**Lemma.** $f^{\mathfrak M}$ and $P^{\mathfrak M}$ are uniformly continuous on $M^n$ (from the joint moduli). Hence they have unique uniformly continuous extensions $\hat f:\hat M^n\to\hat M$ and $\hat P:\hat M^n\to\mathbb R$ with $\hat f(\iota\bar a)=\iota f(\bar a)$ and $\hat P(\iota\bar a)=P(\bar a)$, using that $\hat M^n$ is the completion of $M^n$.
+
+**Lemma.** $\hat P$ takes values in $[0,1]$; the extended metric symbol $\hat d$ coincides with the metric of $\hat M$; and $\hat f,\hat P$ satisfy the same one-argument moduli $\delta_{s,i}$ as $f,P$.
+
+*Proof.* Each property is a closed condition that holds on the dense image of $M$ and is preserved under limits. For the moduli: if $d(c,e)<\delta(\epsilon)$ in $\hat M$, approximate $c,e$ and the other arguments by points of $M$ that are still $\delta(\epsilon)$-close (possible because the inequality is strict); the modulus inequality holds for the approximants and passes to the limit by continuity.
+
+**Definition** (`metricCompletion`). $\widehat{\mathfrak M}=(\hat M,\hat f,\hat P)$ is a continuous $\mathcal L$-structure: $\hat d$ is the complete metric of $\hat M$, and the moduli hold.
+
+**Lemma.** $\iota$ is an $\mathcal L$-morphism with dense image.
+
+**Lemma.** If a real function $g$ on a space is continuous with values in $[0,1]$ and $S$ is dense, then $\sup g[S]=\sup g$.
+
+**Theorem** (`metricCompletionElementary`). $\iota$ is elementary: $\mathfrak M(\varphi,\sigma)=\widehat{\mathfrak M}(\varphi,\iota\circ\sigma)$.
+
+*Proof.* Induction on $\varphi$; atomic formulae and connectives are as for morphisms. For $\sup_x\alpha$: the map $b\mapsto\widehat{\mathfrak M}(\alpha,(\iota\circ\sigma)^b_x)$ is continuous on $\hat M$ (by Theorem 6.8 applied in $\widehat{\mathfrak M}$), its values at $b=\iota(a)$ are $\mathfrak M(\alpha,\sigma^a_x)$ by induction, and $\iota[M]$ is dense; so the supremum over $\hat M$ equals the supremum over $M$.

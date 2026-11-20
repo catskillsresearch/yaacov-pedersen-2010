@@ -1,0 +1,10 @@
+**Definition** (`BaseAxiomSchema`). The axiom instances are:
+(A1) $(\varphi\dot-\psi)\dot-\varphi$;
+(A2) $((\chi\dot-\varphi)\dot-(\chi\dot-\psi))\dot-(\psi\dot-\varphi)$;
+(A3) $(\varphi\dot-(\varphi\dot-\psi))\dot-(\psi\dot-(\psi\dot-\varphi))$;
+(A4) $(\varphi\dot-\psi)\dot-(\neg\psi\dot-\neg\varphi)$;
+(A5) $\tfrac12\varphi\dot-(\varphi\dot-\tfrac12\varphi)$;
+(A6) $(\varphi\dot-\tfrac12\varphi)\dot-\tfrac12\varphi$;
+(A7) $(\sup_x\psi\dot-\sup_x\varphi)\dot-\sup_x(\psi\dot-\varphi)$;
+(A8) $\varphi[t/x]\dot-\sup_x\varphi$, provided the substitution is correct;
+(A9) $\sup_x\varphi\dot-\varphi$, provided $x\notin\mathrm{FV}(\varphi)$.

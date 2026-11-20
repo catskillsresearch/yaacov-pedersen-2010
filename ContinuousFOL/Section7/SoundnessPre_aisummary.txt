@@ -1,0 +1,1 @@
+Every generalization of an (A1)–(A9) instance is valid; hence $\Gamma\vdash_Q\varphi\Rightarrow\Gamma\models_Q\varphi$, and satisfiable sets are consistent.

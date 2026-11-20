@@ -1,0 +1,15 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 12, Definition 6.5 (paraphrase)**
+
+An $\mathcal L$-morphism commutes with the function symbols and preserves the values of the relation symbols exactly; it is elementary if it preserves the value of every formula under every assignment. With a metric symbol, every morphism is therefore an isometry.
+
+</div>
+
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 12, Theorem 6.6 (paraphrase)**
+
+A surjective $\mathcal L$-morphism is automatically elementary, by induction on formulae.
+
+</div>

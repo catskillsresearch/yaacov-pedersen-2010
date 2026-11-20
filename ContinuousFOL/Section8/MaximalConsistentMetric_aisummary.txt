@@ -1,0 +1,1 @@
+The metric analogue of the previous module, partly by reduction: metric consistency of $\Gamma$ is plain consistency of $\Gamma$ plus all generalized metric axioms.

@@ -1,0 +1,5 @@
+**Definition** (`LukPropForm.eval`). Given $v_0:I\to\mathbb R$, define $v(P_i)=v_0(i)$, $v(\varphi\dot-\psi)=v(\varphi)\dot-v(\psi)$ and $v(\neg\varphi)=1-v(\varphi)$.
+
+**Lemma** (`eval_mem_Icc`). If $v_0(i)\in[0,1]$ for every $i$, then $v(\varphi)\in[0,1]$ for every formula $\varphi$.
+
+*Proof.* Induction on $\varphi$. Variables hold by hypothesis; a truncated difference of a value in $[0,1]$ and a nonnegative value lies in $[0,1]$; and $1-x\in[0,1]$ when $x\in[0,1]$.

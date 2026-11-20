@@ -1,0 +1,1 @@
+A function on $[0,1]^n$ is piecewise linear if finitely many polyhedral cells cover the cube with an affine formula on each. Such functions are closed under constants, projections, $1-f$, scalar multiples and truncated subtraction, and they satisfy the uniform bound $f\le Ng$ used for semantic iteration.

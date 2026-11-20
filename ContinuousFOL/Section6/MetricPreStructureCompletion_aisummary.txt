@@ -1,0 +1,1 @@
+Constructs $\widehat{\mathfrak M}$: the carrier is the metric completion of $(M,d^{\mathfrak M})$, symbols are extended by uniform continuity, the extensions keep their moduli, $d$ extends to the metric of the completion, and the inclusion is an elementary morphism.

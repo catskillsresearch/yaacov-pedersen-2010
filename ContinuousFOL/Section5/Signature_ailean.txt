@@ -1,0 +1,3 @@
+**Definition** (`Signature`). A continuous signature $\mathcal L$ consists of a type $\mathcal R$ of relation symbols, assumed nonempty, a type $\mathcal F$ of function symbols, arities $n_P$ and $n_f$, and for each symbol and argument index $i$ a function $\delta_{s,i}:\mathbb R\to\mathbb R$ that maps $(0,1]$ into $(0,1]$.
+
+*Remark.* The moduli are total functions on $\mathbb R$ that are only constrained on $(0,1]$; this represents a function $(0,1]\to(0,1]$. Disjointness of $\mathcal R$ and $\mathcal F$ is automatic because they are separate types.

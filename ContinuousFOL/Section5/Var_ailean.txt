@@ -1,0 +1,1 @@
+**Definition** (`Var`). The set of variables is $V=\mathbb N$; the variable $v_i$ is represented by $i$. Equality of variables is decidable, and there are always fresh variables.

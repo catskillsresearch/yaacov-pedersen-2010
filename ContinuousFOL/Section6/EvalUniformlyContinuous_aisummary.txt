@@ -1,0 +1,1 @@
+Definition 6.7 and Theorem 6.8 for metric pre-structures: symbols are jointly uniformly continuous (Remark 5.8), and so are term and formula evaluation as functions of the assignment, in the variables that occur.

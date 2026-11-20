@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 5, Axioms (A1)–(A4) (paraphrase)**
+
+Four schemata axiomatize Łukasiewicz logic. Reading $\psi\dot-\varphi$ as "$\psi$ is at most $\varphi$": (A1) $\varphi\dot-\psi$ is at most $\varphi$; (A2) $(\chi\dot-\varphi)\dot-(\chi\dot-\psi)$ is at most $\psi\dot-\varphi$; (A3) $\varphi\dot-(\varphi\dot-\psi)$ is at most $\psi\dot-(\psi\dot-\varphi)$ (both express the minimum); (A4) $\varphi\dot-\psi$ is at most $\neg\psi\dot-\neg\varphi$ (contraposition).
+
+</div>

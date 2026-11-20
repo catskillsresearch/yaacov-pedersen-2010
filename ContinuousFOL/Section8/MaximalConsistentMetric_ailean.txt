@@ -1,0 +1,9 @@
+**Definition** (`MaximalConsistentMetric`). As before, with $\vdash_Q$ including (A10)–(A14).
+
+**Lemma** (`consistentMetricQ_iff`). $\Gamma$ is metrically consistent iff $\Gamma\cup\mathrm{Ax}_{10\text{–}14}$ is consistent in the plain calculus, where $\mathrm{Ax}_{10\text{–}14}$ is the set of generalizations of metric axiom instances.
+
+*Proof.* A metric derivation is a plain derivation that uses metric axioms as premises, and conversely.
+
+**Lemmas.** Metric inconsistency iff proving $1$; a proof of $2^{-n}$ gives a proof of $1$; a metrically maximal consistent set is maximal consistent for the plain calculus (plain provability is weaker, so the archimedean clause still holds); and it is deductively closed.
+
+**Theorems.** Lemma 8.6, Theorem 8.10 (Zorn's lemma as before, with metric proof compactness), Lemma 8.11 and Lemma 8.12, all for the metric calculus, with the same proofs as in the plain case.

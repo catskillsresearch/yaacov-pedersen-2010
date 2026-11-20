@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 8, Definition 5.4 (paraphrase)**
+
+A signature with a metric singles out one binary relation symbol $d$. Unlike equality in classical logic, $d$ is a relation symbol, so $d\,t_0t_1$ is a formula with a truth value, not a term.
+
+</div>

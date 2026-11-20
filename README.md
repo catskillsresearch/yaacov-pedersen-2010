@@ -9,7 +9,7 @@ J. Symbolic Logic **75** (2010) 168–190
 
 Standalone package aimed at [Palomar](https://palomar-registry.org/about)
 registration (Challenge / Solution / `comparator.json` / `formalization.yaml`).
-See `PROVENANCE.md`.
+Palomar Registration: TBD. See `PROVENANCE.md`.
 
 ## Build
 
@@ -86,16 +86,30 @@ list of results, files, axioms and verbatim paper quotes: `formalization.yaml`
 
 ## Completed proof (paper writeup)
 
+The `.md` tree is the source of the writeup; it is flattened to `arxiv.md`,
+translated to `arxiv.tex`, and compiled (pdfLaTeX + BibTeX, `references.bib`)
+to `ContinuousFOL.pdf`. Layout follows the lyasoff2016 repository.
+
 | File | Role |
 |------|------|
-| [`ContinuousFOL.md`](ContinuousFOL.md) | Paper-facing TOC |
-| [`ContinuousFOL/SectionN.md`](ContinuousFOL/) | Section barrels + subsection dependency SVGs |
-| [`ContinuousFOL/SectionN/Name.md`](ContinuousFOL/) | One leaf per `.lean` (`*_aisummary.txt`, `*_math.txt`, `*_ailean.txt`, Lean `@import`) |
+| [`ContinuousFOL.md`](ContinuousFOL.md) | Root: front matter (`bibliography: references.bib`) and table of contents |
+| [`ContinuousFOL/Abstract.md`](ContinuousFOL/Abstract.md) | Abstract (incl. the added-premise note for Facts 4.2/4.3) |
+| [`ContinuousFOL/Introduction.md`](ContinuousFOL/Introduction.md) | Section graph (`ContinuousFOL.svg`), faithfulness notes, sources / software / AI assistance |
+| [`ContinuousFOL/SectionN.md`](ContinuousFOL/) | §1–§9 barrels: orientation, deviation notes, module graph `SectionN.svg`, links to leaves |
+| [`ContinuousFOL/SectionN/Name.md`](ContinuousFOL/) | One leaf per `.lean`: paraphrased paper box (`*_math.txt`), English recap of the theorems and proofs (`*_aisummary.txt`, `*_ailean.txt`), full Lean `@import` |
+| [`ContinuousFOL/module_writeup.json`](ContinuousFOL/module_writeup.json) | Source database for the leaf sidecars |
+| [`references.bib`](references.bib) | Bibliography (paper, literature, Lean/Mathlib and pinned dependencies, AI model cards) |
 
 ```bash
-python3 scripts/compile_md_tree.py --tex-only   # → arxiv.md + arxiv.tex
-bash scripts/build_arxiv_pdf.sh                 # → ContinuousFOL.pdf (needs latexmk)
+python3 scripts/scaffold_continuousfol_writeup.py          # regenerate leaves, barrels and graphs from module_writeup.json
+python3 scripts/scaffold_continuousfol_writeup.py --check  # verify every module has a leaf and nothing is stale
+python3 scripts/section_deps_graph.py                      # ContinuousFOL.svg (section dependency graph)
+bash scripts/build_arxiv_pdf.sh                            # md → arxiv.tex → ContinuousFOL.pdf (needs latexmk, bibtex)
 ```
+
+The PDF has a title page (with the Palomar registration line, currently TBD),
+a table of contents on its own page, pretty-printed Lean listings with Unicode
+mapped to LaTeX, and a BibTeX bibliography.
 
 ## Palomar packaging
 
@@ -107,7 +121,7 @@ bash scripts/build_arxiv_pdf.sh                 # → ContinuousFOL.pdf (needs l
 | [`formalization.yaml`](formalization.yaml) | v0.4 self-report |
 | [`PROVENANCE.md`](PROVENANCE.md) | Authorship; source-author non-involvement |
 | [`LICENSE`](LICENSE) / [`NOTICE`](NOTICE) | Apache-2.0 + third-party source notice |
-| [`scripts/ai_model_cards.py`](scripts/ai_model_cards.py) | AI model-card registry (**includes Gemini 4 Carbon**) |
+| [`scripts/ai_model_cards.py`](scripts/ai_model_cards.py) | AI model-card registry (Grok Bot, Gemini 4 Carbon) |
 
 ```bash
 bash scripts/palomar_preflight.sh   # Palomar packaging checks
@@ -121,10 +135,8 @@ formalization. Author: Lars Warren Ericson (no other collaborators).
 
 Recorded in `scripts/ai_model_cards.py` and `formalization.yaml` → `automation`:
 
-- Cursor Grok 4.7
-- Cursor Composer 2.5
-- Claude Fable 5.2
-- **Google Gemini 4 Carbon** (required for this project)
+- Grok Bot
+- Google Gemini 4 Carbon
 
 ## Proof-hole board
 

@@ -1,0 +1,13 @@
+**Definition.** `vars` $\varphi$ is the finite set of variables occurring in $\varphi$.
+
+**Lemma** (`eval_eqOn`). Two assignments agreeing on the variables of $\varphi$ give $\varphi$ the same value.
+
+**Definition.** For a finite set $s$ of variables, `restrictTo` sends an assignment to the vector of its values on $s$ (a point of $\mathbb R^{|s|}$), and `extendOn` turns a vector back into an assignment that is $0$ off $s$. Restricting a $[0,1]$-valued assignment lands in the cube, extending a point of the cube gives a $[0,1]$-valued assignment, and extending a restriction agrees with the original assignment on $s$, hence on every formula whose variables lie in $s$.
+
+**Lemma** (`hasPL_eval`). If the variables of $\varphi$ lie in $s$, the function $x\mapsto v_x(\varphi)$ on $[0,1]^{|s|}$ is piecewise linear.
+
+*Proof.* Induction on $\varphi$, using closure of piecewise-linear functions under projections, $1-f$, truncated subtraction (and halving, for continuous formulae).
+
+**Theorem** (`semantic_iteration`). Let $\Sigma$ be finite. If $\Sigma\cup\{\psi\}\models\varphi$ then there is $n$ with $\Sigma\models\varphi\dot-n\psi$.
+
+*Proof.* Let $s$ collect the variables of $\Sigma$, $\varphi$ and $\psi$, and view every formula as a piecewise-linear function on the cube $[0,1]^{|s|}$. The hypothesis says exactly that $\varphi$ vanishes wherever all members of $\Sigma$ and $\psi$ vanish, and $\psi\ge0$. The cube lemma gives $N$ with $v(\varphi)\le N\,v(\psi)$ at every point where $\Sigma$ vanishes. Now take any model $v$ of $\Sigma$; its restriction to $s$ is such a point, so $v(\varphi)\le Nv(\psi)$, and therefore $v(\varphi\dot-N\psi)=\max(v(\varphi)-Nv(\psi),0)=0$.

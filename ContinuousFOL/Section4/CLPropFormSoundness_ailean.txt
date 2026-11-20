@@ -1,0 +1,7 @@
+**Lemma** (`axiom_eval_zero`). Every instance of (A1)–(A6) evaluates to $0$.
+
+*Proof.* (A1)–(A4) as in the Łukasiewicz case. For (A5) and (A6), with $a=v(\varphi)\ge0$ we have $a\dot-a/2=a/2$, so both $\tfrac a2\dot-(a\dot-\tfrac a2)$ and $(a\dot-\tfrac a2)\dot-\tfrac a2$ are $0$.
+
+**Theorem** (`soundness`). If $\Sigma\vdash^{\mathrm{CL}}\varphi$ then $\Sigma\models^{\mathrm{CL}}\varphi$.
+
+*Proof.* Induction on the derivation exactly as for Łukasiewicz logic: modus ponens preserves value $0$ since $v(\psi)\le v(\varphi)+v(\psi\dot-\varphi)$.

@@ -1,0 +1,1 @@
+Defines real truncated subtraction $x\dot-y=\max(x-y,0)$ with the infix notation `∸`, its iterate $b\dot-ka$, and the elementary inequalities about it that later soundness and evaluation proofs use (for example the real form of axiom (A2)).

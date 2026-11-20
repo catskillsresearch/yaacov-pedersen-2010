@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 13, Theorem 6.9 (paraphrase)**
+
+Every pre-structure for a metric signature maps elementarily into a complete continuous structure for the same signature. The key fact is that a map with a modulus of uniform continuity, defined on a subset of a metric space and valued in a complete space, extends uniquely to the closure with the same modulus; so the moduli of the signature survive the completion.
+
+</div>

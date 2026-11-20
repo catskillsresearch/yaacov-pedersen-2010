@@ -1,0 +1,47 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 18, Lemma 8.6 (paraphrase)**
+
+Among the consistent extensions of a consistent $\Gamma$, the maximal ones are characterized by three conditions: they are consistent, they contain every formula they prove to be below all $2^{-n}$, and they contain one of $\varphi\dot-\psi$, $\psi\dot-\varphi$ for all $\varphi,\psi$.
+
+</div>
+
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 19, Definition 8.8 (paraphrase)**
+
+A maximal consistent set is a consistent set that is closed under the archimedean rule above and decides every comparison between two formulae. The classical definition ($\varphi$ or $\neg\varphi$ in the set) is wrong here, since neither $\tfrac12$ nor $\neg\tfrac12$ should belong to a consistent set.
+
+</div>
+
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 19, Remark 8.9 (paraphrase)**
+
+Maximal consistent sets are deductively closed: a formula belongs to the set exactly when the set proves it.
+
+</div>
+
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 19, Theorem 8.10 (paraphrase)**
+
+By Zorn's lemma, every consistent set is contained in a maximal consistent one.
+
+</div>
+
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 19, Lemma 8.11 (paraphrase)**
+
+If $\sup_x\varphi\dot-p$ lies in a maximal consistent $\Delta$, then for any term $t$ some equivalent variant $\varphi'$ of $\varphi$ (renaming bound variables away from $t$) has $\varphi'[t/x]\dot-p\in\Delta$.
+
+</div>
+
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 20, Lemma 8.12 (paraphrase)**
+
+For a maximal consistent $\Delta$ and any $\varphi$, the dyadic lower bounds $p$ with $p\dot-\varphi\in\Delta$ and the dyadic upper bounds $q$ with $\varphi\dot-q\in\Delta$ meet: their supremum equals their infimum. This common value will be the truth value of $\varphi$ in the Henkin model.
+
+</div>

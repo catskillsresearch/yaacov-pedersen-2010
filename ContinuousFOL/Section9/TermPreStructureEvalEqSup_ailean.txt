@@ -1,0 +1,15 @@
+Let $\Delta$ be maximal consistent and Henkin complete, $\mathfrak M$ its term pre-structure and $\sigma$ the identity. Write $A(\varphi)=\{p:\ p\dot-\varphi\in\Delta\}$ and $B(\varphi)=\{q:\ \varphi\dot-q\in\Delta\}$ (dyadic values).
+
+**Lemma** (squeeze). If $r$ satisfies $p\le r$ for all $p\in A(\varphi)$ and $r\le q$ for all $q\in B(\varphi)$, then $r=\sup A(\varphi)$. This is Lemma 8.12. Also, no dyadic constant of positive value lies in $\Delta$.
+
+**Lemmas** (connective cases). If the claim holds for $\alpha$ and $\beta$, it holds for $\neg\alpha$, $\tfrac12\alpha$ and $\alpha\dot-\beta$.
+
+*Proof.* In each case show that the candidate value is squeezed by the cuts. For $\tfrac12\alpha$: if $p\dot-\tfrac12\alpha\in\Delta$ then, by a valid (hence provable, Fact 4.5) propositional schema and deductive closure, a dyadic $p'$ with $p\le\tfrac12p'$ lies in $A(\alpha)$, so $p\le\tfrac12\sup A(\alpha)$; symmetrically for upper bounds. $\neg$ and $\dot-$ are handled the same way, using that $\neg$ swaps lower and upper cuts and that bounds on $\alpha$ and $\beta$ give bounds on $\alpha\dot-\beta$ by monotonicity schemata.
+
+**Theorem** (`termPreStructure_eval_eq_sup`). $\mathfrak M(\varphi,\sigma)=\sup A(\varphi)$ for every $\varphi$.
+
+*Proof.* Strong induction on the rank, for all formulae of that rank simultaneously (needed because Lemma 8.11 replaces $\varphi$ by an equivalent formula of the same rank). Atomic formulae hold by definition, since every term denotes itself. The connectives use the lemmas above. For $\varphi=\sup_x\psi$, both inequalities are needed.
+
+(a) Lower bounds: if $p<q$ are dyadics with $q<\sup A(\sup_x\psi)$, Henkin completeness gives $c$ with $(\sup_x\psi\dot-q)\wedge(p\dot-\psi[c/x])\in\Delta$; since a larger $r>q$ is in $A(\sup_x\psi)$, the first conjunct is refuted in $\Delta$, so $p\dot-\psi[c/x]\in\Delta$. By the induction hypothesis (lower rank) and the Substitution Lemma, $\mathfrak M(\psi,\sigma^c_x)\ge p$. Hence the supremum of values is at least $\sup A(\sup_x\psi)$.
+
+(b) Upper bounds: if $\sup_x\psi\dot-q\in\Delta$, then for every term $t$ Lemma 8.11 gives $\psi'\equiv\psi$ of the same rank with $\psi'[t/x]\dot-q\in\Delta$; the induction hypothesis and the Substitution Lemma give $\mathfrak M(\psi,\sigma^t_x)=\mathfrak M(\psi'[t/x],\sigma)\le q$. Hence the supremum of values is at most every $q\in B(\sup_x\psi)$, and the squeeze lemma finishes.

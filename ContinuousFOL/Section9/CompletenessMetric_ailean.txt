@@ -1,0 +1,5 @@
+**Theorem** (`completeness_metric`). If $\Gamma$ is metrically consistent then $\Gamma$ is completely satisfiable.
+
+*Proof.* Take a metric pre-structure model of $\Gamma$ (Henkin) and map it elementarily into its metric completion (Theorem 6.9); the completion is a continuous structure satisfying $\Gamma$.
+
+**Theorems.** Satisfiability in metric pre-structures and complete satisfiability do not depend on the universe, and $\Gamma$ is metrically consistent iff it is completely satisfiable in any universe (completeness plus soundness).

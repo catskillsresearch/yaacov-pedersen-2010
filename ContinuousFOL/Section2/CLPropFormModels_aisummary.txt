@@ -1,0 +1,1 @@
+Models, satisfiability and semantic entailment for continuous propositional formulae.

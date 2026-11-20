@@ -1,0 +1,1 @@
+Every axiom (A1)–(A4) evaluates to $0$, and therefore $\Sigma\vdash^{\mathrm L}\varphi$ implies $\Sigma\models^{\mathrm L}\varphi$.

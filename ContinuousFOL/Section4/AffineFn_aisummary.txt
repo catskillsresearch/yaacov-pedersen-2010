@@ -1,0 +1,1 @@
+Affine maps $x\mapsto c+\sum_i a_ix_i$ on $\mathbb R^n$ as data (coefficients and constant), with their algebra and the fact that they respect affine combinations and are continuous. These are the pieces of the piecewise-linear functions used in the semantic iteration lemma.

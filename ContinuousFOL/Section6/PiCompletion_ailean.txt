@@ -1,0 +1,7 @@
+**Definition** (`piCoe`). The componentwise inclusion $\alpha^n\to\hat\alpha^n$.
+
+**Lemma.** It is an isometry for the sup-metric and has dense range.
+
+*Proof.* Distances are computed coordinatewise; density holds because a finite product of dense subsets is dense in the product.
+
+**Definition** (`finPiCompletion`). Hence $\hat\alpha^n$, with `piCoe`, satisfies the universal property of the completion of $\alpha^n$: it is complete, Hausdorff, and contains a dense uniform-embedded copy of $\alpha^n$.

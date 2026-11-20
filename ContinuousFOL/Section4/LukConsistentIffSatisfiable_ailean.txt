@@ -1,0 +1,5 @@
+**Theorem** (`luk_consistent_iff_satisfiable`). If the set $I$ of propositional variables is nonempty, then a set $\Sigma$ of Łukasiewicz formulae is consistent iff it is satisfiable.
+
+*Proof.* Consistent implies satisfiable for every $I$, by compactness and finite strong completeness; satisfiable implies consistent because $\neg(P\dot-P)$ has value $1$ in every model and so, by soundness, is unprovable.
+
+**Remark** (added premise). If $I=\emptyset$ there are no formulae, so $\emptyset$ is satisfiable yet vacuously inconsistent; this is proved as `LukPropForm.consistent_iff_satisfiable_fails_empty`.

@@ -1,0 +1,1 @@
+**Definition** (`EntailsPre`). $\Gamma\models_Q\varphi$ iff for every pre-structure $\mathfrak M$ (in universe $u$) and assignment $\sigma$ with $(\mathfrak M,\sigma)\models_Q\Gamma$, $\mathfrak M(\varphi,\sigma)=0$. `EntailsMetricPre` is the same with metric pre-structures.

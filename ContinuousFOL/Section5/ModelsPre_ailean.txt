@@ -1,0 +1,3 @@
+**Definition** (`ModelsPre`). $(\mathfrak M,\sigma)\models_Q\Gamma$ iff $\mathfrak M(\varphi,\sigma)=0$ for every $\varphi\in\Gamma$.
+
+**Definition.** $\Gamma$ is satisfiable (in universe $u$) iff some pre-structure in that universe and some assignment model it; for a signature with a metric, `SatisfiableMetricPre` requires a metric pre-structure.

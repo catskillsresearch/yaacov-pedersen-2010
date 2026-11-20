@@ -1,0 +1,1 @@
+**Definitions.** $s[t/x]$ replaces every occurrence of $x$ in $s$ by $t$. For a $0$-ary function symbol $c$, $s[x/c]$ replaces every occurrence of the constant $c$ by the variable $x$.

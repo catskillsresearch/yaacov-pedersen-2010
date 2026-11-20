@@ -1,0 +1,15 @@
+**Definition.** Cells can be intersected, cut by one more inequality $a\le0$, or cut to the hyperplane $a=0$; the whole cube is a cell. An *affine chart* is a cell with an affine function on it. A function $f$ is *piecewise linear* (`HasPL f`) if there is a finite list of charts whose cells cover $[0,1]^n$ and on each of which $f$ agrees with the chart's affine function.
+
+**Lemma.** Constants and coordinate projections are piecewise linear (one chart, the cube). If $f$ is piecewise linear so are $1-f$ and $cf$.
+
+**Lemma** (`HasPL.pair`, common refinement). For piecewise-linear $f,g$ there is one finite cover by cells on each of which both $f$ and $g$ are affine.
+
+*Proof.* Intersect each cell of the first cover with each cell of the second.
+
+**Lemma** (`hasPL_tsub`). If $f,g$ are piecewise linear, so is $x\mapsto f(x)\dot-g(x)$.
+
+*Proof.* On a common refinement cell where $f=a$ and $g=b$ are affine, split the cell by the inequality $a-b\le0$: on that part $f\dot-g=0$, and on the part cut by $b-a\le0$ it equals $a-b$. The two parts cover the cell.
+
+**Lemma** (`semantic_iteration_cube`). Let $h_1,\dots,h_k,f,g$ be piecewise linear on $[0,1]^n$ with $g\ge0$, and suppose that $f(x)=0$ at every point of the cube where all $h_j$ and $g$ vanish. Then there is $N$ with $f(x)\le Ng(x)$ at every point where all $h_j$ vanish.
+
+*Proof.* Refine to finitely many cells on which $f$, $g$ and every $h_j$ are affine, and on each cell cut down to the set where all $h_j$ vanish (again a cell, by equalizing). On each such cell the hypotheses of the bounded-ratio lemma hold, giving an $N$ per cell; since the bound $f\le Ng$ is monotone in $N$, the maximum of these finitely many $N$ works everywhere.

@@ -1,0 +1,1 @@
+$\psi\dot-n\varphi$ for first-order formulae.

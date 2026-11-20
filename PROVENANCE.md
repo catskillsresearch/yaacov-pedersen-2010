@@ -7,7 +7,8 @@ first-order logic*, Journal of Symbolic Logic **75** (2010) 168–190
 independent formalization.
 
 **Itaï Ben Yaacov and Arthur Paul Pedersen did not participate in, review, or
-endorse this formalization.** There are no other human collaborators. The Lean
+endorse this formalization.** Dana Scott has contacted Pedersen about it; no
+reply has been received yet. There are no other human collaborators. The Lean
 development was produced by Lars Warren Ericson with AI-agent assistance under
 his direction and review. The source paper is cited as literature only and is
 not licensed under this repository's Apache-2.0 terms (see `NOTICE`).
@@ -15,8 +16,8 @@ not licensed under this repository's Apache-2.0 terms (see `NOTICE`).
 **This repository is intended for standalone Palomar registration**, for the
 Ben Yaacov–Pedersen 2010 continuous-logic completeness development alone,
 following the Challenge / Solution / `comparator.json` / `formalization.yaml`
-pattern. Registration is pending; the registry id will be recorded here once
-assigned.
+pattern. Palomar Registration: TBD (the registry id will be recorded here once
+assigned).
 
 ## Framing
 
@@ -50,9 +51,11 @@ project-defined `axiom`s. Intentional challenge stubs in
 ## AI assistance
 
 Model cards for this project are listed in `scripts/ai_model_cards.py` and
-mirrored under `automation.methods` in `formalization.yaml`. The registry
-**includes Google Gemini 4 Carbon** alongside Cursor Grok 4.7, Cursor Composer
-2.5, and Claude Fable 5.2.
+mirrored under `automation.methods` in `formalization.yaml`: Grok Bot and
+Google Gemini 4 Carbon. Grok Bot also wrote the paraphrased paper boxes and the
+mathematical-English module summaries of the writeup
+(`ContinuousFOL/module_writeup.json`). Lars Warren Ericson directed and reviewed
+the work and takes responsibility for it.
 
 ## Deviations from the paper (errata)
 

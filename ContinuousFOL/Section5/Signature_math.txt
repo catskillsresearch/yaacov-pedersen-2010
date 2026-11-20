@@ -1,0 +1,15 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 8, Definition 5.2 (paraphrase)**
+
+A continuous signature consists of a non-empty set of relation symbols, a disjoint set of function symbols, an arity for every symbol, and for every symbol $s$ and argument place $i<n_s$ a modulus of uniform continuity $\delta_{s,i}:(0,1]\to(0,1]$.
+
+</div>
+
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 8, Remark 5.3 (paraphrase)**
+
+The moduli are not symbols of the language; they are actual functions on $(0,1]$ that will constrain how the symbols may be interpreted.
+
+</div>

@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 16, Lemma 8.3 (paraphrase)**
+
+If $y$ does not occur in $\varphi$, then $\varphi\dot-\varphi\{y/x\}$ and $\varphi\{y/x\}\dot-\varphi$ are both provable. The paper proves this by induction on $\varphi$, using propositional tautologies from §4 for the connectives and (A7)–(A9) with generalization for the quantifier step.
+
+</div>

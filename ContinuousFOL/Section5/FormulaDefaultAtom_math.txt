@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 6, Notation 3.3 (paraphrase)**
+
+The constant $1$ is written as $\neg(\varphi\dot-\varphi)$, which requires some formula $\varphi$ to exist; in first-order logic an atomic formula is always available because there is at least one relation symbol.
+
+</div>

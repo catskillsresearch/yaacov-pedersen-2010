@@ -1,0 +1,1 @@
+Free, bound and all variables of a formula, and the sup-closure $\sup_{x_1}\cdots\sup_{x_k}\varphi$ that binds all free variables.

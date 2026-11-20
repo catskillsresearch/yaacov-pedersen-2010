@@ -1,0 +1,1 @@
+Lemma 8.5 (i) and (ii), with and without a metric.

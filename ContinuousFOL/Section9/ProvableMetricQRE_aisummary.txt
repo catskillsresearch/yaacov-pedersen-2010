@@ -1,0 +1,1 @@
+Proofs as finite sequences; the set of codes of formulae provable from an r.e. premise set is r.e.

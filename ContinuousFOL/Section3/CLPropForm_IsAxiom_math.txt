@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 5, Axioms (A5)–(A6) (paraphrase)**
+
+Continuous logic adds two schemata about halving to (A1)–(A4): (A5) $\tfrac12\varphi$ is at most $\varphi\dot-\tfrac12\varphi$, and (A6) $\varphi\dot-\tfrac12\varphi$ is at most $\tfrac12\varphi$. Together they force $\tfrac12\varphi$ to be exactly half of $\varphi$ under the intended semantics.
+
+</div>

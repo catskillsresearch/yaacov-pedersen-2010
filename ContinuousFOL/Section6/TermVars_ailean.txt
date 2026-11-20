@@ -1,0 +1,1 @@
+**Definition** (`Term.vars`). $\mathrm{vars}(x)=\{x\}$ and $\mathrm{vars}(f(t_0,\dots))=\bigcup_i\mathrm{vars}(t_i)$.

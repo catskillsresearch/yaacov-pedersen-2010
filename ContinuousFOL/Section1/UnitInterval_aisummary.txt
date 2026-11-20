@@ -1,0 +1,1 @@
+Two one-line facts: $[0,1]$ is closed under $x\mapsto1-x$ and under $x\mapsto x/2$.

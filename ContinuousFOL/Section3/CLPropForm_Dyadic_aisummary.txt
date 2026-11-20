@@ -1,0 +1,1 @@
+Translates a syntactic dyadic code into a continuous formula, given an anchor formula used to build $1$.

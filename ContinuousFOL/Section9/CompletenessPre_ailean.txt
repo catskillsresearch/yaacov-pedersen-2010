@@ -1,0 +1,5 @@
+**Theorem** (`completeness_pre`, Theorem 9.5). If $\Gamma$ is consistent then $\Gamma$ is satisfiable (in universe $0$).
+
+*Proof.* The Henkin model $(\mathfrak M,\sigma)$ satisfies $\Delta\supseteq e[\Gamma]$; its reduct to $\mathcal L$ gives every $\varphi\in\Gamma$ the value $\mathfrak M(e(\varphi),\sigma)=0$.
+
+**Theorem.** Satisfiability does not depend on the universe: a model in universe $0$ lifts to every universe, and a model in any universe makes $\Gamma$ consistent (soundness), hence satisfiable in universe $0$. Consequently $\Gamma$ is consistent iff satisfiable, in any universe.

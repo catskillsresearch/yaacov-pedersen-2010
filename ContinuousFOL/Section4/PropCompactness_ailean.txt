@@ -1,0 +1,23 @@
+**Lemma** (`exists_common_zero`). If continuous functions $f_j:[0,1]^I\to\mathbb R$ have a common zero in the cube on every finite subfamily, they have a common zero in the cube.
+
+*Proof.* The cube is compact by Tychonoff, and the zero sets are closed sets with the finite intersection property.
+
+**Lemma.** For a Łukasiewicz or continuous formula, $v\mapsto v(\varphi)$ is continuous on $\mathbb R^I$, since $\dot-$, $1-x$ and $x/2$ are continuous.
+
+**Theorem** (`satisfiable_of_finite`, compactness). A set of formulae is satisfiable if each finite subset is.
+
+**Theorem** (`satisfiable_of_consistent`). For any $I$, a consistent $\Gamma$ is satisfiable (Łukasiewicz and continuous versions).
+
+*Proof.* If not, compactness gives a finite unsatisfiable $\Gamma_0\subseteq\Gamma$. Then $\Gamma_0\models\varphi$ vacuously for every $\varphi$, so by finite strong completeness $\Gamma_0\vdash\varphi$ and hence $\Gamma\vdash\varphi$ for every $\varphi$: $\Gamma$ is inconsistent.
+
+**Theorem** (`consistent_of_satisfiable`). If there is at least one propositional variable $P$, a satisfiable $\Gamma$ is consistent.
+
+*Proof.* Let $v$ satisfy $\Gamma$. The formula $\neg(P\dot-P)$ has value $1$ under $v$, so by soundness it is not provable from $\Gamma$.
+
+**Theorem** (`consistent_iff_satisfiable`, Facts 4.2 and 4.3). If $I$ is nonempty, $\Gamma$ is consistent iff it is satisfiable.
+
+**Theorem** (`consistent_iff_satisfiable_fails_empty`). With no propositional variables there are no formulae; then $\emptyset$ is satisfiable but, vacuously, inconsistent, so the equivalence fails as literally stated.
+
+**Theorem** (`entails_iff_forall_provable_tsub_pow2Neg`, Fact 4.4). $\Gamma\models\varphi$ iff $\Gamma\vdash\varphi\dot-2^{-n}$ for all $n$, where the constant $2^{-n}$ is the dyadic formula built from $\varphi$.
+
+*Proof.* ($\Leftarrow$) By soundness every model has $v(\varphi)\le2^{-n}$ for all $n$, hence $v(\varphi)=0$. ($\Rightarrow$) Fix $n$. The conditions "every premise is $0$" and "$2^{-n}\dot-\varphi=0$" (i.e. $\varphi\ge2^{-n}$) have no common zero, since a common zero would be a model of $\Gamma$ with $\varphi\ne0$. By the compactness lemma some finite subfamily already has no common zero; let $\Gamma_0$ be the premises occurring in it. Then $\Gamma_0\models\varphi\dot-2^{-n}$, finite strong completeness gives $\Gamma_0\vdash\varphi\dot-2^{-n}$, and monotonicity gives the claim for $\Gamma$.

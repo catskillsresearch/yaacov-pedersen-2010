@@ -1,0 +1,1 @@
+Fact 4.4. The constant $2^{-n}$ is built from $\varphi$ itself (with $1:=\neg(\varphi\dot-\varphi)$ as in Notation 3.3), so no assumption on the variable set is needed.

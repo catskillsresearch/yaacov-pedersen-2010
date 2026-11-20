@@ -1,0 +1,1 @@
+**Definitions.** $\inf_x\varphi:=\neg\sup_x\neg\varphi$; $\varphi\wedge\psi:=\varphi\dot-(\varphi\dot-\psi)$; $\varphi\vee\psi:=\neg(\neg\varphi\wedge\neg\psi)$; $|\varphi-\psi|:=(\varphi\dot-\psi)\vee(\psi\dot-\varphi)$; $\varphi\oplus\psi:=\neg(\neg\varphi\dot-\psi)$ (truncated addition); and for a metric signature, $d(t_0,t_1)$ is the metric symbol applied to $t_0,t_1$.

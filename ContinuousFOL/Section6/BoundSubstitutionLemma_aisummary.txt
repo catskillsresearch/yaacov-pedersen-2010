@@ -1,0 +1,1 @@
+Renaming a bound variable to a variable absent from the formula preserves the value; iterating over a finite set of variables yields Lemma 6.4, for plain and for metric equivalence.

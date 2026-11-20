@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 18, Lemma 8.5 (paraphrase)**
+
+Two ways to extend a consistent set: (i) a formula that the set proves to be below every $2^{-n}$ can be added consistently; (ii) for any two formulae, one of the two comparisons $\varphi\dot-\psi$, $\psi\dot-\varphi$ can be added consistently.
+
+</div>

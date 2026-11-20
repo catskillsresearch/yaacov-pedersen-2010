@@ -1,0 +1,1 @@
+Proposition 9.2 with and without a metric. The tower of signatures is replaced by one inductive type of codes; consistency is proved by adjoining Henkin axioms one at a time in order of decreasing code size, and conservativity uses a translation that turns new constants into a fresh variable.

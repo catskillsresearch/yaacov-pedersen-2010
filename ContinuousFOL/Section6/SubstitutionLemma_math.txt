@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 11, Lemma 6.2 (paraphrase)**
+
+If $\varphi[t/x]$ is a correct substitution, then evaluating it under $\sigma$ is the same as evaluating $\varphi$ under the assignment that sends $x$ to the value of $t$.
+
+</div>

@@ -1,0 +1,1 @@
+$\Sigma\vdash^{\mathrm{CL}}\varphi$ as the closure of axioms and hypotheses under modus ponens, and consistency.

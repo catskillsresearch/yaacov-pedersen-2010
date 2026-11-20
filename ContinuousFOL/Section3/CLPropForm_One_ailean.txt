@@ -1,0 +1,1 @@
+**Definition** (`CLPropForm.one`). For any formula $\varphi_0$ put $1_{\varphi_0}:=\neg(\varphi_0\dot-\varphi_0)$. Every truth assignment gives it the value $1-0=1$, whatever $\varphi_0$ is; making the anchor explicit records that the abbreviation needs some formula to exist.

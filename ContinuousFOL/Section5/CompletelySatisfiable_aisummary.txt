@@ -1,0 +1,1 @@
+The variants of satisfiability and entailment that quantify only over complete continuous structures.

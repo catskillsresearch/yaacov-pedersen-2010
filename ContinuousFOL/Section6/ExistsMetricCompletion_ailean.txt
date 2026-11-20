@@ -1,0 +1,3 @@
+**Theorem** (`exists_metric_completion`, Theorem 6.9). For every metric pre-structure $\mathfrak M$ (in universe $u$) there is a continuous structure $\widehat{\mathfrak M}$ in the same universe and an elementary $\mathcal L$-morphism $\mathfrak M\to\widehat{\mathfrak M}$.
+
+*Proof.* Take the metric completion and its canonical elementary morphism.

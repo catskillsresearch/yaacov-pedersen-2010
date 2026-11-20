@@ -1,0 +1,1 @@
+$\mathfrak M(\varphi,\sigma)$ by recursion, its range $[0,1]$, and the values of the constants $1$ and of dyadic formulae.

@@ -1,0 +1,5 @@
+**Lemma** (normal form). A predicate $p$ on a primcodable type is r.e. iff $p(a)\iff\exists n\ q(a,n)$ for some computable Boolean $q$.
+
+**Lemmas** (closure). R.e. predicates are closed under computable precomposition, $\vee$, $\wedge$, existential quantification over a primcodable type, and bounded universal quantification. Computable predicates are closed under $\wedge$, $\vee$, precomposition, equality of computable functions, bounded $\forall$ and $\exists$, and quantification over the members of a list.
+
+*Proof.* Standard: dovetail the search for witnesses through the pairing function, and decide bounded quantifiers by a primitive recursive loop.

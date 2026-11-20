@@ -1,0 +1,21 @@
+**Definition** (`tsubR`). For real numbers $x,y$ put $x\dot-y:=\max(x-y,0)$.
+
+**Lemma** (basic facts). For all reals: $x\dot-y\ge0$; $x\dot-y=0$ iff $x\le y$; for $z\ge0$, $x\dot-y\le z$ iff $x-y\le z$ iff $x\le y+z$; $x\le y+(x\dot-y)$; and if $x\in[0,1]$, $y\ge0$ then $x\dot-y\in[0,1]$, while for $x,y\ge0$ we have $x\dot-y\le x$.
+
+*Proof.* Each statement is a case distinction on whether $x\le y$, after unfolding the maximum; in each case the claim is a linear inequality.
+
+**Lemma** (`tsub_tsub_le`, the real form of (A2)). For all $a,b,c$: $(c\dot-a)\dot-(c\dot-b)\le b\dot-a$.
+
+*Proof.* Split on $c\le b$ and $c\le a$. If $c\le b$ then $c\dot-b=0$ and the left side is $c\dot-a$, which is $0$ when $c\le a$ and otherwise $c-a\le b-a$. If $c>b$ and $c\le a$ the left side is $0$. If $c>a$ and $c>b$ the left side is $\max((c-a)-(c-b),0)=b\dot-a$.
+
+**Lemma.** For $x,y\ge0$: $x\dot-(x\dot-y)=\min(x,y)$. Also $(1-y)\dot-(1-x)=x\dot-y$ (negation reverses truncated subtraction), and $x\dot-x/2=x/2$ for $x\ge0$.
+
+*Proof.* Case split on $x\le y$ for the minimum; the other two are direct computations of the difference inside the maximum.
+
+**Definition** (`iterSubR`). $b\dot-0a:=b$ and $b\dot-(k+1)a:=(b\dot-ka)\dot-a$.
+
+**Lemma** (`iterSubR_eq`). If $a,b\ge0$ then $b\dot-ka=\max(b-ka,0)$.
+
+*Proof.* Induction on $k$. In the step, if $b\le ka$ both sides are $0$; otherwise $b-ka\ge0$ and subtracting $a$ once more gives $b-(k+1)a$ truncated at $0$.
+
+**Lemma.** $x\dot-0=x$ for $x\ge0$.

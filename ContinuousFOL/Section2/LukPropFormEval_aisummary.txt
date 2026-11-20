@@ -1,0 +1,1 @@
+The value of a Łukasiewicz formula under an assignment $v_0:I\to\mathbb R$, defined by recursion, and the fact that it lies in $[0,1]$ whenever $v_0$ does.

@@ -1,0 +1,21 @@
+Let $A$ be an MV-chain.
+
+**Definition.** The *carry* of $a+b$ is $1$ if $a\oplus b=1$ and $0$ otherwise; the *fractional part* is $a\odot b$ in the first case and $a\oplus b$ in the second. The *digits* of $a+b+c$ are $(a\oplus b\oplus c,\ F(a,b,c),\ a\odot b\odot c)$, from which an integer part ($0$, $1$ or $2$) and a fractional part are read off.
+
+**Lemma** (`fold_eq`). Adding $a$, $b$, $c$ from the left with carries yields the integer and fractional parts read off the digits; the digits are symmetric under all permutations of $a,b,c$.
+
+*Proof.* Case analysis on $a\oplus b\oplus c=1$ and on $F(a,b,c)=1$, using the chain identities. Symmetry in the last two arguments is the theorem $F(x,y,z)=F(x,z,y)$; the other symmetries follow from commutativity.
+
+**Definition** (`ChainGroup A`). Elements are pairs $(n,a)$, $n\in\mathbb Z$, $a\in A$, $a\ne1$, standing for "$n+a$". Addition is $(n,a)+(m,b)=(n+m+\mathrm{carry}(a,b),\ \mathrm{fsum}(a,b))$, zero is $(0,0)$, and the order is lexicographic.
+
+**Theorem.** `ChainGroup A` is a linearly ordered abelian group.
+
+*Proof.* Commutativity and the zero law are immediate; associativity follows from `fold_eq` because both bracketings compute the digits of $a+b+c$, which are symmetric. Negation of $(n,a)$ is $(-n,0)$ if $a=0$ and $(-n-1,\neg a)$ otherwise. The lexicographic order is linear because the MV-order on $A$ is, and it is translation invariant by a case analysis on carries.
+
+**Definition** (`emb`). $u:=(1,0)>0$. Embed $A$ by $x\mapsto(0,x)$ for $x\ne1$ and $1\mapsto u$.
+
+**Lemma.** The embedding is monotone, lands in $[0,u]$, sends only $0$ to $0$, is additive on sums without overflow ($a\odot b=0$), and satisfies $\mathrm{emb}(x\ominus y)=\max(\mathrm{emb}\,x-\mathrm{emb}\,y,0)$ and $\mathrm{emb}(\neg x)=u-\mathrm{emb}\,x$. Hence evaluating a formula in $[0,u]$ at $\mathrm{emb}\circ v$ gives the embedding of its MV-value at $v$.
+
+**Theorem** (`exists_real_of_evalMV_chain_ne_zero`). If a Łukasiewicz formula has a non-zero value in an MV-chain, it has a non-zero value under some real $[0,1]$-assignment.
+
+*Proof.* Its value in $[0,u]$ of the chain group is the embedding of a non-zero element, hence non-zero; now apply the transfer from ordered groups to $[0,1]$.

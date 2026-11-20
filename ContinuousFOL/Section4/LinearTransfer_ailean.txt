@@ -1,0 +1,17 @@
+**Definition.** A constraint in $n$ variables is an integer vector $c$ and a flag; it says $0\le\sum_jc_jx_j$, or $0<\sum_jc_jx_j$ if the flag is set. It makes sense in any ordered abelian group.
+
+**Definition** (Fourier–Motzkin step). Given a list of constraints in $n+1$ variables, keep those whose last coefficient is $0$ (dropping that variable), and for every pair $p$ with positive and $q$ with negative last coefficient add the combination $(-q_{n})\,p+p_n\,q$, whose last coefficient is $0$; it is strict if $p$ or $q$ is.
+
+**Lemma** (`holds_elim`). If $x$ satisfies the system in an ordered abelian group, then the truncation of $x$ satisfies the eliminated system.
+
+*Proof.* Positive integer multiples and sums of nonnegative (positive) elements are nonnegative (positive, if one summand is).
+
+**Lemma** (`exists_between_lists`). Given finitely many real lower bounds $l_p$ and upper bounds $u_q$, each pair compatible (with strict inequality when either bound is strict), there is a real $t$ between all of them, respecting strictness.
+
+*Proof.* Take $t$ between the maximum of the lower bounds and the minimum of the upper bounds, using the midpoint when some inequality must be strict.
+
+**Theorem** (`exists_real_solution`, transfer). If a finite system of such constraints is solvable in a linearly ordered abelian group $G$, it is solvable in $\mathbb R$.
+
+*Proof.* Induction on the number of variables. With no variables each constraint is a statement about $0$, which holds in $G$ iff it holds in $\mathbb R$. In the step, eliminate the last variable: the eliminated system holds at the truncated $G$-solution, so by induction it has a real solution $y'$. Each constraint with positive last coefficient gives a lower bound for the last coordinate in terms of $y'$, each with negative last coefficient an upper bound, and the eliminated combinations say precisely that every lower bound is below every upper bound. Choosing $t$ in between gives a real solution $(y',t)$; constraints not involving the last variable already hold at $y'$.
+
+**Corollary** (`exists_real_solution_fintype`). The same holds for variables indexed by any finite type.

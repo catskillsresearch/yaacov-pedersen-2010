@@ -1,0 +1,1 @@
+**Definition** (`IsSentence`). $\varphi$ is a sentence iff $\mathrm{FV}(\varphi)=\emptyset$.

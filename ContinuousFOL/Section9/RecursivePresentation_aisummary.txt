@@ -1,0 +1,1 @@
+The standing assumption for Corollary 9.11 made explicit: an injective coding of formulae with computable syntactic operations and r.e. logical axioms.

@@ -1,0 +1,1 @@
+Order in the Lindenbaum algebra corresponds to provability of $\alpha\dot-\beta$; every premise set that does not prove $\varphi$ extends to a *linear* one (any two formulae comparable) that still does not prove $\varphi$; and the Lindenbaum algebra of a linear set is totally ordered.

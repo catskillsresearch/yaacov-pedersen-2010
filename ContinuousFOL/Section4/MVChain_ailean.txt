@@ -1,0 +1,13 @@
+**Definition** (`MVChain`). An MV-chain is an MV-algebra whose natural order is total and in which $0\neq1$.
+
+**Lemma** (all MV-algebras). If $x\odot y=0$ then $(x\oplus y)\odot\neg y=x$; if $x\oplus y=1$ then $(x\odot y)\oplus\neg y=x$; and $\neg y$ is the only $x$ with $x\oplus y=1$ and $x\odot y=0$. Being $1$ under $\oplus$ is upward closed and being $0$ under $\odot$ is downward closed.
+
+**Lemma** (chains). In a chain, for all $x,y$: $x\oplus y=1$ or $x\odot y=0$. The meet of two elements is one of them. Cancellation: if $x\oplus y=x\oplus z\neq1$ then $y=z$; if $x\odot y=x\odot z\neq0$ then $y=z$. If $x\oplus y=1$ and $x\oplus z\neq1$ then $(x\odot y)\oplus z=(x\oplus z)\odot y$.
+
+*Proof.* The dichotomy: if $\neg y\le x$ then $x\oplus y\ge\neg y\oplus y=1$; otherwise $x\le\neg y$, i.e. $x\odot y=0$. Cancellation compares $y$ and $z$ (totality) and uses that adding the difference changes a sum below $1$. The mixed identity is a case computation using the first two lemmas.
+
+**Definition** (`digit2`). $F(x,y,z):=(x\odot y)\oplus((x\oplus y)\odot z)$. Think of $x,y,z$ as digits in $[0,1]$: $F$ is the carry of $x+y+z$ into the second place. One also has $F(x,y,z)=(x\oplus y)\odot((x\odot y)\oplus z)$ and $\neg F(x,y,z)=F(\neg x,\neg y,\neg z)$.
+
+**Theorem** (`digit2_symm`). In every MV-chain, $F(x,y,z)=F(x,z,y)$.
+
+*Proof.* If $x\oplus y\oplus z\neq1$, all pairwise products vanish and both sides reduce to the same expression. If $\neg x\oplus\neg y\oplus\neg z\neq1$, apply the previous case to the negations and use $\neg F=F(\neg\cdot)$. Otherwise $x\odot y\odot z=0$ and we split on whether $x\oplus y$ and $x\oplus z$ equal $1$: if both do, the key identity $(x\odot y)\oplus z=(x\odot z)\oplus y$ (proved by a longer computation with cancellation) finishes; if exactly one does, the mixed identity above finishes; if neither does, dualize.

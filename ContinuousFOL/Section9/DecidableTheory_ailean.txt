@@ -1,0 +1,5 @@
+**Definition** (`DegreeUniformlyComputable`). There is a computable $f:\mathbb N\times\mathbb N\to\mathbb Z$ such that for every sentence $\varphi$ and every $n$, $|f(\ulcorner\varphi\urcorner,n)/2^n-\varphi^\circ_T|\le2^{-n}$.
+
+**Definition** (`IsDecidableTheory`). $T$ is decidable if its degrees of truth are uniformly computable in this sense (both clauses of Definition 9.10 amount to this).
+
+**Definition** (`IsAxiomatization`). $\mathrm{Ax}$ axiomatizes $T$ if $\mathrm{Ax}$ consists of sentences and the sentences of $T$ are exactly the sentences $\varphi$ with $\mathrm{Ax}\models_{QC}\varphi$.

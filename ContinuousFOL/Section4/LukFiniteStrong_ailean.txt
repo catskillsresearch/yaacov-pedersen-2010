@@ -1,0 +1,3 @@
+**Theorem** (`provable_of_entails_finset`). If $\Sigma$ is a finite set of Łukasiewicz formulae and $\Sigma\models\varphi$, then $\Sigma\vdash\varphi$.
+
+*Proof.* Induction on $\Sigma$, simultaneously for all $\varphi$. For $\Sigma=\emptyset$ this is weak completeness. If $\Sigma=\Sigma_0\cup\{\psi\}$ and $\Sigma\models\varphi$, the semantic iteration lemma gives $n$ with $\Sigma_0\models\varphi\dot-n\psi$; by induction $\Sigma_0\vdash\varphi\dot-n\psi$, and the deduction theorem turns this into $\Sigma_0\cup\{\psi\}\vdash\varphi$.

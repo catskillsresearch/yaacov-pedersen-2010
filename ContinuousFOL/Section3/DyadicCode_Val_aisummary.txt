@@ -1,0 +1,1 @@
+The real value of a dyadic code, the codes for $0$, $2^{-n}$ and $k2^{-n}$, and the proof of Remark 3.4: the values of codes are exactly the dyadic numbers in $[0,1]$, which are dense there.

@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 21, Theorem 9.4 (paraphrase)**
+
+The Henkin model has the terms as elements; function symbols build terms, and a relation $P$ at terms $\bar t$ gets the value $\sup\{p\in\mathbb D:\ p\dot-P\bar t\in\Delta\}$. The assignment sends each variable to itself, so every term denotes itself.
+
+</div>

@@ -1,0 +1,1 @@
+**Definition** (`rank`). $\mathrm{rank}(P\bar t)=0$; $\mathrm{rank}(\tfrac12\varphi)=\mathrm{rank}(\neg\varphi)=\mathrm{rank}(\sup_x\varphi)=\mathrm{rank}\,\varphi+1$; $\mathrm{rank}(\varphi\dot-\psi)=\mathrm{rank}\,\varphi+\mathrm{rank}\,\psi+1$.

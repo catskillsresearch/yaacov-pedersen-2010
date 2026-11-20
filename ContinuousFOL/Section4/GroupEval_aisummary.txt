@@ -1,0 +1,1 @@
+Evaluates Łukasiewicz formulae in the interval $[0,u]$ of a linearly ordered abelian group ($\Gamma(G,u)$), and proves that a formula which is non-zero there is non-zero under some real $[0,1]$ assignment, by linearizing the formula around the given point and transferring the resulting inequalities to $\mathbb R$.

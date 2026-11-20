@@ -1,0 +1,1 @@
+An embedding $\mathcal L\to\mathcal L'$ that is a bijection on relation symbols, injective on function symbols and preserves arities and moduli; translation of terms and formulae; reducts of $\mathcal L'$-structures; and preservation of truth values under reduct.

@@ -51,26 +51,15 @@ automation:
   methods:
   - method: agent
     models:
-    - Cursor Grok 4.7
+    - Grok Bot
     framework: Cursor
-    role: Primary agent for Lean 4 / Mathlib formalization, lake build repair, vision-OCR alignment, ContinuousFOL
-      writeup, and Palomar packaging.
-  - method: agent
-    models:
-    - Cursor Composer 2.5
-    framework: Cursor
-    role: Routine scaffolding and medium-complexity proof obligations.
-  - method: agent
-    models:
-    - Claude Fable 5.2
-    framework: Cursor
-    role: Substantive Lean repairs and larger proof obligations.
+    role: Agent for Lean 4 / Mathlib formalization and lake build repair; wrote the ContinuousFOL writeup
+      (paraphrased paper boxes and mathematical-English module summaries) and the md -> tex -> pdf pipeline.
   - method: agent
     models:
     - Google Gemini 4 Carbon
     framework: Cursor
-    role: Agent and support passes (gemini-4-carbon). Required model card for this project; listed in
-      scripts/ai_model_cards.py.
+    role: Agent and support passes (gemini-4-carbon).
   - method: manual
     models: []
     role: Lars Warren Ericson chose the formalization route and reviewed the Lean development. The human

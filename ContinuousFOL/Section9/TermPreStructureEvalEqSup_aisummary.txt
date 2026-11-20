@@ -1,0 +1,1 @@
+For $\Delta$ maximal consistent and Henkin complete, $\mathfrak M(\varphi,\sigma)=\sup\{p:\ p\dot-\varphi\in\Delta\}$ for every formula.

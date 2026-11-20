@@ -1,0 +1,17 @@
+**Notation.** Write $\varphi\to\psi$ for $\psi\dot-\varphi$ (so "$\to$" is provable exactly when the consequent is at most the antecedent), and $\varphi\vee\psi$ for $(\varphi\to\psi)\to\psi$.
+
+**Lemma** (monotonicity, compactness). If $\Gamma\subseteq\Gamma'$ and $\Gamma\vdash\varphi$ then $\Gamma'\vdash\varphi$. If $\Gamma\vdash\varphi$ then some finite $\Gamma_0\subseteq\Gamma$ proves $\varphi$.
+
+*Proof.* Induction on derivations; for compactness, the finite set is the union of the finite sets of the premises of modus ponens.
+
+**Lemma** (derived rules). The following are provable from any $\Gamma$, following Rose and Rosser: syllogism $(\varphi\to\psi)\to((\psi\to\chi)\to(\varphi\to\chi))$, which is (A2); $\varphi\to(\psi\vee\varphi)$ and $\varphi\to(\varphi\vee\psi)$; exchange of antecedents $(\varphi\to(\psi\to\chi))\to(\psi\to(\varphi\to\chi))$; reflexivity $\varphi\to\varphi$; prefixing $(\varphi\to\psi)\to((\chi\to\varphi)\to(\chi\to\psi))$; and congruence of $\dot-$ in its left argument, $(\varphi\to\psi)\to((\varphi\dot-\alpha)\to(\psi\dot-\alpha))$.
+
+*Proof.* Each is a short chain of instances of (A1)–(A4) (the halving axioms are not needed) combined by modus ponens, transcribed from the Hilbert-style derivations of Rose and Rosser.
+
+**Lemma** (iterated subtraction). (i) If $\vdash\varphi\to\psi$ and $\vdash\varphi\dot-n\alpha$ then $\vdash\psi\dot-n\alpha$. (ii) $\vdash(\beta\dot-\gamma)\dot-n\alpha\ \to\ (\beta\dot-n\alpha)\dot-\gamma$. (iii) $(\beta\dot-n\alpha)\dot-m\alpha$ is literally $\beta\dot-(n+m)\alpha$. (iv) From $\vdash(\beta\dot-\gamma)\dot-n\alpha$ and $\vdash\gamma\dot-m\alpha$ infer $\vdash\beta\dot-(n+m)\alpha$. (v) If $\Gamma\vdash\psi$ and $\Gamma\vdash\varphi\dot-n\psi$ then $\Gamma\vdash\varphi$. (vi) The value of $\psi\dot-n\varphi$ is the real iterate $v(\psi)\dot-n\,v(\varphi)$.
+
+*Proof.* (i) and (ii) by induction on $n$ using congruence and the commutation $((\beta\dot-\gamma)\dot-\alpha)\to((\beta\dot-\alpha)\dot-\gamma)$. (iii) by induction on $m$. (iv) combines (ii), (iii) and one modus ponens with $\gamma\dot-m\alpha$ moved to the front. (v) applies modus ponens $n$ times, peeling one copy of $\psi$ each time. (vi) by induction on $n$.
+
+**Theorem** (`deduction_theorem`, weak deduction theorem). $\Gamma\cup\{\psi\}\vdash\varphi$ if and only if $\Gamma\vdash\varphi\dot-n\psi$ for some $n$.
+
+*Proof.* ($\Leftarrow$) $\Gamma\cup\{\psi\}$ proves both $\psi$ and $\varphi\dot-n\psi$, so it proves $\varphi$ by (v). ($\Rightarrow$) Induction on the derivation of $\varphi$ from $\Gamma\cup\{\psi\}$. Axioms and members of $\Gamma$ are proved from $\Gamma$ with $n=0$. The hypothesis $\psi$ itself gives $\psi\dot-1\psi=\psi\dot-\psi$, which is provable by reflexivity. If $\varphi$ was obtained by modus ponens from $\alpha$ and $\varphi\dot-\alpha$, the induction hypotheses give $\Gamma\vdash\alpha\dot-n\psi$ and $\Gamma\vdash(\varphi\dot-\alpha)\dot-m\psi$, and (iv) combines them into $\Gamma\vdash\varphi\dot-(m+n)\psi$.

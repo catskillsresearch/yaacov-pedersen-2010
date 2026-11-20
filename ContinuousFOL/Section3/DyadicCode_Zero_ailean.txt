@@ -1,0 +1,1 @@
+**Definition** (`DyadicCode.zero`). $0:=\neg 1$.

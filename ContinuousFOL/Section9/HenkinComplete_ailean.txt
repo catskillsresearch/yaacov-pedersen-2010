@@ -1,0 +1,1 @@
+**Definition** (`HenkinComplete`). $\Gamma$ is Henkin complete if for every formula $\varphi$, variable $x$ and dyadic codes $p,q$ with $p<q$ there is a $0$-ary function symbol $c$ with $(\sup_x\varphi\dot-q)\wedge(p\dot-\varphi[c/x])\in\Gamma$.

@@ -1,0 +1,1 @@
+Provable equivalence relative to $\Gamma$, the derived rules needed to make it a congruence (double negation, contraposition, exchange), the quotient $\mathrm{Lind}(\Gamma)$, and the proof that it is an MV-algebra in which $[\varphi]=0$ iff $\Gamma\vdash\varphi$.

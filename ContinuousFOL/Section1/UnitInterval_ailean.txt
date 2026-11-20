@@ -1,0 +1,5 @@
+**Lemma** (`unit_closed_neg`). If $0\le x\le1$ then $0\le1-x\le1$.
+
+**Lemma** (`unit_closed_half`). If $0\le x\le1$ then $0\le x/2\le1$.
+
+*Proof.* Both are linear inequalities that follow immediately from the hypotheses.

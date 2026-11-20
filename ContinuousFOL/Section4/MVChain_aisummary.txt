@@ -1,0 +1,1 @@
+Totally ordered MV-algebras (MV-chains): cancellation laws, the dichotomy $x\oplus y=1$ or $x\odot y=0$, and the symmetry $F(x,y,z)=F(x,z,y)$ of the "second digit" $F(x,y,z)=(x\odot y)\oplus((x\oplus y)\odot z)$, which is what makes Chang's construction of an ordered group from a chain associative.

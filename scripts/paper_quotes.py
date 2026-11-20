@@ -3,7 +3,8 @@
 """Locate verbatim paper quotations for Lean `Paper:` ascriptions.
 
 Source of truth: ``sources/yaacov_pedersen_2010_vision.md`` (vision transcription of the
-journal PDF, ``<!-- page N -->`` markers; journal page ≈ 167 + N).  Quotes are
+arXiv preprint arXiv:0903.4051v1, 26 pages, ``<!-- page N -->`` markers; page
+labels below are arXiv page numbers, not JSL journal pages).  Quotes are
 *cut* from that file, never written by hand:
 
 1. an equation number ``(4.4)`` / ``(5.9b)`` → the display carrying ``\\tag{…}``
@@ -29,8 +30,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 VISION = ROOT / "sources" / "yaacov_pedersen_2010_vision.md"
 ANCHORS = ROOT / "scripts" / "paper_quote_anchors.json"
-# Journal page ≈ 167 + OCR page index (JSL 75 starts at p. 168).
-PAGE_OFFSET = 167
+# The source PDF is the arXiv preprint; OCR page index = arXiv page number.
+PAGE_OFFSET = 0
 
 _JUNK_RE = re.compile(r"<｜[^｜]*｜>")
 _RUNNING_HEADERS = {
@@ -223,7 +224,7 @@ def resolve(module: str, ascription: str) -> tuple[Quote | None, str]:
     us = units()
     pages = sorted({PAGE_OFFSET + us[i].page for i in idxs})
     ptxt = f"p. {pages[0]}" if len(pages) == 1 else f"pp. {pages[0]}–{pages[-1]}"
-    title = f"ContinuousFOL (2016), {ptxt}" + (f", {label}" if label else "")
+    title = f"Ben Yaacov–Pedersen (2010), arXiv {ptxt}" + (f", {label}" if label else "")
     body = "\n\n".join(_fix_tags(us[i].text) for i in idxs)
     return Quote(title, body), how
 
@@ -263,7 +264,7 @@ def main() -> int:
     from scaffold_continuousfol_writeup import extract_paper_blocks  # type: ignore
 
     n = ok = 0
-    for p in sorted((ROOT / "ContinuousFOL").glob("*.lean")):
+    for p in sorted((ROOT / "ContinuousFOL").rglob("*.lean")):
         for asc, _ in extract_paper_blocks(p.read_text(encoding="utf-8")):
             n += 1
             q, how = resolve(p.stem, asc)

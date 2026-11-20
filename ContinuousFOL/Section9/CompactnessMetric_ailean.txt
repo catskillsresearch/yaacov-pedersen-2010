@@ -1,0 +1,3 @@
+**Theorems** (`compactness_metric_pre`, `compactness_metric_complete`, `compactness_metric`). If every finite subset of $\Gamma$ is satisfiable in a metric pre-structure (resp. completely satisfiable), so is $\Gamma$.
+
+*Proof.* As without a metric, using the metric completeness theorem, finiteness of metric proofs, and metric soundness.

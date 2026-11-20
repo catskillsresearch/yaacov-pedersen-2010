@@ -1,0 +1,1 @@
+The same derived rules and weak deduction theorem as for Łukasiewicz logic, for continuous propositional formulae (the extra axioms (A5), (A6) are never needed in these derivations, only allowed).

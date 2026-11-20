@@ -1,0 +1,1 @@
+A metric pre-structure together with a metric-space structure on the carrier whose distance is $d^{\mathfrak M}$ and which is complete.

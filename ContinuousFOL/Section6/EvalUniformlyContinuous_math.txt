@@ -1,0 +1,23 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 12, Definition 6.7 (paraphrase)**
+
+If the variables of a term $t$ (the free variables of a formula $\varphi$) are among $x_0,\dots,x_{n-1}$, then $t$ and $\varphi$ induce maps $M^n\to M$ and $M^n\to[0,1]$ by assigning $a_i$ to $x_i$.
+
+</div>
+
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 13, Theorem 6.8 (paraphrase)**
+
+These induced maps are uniformly continuous; the paper's proof is an induction that combines the moduli of the symbols as in Remark 5.8.
+
+</div>
+
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 9, Remark 5.8 (paraphrase)**
+
+From the one-argument moduli one obtains a modulus for all arguments at once, e.g. $\Delta_f(\epsilon)=\min_i\delta_{f,i}(\epsilon/n_f)$, measured in the maximum distance on tuples.
+
+</div>

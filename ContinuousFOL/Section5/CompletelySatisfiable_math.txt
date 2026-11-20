@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 13, Definition 6.10 (paraphrase)**
+
+For a signature with a metric, $\Gamma$ is completely satisfiable if it has a model that is a genuine continuous structure (complete metric), and $\Gamma\models_{QC}\varphi$ if every such model of $\Gamma$ makes $\varphi$ zero.
+
+</div>

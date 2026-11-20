@@ -1,0 +1,1 @@
+Definition 8.8, Remark 8.9, Lemmas 8.6, 8.11, 8.12 and Theorem 8.10 for the calculus without a metric.

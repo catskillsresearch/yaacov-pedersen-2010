@@ -1,0 +1,1 @@
+Semantic iteration for continuous formulae: halving is linear, so formulae are still piecewise linear and the same uniform bound applies.

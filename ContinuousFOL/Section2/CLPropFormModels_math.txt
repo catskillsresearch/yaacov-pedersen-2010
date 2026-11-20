@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 5, Definition 2.4 (paraphrase)**
+
+Models, satisfiable sets and semantic entailment for continuous propositional logic are defined word for word as in the Łukasiewicz case, now using the richer truth assignments.
+
+</div>

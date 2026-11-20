@@ -1,0 +1,1 @@
+The rank used for induction in the Henkin model theorem.

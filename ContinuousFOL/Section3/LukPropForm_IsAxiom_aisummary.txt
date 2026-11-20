@@ -1,0 +1,1 @@
+The axiom schemata (A1)–(A4) as an inductive predicate on Łukasiewicz formulae.

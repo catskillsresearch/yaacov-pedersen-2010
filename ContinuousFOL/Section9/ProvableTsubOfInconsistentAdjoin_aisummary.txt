@@ -1,0 +1,1 @@
+If $\Gamma\cup\{p\dot-\varphi\}$ is inconsistent then $\Gamma\vdash\varphi\dot-p$, with and without a metric.

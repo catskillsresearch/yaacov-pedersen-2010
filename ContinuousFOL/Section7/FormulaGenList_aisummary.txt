@@ -1,0 +1,1 @@
+$\sup_{x_1}\cdots\sup_{x_n}\psi$ for a list of variables.

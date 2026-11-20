@@ -1,0 +1,7 @@
+**Definition** (`Models`). An assignment $v_0:I\to\mathbb R$ is a model of $\Sigma$ if every $v_0(i)$ lies in $[0,1]$ and $v(\varphi)=0$ for every $\varphi\in\Sigma$.
+
+**Definition** (`Satisfiable`). $\Sigma$ is satisfiable if it has a model.
+
+**Definition** (`Entails`). $\Sigma\models\varphi$ if every model of $\Sigma$ gives $\varphi$ the value $0$.
+
+The range condition $v_0(i)\in[0,1]$ is part of being a model, so assignments are exactly the maps of the paper into the unit interval.

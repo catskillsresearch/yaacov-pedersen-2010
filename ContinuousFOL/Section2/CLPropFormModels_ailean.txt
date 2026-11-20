@@ -1,0 +1,1 @@
+**Definition.** An assignment $v_0:I\to[0,1]$ is a model of $\Sigma\subseteq$ `CLPropForm I` if every member of $\Sigma$ has value $0$; $\Sigma$ is satisfiable if it has a model; and $\Sigma\models\varphi$ if every model of $\Sigma$ gives $\varphi$ the value $0$.

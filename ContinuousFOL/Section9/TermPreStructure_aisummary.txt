@@ -1,0 +1,1 @@
+The pre-structure of terms over a set $\Delta$, and the identity assignment.

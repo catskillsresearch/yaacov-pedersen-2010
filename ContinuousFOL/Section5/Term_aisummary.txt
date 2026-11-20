@@ -1,0 +1,1 @@
+Terms: variables and function symbols applied to tuples of terms.

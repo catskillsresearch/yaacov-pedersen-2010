@@ -1,0 +1,1 @@
+Models, satisfiability and semantic entailment $\Sigma\models\varphi$ for Łukasiewicz formulae, with assignments ranging over $[0,1]$-valued maps.

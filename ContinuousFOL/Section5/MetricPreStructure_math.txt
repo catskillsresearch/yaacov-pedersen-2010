@@ -1,0 +1,15 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 9, Definition 5.6 (paraphrase)**
+
+For a signature with a metric, $d$ must be interpreted as a pseudo-metric with values in $[0,1]$, and every symbol must respect its moduli: if $c$ and $e$ are closer than $\delta_{s,i}(\epsilon)$ then replacing $c$ by $e$ in argument $i$ moves a function value by at most $\epsilon$ in $d$, and increases a relation value by at most $\epsilon$.
+
+</div>
+
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 9, Remark 5.8 (paraphrase)**
+
+These continuity requirements replace the congruence axioms for equality in classical logic; consequently every symbol is interpreted by a uniformly continuous map.
+
+</div>

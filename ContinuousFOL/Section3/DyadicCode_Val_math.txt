@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 6, Remark 3.4 (paraphrase)**
+
+Whatever the truth assignment, the values taken by the expressions in $\mathcal D$ form exactly the set $\mathbb D$ of dyadic numbers $k/2^n$ with $k\le 2^n$. The paper therefore does not distinguish between such expressions and the dyadic numbers they denote.
+
+</div>

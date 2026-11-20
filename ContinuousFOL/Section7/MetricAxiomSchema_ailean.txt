@@ -1,0 +1,8 @@
+**Definition** (`MetricAxiomSchema`). Every base instance is an instance, and in addition, for variables $x,y,z,w$, a tuple of variables $\bar v$, and $\bar v[i\mapsto z]$ the tuple with the $i$-th entry replaced:
+(A10) $d(x,x)$; (A11) $d(x,y)\dot-d(y,x)$; (A12) $(d(x,z)\dot-d(x,y))\dot-d(y,z)$;
+(A13) for a function symbol $f$, an index $i$, a real $\epsilon\in(0,1]$ and dyadic codes $r,q$ with $\epsilon<r$ and $q<\delta_{f,i}(\epsilon)$:
+$\big(q\dot-d(z,w)\big)\wedge\big(d(f(\bar v[i\mapsto z]),f(\bar v[i\mapsto w]))\dot-r\big)$;
+(A14) for a relation symbol $P$ and the same side conditions:
+$\big(q\dot-d(z,w)\big)\wedge\big((P(\bar v[i\mapsto z])\dot-P(\bar v[i\mapsto w]))\dot-r\big)$.
+
+*Remark.* The arguments other than the $i$-th are variables, as in the paper's $f\bar xz\bar y$.

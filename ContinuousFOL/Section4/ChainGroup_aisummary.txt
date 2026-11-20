@@ -1,0 +1,1 @@
+Chang's construction for an MV-chain $A$: pairs $(n,a)$ with $n\in\mathbb Z$, $a\in A\setminus\{1\}$ read as $n+a$ form a linearly ordered abelian group with strong unit $u=1+0$, into whose interval $[0,u]$ the chain embeds preserving $\ominus$ and $\neg$. Consequently a formula that is non-zero in a chain is non-zero in $[0,1]$.

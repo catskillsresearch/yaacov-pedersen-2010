@@ -1,0 +1,1 @@
+**Definition** (`LukPropForm.iterSub`). $\psi\dot-0\varphi:=\psi$ and $\psi\dot-(n+1)\varphi:=(\psi\dot-n\varphi)\dot-\varphi$.

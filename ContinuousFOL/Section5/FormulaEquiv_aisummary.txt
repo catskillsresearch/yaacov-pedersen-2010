@@ -1,0 +1,1 @@
+$\varphi\equiv\psi$, both over all pre-structures and over metric pre-structures, and the implication between the two.

@@ -1,0 +1,1 @@
+Validity of (A10)–(A14) in metric pre-structures and the full Theorem 7.2 for signatures with a metric.

@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 16, Theorem 8.1 (paraphrase)**
+
+Adding $\psi$ as a premise proves $\varphi$ exactly when, without $\psi$, one can prove $\varphi\dot-n\psi$ for some $n$. The proof rests on a Łukasiewicz tautology that lets the number of subtractions of $\psi$ add up along modus ponens.
+
+</div>

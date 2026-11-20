@@ -1,0 +1,3 @@
+**Definition** (`freeSubst`). $\varphi[t/x]$ substitutes $t$ for $x$ in the terms of atomic formulae, commutes with the connectives, leaves $\sup_x\alpha$ unchanged, and for $y\neq x$ sends $\sup_y\alpha$ to $\sup_y(\alpha[t/x])$.
+
+**Definition** (`FreeSubstCorrect`). The substitution is correct if, for every subformula $\sup_y\alpha$ with $y\neq x$ through which it passes, either $x$ is not free in $\alpha$ or $y$ does not occur in $t$.

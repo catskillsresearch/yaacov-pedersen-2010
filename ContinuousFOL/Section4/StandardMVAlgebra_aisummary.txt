@@ -1,0 +1,1 @@
+The unit interval with $x\oplus y=\min(x+y,1)$ and $\neg x=1-x$ is an MV-algebra; evaluation of Łukasiewicz formulae in any MV-algebra; on the standard algebra it agrees with the real-valued truth assignments, so $\models\varphi$ means $\varphi$ evaluates to $0$ in $[0,1]$.

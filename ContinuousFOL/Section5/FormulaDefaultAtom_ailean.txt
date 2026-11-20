@@ -1,0 +1,1 @@
+**Definition** (`defaultAtom`). Choose a relation symbol $P$ (possible since $\mathcal R\neq\emptyset$) and let $\varphi_0:=P(v_0,\dots,v_0)$.

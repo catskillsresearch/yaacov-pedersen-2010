@@ -1,0 +1,4 @@
+**Definition** (`MetricPreStructure`). For a signature with a metric, a metric pre-structure is a pre-structure in which, writing $d(x,y)$ for the value of the metric symbol at $(x,y)$:
+1. $d(a,a)=0$, $d(a,b)=d(b,a)$ and $d(a,c)\le d(a,b)+d(b,c)$ (with values in $[0,1]$ inherited from the pre-structure);
+2. for each function symbol $f$, place $i$ and $\epsilon\in(0,1]$: if $d(c,e)<\delta_{f,i}(\epsilon)$ then $d(f(v[i\mapsto c]),f(v[i\mapsto e]))\le\epsilon$ for every tuple $v$;
+3. for each relation symbol $P$, place $i$ and $\epsilon\in(0,1]$: if $d(c,e)<\delta_{P,i}(\epsilon)$ then $P(v[i\mapsto c])\dot-P(v[i\mapsto e])\le\epsilon$.

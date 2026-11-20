@@ -1,0 +1,3 @@
+**Definition** (`boundSubst`). $\varphi\{y/x\}$ fixes atomic formulae, commutes with connectives, sends $\sup_x\alpha$ to $\sup_y(\alpha'[y/x])$ and $\sup_z\alpha$ ($z\ne x$) to $\sup_z\alpha'$, where $\alpha'=\alpha\{y/x\}$.
+
+**Definition** (`BoundSubstCorrect`). Correct if at every subformula $\sup_x\alpha$, $y\notin\mathrm{FV}(\alpha)$ and $\alpha[y/x]$ is correct, and recursively in all subformulae.

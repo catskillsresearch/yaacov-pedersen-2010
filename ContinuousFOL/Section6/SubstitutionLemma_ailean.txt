@@ -1,0 +1,11 @@
+**Lemma.** If $x\ne y$ then $(\sigma^a_y)^v_x=(\sigma^v_x)^a_y$.
+
+**Lemma** (term substitution). $(s[t/x])^{\mathfrak M,\sigma}=s^{\mathfrak M,\sigma^a_x}$ with $a=t^{\mathfrak M,\sigma}$.
+
+**Lemma** (coincidence). If $y\notin\mathrm{vars}(t)$ then $t^{\mathfrak M,\sigma^a_y}=t^{\mathfrak M,\sigma}$; if $x\notin\mathrm{FV}(\varphi)$ then $\mathfrak M(\varphi,\sigma^a_x)=\mathfrak M(\varphi,\sigma)$.
+
+*Proof.* Induction on $t$, resp. $\varphi$; in the case $\sup_z\alpha$ with $z\ne x$, swap the updates at $x$ and $z$ and use the induction hypothesis pointwise inside the supremum, while for $z=x$ the outer update is overwritten.
+
+**Theorem** (`substitution_lemma`, Lemma 6.2). If $\varphi[t/x]$ is correct, then $\mathfrak M(\varphi[t/x],\sigma)=\mathfrak M(\varphi,\sigma^a_x)$ with $a=t^{\mathfrak M,\sigma}$.
+
+*Proof.* Induction on $\varphi$, for all $\sigma$. Atomic formulae: the term lemma. Connectives: immediate. For $\sup_x\alpha$ the substitution does nothing, and $x$ is not free, so the coincidence lemma applies. For $\sup_y\alpha$ with $y\ne x$: if $x\notin\mathrm{FV}(\alpha)$ the substitution is invisible semantically and both sides equal $\mathfrak M(\sup_y\alpha,\sigma)$ by coincidence. Otherwise correctness gives $y\notin\mathrm{vars}(t)$, so $t$ has the same value $a$ under every $\sigma^b_y$; applying the induction hypothesis at $\sigma^b_y$ and commuting the updates shows that the families whose suprema are taken coincide.

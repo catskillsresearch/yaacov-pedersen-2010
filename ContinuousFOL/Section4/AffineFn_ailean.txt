@@ -1,0 +1,5 @@
+**Definition** (`AffineFn n`). An affine function is given by coefficients $a\in\mathbb R^n$ and a constant $c$; it evaluates to $c+\sum_i a_ix_i$. Constants, coordinate projections, sums, scalar multiples, negatives and differences of affine functions are affine, with the expected values.
+
+**Lemma.** For an affine $a$, points $x,y$ and $t\in\mathbb R$: $a(x+t(y-x))=a(x)+t(a(y)-a(x))$, and $a((1-t)x+ty)=(1-t)a(x)+ta(y)$; more generally $a(sx+ty)=sa(x)+ta(y)$ when $s+t=1$. Every affine function is continuous.
+
+*Proof.* Expand the sum: the constant term is multiplied by $s+t=1$ and the linear part is linear. Continuity holds because a finite sum of continuous coordinate functions plus a constant is continuous.

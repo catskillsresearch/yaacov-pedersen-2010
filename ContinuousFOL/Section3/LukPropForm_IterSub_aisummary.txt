@@ -1,0 +1,1 @@
+The formula $\psi\dot-n\varphi$ by recursion on $n$.

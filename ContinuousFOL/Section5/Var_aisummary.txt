@@ -1,0 +1,1 @@
+Variables are natural numbers: $v_i$ is the number $i$.

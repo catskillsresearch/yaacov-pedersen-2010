@@ -1,0 +1,19 @@
+**Definition** (`unitIAdd`). On $[0,1]$ put $x\oplus y:=\min(x+y,1)$.
+
+**Lemma.** With $\neg x=1-x$: $\neg(\neg x\oplus y)=x\dot-y$; $\oplus$ is associative; and $(x\ominus y)\oplus y=\max(x,y)$.
+
+*Proof.* Each is a case analysis on which of the minima and maxima are attained, reducing to linear arithmetic.
+
+**Theorem** (`unitInterval.instMVAlgebra`). $([0,1],\oplus,\neg,0)$ is an MV-algebra.
+
+*Proof.* Associativity and commutativity were shown above, $x\oplus0=x$, $1-(1-x)=x$, $x\oplus1=1$, and Chang's axiom holds because both sides equal $\max(x,y)$.
+
+**Definition** (`evalMV`). For an assignment $v$ of variables in an MV-algebra $A$, evaluate $\varphi\dot-\psi$ as $v(\varphi)\ominus v(\psi)$ and $\neg\varphi$ as $\neg v(\varphi)$.
+
+**Lemma** (`evalMV_coe`). On the standard algebra, MV-evaluation is the paper's real-valued truth assignment.
+
+*Proof.* Induction on the formula, using $\neg(\neg x\oplus y)=x\dot-y$ and $\neg x=1-x$.
+
+**Lemma** (`entails_empty_iff_evalMV`). $\models\varphi$ (no premises) iff $\varphi$ evaluates to $0$ under every assignment into the standard MV-algebra.
+
+*Proof.* Real assignments with values in $[0,1]$ and assignments into the standard algebra correspond to each other (`liftVal`), and the two evaluations agree.

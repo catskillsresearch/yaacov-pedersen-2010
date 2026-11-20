@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 13, Theorem 6.9 (paraphrase)**
+
+Each pre-structure for a signature with a metric admits an elementary morphism into a continuous structure, its metric completion.
+
+</div>

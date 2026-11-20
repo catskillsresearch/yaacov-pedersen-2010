@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 4, Definition 2.2 (paraphrase)**
+
+The intended semantics evaluates formulae in $[0,1]$ with $\dot-$ as truncated subtraction and $\neg$ as $1-x$. In algebraic terms this is the standard MV-algebra on the unit interval, with $x\oplus y=\min(x+y,1)$.
+
+</div>

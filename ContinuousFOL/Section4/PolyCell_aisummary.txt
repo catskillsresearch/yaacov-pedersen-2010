@@ -1,0 +1,1 @@
+Polyhedral cells (the unit cube cut by finitely many affine inequalities), their compactness and convexity, finiteness of their extreme points, attainment of affine maxima at extreme points, and the key estimate: if $g\ge0$ and $f$ vanishes wherever $g$ does on a cell, then $f\le Ng$ there for some integer $N$.

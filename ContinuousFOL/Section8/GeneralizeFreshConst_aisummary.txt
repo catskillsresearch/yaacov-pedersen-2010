@@ -1,0 +1,1 @@
+Lemma 8.4: replacing a fresh constant by a sufficiently fresh variable maps axioms to axioms and proofs to proofs; then generalize and rename.

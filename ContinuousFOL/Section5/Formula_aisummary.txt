@@ -1,0 +1,1 @@
+Formulae: atomic formulae $P\bar t$, $\varphi\dot-\psi$, $\neg\varphi$, $\tfrac12\varphi$ and $\sup_x\varphi$.

@@ -1,0 +1,15 @@
+**Lemma** (`eval_genList_eq_zero`). If $\psi$ has value $0$ under every assignment in $\mathfrak M$, so does every generalization of $\psi$.
+
+*Proof.* Induction on the list: a supremum of zeros is zero.
+
+**Lemma** (`baseAxiom_eval_zero`). Every instance of (A1)–(A9) has value $0$ in every pre-structure under every assignment.
+
+*Proof.* (A1)–(A6) are real inequalities about $\dot-$, $1-x$ and $x/2$ on $[0,1]$, checked by cases. (A7): for every $a$, $\psi(a)\le(\psi(a)\dot-\varphi(a))+\varphi(a)\le\sup(\psi\dot-\varphi)+\sup\varphi$, so $\sup\psi\dot-\sup\varphi\le\sup(\psi\dot-\varphi)$. (A8): by the Substitution Lemma, $\varphi[t/x]$ has the value of $\varphi$ at $\sigma^a_x$ for $a=t^{\mathfrak M,\sigma}$, which is at most the supremum. (A9): if $x$ is not free, every $\sigma^a_x$ gives the same value as $\sigma$, so the supremum equals that value.
+
+**Theorem** (`soundness_pre`, Theorem 7.2(i)). If $\Gamma\vdash_Q\varphi$ then $\Gamma\models_Q\varphi$ (over pre-structures in any universe).
+
+*Proof.* Induction on the derivation. Axioms are valid by the two lemmas; premises vanish in a model of $\Gamma$; and if $\varphi=0$ and $\psi\dot-\varphi=0$ then $\psi\le\varphi=0$.
+
+**Theorem** (`satisfiable_consistent_pre`, Theorem 7.2(ii)). A satisfiable $\Gamma$ is consistent.
+
+*Proof.* The constant $1$ has value $1$ in the model, so by soundness it is not provable.

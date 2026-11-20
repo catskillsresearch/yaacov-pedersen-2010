@@ -1,0 +1,7 @@
+**Lemma** (`swap_one_iter`). $\vdash_Q(\beta\dot-\alpha)\dot-(1\dot-n(\alpha\dot-\beta))$ for every $n$.
+
+*Proof.* The real form $(b\dot-a)\dot-(1\dot-n(a\dot-b))=0$ for $a,b\in[0,1]$: if $a\ge b$ the left term is $0$; if $a<b$ then $a\dot-b=0$ and the right term is $1\ge b-a$. The propositional schema is therefore provable by Fact 4.1 and transports to $\vdash_Q$.
+
+**Lemma** (`provable_tsub_of_inconsistent_adjoin`). If $\Gamma\cup\{p\dot-\varphi\}$ is inconsistent then $\Gamma\vdash_Q\varphi\dot-p$.
+
+*Proof.* Inconsistency means proving $1$; by the Deduction Theorem $\Gamma\vdash1\dot-n(p\dot-\varphi)$, and the schema with $\beta=\varphi$, $\alpha=p$ gives $\Gamma\vdash\varphi\dot-p$ by modus ponens.

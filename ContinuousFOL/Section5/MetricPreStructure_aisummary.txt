@@ -1,0 +1,1 @@
+Clauses (iii)–(v) of Definition 5.6: $d^{\mathfrak M}$ is a pseudo-metric, and functions and relations obey the moduli of the signature in each argument.

@@ -1,0 +1,5 @@
+**Theorem** (`cl_consistent_iff_satisfiable`). If $I$ is nonempty, a set $\Sigma$ of continuous propositional formulae is consistent iff it is satisfiable.
+
+*Proof.* As for Fact 4.2, now using finite strong completeness of continuous logic (Fact 4.5) in the direction consistent $\Rightarrow$ satisfiable.
+
+**Remark** (added premise). For $I=\emptyset$ the statement fails (`CLPropForm.consistent_iff_satisfiable_fails_empty`); consistent $\Rightarrow$ satisfiable still holds for every $I$.

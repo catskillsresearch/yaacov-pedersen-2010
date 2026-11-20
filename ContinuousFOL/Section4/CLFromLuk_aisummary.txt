@@ -1,0 +1,1 @@
+Treats each half-formula $\tfrac12\chi$ as a new propositional atom, so that continuous formulae become Łukasiewicz formulae; adding the finitely many relevant instances of (A5) and (A6) as premises forces the new atoms to take the value of $\tfrac12\chi$, and finite strong completeness for Łukasiewicz logic then yields Fact 4.5.

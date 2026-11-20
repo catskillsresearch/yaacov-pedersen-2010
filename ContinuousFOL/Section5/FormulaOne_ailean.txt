@@ -1,0 +1,1 @@
+**Definition.** $1:=\neg(\varphi_0\dot-\varphi_0)$ and $0:=\neg1$, with $\varphi_0$ the default atom. (That $1$ has value $1$ is proved in `FormulaEval`.)

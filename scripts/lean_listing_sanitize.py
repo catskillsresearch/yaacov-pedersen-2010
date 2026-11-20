@@ -193,6 +193,20 @@ def _replacements_for_listings(allowed: frozenset[str]) -> tuple[tuple[str, str]
     )
 
 
+# Letter + combining accent sequences (e.g. "x̄") cannot be ``literate`` keys
+# (listings needs one character per key), so they are first mapped to
+# private-use code points, each of which has a ``literate`` entry in
+# scripts/tex_preamble_arxiv.tex.
+COMBINING_SEQUENCES: tuple[tuple[str, str], ...] = (
+    ("t̃", "\ue000"),  # \tilde{t}
+    ("φ̃", "\ue001"),  # \tilde{\varphi}
+    ("x̄", "\ue002"),  # \bar{x}
+    ("b̄", "\ue003"),  # \bar{b}
+    ("ā", "\ue004"),  # \bar{a}
+    ("𝔐̂", "\ue005"),  # \widehat{\mathfrak{M}}
+)
+
+
 class UnmappedLeanCharError(RuntimeError):
     """A Lean listing contains a character with no LaTeX rendering."""
 
@@ -206,6 +220,8 @@ def sanitize_lean_for_arxiv(
     allowed = leanbox_literate_chars(preamble_path=preamble_path)
 
     out = text
+    for seq, code in COMBINING_SEQUENCES:
+        out = out.replace(seq, code)
     for src, dst in _replacements_for_listings(allowed):
         out = out.replace(src, dst)
 

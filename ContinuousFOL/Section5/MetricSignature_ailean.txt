@@ -1,0 +1,1 @@
+**Definition** (`MetricSignature`). A continuous signature with a metric is a continuous signature together with a relation symbol $d$ whose arity is $2$.

@@ -1,0 +1,13 @@
+Write $\varphi\to\psi$ for $\psi\dot-\varphi$ and $\varphi\vee\psi$ for $(\varphi\to\psi)\to\psi$.
+
+**Lemma** (derived rules). Every instance of (A1)–(A9) is provable (empty generalization). From $\vdash\varphi$ and $\vdash\varphi\to\psi$ infer $\vdash\psi$. Syllogism: from $\varphi\to\psi$ and $\psi\to\chi$ infer $\varphi\to\chi$. Also provable: $\varphi\to(\psi\vee\varphi)$, $\varphi\to(\varphi\vee\psi)$, exchange $(\varphi\to(\psi\to\chi))\to(\psi\to(\varphi\to\chi))$, identity $\varphi\to\varphi$, and $\neg\varphi\to(\varphi\to\psi)$.
+
+*Proof.* The Rose–Rosser derivations from (A1)–(A4): syllogism is (A2) plus modus ponens twice, the disjunction rules come from (A1), (A3) and syllogism, exchange combines them, and identity follows from exchange applied to (A1).
+
+**Lemma** (`tsub_one`). $\vdash_Q\varphi\dot-1$ for every $\varphi$.
+
+*Proof.* $1=\neg(\varphi_0\dot-\varphi_0)$; from ex falso and $\vdash\varphi_0\dot-\varphi_0$ one gets $\neg(\varphi_0\dot-\varphi_0)\to\varphi$.
+
+**Theorem** (`inconsistent_iff_provable_one`). $\Gamma$ is inconsistent iff $\Gamma\vdash_Q1$.
+
+*Proof.* If $\Gamma$ proves everything it proves $1$. Conversely, from $\Gamma\vdash1$ and $\vdash\varphi\dot-1$, modus ponens gives $\Gamma\vdash\varphi$ for all $\varphi$.

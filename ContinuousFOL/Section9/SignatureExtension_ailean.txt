@@ -1,0 +1,7 @@
+**Definition** (`SignatureExtension`). A bijection of relation symbols and an injection of function symbols from $\mathcal L$ to $\mathcal L'$ preserving arities and moduli.
+
+**Definition.** $e(t)$ and $e(\varphi)$ rename the symbols of a term or formula along $e$. For an $\mathcal L'$-pre-structure $\mathfrak N$, the reduct $\mathfrak N|_{\mathcal L}$ has the same carrier and interprets each $\mathcal L$-symbol as its image does in $\mathfrak N$.
+
+**Lemma** (`eval_reduct`). $t^{\mathfrak N|_{\mathcal L},\sigma}=e(t)^{\mathfrak N,\sigma}$ and $\mathfrak N|_{\mathcal L}(\varphi,\sigma)=\mathfrak N(e(\varphi),\sigma)$.
+
+*Proof.* Induction on terms and formulae.

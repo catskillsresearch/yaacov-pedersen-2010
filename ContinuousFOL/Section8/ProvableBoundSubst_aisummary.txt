@@ -1,0 +1,1 @@
+Lemma 8.3: the congruence schemata for the connectives (obtained from continuous propositional completeness), substitution bookkeeping lemmas, and the quantifier step.

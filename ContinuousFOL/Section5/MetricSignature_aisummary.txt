@@ -1,0 +1,1 @@
+A signature together with a distinguished relation symbol $d$ of arity $2$.

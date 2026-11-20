@@ -1,0 +1,13 @@
+**Lemma** (`eval_of_genList`). If a generalization $\sup_{x_1}\cdots\sup_{x_n}\psi$ has value $0$ at $\sigma$, then $\psi$ has value $0$ at every assignment that agrees with $\sigma$ off $x_1,\dots,x_n$.
+
+*Proof.* Each supremum is $0$ only if all its instances are $0$ (values are nonnegative).
+
+**Definition** (`ofMetricAxioms`). If a pre-structure $\mathfrak N$ and an assignment satisfy every generalization of every instance of (A1)–(A14), then $\mathfrak N$ is a metric pre-structure.
+
+*Proof.* Generalizing over the variables of an instance and applying the previous lemma, each instance holds under every assignment. (A10)–(A12) then say $d(a,a)=0$, $d(a,b)\le d(b,a)$ and $d(a,c)\le d(a,b)+d(b,c)$. For the modulus condition of $f$ at place $i$: if $d(c,e)<\delta_{f,i}(\epsilon)$, choose dyadics $q$ with $d(c,e)<q<\delta_{f,i}(\epsilon)$ and, for any $r>\epsilon$, a dyadic $r'$ in $(\epsilon,r)$; axiom (A13) at these values forces $d(f(\dots c\dots),f(\dots e\dots))\le r'$, and letting $r\downarrow\epsilon$ gives $\le\epsilon$. (A14) is the same for relations.
+
+**Theorem** (`metric_prestructure_model_of_consistent`). A metrically consistent $\Gamma$ is satisfied by some metric pre-structure (universe $0$).
+
+*Proof.* $\Gamma\cup\mathrm{Ax}_{10\text{–}14}$ is consistent in the plain calculus, so the plain Henkin model satisfies it; its reduct to $\mathcal L$ satisfies $\Gamma$ and all metric axioms, hence is a metric pre-structure.
+
+**Theorem** (`henkin_model_existence_metric`, Theorem 9.4). As in the plain case, with $\mathcal L^c$ a metric signature with the same metric symbol, $\Delta$ maximal consistent for the metric calculus and Henkin complete, and $\mathfrak M$ a metric pre-structure.

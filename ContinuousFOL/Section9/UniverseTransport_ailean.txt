@@ -1,0 +1,9 @@
+**Lemma.** Degrees of truth are nonnegative.
+
+**Theorem** (`degreeOfTruthPre_eq_universe` and variants). $\varphi^\circ_\Gamma$ computed in universe $u$ equals $\varphi^\circ_\Gamma$ computed in universe $0$; likewise for metric pre-structures and complete structures.
+
+*Proof.* Every universe-$0$ model lifts to universe $u$ with the same values, so the universe-$0$ supremum is at most the universe-$u$ one. Conversely, suppose some model in universe $u$ gives $\varphi$ a value $r$ above the universe-$0$ supremum $s$. Choose a dyadic $p$ with $s<p<r$. Then $\Gamma\cup\{p\dot-\varphi\}$ is satisfiable in universe $u$, hence (satisfiability does not depend on the universe) in universe $0$, by a model in which $\varphi\ge p>s$, a contradiction. Empty sets of models are handled by the same argument, since then both suprema are $0$.
+
+**Lemma** (`entailsPre_iff_degree_eq_zero` and variants). $\Gamma\models\varphi$ iff $\varphi^\circ_\Gamma=0$ (values are nonnegative and bounded by the supremum).
+
+**Theorems.** Hence entailment, and being a complete theory, are independent of the universe.

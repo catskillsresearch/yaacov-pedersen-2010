@@ -1,0 +1,1 @@
+A convenience module that re-exports truncated subtraction and the unit-interval closure facts; it declares nothing of its own.

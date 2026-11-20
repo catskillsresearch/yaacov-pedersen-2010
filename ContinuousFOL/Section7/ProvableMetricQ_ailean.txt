@@ -1,0 +1,1 @@
+**Definition** (`ProvableMetricQ`). As `ProvableQ`, but the axioms are generalizations of instances of (A1)–(A14).

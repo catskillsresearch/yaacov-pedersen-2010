@@ -28,3 +28,6 @@ sources/pages/
 sources/ocr_*.log
 .venv-ocr
 .cache
+
+# Built writeup PDF (regenerate with scripts/build_arxiv_pdf.sh)
+ContinuousFOL.pdf

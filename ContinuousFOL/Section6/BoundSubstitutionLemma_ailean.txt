@@ -1,0 +1,17 @@
+**Definition** (`freshAbove`). For a finite set $s$ of variables, $\mathrm{fresh}(s)$ is a variable larger than every member of $s$, hence not in $s$.
+
+**Lemma.** $\mathrm{FV}(\varphi)\subseteq\mathrm{AV}(\varphi)$; free substitution does not change bound variables; substituting a variable $y\notin\mathrm{AV}(\varphi)$ is always correct, and so is any substitution for a variable not free in $\varphi$.
+
+**Lemma** (`eval_boundSubst`). If $y\notin\mathrm{AV}(\varphi)$ then $\mathfrak M(\varphi\{y/x\},\sigma)=\mathfrak M(\varphi,\sigma)$ for all $\mathfrak M,\sigma$.
+
+*Proof.* Induction on $\varphi$. At $\sup_x\alpha$ the result is $\sup_y\alpha'[y/x]$; by the Substitution Lemma (correct because $y$ is fresh) the value at $\sigma^b_y$ is the value of $\alpha'$ at $(\sigma^b_y)^b_x$, which by coincidence ($y$ not free in $\alpha'$) is the value of $\alpha'$ at $\sigma^b_x$; and $\alpha'$ has the value of $\alpha$ by induction.
+
+**Lemma.** If $y\ne x$ then $x\notin\mathrm{BV}(\varphi\{y/x\})$, and $\mathrm{BV}(\varphi\{y/x\})\subseteq\mathrm{BV}(\varphi)\cup\{y\}$.
+
+**Definition** (`BoundSubstReach`). $\varphi'$ is reachable from $\varphi$ if it arises by a finite (possibly empty) sequence of bound substitutions.
+
+**Theorem** (`bound_substitution_lemma`, Lemma 6.4). For variables $x_0,\dots,x_{n-1}$ there is $\varphi'$ reachable from $\varphi$ in which no $x_i$ is bound and $\varphi\equiv\varphi'$; likewise for metric equivalence.
+
+*Proof.* Induction on the finite set $s=\{x_0,\dots,x_{n-1}\}$. For $s\cup\{a\}$, take $\varphi_1$ for $s$ and a variable $y$ above $s\cup\{a\}\cup\mathrm{AV}(\varphi_1)$, and put $\varphi'=\varphi_1\{y/a\}$. Then $a$ is no longer bound, the new bound variable $y$ is not in $s$, the members of $s$ remain unbound, and $\varphi'$ has the same value as $\varphi_1$, hence as $\varphi$. Metric equivalence follows from plain equivalence.
+
+A separate renaming function `renameBound` (renaming every clashing binder to a fresh variable in one pass) is also shown to preserve values and to avoid a given set.

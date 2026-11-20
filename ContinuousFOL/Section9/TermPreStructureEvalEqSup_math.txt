@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 21, Theorem 9.4 (paraphrase)**
+
+The heart of the proof: by induction on rank, the value of every formula in the term model equals $\sup\{p\in\mathbb D:\ p\dot-\varphi\in\Delta\}$. The paper writes out the cases $\tfrac12\psi$ and $\sup_x\psi$. For the quantifier, a gap below the cut is closed by a Henkin witness, and a gap above it by Lemma 8.11 and the Substitution Lemma.
+
+</div>

@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 21, Theorem 9.4 (paraphrase)**
+
+The Henkin model theorem holds also for signatures with a metric; then the model is a pre-structure for the metric signature, i.e. $d$ is a pseudo-metric and the moduli are respected.
+
+</div>

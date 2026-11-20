@@ -1,0 +1,1 @@
+Compactness of $[0,1]^I$ (Tychonoff) and continuity of evaluation give propositional compactness; combined with finite strong completeness this proves Facts 4.2 and 4.3 (with the added premise that there is at least one propositional variable, and with a counterexample when there is none) and Fact 4.4.

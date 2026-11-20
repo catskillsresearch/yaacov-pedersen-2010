@@ -1,0 +1,1 @@
+The helper $v[i\mapsto c]$ used to state uniform continuity in one argument.

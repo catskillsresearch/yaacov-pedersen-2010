@@ -1,0 +1,23 @@
+Fix a set $\Gamma$ of Łukasiewicz formulae and write $\varphi\to\psi$ for $\psi\dot-\varphi$.
+
+**Definition** (`ProvableEq`). $\varphi\equiv_\Gamma\psi$ iff $\Gamma\vdash\varphi\to\psi$ and $\Gamma\vdash\psi\to\varphi$. This is an equivalence relation; any two formulae provable from $\Gamma$ are equivalent; and $\varphi\equiv_\Gamma\psi\dot-\psi$ iff $\Gamma\vdash\varphi$.
+
+*Proof.* Reflexivity and transitivity are the derived rules $\varphi\to\varphi$ and syllogism. Two theorems imply each other by (A1). For the last claim use that $\psi\dot-\psi$ is provable and that a formula equivalent to a theorem is a theorem by modus ponens.
+
+**Lemma** (derived rules). Each is provable from any $\Gamma$: right antitonicity $(\alpha\to\beta)\to((\varphi\dot-\beta)\to(\varphi\dot-\alpha))$; axiom (A4) in implication form $(\neg\varphi\to\neg\psi)\to(\psi\to\varphi)$; ex falso $\neg\varphi\to(\varphi\to\psi)$; double negation $\neg\neg\varphi\to\varphi$ and $\varphi\to\neg\neg\varphi$; contraposition $(\varphi\to\psi)\to(\neg\psi\to\neg\varphi)$; and $\varphi\to(\psi\dot-\psi)$.
+
+*Proof.* Short Hilbert-style derivations from (A1)–(A4), syllogism and exchange of antecedents; double negation elimination combines ex falso with (A4), and direct contraposition is obtained from the converse one by double negation.
+
+**Lemma** (congruence). $\equiv_\Gamma$ is compatible with $\neg$ and with $\dot-$ in both arguments. Subtracting a theorem changes nothing, contraposition and exchange of antecedents are equivalences, and (A3) says that $\varphi\vee\psi\equiv\psi\vee\varphi$.
+
+**Definition.** At the formula level $\varphi\oplus\psi:=\neg(\neg\varphi\dot-\psi)$. Up to $\equiv_\Gamma$ it is commutative and associative, has any theorem as neutral element and its negation as absorbing element, satisfies Chang's axiom, and $\varphi\dot-\psi\equiv\neg(\neg\varphi\oplus\psi)$.
+
+*Proof.* Each identity reduces, by the congruence lemmas, to an equivalence between implications that is an instance of exchange, contraposition, double negation or (A3).
+
+**Definition** (`LukLindT Γ`). The quotient of formulae by $\equiv_\Gamma$, with $\neg[\varphi]=[\neg\varphi]$, $[\varphi]\oplus[\psi]=[\varphi\oplus\psi]$ and $0=[\psi\dot-\psi]$ for any $\psi$ (all choices give the same class).
+
+**Theorem** (`instMVAlgebra`). $\mathrm{Lind}(\Gamma)$ is an MV-algebra, its truncated subtraction is $[\varphi]\ominus[\psi]=[\varphi\dot-\psi]$, and $[\varphi]=0$ iff $\Gamma\vdash\varphi$ (`mk_eq_zero_iff`).
+
+**Theorem** (`provable_iff_evalMV_canonical`). Evaluating $\varphi$ in $\mathrm{Lind}(\Gamma)$ at the canonical assignment $i\mapsto[P_i]$ returns $[\varphi]$; hence $\Gamma\vdash\varphi$ iff $\varphi$ evaluates to $0$ there.
+
+*Proof.* Induction on $\varphi$ using the descriptions of $\ominus$ and $\neg$ on classes.

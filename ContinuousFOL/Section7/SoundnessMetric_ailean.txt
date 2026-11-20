@@ -1,0 +1,9 @@
+**Lemma** (`metricAxiom_eval_zero`). Every instance of (A1)–(A14) has value $0$ in every metric pre-structure under every assignment.
+
+*Proof.* (A1)–(A9) as before. (A10)–(A12) are $d(x,x)=0$, symmetry and the triangle inequality. For (A13): write $D=d(z,w)$ and $E=d(f(\dots z\dots),f(\dots w\dots))$; the value is $\min(q\dot-D,\ E\dot-r)$. If $D<q$, then $D<q<\delta_{f,i}(\epsilon)$, so by the modulus $E\le\epsilon<r$ and the second term is $0$; otherwise the first term is $0$. (A14) is the same with the truncated difference of relation values.
+
+**Theorem** (`soundness_metric_pre`, `soundness_metric`). If $\Gamma\vdash_Q\varphi$ with the metric axioms, then $\Gamma\models_Q\varphi$ over metric pre-structures and hence $\Gamma\models_{QC}\varphi$ over complete structures.
+
+**Theorem** (`soundness_metric_full`, Theorem 7.2). (i) $\Gamma\vdash_Q\varphi$ implies $\Gamma\models_Q\varphi$ and $\Gamma\models_{QC}\varphi$; (ii) if $\Gamma$ is satisfiable, or completely satisfiable, then $\Gamma$ is consistent.
+
+*Proof.* (i) by induction on derivations as before. (ii): in a model the formula $1$ has value $1$, so it is not provable.

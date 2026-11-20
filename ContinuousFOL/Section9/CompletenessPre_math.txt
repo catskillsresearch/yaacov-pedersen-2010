@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 23, Theorem 9.5 (paraphrase)**
+
+Completeness: every consistent set of formulae is satisfiable, and with a metric even completely satisfiable.
+
+</div>

@@ -1,0 +1,25 @@
+**Definition** (`val`). $\mathrm{val}(1)=1$, $\mathrm{val}(\neg d)=1-\mathrm{val}(d)$, $\mathrm{val}(d\dot-e)=\mathrm{val}(d)\dot-\mathrm{val}(e)$, $\mathrm{val}(\tfrac12d)=\mathrm{val}(d)/2$.
+
+**Lemma.** $\mathrm{val}(0)=0$, $\mathrm{val}(2^{-n})=2^{-n}$, and every value lies in $[0,1]$.
+
+*Proof.* The first two are direct computations (the second by induction on $n$); the range statement is induction on codes.
+
+**Definition** (`add`, `mulPow2Neg`). Truncated addition of codes is $d\oplus e:=\neg(\neg d\dot-e)$, and $k\cdot2^{-n}$ is the $k$-fold sum of $2^{-n}$ starting from $0$.
+
+**Lemma.** If $\mathrm{val}(d)+\mathrm{val}(e)\le1$ then $\mathrm{val}(d\oplus e)=\mathrm{val}(d)+\mathrm{val}(e)$. Consequently, for $k\le2^n$, $\mathrm{val}(k\cdot2^{-n})=k/2^n$.
+
+*Proof.* $1-((1-a)\dot-b)=a+b$ when $a+b\le1$. The second statement is induction on $k$, using that all partial sums stay at most $1$.
+
+**Definition** (`dyadics`). $\mathbb D:=\{k/2^n: k,n\in\mathbb N,\ k\le2^n\}$.
+
+**Lemma** (`exists_val_eq_div`). Every code has value $k/2^n$ for some $k\le2^n$.
+
+*Proof.* Induction on the code. $1=1/2^0$. If $\mathrm{val}(d)=k/2^n$ then $\mathrm{val}(\neg d)=(2^n-k)/2^n$ and $\mathrm{val}(\tfrac12 d)=k/2^{n+1}$. For $d\dot-e$, write both values over the common denominator $2^N$ with $N=\max(n,m)$; their truncated difference is again of the form $k'/2^N$ with $k'\le 2^N$.
+
+**Theorem** (`val_range_eq_dyadics`, Remark 3.4). The set of values of codes is exactly $\mathbb D$.
+
+*Proof.* One inclusion is the previous lemma; conversely $k/2^n$ is the value of the code $k\cdot2^{-n}$.
+
+**Lemma** (`dense_in_Icc`). If $0\le x<y\le1$, some code has value strictly between $x$ and $y$.
+
+*Proof.* Choose $n$ with $2^{-n}<y-x$ and let $k=\lfloor x2^n\rfloor+1$. Then $x<k2^{-n}\le x+2^{-n}<y\le1$, so $k\le2^n$ and the code $k\cdot2^{-n}$ works.

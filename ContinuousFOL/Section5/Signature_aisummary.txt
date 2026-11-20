@@ -1,0 +1,1 @@
+A signature: types of relation and function symbols (relation symbols nonempty), arities, and real-valued moduli for each argument place mapping $(0,1]$ into $(0,1]$.

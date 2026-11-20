@@ -1,0 +1,15 @@
+**Definitions.** `toLuk` reads a continuous formula as a Łukasiewicz formula over the variables $I\sqcup\{\text{continuous formulae}\}$, replacing each $\tfrac12\chi$ by the atom $[\chi]$; `ofLuk` substitutes back $\tfrac12\chi$ for $[\chi]$, and $\mathrm{ofLuk}(\mathrm{toLuk}\,\varphi)=\varphi$. Let $\mathrm{sub}(\varphi)$ be the finite set of subformulae of $\varphi$ and $A_5(\chi)$, $A_6(\chi)$ the instances of (A5) and (A6) at $\chi$.
+
+**Lemma** (`provable_ofLuk`). A Łukasiewicz proof from $S$ becomes, after substitution, a continuous-logic proof of $\mathrm{ofLuk}\,\varphi$ from $\mathrm{ofLuk}[S]$.
+
+*Proof.* Induction on the proof: axioms (A1)–(A4) substitute to axioms, premises to premises, and modus ponens to modus ponens.
+
+**Lemma** (`provable_cut`). If $S\vdash\varphi$ and every member of $S$ is provable from $T$, then $T\vdash\varphi$.
+
+**Lemma** (`eval_toLuk`). Let $w$ be a $[0,1]$-assignment on the extended variables. If $w$ gives value $0$ to $\mathrm{toLuk}(A_5(\chi))$ and $\mathrm{toLuk}(A_6(\chi))$ for every $\tfrac12\chi$ occurring in $\psi$, then the Łukasiewicz value of $\mathrm{toLuk}\,\psi$ under $w$ equals the continuous value of $\psi$ under the restriction of $w$ to $I$.
+
+*Proof.* Induction on $\psi$. The only nontrivial case is $\tfrac12\chi$: the two axiom instances say $w([\chi])\dot-(\chi\dot-w([\chi]))=0$ and $(\chi\dot-w([\chi]))\dot-w([\chi])=0$, which together force $w([\chi])=\chi/2$.
+
+**Theorem** (`entails_finset_iff_provable`, Fact 4.5). For finite $\Sigma$: $\Sigma\models\varphi$ iff $\Sigma\vdash\varphi$.
+
+*Proof.* Soundness gives one direction. For the other, let $C$ be the subformulae of $\varphi$ and of the members of $\Sigma$, $H$ the (A5)/(A6) instances for all $\tfrac12\chi\in C$, and $L=\mathrm{toLuk}[\Sigma\cup H]$, a finite set. Any $[0,1]$-assignment satisfying $L$ evaluates every relevant formula as in continuous logic, so it satisfies $\Sigma$ and hence gives $\mathrm{toLuk}\,\varphi$ the value $0$; thus $L\models\mathrm{toLuk}\,\varphi$. By finite strong completeness of Łukasiewicz logic $L\vdash\mathrm{toLuk}\,\varphi$; substituting back gives $\Sigma\cup H\vdash\varphi$ in continuous logic. Every member of $H$ is an axiom, so the cut lemma gives $\Sigma\vdash\varphi$.

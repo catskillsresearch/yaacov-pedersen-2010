@@ -1,0 +1,3 @@
+**Definition** (`IsCompleteTheory`). A theory $T$ is complete if there are a continuous structure $\mathfrak M$ and an assignment $\sigma$ such that $T=\{\varphi:\ \varphi\text{ is a sentence and }\mathfrak M(\varphi,\sigma)=0\}$.
+
+*Remark.* The paper writes the set of all formulae true in $(\mathfrak M,\sigma)$. Since a theory consists of sentences, the Lean restricts to sentences; otherwise no theory could be complete.

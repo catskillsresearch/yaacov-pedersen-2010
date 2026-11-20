@@ -1,0 +1,1 @@
+Chang's MV-algebras in the signature $\langle A,\oplus,\neg,0\rangle$ with axioms (MV1)–(MV6), the derived constants and operations $1$, $\ominus$, $\odot$, join and the natural order.

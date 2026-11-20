@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 20, Proposition 9.2 (paraphrase)**
+
+There is a signature $\mathcal L^c\supseteq\mathcal L$ and a set $\Gamma^c$ of $\mathcal L^c$-formulae such that $\Gamma\cup\Gamma^c$ is Henkin complete for every $\Gamma$, and consistent whenever $\Gamma$ is. The paper adds, in countably many rounds, a constant $c_{(\varphi,x,p,q)}$ for every formula of the previous round and takes $\Gamma^c$ to be the Henkin axioms $(\sup_x\varphi\dot-q)\wedge(p\dot-\varphi[c_{(\varphi,x,p,q)}/x])$. For consistency it removes, from a minimal finite inconsistent set of Henkin axioms, the one whose constant is newest: that constant does not occur elsewhere, and generalizing over it (Lemma 8.4) yields $\Gamma\vdash q\dot-p$, which is impossible for $p<q$.
+
+</div>

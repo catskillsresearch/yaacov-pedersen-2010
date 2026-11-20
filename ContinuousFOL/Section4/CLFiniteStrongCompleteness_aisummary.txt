@@ -1,0 +1,1 @@
+Fact 4.5, proved by reducing continuous logic to Łukasiewicz logic with the half-operator treated as new atoms.

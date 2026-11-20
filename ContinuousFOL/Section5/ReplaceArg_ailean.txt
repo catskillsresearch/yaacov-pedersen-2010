@@ -1,0 +1,1 @@
+**Definition** (`replaceArg`). For an $n$-tuple $v$, an index $i<n$ and an element $c$, $v[i\mapsto c]$ is the tuple whose $j$-th entry is $c$ if $j=i$ and $v_j$ otherwise. Thus $(\bar a,c,\bar b)$ with $|\bar a|=i$ is $v[i\mapsto c]$ for any $v$ extending $\bar a$ and $\bar b$.

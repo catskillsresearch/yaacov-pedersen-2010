@@ -1,0 +1,7 @@
+**Lemma** (`axiom_eval_zero`). Every instance of (A1)–(A4) has value $0$ under every $[0,1]$-valued assignment.
+
+*Proof.* Write $a,b,c$ for the values of $\varphi,\psi,\chi$. (A1) says $(a\dot-b)\dot-a=0$, true because $a\dot-b\le a$ for $a,b\ge0$. (A2) is the real inequality $(c\dot-a)\dot-(c\dot-b)\le b\dot-a$. (A3) holds because both $a\dot-(a\dot-b)$ and $b\dot-(b\dot-a)$ equal $\min(a,b)$. (A4) holds because $(1-b)\dot-(1-a)=a\dot-b$.
+
+**Theorem** (`soundness`). If $\Sigma\vdash\varphi$ then $\Sigma\models\varphi$.
+
+*Proof.* Induction on the derivation. Axioms have value $0$ by the lemma, and hypotheses have value $0$ in every model of $\Sigma$. For modus ponens, if a model gives $\varphi$ and $\psi\dot-\varphi$ the value $0$, then $v(\psi)\le v(\varphi)=0$, so $v(\psi)=0$ because values are nonnegative.

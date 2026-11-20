@@ -1,0 +1,1 @@
+From weak completeness and the semantic and syntactic iteration (deduction) theorems: for a finite premise set $\Sigma$, $\Sigma\models\varphi$ implies $\Sigma\vdash\varphi$.

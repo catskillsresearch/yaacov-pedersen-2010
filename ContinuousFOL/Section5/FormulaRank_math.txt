@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 21, Definition 9.3 (paraphrase)**
+
+The rank counts connectives and quantifiers: atomic formulae have rank $0$, each unary connective or quantifier adds one, and $\varphi\dot-\psi$ has rank $\mathrm{rank}\,\varphi+\mathrm{rank}\,\psi+1$.
+
+</div>

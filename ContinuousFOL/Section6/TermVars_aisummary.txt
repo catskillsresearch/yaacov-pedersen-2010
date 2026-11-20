@@ -1,0 +1,1 @@
+The finite set of variables occurring in a term.

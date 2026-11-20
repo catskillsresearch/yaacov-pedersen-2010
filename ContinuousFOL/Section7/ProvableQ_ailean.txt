@@ -1,0 +1,1 @@
+**Definition** (`ProvableQ`). The least relation such that every generalization of an instance of (A1)–(A9) is provable, every member of $\Gamma$ is provable, and if $\varphi$ and $\psi\dot-\varphi$ are provable then so is $\psi$ (modus ponens: $\psi\dot-\varphi$ says "$\varphi\to\psi$").

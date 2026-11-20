@@ -1,0 +1,7 @@
+**Definition** (`LMorphism`). A map $h:M\to N$ with $h(f^{\mathfrak M}(\bar a))=f^{\mathfrak N}(h\bar a)$ and $P^{\mathfrak M}(\bar a)=P^{\mathfrak N}(h\bar a)$.
+
+**Lemma** (`map_term`). $h(t^{\mathfrak M,\sigma})=t^{\mathfrak N,h\circ\sigma}$, by induction on $t$.
+
+**Theorem** (`surjective_morphism_elementary`, Theorem 6.6). If $h$ is surjective then $\mathfrak M(\varphi,\sigma)=\mathfrak N(\varphi,h\circ\sigma)$ for all $\varphi,\sigma$.
+
+*Proof.* Induction on $\varphi$. Atomic formulae use `map_term` and preservation of relations; the connectives are immediate. For $\sup_x\alpha$: $h\circ\sigma^a_x=(h\circ\sigma)^{h(a)}_x$, so by induction the values on the left are the values $\mathfrak N(\alpha,(h\circ\sigma)^{h(a)}_x)$, $a\in M$; by surjectivity these are all the values $\mathfrak N(\alpha,(h\circ\sigma)^b_x)$, $b\in N$. The suprema of equal sets are equal.

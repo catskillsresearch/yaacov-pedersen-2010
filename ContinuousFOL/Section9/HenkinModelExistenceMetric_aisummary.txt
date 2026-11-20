@@ -1,0 +1,1 @@
+A pre-structure satisfying all generalized metric axioms is a metric pre-structure; hence a metrically consistent $\Gamma$ has a metric pre-structure model (Theorem 9.4 with a metric).

@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 18, Lemma 8.5 (paraphrase)**
+
+The paper repeatedly uses, "cf. the proof of Lemma 8.5", that if adding $p\dot-\varphi$ makes $\Gamma$ inconsistent, then $\Gamma$ proves $\varphi\dot-p$.
+
+</div>

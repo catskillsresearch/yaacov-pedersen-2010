@@ -1,0 +1,13 @@
+**Lemmas** (bookkeeping). Replacing $c$ by $y$ does nothing if $c$ does not occur; it adds at most $y$ to the (free, all) variables; it commutes with free substitution of other variables; and replacing $c$ by $y$ and then $y$ by $x$ equals replacing $c$ by $x$, when $y$ was absent.
+
+**Lemma** (`BaseAxiomSchema.substConstVar`). If $\psi$ is an instance of (A1)–(A9) and $y\notin\mathrm{AV}(\psi)$, then $\psi[y/c]$ is again an instance.
+
+*Proof.* Case by case; for (A8) and (A9) the side conditions (correctness, non-freeness) are preserved because $y$ is new.
+
+**Lemma** (`substConstVar_fresh`). If $c$ does not occur in $\Gamma$ and $\Gamma\vdash_Q\varphi$, then there is a finite set $S$ of variables such that $\Gamma\vdash_Q\varphi[y/c]$ for every $y\notin S$.
+
+*Proof.* Induction on the derivation, collecting the variables of each axiom instance used; premises are unchanged since $c$ does not occur in them.
+
+**Theorem** (`generalize_fresh_const`, Lemma 8.4). If $c$ is a constant not occurring in $\Gamma$, $x\notin\mathrm{AV}(\varphi)$ and $\Gamma\vdash_Q\varphi$, then $\Gamma\vdash_Q\sup_x\varphi[x/c]$.
+
+*Proof.* Choose $y$ outside $S$, outside the free variables of the premises actually used (finitely many) and outside $\mathrm{AV}(\varphi)\cup\{x\}$. Then $\Gamma\vdash\varphi[y/c]$, and by generalization $\Gamma\vdash\sup_y\varphi[y/c]$. Since $\varphi[x/c]$ is $\varphi[y/c]$ with $x$ for $y$ and $x$ does not occur in $\varphi$, the formula $\sup_x\varphi[x/c]$ is a bound renaming of $\sup_y\varphi[y/c]$, so Lemma 8.3 and modus ponens finish. The metric version is identical, using that metric axioms are also closed under replacing constants by fresh variables.

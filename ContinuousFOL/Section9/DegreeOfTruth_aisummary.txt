@@ -1,0 +1,1 @@
+$\varphi^\circ_\Gamma$ over pre-structures, over metric pre-structures, and (as a helper) over complete structures; the last two agree.

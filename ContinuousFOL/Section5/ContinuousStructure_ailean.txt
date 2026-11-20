@@ -1,0 +1,1 @@
+**Definition** (`ContinuousStructure`). A continuous $\mathcal L$-structure is a metric pre-structure $\mathfrak M$ together with a metric space structure on $M$ whose distance function equals $d^{\mathfrak M}$ and which is complete. Since a metric space separates points, $d^{\mathfrak M}(a,b)=0$ implies $a=b$.

@@ -1,0 +1,1 @@
+Lemma 6.2, together with the coincidence lemmas: evaluation depends only on the (free) variables actually present.

@@ -41,7 +41,8 @@ LISTING_CHUNK_LINES = 400
 AUTHOR = "Lars Warren Ericson"
 COMPANY = "Catskills Research Company"
 GITHUB_URL = r"https://github.com/catskillsresearch/yaacov-pedersen-2010"
-# Set to the Palomar registry entry URL once this project is registered.
+# Palomar registry entry: TBD (this project is not registered yet). Set to the
+# entry URL once registered; until then the title page shows "TBD".
 PALOMAR_URL = ""
 ORCID = "0000-0001-8299-9361"
 EMAIL = "lars.ericson@catskillsresearch.com"
@@ -101,7 +102,7 @@ FENCE_RE = re.compile(r"^```([^\n]*)\n(.*?)^```\s*$", re.MULTILINE | re.DOTALL)
 MANUAL_SECTION_NUM = re.compile(r"^(#{1,6})[ \t]+\d+(?:\.\d+)*\.?[ \t]+", re.MULTILINE)
 NARRATIVE_MARKER = "# Narrative (from arxiv.md)"
 LEAN_MODULE_RE = re.compile(
-    r"^###\s+((?:ContinuousFOL(?:\.lean|/[^\s{]+))\s*$",
+    r"^###\s+(ContinuousFOL(?:\.lean|/[^\s{]+))\s*$",
     re.MULTILINE,
 )
 FIGURE_CAPTION_RE = re.compile(
@@ -238,12 +239,12 @@ def embed_lstlean(preamble: str) -> str:
 
 
 # Bold first line of a ```source``` / `*_math.txt` block, e.g.
-# **Ben Yaacov–Pedersen (2010), p. N / Thm …** or **Nowakowska, THEORY_OF_ACTIONS_KEEP (1982), …**
+# **Ben Yaacov–Pedersen (2010), arXiv p. 3, Definition 2.1 (paraphrase)**
 _SOURCE_HEADER_RE = re.compile(
-    r"^\*\*((?:ContinuousFOL|Nowakowska)\b.*?)\*\*\s*$",
+    r"^\*\*((?:Ben Yaacov|Lyasoff|Nowakowska)\b.*?)\*\*\s*$",
 )
 
-_DEFAULT_SOURCE_TITLE = r"ContinuousFOL, \emph{Finance Stoch.} (2016)"
+_DEFAULT_SOURCE_TITLE = r"Ben Yaacov--Pedersen, \emph{J. Symbolic Logic} (2010)"
 
 
 def _is_source_header(stripped: str) -> bool:
@@ -405,7 +406,7 @@ def extract_lean_titles(text: str) -> dict[str, str]:
         module = None
         for line in reversed(prefix.splitlines()[-4:]):
             m = re.match(
-                r"^###\s+((?:ContinuousFOL(?:\.lean|/[^\s{]+))",
+                r"^###\s+(ContinuousFOL(?:\.lean|/[^\s{]+))",
                 line.strip(),
             )
             if m:
@@ -677,7 +678,7 @@ def cleanup_abstract_latex(latex: str) -> str:
 
 
 def build_title_page(abstract_latex: str) -> str:
-    palomar_latex = f"\\url{{{PALOMAR_URL}}}" if PALOMAR_URL else "registration pending"
+    palomar_latex = f"\\url{{{PALOMAR_URL}}}" if PALOMAR_URL else "TBD"
     return textwrap.dedent(
         f"""
         \\title{{\\textbf{{{TITLE}}}}}

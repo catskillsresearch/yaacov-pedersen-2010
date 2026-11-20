@@ -1,0 +1,1 @@
+Clauses (i)–(ii) of Definition 5.6: a nonempty carrier in an arbitrary universe, interpretations of function symbols, and $[0,1]$-valued interpretations of relation symbols.

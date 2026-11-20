@@ -1,0 +1,7 @@
+**Definition** (`MVAlgebra`). An MV-algebra is a set $A$ with a binary operation $\oplus$, a unary operation $\neg$ and an element $0$ such that $\oplus$ is associative and commutative with neutral element $0$, $\neg\neg x=x$, $x\oplus\neg0=\neg0$, and Chang's axiom $\neg(\neg x\oplus y)\oplus y=\neg(\neg y\oplus x)\oplus x$ holds.
+
+**Definitions.** $1:=\neg0$; truncated subtraction $x\ominus y:=\neg(\neg x\oplus y)$; the product $x\odot y:=\neg(\neg x\oplus\neg y)$; the join $x\vee y:=(x\ominus y)\oplus y$; and the natural order $x\le y$ iff $x\ominus y=0$.
+
+**Lemma.** $0\oplus x=x$; $\neg1=0$; $x\oplus1=1=1\oplus x$; $\neg\neg x=x$; $\odot$ is commutative; and Chang's axiom says precisely that the join is commutative: $(x\ominus y)\oplus y=(y\ominus x)\oplus x$.
+
+*Proof.* Each identity is a one- or two-step rewrite using commutativity of $\oplus$ and the axioms.

@@ -23,68 +23,30 @@ class ModelCard:
 
 MODEL_CARDS: tuple[ModelCard, ...] = (
     ModelCard(
-        label="Cursor Grok 4.7",
-        cite_key="Grk47",
+        label="Grok Bot",
+        cite_key="ai-grok-bot",
         tool_note=(
-            "primary agent model for Lean 4 / Mathlib formalization, lake build "
-            "repair, vision-OCR alignment, ContinuousFOL writeup, and Palomar "
-            "packaging."
+            "agent for Lean 4 / Mathlib formalization and lake build repair, "
+            "and author of the ContinuousFOL writeup: the paraphrased paper "
+            "boxes and the mathematical-English summaries of every Lean module "
+            "(`ContinuousFOL/module_writeup.json`), plus the md -> tex -> pdf "
+            "pipeline."
         ),
         bib_entry_type="misc",
         bib_fields={
-            "author": "xAI and {Anysphere, Inc.}",
-            "title": "Grok 4.7",
-            "howpublished":
-                "Model documentation, \\url{https://docs.x.ai/docs/models}; "
-                "Cursor model catalog, \\url{https://cursor.com/docs/models}",
+            "author": "{xAI} and {Anysphere, Inc.}",
+            "title": "Grok Bot",
+            "howpublished": "AI agent, \\url{https://cursor.com}",
             "year": "2026",
-            "note": "accessed 2026",
-        },
-    ),
-    ModelCard(
-        label="Cursor Composer 2.5",
-        cite_key="Cmp25",
-        tool_note=(
-            "routine scaffolding and medium-complexity proof obligations where "
-            "the strategy is already fixed (`composer-2.5`)."
-        ),
-        bib_entry_type="misc",
-        bib_fields={
-            "author": "{Anysphere, Inc.}",
-            "title": "Composer 2.5",
-            "howpublished":
-                "Model announcement and documentation, "
-                "\\url{https://cursor.com/blog/composer-2-5}; "
-                "model card as integrated in Cursor, "
-                "\\url{https://cursor.com/docs/models}",
-            "year": "2026",
-            "note": "accessed 2026",
-        },
-    ),
-    ModelCard(
-        label="Claude Fable 5.2",
-        cite_key="Fab52",
-        tool_note=(
-            "substantive Lean repairs and larger proof obligations "
-            "(`claude-fable-5-2`)."
-        ),
-        bib_entry_type="misc",
-        bib_fields={
-            "author": "{Anthropic} and {Anysphere, Inc.}",
-            "title": "Claude Fable 5.2",
-            "howpublished":
-                "Model as integrated in Cursor, "
-                "\\url{https://cursor.com/docs/models}",
-            "year": "2026",
-            "note": "accessed 2026",
+            "note": "Wrote the module summaries and paraphrased paper boxes of the ContinuousFOL writeup, 2026-11-20",
         },
     ),
     ModelCard(
         label="Google Gemini 4 Carbon",
         cite_key="Gem4C",
         tool_note=(
-            "agent and support passes for ContinuousFOL formalization "
-            "(`gemini-4-carbon` / Gemini 4 Carbon in Cursor)."
+            "agent and support passes for the ContinuousFOL formalization "
+            "(`gemini-4-carbon` in Cursor)."
         ),
         bib_entry_type="misc",
         bib_fields={
@@ -95,7 +57,7 @@ MODEL_CARDS: tuple[ModelCard, ...] = (
                 "\\url{https://ai.google.dev/gemini-api/docs/models}; "
                 "Cursor model catalog, \\url{https://cursor.com/docs/models}",
             "year": "2026",
-            "note": "accessed 2026; required model card for this project",
+            "note": "accessed 2026",
         },
     ),
 )

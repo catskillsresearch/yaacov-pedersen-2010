@@ -1,0 +1,11 @@
+**Lemma** (`approx_schema`). $\vdash_Q\big(\tfrac12\dot-(1\dot-m\varphi)\big)\dot-2m(\varphi\dot-2^{-(m+2)})$, where $\tfrac12$ is the formula $\tfrac12 1$.
+
+*Proof.* The real form: if $a\ge0$ and $4mc<1$ then $(\tfrac12\dot-(1\dot-ma))\dot-2m(a\dot-c)=0$. If $ma\ge1$, the left part is $\tfrac12$ and $2m(a-c)\ge2-2mc>\tfrac12$. If $ma<1$, the left part is $\max(ma-\tfrac12,0)$; when $a\le c$ this is $0$ because $ma\le mc<\tfrac14$, and otherwise $2m(a-c)>2ma-\tfrac12\ge ma-\tfrac12$. Hence the continuous propositional formula is valid, hence provable (Fact 4.5), hence a $\vdash_Q$ theorem after substitution. Also $\vdash(1\dot-\tfrac12)\dot-\tfrac12$.
+
+**Theorem** (`consistent_adjoin_approx`, Lemma 8.5(i)). If $\Gamma$ is consistent and $\Gamma\vdash\varphi\dot-2^{-n}$ for every $n$, then $\Gamma\cup\{\varphi\}$ is consistent.
+
+*Proof.* Otherwise $\Gamma\cup\{\varphi\}\vdash1$, and the Deduction Theorem gives $\Gamma\vdash1\dot-m\varphi$. From $\Gamma\vdash\varphi\dot-2^{-(m+2)}$ and the schema, cancelling $2m$ subtractions gives $\Gamma\vdash\tfrac12\dot-(1\dot-m\varphi)$, then modus ponens gives $\Gamma\vdash\tfrac12$, and with $(1\dot-\tfrac12)\dot-\tfrac12$ we get $\Gamma\vdash1$: $\Gamma$ is inconsistent.
+
+**Theorem** (`consistent_adjoin_comparable`, Lemma 8.5(ii)). If $\Gamma$ is consistent then $\Gamma\cup\{\varphi\dot-\psi\}$ or $\Gamma\cup\{\psi\dot-\varphi\}$ is consistent.
+
+*Proof.* If both were inconsistent, the Deduction Theorem gives $\Gamma\vdash1\dot-n(\varphi\dot-\psi)$ and $\Gamma\vdash1\dot-n'(\psi\dot-\varphi)$. The first yields $\Gamma\vdash\psi\dot-\varphi$ (by a provable schema exchanging the roles), and then the second, by cancelling, yields $\Gamma\vdash1$.

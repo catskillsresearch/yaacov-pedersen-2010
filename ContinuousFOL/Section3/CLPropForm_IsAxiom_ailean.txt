@@ -1,0 +1,3 @@
+**Definition** (`CLPropForm.IsAxiom`). A continuous formula is an axiom if it is an instance of (A1)–(A4) (as for Łukasiewicz logic) or of
+(A5) $\tfrac12\varphi\dot-(\varphi\dot-\tfrac12\varphi)$, or
+(A6) $(\varphi\dot-\tfrac12\varphi)\dot-\tfrac12\varphi$.

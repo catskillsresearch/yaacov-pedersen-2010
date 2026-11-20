@@ -1,0 +1,1 @@
+Theorem 6.9, packaged from the construction.

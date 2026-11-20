@@ -1,0 +1,1 @@
+**Definition** (`Term.eval`). Given a pre-structure $\mathfrak M$ and an assignment $\sigma:V\to M$: $x^{\mathfrak M,\sigma}=\sigma(x)$ and $f(t_0,\dots)^{\mathfrak M,\sigma}=f^{\mathfrak M}(t_0^{\mathfrak M,\sigma},\dots)$.

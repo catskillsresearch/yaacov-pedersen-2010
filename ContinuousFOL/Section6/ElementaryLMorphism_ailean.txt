@@ -1,0 +1,1 @@
+**Definition** (`ElementaryLMorphism`). An $\mathcal L$-morphism $h$ such that $\mathfrak M(\varphi,\sigma)=\mathfrak N(\varphi,h\circ\sigma)$ for every formula $\varphi$ and every assignment $\sigma$.

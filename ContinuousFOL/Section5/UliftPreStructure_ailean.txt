@@ -1,0 +1,7 @@
+**Definition.** For a pre-structure $\mathfrak M$ in universe $0$, $\mathfrak M^\uparrow$ has carrier the lift of $M$ to universe $u$, with the symbols interpreted through the bijection $\mathrm{up}:M\to M^\uparrow$ and its inverse $\mathrm{down}$.
+
+**Lemma.** For every term $t$ and formula $\varphi$: $t^{\mathfrak M^\uparrow,\mathrm{up}\circ\sigma}=\mathrm{up}(t^{\mathfrak M,\sigma})$ and $\mathfrak M^\uparrow(\varphi,\mathrm{up}\circ\sigma)=\mathfrak M(\varphi,\sigma)$; equivalently $\mathfrak M^\uparrow(\varphi,\tau)=\mathfrak M(\varphi,\mathrm{down}\circ\tau)$.
+
+*Proof.* Induction on $t$ and on $\varphi$. The only non-routine case is $\sup_x$: updating $\mathrm{up}\circ\sigma$ at $x$ with $\mathrm{up}(a)$ is $\mathrm{up}$ composed with $\sigma^a_x$, and $\mathrm{up}$ is a bijection, so both suprema range over the same set of values.
+
+**Corollaries.** $(\mathfrak M^\uparrow,\mathrm{up}\circ\sigma)\models_Q\Gamma$ iff $(\mathfrak M,\sigma)\models_Q\Gamma$, so satisfiability in universe $0$ implies it in every universe. The same lifting works for metric pre-structures (the pseudo-metric axioms and moduli transfer through the bijection) and for continuous structures (the lifted metric is complete), so complete satisfiability also lifts.

@@ -1,0 +1,1 @@
+Hilbert-style derived rules for $\vdash_Q$ (syllogism, exchange, identity, ex falso), $\vdash\varphi\dot-1$, and the criterion that $\Gamma$ is inconsistent iff $\Gamma\vdash_Q1$.

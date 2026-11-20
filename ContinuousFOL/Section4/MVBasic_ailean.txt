@@ -1,0 +1,23 @@
+Throughout, $A$ is an MV-algebra.
+
+**Lemma** (algebra). $\neg$ is injective; $x\oplus\neg x=1$; $x\ominus y=x\odot\neg y$; $\neg(x\oplus y)=\neg x\odot\neg y$ and $\neg(x\odot y)=\neg x\oplus\neg y$; $\odot$ is associative and commutative with unit $1$ and absorbing element $0$; $x\odot\neg x=0$; and the dual of Chang's axiom $x\odot(\neg x\oplus y)=y\odot(\neg y\oplus x)$.
+
+*Proof.* Apply $\neg$ to the corresponding $\oplus$-identities and use $\neg\neg x=x$.
+
+**Lemma** (order). $x\le y$ iff $\neg x\oplus y=1$ iff $x\odot\neg y=0$ iff $y=x\oplus z$ for some $z$. The relation $\le$ is reflexive, transitive and antisymmetric, with least element $0$ and greatest element $1$. Addition and multiplication are monotone in each argument, $\neg$ is antitone, $x\odot y\le x$, $x\ominus y\le x$, and residuation holds: $x\odot y\le z$ iff $x\le\neg y\oplus z$. Moreover $(x\ominus a)\ominus b=x\ominus(a\oplus b)$, $x\ominus0=x$, $0\ominus x=0$, $1\ominus x=\neg x$.
+
+*Proof.* The characterizations of $\le$ follow from the definitions and the De Morgan laws; when $x\le y$ one has $y=x\oplus(y\ominus x)$ by Chang's axiom, which gives the existential form, from which reflexivity, transitivity and monotonicity of $\oplus$ are immediate. Antisymmetry uses Chang's axiom once more: if $x\ominus y=0=y\ominus x$ then $y=(x\ominus y)\oplus y=(y\ominus x)\oplus x=x$.
+
+**Lemma** (lattice). $x\vee y$ is the least upper bound of $x,y$; $x\wedge y:=x\odot(\neg x\oplus y)=\neg(\neg x\vee\neg y)$ is the greatest lower bound, with $x\wedge y=x$ when $x\le y$ and $x\wedge0=0$.
+
+**Lemma** (`add_meet`). $x\oplus(y\wedge z)=(x\oplus y)\wedge(x\oplus z)$.
+
+**Theorem** (`meet_msub_msub`, prelinearity). $(x\ominus y)\wedge(y\ominus x)=0$ in every MV-algebra.
+
+*Proof.* Put $b=y\ominus x$ and $w=\neg y\oplus x$, so that $x\ominus y=x\odot\neg y$ and $\neg w=y\odot\neg x$. Unfold the meet $(x\odot\neg y)\odot(\neg(x\odot\neg y)\oplus b)$ and rewrite it three times with the dual Chang identity $u\odot(\neg u\oplus v)=v\odot(\neg v\oplus u)$, for the pairs $(\neg y,w)$, $(x,b)$ and $(y,\neg w)$; the resulting chain of equalities ends in a product containing a factor $u\odot\neg u=0$.
+
+**Definition** (`nsm`). $0\cdot x=0$ and $(n+1)x=nx\oplus x$; this is monotone in $n$.
+
+**Lemma** (`meet_nsm_nsm`). If $x\wedge y=0$ then $nx\wedge my=0$ for all $n,m$.
+
+*Proof.* First, if $a\wedge y=0$ and $b\wedge y=0$ then $(a\oplus b)\wedge y=0$, using distributivity and monotonicity. Induction on $n$ gives $nx\wedge y=0$, and the same argument in the other argument gives $nx\wedge my=0$.

@@ -1,0 +1,1 @@
+A canonical atomic formula $P(v_0,\dots,v_0)$, built from an arbitrarily chosen relation symbol, used to define the constant $1$.

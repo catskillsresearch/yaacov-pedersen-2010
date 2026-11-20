@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 4, Definition 2.2 (paraphrase)**
+
+A truth assignment interprets the formal connective $\dot-$ as truncated subtraction of real numbers: the value of $\varphi\dot-\psi$ is the larger of $v(\varphi)-v(\psi)$ and $0$. Since $0$ means "true", $\psi\dot-\varphi$ vanishes exactly when the value of $\psi$ is at most that of $\varphi$, which is why the paper reads $\dot-$ as a kind of implication.
+
+</div>

@@ -1,0 +1,1 @@
+The provability relation $\Sigma\vdash^{\mathrm L}\varphi$ as the least set containing the axioms and $\Sigma$ and closed under modus ponens, and consistency as "some formula is unprovable".

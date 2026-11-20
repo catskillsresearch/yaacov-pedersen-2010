@@ -1,0 +1,1 @@
+**Definition** (`PreStructure`). A pre-structure $\mathfrak M$ for $\mathcal L$ consists of a nonempty type $M$ (in an arbitrary universe $u$), for each function symbol $f$ a map $f^{\mathfrak M}:M^{n_f}\to M$, and for each relation symbol $P$ a map $P^{\mathfrak M}:M^{n_P}\to\mathbb R$ whose values lie in $[0,1]$.

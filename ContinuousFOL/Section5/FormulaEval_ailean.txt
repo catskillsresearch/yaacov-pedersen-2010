@@ -1,0 +1,9 @@
+**Definition** (`Formula.eval`). $\mathfrak M(P\bar t,\sigma)=P^{\mathfrak M}(\bar t^{\mathfrak M,\sigma})$; $\mathfrak M(\alpha\dot-\beta,\sigma)=\mathfrak M(\alpha,\sigma)\dot-\mathfrak M(\beta,\sigma)$; $\mathfrak M(\neg\alpha,\sigma)=1-\mathfrak M(\alpha,\sigma)$; $\mathfrak M(\tfrac12\alpha,\sigma)=\mathfrak M(\alpha,\sigma)/2$; and $\mathfrak M(\sup_x\alpha,\sigma)=\sup_{a\in M}\mathfrak M(\alpha,\sigma^a_x)$.
+
+**Lemma** (`eval_in_Icc`). Every value lies in $[0,1]$.
+
+*Proof.* Induction on $\varphi$. Atomic values lie in $[0,1]$ by definition of a pre-structure; the three connectives preserve $[0,1]$. For $\sup_x\alpha$, the set of values is nonempty (since $M\neq\emptyset$) and bounded by $1$, so its supremum is at most $1$ and at least any member, hence at least $0$.
+
+**Lemma.** The formula $1$ has value $1$, and the formula of a dyadic code $d$ has value $\mathrm{val}(d)$ under every assignment; hence the set of values of dyadic formulae is exactly the set of dyadic rationals in $[0,1]$ (Remark 3.4).
+
+*Proof.* $\varphi_0\dot-\varphi_0$ has value $0$, so its negation has value $1$; the dyadic case is induction on the code.

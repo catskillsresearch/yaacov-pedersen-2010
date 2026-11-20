@@ -1,0 +1,1 @@
+**Definition** (`CLPropForm.dyadic`). Given an anchor $\varphi_0$, map the code $1$ to $1_{\varphi_0}$, and translate $\neg$, $\dot-$ and $\tfrac12$ on codes into the same connectives on formulae. By construction the value of the resulting formula under any assignment equals the value of the code (proved where evaluation of dyadics is needed).

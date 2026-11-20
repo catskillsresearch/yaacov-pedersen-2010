@@ -1,0 +1,1 @@
+Enlarging the premises preserves provability, and every proof uses finitely many premises.

@@ -1,0 +1,1 @@
+$(\mathfrak M,\sigma)\models_Q\Gamma$, satisfiability over all pre-structures in a universe, and over metric pre-structures.

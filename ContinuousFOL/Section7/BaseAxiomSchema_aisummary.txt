@@ -1,0 +1,1 @@
+The first-order axiom schemata for an arbitrary signature: (A1)–(A6) at first-order formulae, plus (A7)–(A9).

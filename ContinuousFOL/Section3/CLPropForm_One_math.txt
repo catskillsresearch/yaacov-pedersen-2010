@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 6, Notation 3.3 (paraphrase)**
+
+There is no constant symbol for falsity; instead $1$ abbreviates $\neg(\varphi\dot-\varphi)$ for an arbitrary formula $\varphi$, which every assignment evaluates to $1$. Then $0$ abbreviates $\neg1$, and $2^{-n}$ is $1$ halved $n$ times.
+
+</div>

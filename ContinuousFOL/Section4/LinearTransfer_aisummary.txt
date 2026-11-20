@@ -1,0 +1,1 @@
+Fourier–Motzkin elimination for finite systems of homogeneous integer-linear strict and non-strict inequalities: such a system with a solution in some linearly ordered abelian group also has a real solution.

@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 7, Definition 5.1 (paraphrase)**
+
+The logical symbols are parentheses, the connectives $\dot-$, $\neg$, $\tfrac12$, the quantifier $\sup$ (with $\inf$ as its dual), a countable list of variables $v_0,v_1,\dots$, and optionally a binary metric symbol $d$. The three connectives are the continuous analogue of the classical choice $\{\neg,\to\}$: finitely many, yet enough to approximate every continuous connective.
+
+</div>

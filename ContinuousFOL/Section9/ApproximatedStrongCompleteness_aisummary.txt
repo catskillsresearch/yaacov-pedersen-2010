@@ -1,0 +1,1 @@
+Corollary 9.6 for pre-structures, metric pre-structures and complete structures.

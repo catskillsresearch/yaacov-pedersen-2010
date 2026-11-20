@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 14, Axioms (A10)–(A14) (paraphrase)**
+
+For a signature with a metric add: (A10)–(A12) say that $d$ is a pseudo-metric ($dxx$, $dxy\dot-dyx$, $(dxz\dot-dxy)\dot-dyz$). (A13) and (A14) encode the moduli: for a dyadic $q$ below $\delta_{s,i}(\epsilon)$ and a dyadic $r$ above $\epsilon$, the formula $(q\dot-dzw)\wedge(\text{change of }s\text{ in argument }i\text{ when }z\text{ is replaced by }w\ \dot-\ r)$ is an axiom. Informally, whenever $d(z,w)<q$, the first conjunct is positive, so the second must vanish and the change is at most $r$; letting $r\downarrow\epsilon$ recovers the modulus.
+
+</div>

@@ -1,0 +1,1 @@
+$\inf$, $\wedge$, $\vee$, $|\cdot-\cdot|$, the truncated sum $\varphi\oplus\psi$ and the atomic formula $d(t_0,t_1)$.

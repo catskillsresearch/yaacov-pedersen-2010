@@ -1,0 +1,3 @@
+**Theorem** (`luk_weak_completeness`). For every Łukasiewicz formula $\varphi$ over any set of variables, $\models\varphi$ iff $\vdash\varphi$.
+
+*Proof.* This is the theorem `entails_empty_iff_provable` of the Chang module: soundness in one direction, and in the other the Lindenbaum algebra of a linear extension, Chang's ordered group and the transfer to $[0,1]$.

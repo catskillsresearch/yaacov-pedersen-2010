@@ -1,0 +1,19 @@
+**Lemma** (`deduction_schema_real`). For reals $a,b,c\ge0$ and $n,m$: $\big((b\dot-(n+m)a)\dot-((b\dot-c)\dot-na)\big)\dot-(c\dot-ma)=0$.
+
+*Proof.* Unfold the iterated subtractions as $\max(x-ka,0)$ and check the cases.
+
+**Definition** (`LukPropForm.toFormula`). Substituting first-order formulae for the variables of a Łukasiewicz formula.
+
+**Lemma** (`deduction_schema`). $\vdash_Q\big((\beta\dot-(n+m)\alpha)\dot-((\beta\dot-\gamma)\dot-n\alpha)\big)\dot-(\gamma\dot-m\alpha)$.
+
+*Proof.* The corresponding propositional formula in three variables is valid by the real lemma, hence provable by weak completeness (Fact 4.1); substituting $\alpha,\beta,\gamma$ turns the Łukasiewicz proof into a $\vdash_Q$ proof, because (A1)–(A4) instantiate to axioms.
+
+**Lemma** (`cancel_iterSub`). If $\Gamma\vdash\psi$ and $\Gamma\vdash\varphi\dot-n\psi$ then $\Gamma\vdash\varphi$.
+
+*Proof.* Induction on $n$: from $\psi$ and $(\varphi\dot-k\psi)\dot-\psi$ modus ponens removes one subtraction at a time.
+
+**Theorem** (`deduction_theorem`, Theorem 8.1). $\Gamma\cup\{\psi\}\vdash_Q\varphi$ iff $\Gamma\vdash_Q\varphi\dot-n\psi$ for some $n$.
+
+*Proof.* ($\Leftarrow$) by `cancel_iterSub`. ($\Rightarrow$) Induction on the derivation from $\Gamma\cup\{\psi\}$. An axiom or a member of $\Gamma$ is provable from $\Gamma$, so $n=0$. The premise $\psi$ itself: $\psi\dot-\psi$ is provable, so $n=1$. Modus ponens from $\gamma$ and $\beta\dot-\gamma$: by induction $\Gamma\vdash\gamma\dot-m\psi$ and $\Gamma\vdash(\beta\dot-\gamma)\dot-n\psi$; two modus ponens steps with the deduction schema give $\Gamma\vdash\beta\dot-(n+m)\psi$.
+
+The metric version is the same argument for the metric calculus, with its own finiteness lemma.

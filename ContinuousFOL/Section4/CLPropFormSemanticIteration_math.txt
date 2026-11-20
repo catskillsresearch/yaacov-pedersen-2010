@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 7, Fact 4.5 (paraphrase)**
+
+The same semantic iteration principle holds for continuous propositional logic with finitely many premises; it is the semantic half of the passage from Fact 4.5 for $\Sigma\cup\{\psi\}$ to Fact 4.5 for $\Sigma$.
+
+</div>

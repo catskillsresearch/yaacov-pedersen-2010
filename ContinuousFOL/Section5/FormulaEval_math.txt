@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 10, Definition 5.11 (paraphrase)**
+
+The value $\mathfrak M(\varphi,\sigma)$ is defined by recursion: an atomic formula gets the value of its relation at the values of its terms; $\dot-$ is truncated subtraction, $\neg$ is $1-x$, $\tfrac12$ halves, and $\sup_x\alpha$ takes the supremum of the values of $\alpha$ over all reinterpretations of $x$.
+
+</div>

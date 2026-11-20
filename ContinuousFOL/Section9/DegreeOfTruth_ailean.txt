@@ -1,0 +1,5 @@
+**Definition.** $\varphi^\circ_\Gamma=\sup\{\mathfrak M(\varphi,\sigma):\ (\mathfrak M,\sigma)\models_Q\Gamma\}$, where $\mathfrak M$ ranges over pre-structures (or metric pre-structures) in a fixed universe. A helper variant restricts to complete structures.
+
+**Theorem** (`degreeOfTruthMetric_eq_complete`). Over metric signatures, the supremum over metric pre-structures equals the supremum over complete structures.
+
+*Proof.* Every complete structure is a metric pre-structure; conversely every model maps elementarily into its completion, which is a complete model giving $\varphi$ the same value. So the two sets of values coincide.

@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 25, Corollary 9.11 (paraphrase)**
+
+A complete theory with a recursive or r.e. axiomatization is decidable: the degree of truth of a sentence can be approximated to any precision by searching for proofs of matching upper and lower dyadic bounds, which exist by approximated strong completeness.
+
+</div>

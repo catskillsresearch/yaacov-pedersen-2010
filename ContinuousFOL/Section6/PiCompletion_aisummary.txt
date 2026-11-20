@@ -1,0 +1,1 @@
+For a pseudo-metric space $\alpha$, the $n$-fold product of its completion, with the componentwise inclusion, is a completion of $\alpha^n$; this is what lets $n$-ary symbols be extended to the completion.

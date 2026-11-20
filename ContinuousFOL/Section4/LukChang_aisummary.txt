@@ -1,0 +1,1 @@
+Assembles Chang's proof: an unprovable formula stays unprovable in some linear theory, whose Lindenbaum algebra is a chain in which the formula is non-zero, hence it is non-zero under some real assignment.

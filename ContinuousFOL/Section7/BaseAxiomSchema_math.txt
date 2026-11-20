@@ -1,0 +1,15 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 14, Axioms (A7)–(A9) (paraphrase)**
+
+The quantifier schemata imitate classical ones: (A7) $\sup$ distributes over $\dot-$ in the sense that $(\sup_x\psi\dot-\sup_x\varphi)\dot-\sup_x(\psi\dot-\varphi)$ is an axiom; (A8) a correct instance $\varphi[t/x]$ is below $\sup_x\varphi$; and (A9) $\sup_x\varphi$ is below $\varphi$ when $x$ is not free in $\varphi$.
+
+</div>
+
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 5, Axioms (A1)–(A6) (paraphrase)**
+
+The propositional schemata (A1)–(A6) of §3 are taken over verbatim, now ranging over first-order formulae.
+
+</div>

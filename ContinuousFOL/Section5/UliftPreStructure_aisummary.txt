@@ -1,0 +1,1 @@
+Wrapping the carrier of a universe-$0$ (metric) pre-structure or continuous structure into a higher universe gives an isomorphic copy with the same truth values, so satisfiability in universe $0$ implies satisfiability in every universe.

@@ -26,3 +26,5 @@ but, by Definition 3.1, inconsistent. This counterexample is proved in Lean
 (`LukPropForm.consistent_iff_satisfiable_fails_empty`,
 `CLPropForm.consistent_iff_satisfiable_fails_empty`). Neither Fact is used by
 the main theorems, which are unaffected.
+
+**Palomar Registration:** TBD.

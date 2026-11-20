@@ -1,0 +1,3 @@
+**Definition** (`LukPropForm I`). A formula is either a variable $P_i$ ($i\in I$), a truncated difference $\varphi\dot-\psi$ of two formulae, or a negation $\neg\varphi$. Because the type is inductive, formulae are freely generated: two formulae are equal only if they are built in the same way, and functions on formulae can be defined by recursion on this construction. Equality of formulae is decidable when it is decidable on $I$.
+
+Note that there are no constant formulae: if $I$ is empty, the set of formulae is empty as well.

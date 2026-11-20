@@ -1,0 +1,1 @@
+$\Gamma\models_Q\varphi$ over pre-structures and over metric pre-structures.

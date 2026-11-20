@@ -1,0 +1,1 @@
+Computability-theory toolkit on top of Mathlib: Kleene normal form for r.e. predicates, closure of r.e. and computable predicates under Boolean operations, composition, bounded and list-bounded quantifiers, and existential projection.

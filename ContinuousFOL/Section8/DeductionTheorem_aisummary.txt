@@ -1,0 +1,1 @@
+Theorem 8.1 for $\vdash_Q$ with and without a metric, using a Łukasiewicz schema transported from propositional to first-order formulae.

@@ -1,0 +1,1 @@
+Whether a function symbol occurs in a term or formula, and $\varphi[x/c]$.

@@ -1,0 +1,1 @@
+**Definition.** $\Gamma$ is consistent iff some formula is not provable from $\Gamma$ (for the metric version, not provable with (A1)–(A14)).

@@ -1,0 +1,3 @@
+**Theorem** (`compactness_pre`). If every finite subset of $\Gamma$ is satisfiable, $\Gamma$ is satisfiable.
+
+*Proof.* If $\Gamma$ were unsatisfiable it would be inconsistent by completeness, so $\Gamma\vdash1$; the proof uses a finite $\Gamma_0\subseteq\Gamma$, which is then inconsistent and, by soundness, unsatisfiable.

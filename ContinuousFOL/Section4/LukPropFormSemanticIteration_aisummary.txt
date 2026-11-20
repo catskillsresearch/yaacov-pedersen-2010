@@ -1,0 +1,1 @@
+For finitely many premises, $\Sigma\cup\{\psi\}\models\varphi$ implies $\Sigma\models\varphi\dot-n\psi$ for one $n$, proved by viewing formulae as piecewise-linear functions on a cube.

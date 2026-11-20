@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 6, Remark 3.4 (paraphrase)**
+
+Starting from $1$ and closing under $\neg$, $\dot-$ and $\tfrac12$ produces formulae whose values do not depend on the assignment; these values are exactly the dyadic rationals in $[0,1]$, and the paper identifies such formulae with their values.
+
+</div>

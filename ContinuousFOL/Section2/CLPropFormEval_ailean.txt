@@ -1,0 +1,5 @@
+**Definition** (`CLPropForm.eval`). $v(P_i)=v_0(i)$, $v(\varphi\dot-\psi)=v(\varphi)\dot-v(\psi)$, $v(\neg\varphi)=1-v(\varphi)$ and $v(\tfrac12\varphi)=v(\varphi)/2$.
+
+**Lemma** (`eval_mem_Icc`). If $v_0$ takes values in $[0,1]$, so does $v$.
+
+*Proof.* Induction on the formula; the new case uses that $x/2\in[0,1]$ for $x\in[0,1]$.

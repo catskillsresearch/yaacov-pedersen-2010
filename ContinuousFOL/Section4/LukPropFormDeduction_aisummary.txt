@@ -1,0 +1,1 @@
+The Hilbert-style toolkit for Łukasiewicz provability (monotonicity, compactness, syllogism, exchange, reflexivity, congruence, iterated subtraction) culminating in the weak deduction theorem $\Gamma\cup\{\psi\}\vdash\varphi\iff\exists n,\ \Gamma\vdash\varphi\dot-n\psi$.

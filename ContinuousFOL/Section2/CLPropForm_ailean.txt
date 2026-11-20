@@ -1,0 +1,1 @@
+**Definition** (`CLPropForm I`). A formula is a variable $P_i$, a truncated difference $\varphi\dot-\psi$, a negation $\neg\varphi$, or a half $\tfrac12\varphi$. As for Łukasiewicz formulae the type is inductive, so formulae are freely generated and equality is decidable when it is decidable on $I$.

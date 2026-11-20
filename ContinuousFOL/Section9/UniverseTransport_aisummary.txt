@@ -1,0 +1,1 @@
+Degrees of truth, entailment and complete theories do not depend on the universe in which structures are taken.

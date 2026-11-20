@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 21, Theorem 9.4 (paraphrase)**
+
+A consistent set of formulae extends, in a larger signature, to a maximal consistent Henkin complete set that is satisfied by a pre-structure and an assignment.
+
+</div>

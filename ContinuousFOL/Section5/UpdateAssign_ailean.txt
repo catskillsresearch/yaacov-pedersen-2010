@@ -1,0 +1,3 @@
+**Definition** (`updateAssign`). $\sigma^a_x(y)=a$ if $y=x$ and $\sigma(y)$ otherwise.
+
+**Lemma.** $\sigma^a_x(x)=a$, and $\sigma^a_x(y)=\sigma(y)$ for $y\neq x$.

@@ -1,0 +1,13 @@
+**Lemma** (unbounded search). If $p$ is computable and for every $a$ some $n$ has $p(a,n)$, then the least such $n$ is a computable function of $a$.
+
+**Lemma** (rounding). For $N\ge1$ there is an integer $\mathrm{approx}(k,N,n)$, computable from $k,N,n$, with $|k/2^N-\mathrm{approx}(k,N,n)/2^n|\le2^{-(n+1)}$.
+
+**Construction.** Given the code of a sentence $\varphi$ and $n$, let $\bar\varphi$ be its sup-closure and $\varepsilon=2^{-(n+2)}$. A *good witness* consists of a dyadic $d=k/2^N$ ($1\le N$, $k\le2^N$) and stages $s,t$ at which the proof enumeration from $\mathrm{Ax}$ has produced proofs of $((\bar\varphi\dot-d)\dot-\varepsilon)\dot-\varepsilon$ and $((d\dot-\bar\varphi)\dot-\varepsilon)\dot-\varepsilon$. Goodness is decidable; on non-codes, accept the trivial witness.
+
+**Lemma** (`goodAll_total`). If $T$ is complete and $\mathrm{Ax}$ an axiomatization, every input has a good witness.
+
+*Proof.* Let $(\mathfrak M,\sigma)$ witness completeness and $r=\mathfrak M(\bar\varphi,\sigma)$. Every model of $\mathrm{Ax}$ satisfies the same sentences as $\mathfrak M$, and since $\bar\varphi$ is a sentence, the sentences $(\bar\varphi\dot-d)\dot-\varepsilon$ and $(d\dot-\bar\varphi)\dot-\varepsilon$ for a dyadic $d$ with $|d-r|\le\varepsilon$ have value $0$ in $\mathfrak M$, hence belong to $T$ and are entailed by $\mathrm{Ax}$. Approximated strong completeness gives proofs of those sentences minus $\varepsilon$, which appear at some finite stages.
+
+**Theorem** (`complete_re_theory_decidable`, Corollary 9.11). If $T$ is a complete theory with an axiomatization whose set of codes is decidable or r.e., then $T$ is decidable.
+
+*Proof.* Provability from $\mathrm{Ax}$ is r.e., so it has a computable stage-indexed enumeration. The search for the least good witness is total, hence computable, and the output is $\mathrm{approx}(k,N,n)$. By soundness, a good witness gives $|\bar\varphi^\circ_T-d|\le2\varepsilon=2^{-(n+1)}$, where $\bar\varphi^\circ_T=\varphi^\circ_T$ because $\varphi$ is a sentence; rounding adds at most $2^{-(n+1)}$, so the output is within $2^{-n}$ of $\varphi^\circ_T$.

@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 8, §5 abbreviations (paraphrase)**
+
+Abbreviations: $\inf_x\varphi:=\neg\sup_x\neg\varphi$, $\varphi\wedge\psi:=\varphi\dot-(\varphi\dot-\psi)$, $\varphi\vee\psi:=\neg(\neg\varphi\wedge\neg\psi)$ and $|\varphi-\psi|:=(\varphi\dot-\psi)\vee(\psi\dot-\varphi)$. They are interpreted by infimum, minimum, maximum and absolute difference.
+
+</div>

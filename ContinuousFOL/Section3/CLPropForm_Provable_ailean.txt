@@ -1,0 +1,3 @@
+**Definition** (`CLPropForm.Provable`). Axioms (A1)–(A6) and members of $\Sigma$ are provable, and provability is closed under modus ponens: from $\varphi$ and $\psi\dot-\varphi$ infer $\psi$.
+
+**Definition** (`Consistent`). $\Sigma$ is consistent if some formula is not provable from it.

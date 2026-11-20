@@ -1,0 +1,7 @@
+<div class="sourcequote" style="border:1px solid #2f7d57; background:#eef7f1; border-radius:4px; padding:0.1em 0.9em; margin:0.7em 0;">
+
+**Ben Yaacov–Pedersen (2010), arXiv p. 7, Fact 4.5 (paraphrase)**
+
+Finite strong completeness relies on a semantic counterpart of the deduction theorem: for a finite set of premises, if $\psi$ together with $\Sigma$ forces $\varphi$ to be true, then already $\Sigma$ forces $\varphi$ minus some fixed multiple of $\psi$ to be true. With finitely many premises one bound works for all models; the infinite example $\{P\dot-2^{-n}\}$ in the paper shows this fails in general.
+
+</div>

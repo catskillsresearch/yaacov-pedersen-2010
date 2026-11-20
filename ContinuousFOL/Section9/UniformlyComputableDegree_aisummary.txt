@@ -1,0 +1,1 @@
+Corollary 9.11: a computable approximation procedure for $\varphi^\circ_T$ by unbounded search for proofs, proved total using completeness of $T$ and Corollary 9.6.

@@ -1,0 +1,15 @@
+**Lemma** (transport). Substituting first-order formulae into a provable (equivalently, by Fact 4.5, valid) continuous propositional formula yields a $\vdash_Q$ theorem.
+
+**Lemma** (congruence schemata). Provable for all $\alpha,\alpha',\beta,\beta'$: $(\neg\alpha\dot-\neg\beta)\dot-(\beta\dot-\alpha)$; $\tfrac12\alpha\dot-\alpha$; $(\tfrac12\beta\dot-\tfrac12\alpha)\dot-\tfrac12(\beta\dot-\alpha)$; and $\big(((\beta'\dot-\alpha')\dot-(\beta\dot-\alpha))\dot-(\beta'\dot-\beta)\big)\dot-(\alpha\dot-\alpha')$. Consequently, if $\alpha,\alpha'$ and $\beta,\beta'$ are provably two-way bounded ($\vdash\alpha\dot-\alpha'$ and $\vdash\alpha'\dot-\alpha$), so are $\neg\alpha,\neg\alpha'$, $\tfrac12\alpha,\tfrac12\alpha'$ and $\beta\dot-\alpha,\beta'\dot-\alpha'$.
+
+*Proof.* Each schema is valid in $[0,1]$, so it is provable in continuous propositional logic and transports.
+
+**Lemmas** (bookkeeping). Free substitution of $t$ for a variable not free in $\varphi$ does nothing and is correct; substituting $y$ for $x$ and then $x$ for $y$ returns $\varphi$ when $y$ is not free and the first substitution is correct; and after bound substitution of a variable $y\notin\mathrm{AV}(\varphi)$, $y$ is not free and $\varphi\{y/x\}[y/x]$ is correct.
+
+**Lemma** (`sup_rename_step`). Suppose $\vdash\alpha\dot-\alpha'$ and $\vdash\alpha'\dot-\alpha$, $y\ne x$, $y\notin\mathrm{FV}(\alpha')$, $\alpha'[y/x]$ is correct and $x$ is not bound in $\alpha'$. Then $\sup_x\alpha$ and $\sup_y\alpha'[y/x]$ are provably two-way bounded.
+
+*Proof.* As in the paper: (A8) gives $\alpha'[y/x]\dot-\sup_x\alpha'$; generalize over $y$ and use (A7) and (A9) (as $y$ is not free in $\sup_x\alpha'$) to get $\sup_y\alpha'[y/x]\dot-\sup_x\alpha'$; similarly in the other direction, substituting back $x$ for $y$. Generalizing the hypotheses over $x$ and using (A7) replaces $\alpha'$ by $\alpha$; (A2) chains the bounds.
+
+**Theorem** (`provable_bound_subst`, Lemma 8.3). If $y\notin\mathrm{AV}(\varphi)$ then $\vdash_Q\varphi\dot-\varphi\{y/x\}$ and $\vdash_Q\varphi\{y/x\}\dot-\varphi$; likewise with the metric axioms.
+
+*Proof.* Induction on $\varphi$: atomic formulae are unchanged; the connective cases use the congruence schemata; $\sup_z\alpha$ with $z\ne x$ generalizes the induction hypothesis and applies (A7); $\sup_x\alpha$ is `sup_rename_step`.

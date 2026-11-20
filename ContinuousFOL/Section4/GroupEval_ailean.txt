@@ -1,0 +1,13 @@
+**Definition** (`evalG`). For a linearly ordered abelian group $G$, an element $u>0$ and an assignment $a$ of variables in $[0,u]$, evaluate $\varphi\dot-\psi$ as $\max(\varphi-\psi,0)$ and $\neg\varphi$ as $u-\varphi$. Values stay in $[0,u]$.
+
+**Definition** (linearization at a point). Fix a finite set $s$ of variables containing those of $\varphi$, and consider the vector $(u,a_i)_{i\in s}$. Following the branch actually taken at this point by each truncated subtraction, a formula is computed by an integer-linear form `lf` in $(u,a)$: a variable is its coordinate, $\neg\varphi$ is $u-\varphi$, and $\varphi\dot-\psi$ is $\varphi-\psi$ if $\psi\le\varphi$ at the point and $0$ otherwise. The *branch conditions* `cons` record, for each subtraction, the inequality ($\psi\le\varphi$, or $\varphi<\psi$) that selected the branch.
+
+**Lemma.** At the point itself the linear form evaluates to the value of $\varphi$, and all branch conditions hold.
+
+**Lemma** (`eval_realVal`). If a real vector $y$ with $y_u>0$ satisfies all branch conditions, then the real assignment $i\mapsto y_i/y_u$ gives $\varphi$ the value $\mathrm{lf}(y)/y_u$.
+
+*Proof.* Induction on $\varphi$: the branch conditions guarantee that each truncated subtraction takes the same branch at the scaled real point.
+
+**Theorem** (`exists_real_of_evalG_ne_zero`). If $\varphi$ has a non-zero value in $[0,u]$ of a linearly ordered abelian group, it has a non-zero value under some $[0,1]$-valued real assignment.
+
+*Proof.* Collect the constraints $u>0$, $0\le a_i\le u$, all branch conditions of $\varphi$, and $\mathrm{lf}(\varphi)>0$. They hold at the point $(u,a)$ in $G$, so by the transfer theorem they have a real solution $y$. Then $y_u>0$, the assignment $y_i/y_u$ takes values in $[0,1]$, and the value of $\varphi$ there is $\mathrm{lf}(y)/y_u>0$.

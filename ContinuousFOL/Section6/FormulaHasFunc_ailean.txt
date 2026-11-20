@@ -1,0 +1,1 @@
+**Definitions.** $c$ occurs in $t$ if $t$ is an application of $c$ or $c$ occurs in an argument; it occurs in $\varphi$ if it occurs in some term of $\varphi$. $\varphi[x/c]$ replaces every occurrence of the constant $c$ in the terms of $\varphi$ by the variable $x$ (quantifiers are left unchanged).

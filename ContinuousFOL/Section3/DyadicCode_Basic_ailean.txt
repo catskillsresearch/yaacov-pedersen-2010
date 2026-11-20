@@ -1,0 +1,1 @@
+**Definition** (`DyadicCode`). A code is $1$, or $\neg d$, $d\dot-e$, or $\tfrac12 d$ for codes $d,e$. These codes are reused both for propositional formulae and for first-order formulae, where they become constant formulae.

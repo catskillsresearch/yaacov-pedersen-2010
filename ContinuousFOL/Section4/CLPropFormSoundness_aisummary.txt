@@ -1,0 +1,1 @@
+Every axiom (A1)–(A6) evaluates to $0$, so $\Sigma\vdash^{\mathrm{CL}}\varphi$ implies $\Sigma\models^{\mathrm{CL}}\varphi$.

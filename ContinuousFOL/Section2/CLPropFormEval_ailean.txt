@@ -2,4 +2,4 @@
 
 **Lemma** (`eval_mem_Icc`). If $v_0$ takes values in $[0,1]$, so does $v$.
 
-*Proof.* Induction on the formula; the new case uses that $x/2\in[0,1]$ for $x\in[0,1]$.
+*Proof.* Induction on the formula. Variables take the values of $v_0$, which lie in $[0,1]$. If $x,y\in[0,1]$, then $\max(x-y,0)\in[0,1]$ and $1-x\in[0,1]$. The case new to continuous logic is $\tfrac12\alpha$, and $x/2\in[0,\tfrac12]\subseteq[0,1]$ for $x\in[0,1]$.

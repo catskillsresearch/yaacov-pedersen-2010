@@ -18,7 +18,7 @@
 
 **Theorem** (`val_range_eq_dyadics`, Remark 3.4). The set of values of codes is exactly $\mathbb D$.
 
-*Proof.* One inclusion is the previous lemma; conversely $k/2^n$ is the value of the code $k\cdot2^{-n}$.
+*Proof.* Every code has a value of the form $k/2^n$ with $0\le k\le2^n$, by induction on codes. The code $1$ has value $1/2^0$. If $d$ has value $k/2^n$, then $\neg d$ has value $(2^n-k)/2^n$ and $\tfrac12d$ has value $k/2^{n+1}$. For $d\dot-e$, bring both values to a common denominator $2^n$; the value is $\max(k-l,0)/2^n$. In every case the numerator stays between $0$ and the denominator. Conversely, a dyadic $k/2^n\in[0,1]$ has $k\le2^n$, so it is the value of the code $k\cdot2^{-n}$ by the previous lemma.
 
 **Lemma** (`dense_in_Icc`). If $0\le x<y\le1$, some code has value strictly between $x$ and $y$.
 

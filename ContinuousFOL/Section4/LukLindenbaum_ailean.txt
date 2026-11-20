@@ -24,4 +24,4 @@ Fix a set $\Gamma$ of Łukasiewicz formulae and write $\varphi\to\psi$ for $\psi
 
 **Theorem** (`provable_iff_evalMV_canonical`). Evaluating $\varphi$ in $\mathrm{Lind}(\Gamma)$ at the canonical assignment $i\mapsto[P_i]$ returns $[\varphi]$; hence $\Gamma\vdash\varphi$ iff $\varphi$ evaluates to $0$ there.
 
-*Proof.* Induction on $\varphi$ using the descriptions of $\ominus$ and $\neg$ on classes.
+*Proof.* First, $\varphi$ evaluates to its own class $[\varphi]$, by induction on $\varphi$. A variable $P_i$ evaluates to $[P_i]$ by the choice of assignment. For $\alpha\dot-\beta$ and $\neg\alpha$, the operations of $\mathrm{Lind}(\Gamma)$ act on classes by $[\alpha]\ominus[\beta]=[\alpha\dot-\beta]$ and $\neg[\alpha]=[\neg\alpha]$, so the induction hypotheses give the result. Second, $[\varphi]=0$ iff $\Gamma\vdash\varphi$: the zero of the algebra is the class $[\varphi\dot-\varphi]$, and $[\varphi]=[\varphi\dot-\varphi]$ holds exactly when $\Gamma$ proves $\varphi$.

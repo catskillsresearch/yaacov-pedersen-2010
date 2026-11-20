@@ -1,6 +1,6 @@
 **Lemma** (`exists_common_zero`). If continuous functions $f_j:[0,1]^I\to\mathbb R$ have a common zero in the cube on every finite subfamily, they have a common zero in the cube.
 
-*Proof.* The cube is compact by Tychonoff, and the zero sets are closed sets with the finite intersection property.
+*Proof.* Suppose there is no common zero, so the zero sets $Z_j=f_j^{-1}(0)$, which are closed by continuity, have empty intersection with the cube. The cube $[0,1]^I$ is compact by Tychonoff's theorem. So already finitely many of them, say $Z_j$ for $j\in s$, have empty intersection with the cube. This contradicts the hypothesis that the finite subfamily indexed by $s$ has a common zero in the cube.
 
 **Lemma.** For a Łukasiewicz or continuous formula, $v\mapsto v(\varphi)$ is continuous on $\mathbb R^I$.
 

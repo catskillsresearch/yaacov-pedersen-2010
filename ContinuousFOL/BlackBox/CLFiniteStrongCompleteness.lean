@@ -9,6 +9,7 @@ module
 public import ContinuousFOL.Group1Axioms.CLPropForm.Provable
 public import ContinuousFOL.LukasiewiczAndContinuous.CLPropFormModels
 public import Mathlib.Data.Finset.Basic
+public import ContinuousFOL.LukasiewiczAndContinuous.CLFromLuk
 
 @[expose] public section
 
@@ -21,7 +22,7 @@ namespace ContinuousFOL
 theorem cl_finite_strong_completeness {I : Type*} (hypSet : Finset (CLPropForm I))
     (φ : CLPropForm I) :
     CLPropForm.Entails (hypSet : Set (CLPropForm I)) φ ↔
-      CLPropForm.Provable (hypSet : Set (CLPropForm I)) φ := by
-  sorry
+      CLPropForm.Provable (hypSet : Set (CLPropForm I)) φ :=
+  CLPropForm.entails_finset_iff_provable hypSet φ
 
 end ContinuousFOL

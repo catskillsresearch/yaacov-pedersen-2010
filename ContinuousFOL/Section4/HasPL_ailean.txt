@@ -2,9 +2,11 @@
 
 **Lemma.** Constants and coordinate projections are piecewise linear (one chart, the cube). If $f$ is piecewise linear so are $1-f$ and $cf$.
 
+*Proof.* A constant or a coordinate is an affine function on the whole cube, so a single chart suffices. If charts $(C_i,a_i)$ witness $f$, the same cells with the affine functions $1-a_i$, respectively $ca_i$, witness $1-f$ and $cf$, because affine functions are closed under these operations.
+
 **Lemma** (`HasPL.pair`, common refinement). For piecewise-linear $f,g$ there is one finite cover by cells on each of which both $f$ and $g$ are affine.
 
-*Proof.* Intersect each cell of the first cover with each cell of the second.
+*Proof.* Let $(C_i,a_i)$ witness $f$ and $(D_j,b_j)$ witness $g$. The cells $C_i\cap D_j$ cover the cube, since every point lies in some $C_i$ and some $D_j$. On $C_i\cap D_j$, $f=a_i$ and $g=b_j$ are both affine.
 
 **Lemma** (`hasPL_tsub`). If $f,g$ are piecewise linear, so is $x\mapsto f(x)\dot-g(x)$.
 

@@ -2,6 +2,8 @@
 
 **Lemma** (all MV-algebras). If $x\odot y=0$ then $(x\oplus y)\odot\neg y=x$; if $x\oplus y=1$ then $(x\odot y)\oplus\neg y=x$; and $\neg y$ is the only $x$ with $x\oplus y=1$ and $x\odot y=0$. Being $1$ under $\oplus$ is upward closed and being $0$ under $\odot$ is downward closed.
 
+*Proof.* If $x\odot y=0$, apply the dual Chang identity to $\neg y$ and $x$: $\neg y\odot(y\oplus x)=x\odot(\neg x\oplus\neg y)$. The right side is $x\odot\neg(x\odot y)=x\odot\neg0=x$, so $(x\oplus y)\odot\neg y=x$. The second identity is the first applied to $\neg x,\neg y$ (note $\neg x\odot\neg y=\neg(x\oplus y)=0$), followed by negation. For uniqueness: $x\odot y=0$ means $x\le\neg y$, and $x\oplus y=1$ means $\neg y\le x$, so $x=\neg y$. Finally, if $x\oplus z=1$ and $x\le y$, then $1=x\oplus z\le y\oplus z$. Dually, if $y\odot z=0$ and $x\le y$, then $x\odot z\le y\odot z=0$.
+
 **Lemma** (chains). In a chain, for all $x,y$: $x\oplus y=1$ or $x\odot y=0$. The meet of two elements is one of them. Cancellation: if $x\oplus y=x\oplus z\neq1$ then $y=z$; if $x\odot y=x\odot z\neq0$ then $y=z$. If $x\oplus y=1$ and $x\oplus z\neq1$ then $(x\odot y)\oplus z=(x\oplus z)\odot y$.
 
 *Proof.* The dichotomy: if $\neg y\le x$ then $x\oplus y\ge\neg y\oplus y=1$; otherwise $x\le\neg y$, i.e. $x\odot y=0$. Cancellation compares $y$ and $z$ (totality) and uses that adding the difference changes a sum below $1$. The mixed identity is a case computation using the first two lemmas.

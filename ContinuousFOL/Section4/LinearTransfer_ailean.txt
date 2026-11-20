@@ -15,3 +15,5 @@
 *Proof.* Induction on the number of variables. With no variables each constraint is a statement about $0$, which holds in $G$ iff it holds in $\mathbb R$. In the step, eliminate the last variable: the eliminated system holds at the truncated $G$-solution, so by induction it has a real solution $y'$. Each constraint with positive last coefficient gives a lower bound for the last coordinate in terms of $y'$, each with negative last coefficient an upper bound, and the eliminated combinations say precisely that every lower bound is below every upper bound. Choosing $t$ in between gives a real solution $(y',t)$; constraints not involving the last variable already hold at $y'$.
 
 **Corollary** (`exists_real_solution_fintype`). The same holds for variables indexed by any finite type.
+
+*Proof.* Number the finite index set as $0,\dots,k-1$ and rewrite every constraint in these coordinates; a constraint holds at $x$ exactly when its renumbered form holds at the renumbered vector. The theorem for $k$ variables gives a real solution, and undoing the numbering gives a real solution of the original system.

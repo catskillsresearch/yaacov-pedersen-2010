@@ -2,7 +2,7 @@
 
 **Lemma.** With $\neg x=1-x$: $\neg(\neg x\oplus y)=x\dot-y$; $\oplus$ is associative; and $(x\ominus y)\oplus y=\max(x,y)$.
 
-*Proof.* Each is a case analysis on which of the minima and maxima are attained, reducing to linear arithmetic.
+*Proof.* On $[0,1]$, $x\oplus y=\min(x+y,1)$. Then $\neg(\neg x\oplus y)=1-\min(1-x+y,1)=\max(x-y,0)=x\dot-y$. Both bracketings of $x\oplus y\oplus z$ equal $\min(x+y+z,1)$, because truncating at $1$ before adding a nonnegative number and truncating again changes nothing. Finally $(x\ominus y)\oplus y=\min(\max(x-y,0)+y,1)=\min(\max(x,y),1)=\max(x,y)$.
 
 **Theorem** (`unitInterval.instMVAlgebra`). $([0,1],\oplus,\neg,0)$ is an MV-algebra.
 
@@ -12,7 +12,7 @@
 
 **Lemma** (`evalMV_coe`). On the standard algebra, MV-evaluation is the paper's real-valued truth assignment.
 
-*Proof.* Induction on the formula, using $\neg(\neg x\oplus y)=x\dot-y$ and $\neg x=1-x$.
+*Proof.* Induction on the formula. Variables take the same value. The MV-negation is $1-x$, which is the paper's interpretation of $\neg$. The MV-truncated subtraction is $\neg(\neg x\oplus y)$, which on $[0,1]$ is $x\dot-y$ by the previous lemma.
 
 **Lemma** (`entails_empty_iff_evalMV`). $\models\varphi$ (no premises) iff $\varphi$ evaluates to $0$ under every assignment into the standard MV-algebra.
 

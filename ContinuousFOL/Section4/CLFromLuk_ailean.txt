@@ -6,6 +6,8 @@
 
 **Lemma** (`provable_cut`). If $S\vdash\varphi$ and every member of $S$ is provable from $T$, then $T\vdash\varphi$.
 
+*Proof.* Induction on the derivation of $\varphi$ from $S$. Axioms are provable from any set. A premise $\varphi\in S$ is provable from $T$ by hypothesis. If $\varphi$ comes by modus ponens from $\psi$ and $\varphi\dot-\psi$, both are provable from $T$ by induction, and modus ponens gives $\varphi$.
+
 **Lemma** (`eval_toLuk`). Let $w$ be a $[0,1]$-assignment on the extended variables. If $w$ gives value $0$ to $\mathrm{toLuk}(A_5(\chi))$ and $\mathrm{toLuk}(A_6(\chi))$ for every $\tfrac12\chi$ occurring in $\psi$, then the Łukasiewicz value of $\mathrm{toLuk}\,\psi$ under $w$ equals the continuous value of $\psi$ under the restriction of $w$ to $I$.
 
 *Proof.* Induction on $\psi$. The only nontrivial case is $\tfrac12\chi$: the two axiom instances say $w([\chi])\dot-(\chi\dot-w([\chi]))=0$ and $(\chi\dot-w([\chi]))\dot-w([\chi])=0$, which together force $w([\chi])=\chi/2$.

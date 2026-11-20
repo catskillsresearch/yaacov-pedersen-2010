@@ -1,5 +1,7 @@
 **Lemma.** In $\mathrm{Lind}(\Gamma)$: $[\varphi\dot-n\psi]=[\varphi]\ominus n[\psi]$, and $[\alpha]\le[\beta]$ iff $\Gamma\vdash\alpha\dot-\beta$.
 
+*Proof.* The first identity is by induction on $n$. For $n=0$ both sides are $[\varphi]$. Here $n[\psi]$ is the $n$-fold sum $[\psi]\oplus\cdots\oplus[\psi]$. In the step, $[(\varphi\dot-n\psi)\dot-\psi]=([\varphi]\ominus n[\psi])\ominus[\psi]$, because $\ominus$ on classes is $\dot-$ on representatives. The MV-identity $(x\ominus a)\ominus b=x\ominus(a\oplus b)$ turns this into $[\varphi]\ominus(n+1)[\psi]$. For the second, $[\alpha]\le[\beta]$ means $[\alpha]\ominus[\beta]=0$, that is $[\alpha\dot-\beta]=0$, which holds iff $\Gamma\vdash\alpha\dot-\beta$.
+
 **Definition** (`IsLinear`). $\Delta$ is linear if for all $\alpha,\beta$, $\Delta\vdash\alpha\dot-\beta$ or $\Delta\vdash\beta\dot-\alpha$.
 
 **Theorem** (`exists_linear_extension`). If $\Gamma\nvdash\varphi$, there is a linear $\Delta\supseteq\Gamma$ with $\Delta\nvdash\varphi$.
@@ -7,3 +9,5 @@
 *Proof.* The family of sets $\Delta\supseteq\Gamma$ with $\Delta\nvdash\varphi$ is closed under unions of nonempty chains, because a proof uses only finitely many premises and those lie in one member of the chain. By Zorn's lemma it has a maximal member $\Delta$. Suppose $\Delta$ proves neither $\alpha\dot-\beta$ nor $\beta\dot-\alpha$. By maximality, $\Delta\cup\{\alpha\dot-\beta\}\vdash\varphi$ and $\Delta\cup\{\beta\dot-\alpha\}\vdash\varphi$, and the weak deduction theorem gives $\Delta\vdash\varphi\dot-n(\alpha\dot-\beta)$ and $\Delta\vdash\varphi\dot-m(\beta\dot-\alpha)$. In $\mathrm{Lind}(\Delta)$, with $x=[\varphi]$, $p=[\alpha]\ominus[\beta]$, $q=[\beta]\ominus[\alpha]$, this says $x\le(n+m)p$ and $x\le(n+m)q$. By prelinearity $p\wedge q=0$, hence $(n+m)p\wedge(n+m)q=0$ and $x\le0$, i.e. $\Delta\vdash\varphi$, a contradiction.
 
 **Lemma** (`le_total_of_isLinear`). If $\Delta$ is linear, the order of $\mathrm{Lind}(\Delta)$ is total.
+
+*Proof.* Every element is a class $[\alpha]$. Linearity of $\Delta$ says that for all $\alpha,\beta$ either $\Delta\vdash\alpha\dot-\beta$ or $\Delta\vdash\beta\dot-\alpha$, which by the previous lemma means $[\alpha]\le[\beta]$ or $[\beta]\le[\alpha]$.

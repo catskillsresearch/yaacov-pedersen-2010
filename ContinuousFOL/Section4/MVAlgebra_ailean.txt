@@ -4,4 +4,4 @@
 
 **Lemma.** $0\oplus x=x$; $\neg1=0$; $x\oplus1=1=1\oplus x$; $\neg\neg x=x$; $\odot$ is commutative; and Chang's axiom says precisely that the join is commutative: $(x\ominus y)\oplus y=(y\ominus x)\oplus x$.
 
-*Proof.* Each identity is a one- or two-step rewrite using commutativity of $\oplus$ and the axioms.
+*Proof.* $0\oplus x=x\oplus0=x$ by commutativity and the neutral-element axiom. With $1:=\neg0$, $\neg1=\neg\neg0=0$ by double negation. $x\oplus1=1$ is the absorption axiom (MV5), and $1\oplus x=1$ follows by commutativity. $\neg\neg x=x$ is an axiom. Since $x\odot y=\neg(\neg x\oplus\neg y)$, commutativity of $\odot$ follows from that of $\oplus$. Finally $x\ominus y$ is by definition $\neg(\neg x\oplus y)$, so axiom (MV6), $\neg(\neg x\oplus y)\oplus y=\neg(\neg y\oplus x)\oplus x$, reads $(x\ominus y)\oplus y=(y\ominus x)\oplus x$.

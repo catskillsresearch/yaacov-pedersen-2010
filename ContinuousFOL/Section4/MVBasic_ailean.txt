@@ -2,15 +2,19 @@ Throughout, $A$ is an MV-algebra.
 
 **Lemma** (algebra). $\neg$ is injective; $x\oplus\neg x=1$; $x\ominus y=x\odot\neg y$; $\neg(x\oplus y)=\neg x\odot\neg y$ and $\neg(x\odot y)=\neg x\oplus\neg y$; $\odot$ is associative and commutative with unit $1$ and absorbing element $0$; $x\odot\neg x=0$; and the dual of Chang's axiom $x\odot(\neg x\oplus y)=y\odot(\neg y\oplus x)$.
 
-*Proof.* Apply $\neg$ to the corresponding $\oplus$-identities and use $\neg\neg x=x$.
+*Proof.* If $\neg x=\neg y$, apply $\neg$ and use $\neg\neg x=x$. For $x\oplus\neg x=1$, take (MV6) with $y=1$: $\neg(\neg x\oplus1)\oplus1=\neg(\neg1\oplus x)\oplus x$. The left side is $1$. On the right, $\neg1=0$ and $0\oplus x=x$, so it is $\neg x\oplus x$. The De Morgan laws and $x\ominus y=x\odot\neg y$ are the definitions $x\odot y=\neg(\neg x\oplus\neg y)$ and $x\ominus y=\neg(\neg x\oplus y)$, after removing double negations. Associativity and commutativity of $\odot$ come from those of $\oplus$ under the same rewriting. Next, $x\odot1=\neg(\neg x\oplus0)=x$, and $x\odot0=\neg(\neg x\oplus1)=\neg1=0$. Also $x\odot\neg x=\neg(\neg x\oplus x)=\neg1=0$. The dual of Chang's axiom is obtained by applying $\neg$ to (MV6) for $\neg x,\neg y$ and rewriting with the De Morgan laws.
 
 **Lemma** (order). $x\le y$ iff $\neg x\oplus y=1$ iff $x\odot\neg y=0$ iff $y=x\oplus z$ for some $z$. The relation $\le$ is reflexive, transitive and antisymmetric, with least element $0$ and greatest element $1$. Addition and multiplication are monotone in each argument, $\neg$ is antitone, $x\odot y\le x$, $x\ominus y\le x$, and residuation holds: $x\odot y\le z$ iff $x\le\neg y\oplus z$. Moreover $(x\ominus a)\ominus b=x\ominus(a\oplus b)$, $x\ominus0=x$, $0\ominus x=0$, $1\ominus x=\neg x$.
 
 *Proof.* The characterizations of $\le$ follow from the definitions and the De Morgan laws; when $x\le y$ one has $y=x\oplus(y\ominus x)$ by Chang's axiom, which gives the existential form, from which reflexivity, transitivity and monotonicity of $\oplus$ are immediate. Antisymmetry uses Chang's axiom once more: if $x\ominus y=0=y\ominus x$ then $y=(x\ominus y)\oplus y=(y\ominus x)\oplus x=x$.
 
-**Lemma** (lattice). $x\vee y$ is the least upper bound of $x,y$; $x\wedge y:=x\odot(\neg x\oplus y)=\neg(\neg x\vee\neg y)$ is the greatest lower bound, with $x\wedge y=x$ when $x\le y$ and $x\wedge0=0$.
+**Lemma** (lattice). $x\vee y$ is the least upper bound of $x,y$; $x\wedge y:=x\odot(\neg x\oplus y)=\neg(\neg x\vee\neg y)$ is the greatest lower bound, with $x\wedge y=x$ when $x\le y$ and $x\wedge0=0$. Here $x\le y$ means $x\ominus y=0$, and $x\vee y:=(x\ominus y)\oplus y$.
+
+*Proof.* The order is a partial order with least element $0$ and greatest element $1$, it is compatible with $\oplus$ and $\odot$, and $\neg$ reverses it; these are the preceding order lemmas. Upper bound: $y\le(x\ominus y)\oplus y$ because $y\le z\oplus y$ for every $z$, and $x\le x\vee y$ by the commutativity of $\vee$ (Chang's axiom). Least: if $x,y\le z$, then $z=(z\ominus y)\oplus y$ since $y\le z$, and $x\ominus y\le z\ominus y$ since $x\le z$. Adding $y$ gives $x\vee y\le z$. For the meet, $x\odot(\neg x\oplus y)\le x$ because multiplying by anything decreases, and the dual of Chang's axiom makes the expression symmetric, so it is also $\le y$. Rewriting by De Morgan gives $x\wedge y=\neg(\neg x\vee\neg y)$. Since $\neg$ reverses the order, the least-upper-bound property of $\vee$ turns into the greatest-lower-bound property of $\wedge$. If $x\le y$ then $\neg x\oplus y=1$, so $x\wedge y=x\odot1=x$. Taking $y=0\le x$ and using symmetry gives $x\wedge0=0$.
 
 **Lemma** (`add_meet`). $x\oplus(y\wedge z)=(x\oplus y)\wedge(x\oplus z)$.
+
+*Proof.* We prove two inequalities. ($\le$) Since $y\wedge z\le y$ and $y\wedge z\le z$, monotonicity of $\oplus$ gives $x\oplus(y\wedge z)\le x\oplus y$ and $\le x\oplus z$, so it lies below the meet. ($\ge$) In an MV-algebra $w\le x\oplus v$ iff $w\odot\neg x\le v$. Put $w=(x\oplus y)\wedge(x\oplus z)$. Then $w\le x\oplus y$ gives $w\odot\neg x\le y$, and likewise $w\odot\neg x\le z$. Hence $w\odot\neg x\le y\wedge z$, which means $w\le x\oplus(y\wedge z)$.
 
 **Theorem** (`meet_msub_msub`, prelinearity). $(x\ominus y)\wedge(y\ominus x)=0$ in every MV-algebra.
 

@@ -4,6 +4,8 @@
 
 **Lemma.** At the point itself the linear form evaluates to the value of $\varphi$, and all branch conditions hold.
 
+*Proof.* Induction on $\varphi$. A variable's form is its coordinate, whose value at the point is $a_i$, and there are no conditions. For $\neg\varphi$ the form is $u-\mathrm{lf}(\varphi)$, which equals $u-\varphi(a)$ by induction, and the conditions are those of $\varphi$. For $\varphi\dot-\psi$, the branch is chosen by comparing the values at the point itself. If $\psi(a)\le\varphi(a)$, the form $\mathrm{lf}(\varphi)-\mathrm{lf}(\psi)$ evaluates to $\varphi(a)-\psi(a)=\max(\varphi(a)-\psi(a),0)$. Otherwise the form is $0=\max(\varphi(a)-\psi(a),0)$. In both cases the recorded inequality is the one that was true, and the conditions of $\varphi$ and $\psi$ hold by induction.
+
 **Lemma** (`eval_realVal`). If a real vector $y$ with $y_u>0$ satisfies all branch conditions, then the real assignment $i\mapsto y_i/y_u$ gives $\varphi$ the value $\mathrm{lf}(y)/y_u$.
 
 *Proof.* Induction on $\varphi$: the branch conditions guarantee that each truncated subtraction takes the same branch at the scaled real point.

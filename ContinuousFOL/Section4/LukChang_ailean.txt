@@ -2,4 +2,6 @@
 
 *Proof.* Suppose $\nvdash\varphi$. Extend the empty premise set to a linear $\Delta$ with $\Delta\nvdash\varphi$. The Lindenbaum algebra $\mathrm{Lind}(\Delta)$ is totally ordered, and $0\neq1$ there, since otherwise $[\varphi]\le1=0$ would give $\Delta\vdash\varphi$; so it is an MV-chain. At the canonical assignment $\varphi$ evaluates to $[\varphi]\neq0$. By the chain-group construction and the transfer to the reals, there is a $[0,1]$-valued assignment $w$ with $w(\varphi)\neq0$, contradicting $\models\varphi$.
 
-**Theorem** (`entails_empty_iff_provable`). $\models\varphi$ iff $\vdash\varphi$. The other direction is soundness.
+**Theorem** (`entails_empty_iff_provable`). $\models\varphi$ iff $\vdash\varphi$.
+
+*Proof.* From left to right is the preceding theorem (provability of every tautology). From right to left is soundness: every axiom has value $0$ under every assignment, and modus ponens preserves value $0$.

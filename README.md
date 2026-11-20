@@ -98,3 +98,13 @@ python3 -m http.server 8765 --bind 127.0.0.1
 | [`holes-graph.json`](holes-graph.json) | Node/edge data (also embedded) |
 | [`HOLES.md`](HOLES.md) | Markdown inventory |
 ```
+
+## Deviations from the paper (errata)
+
+| Paper statement | Lean | Added premise | Why |
+|---|---|---|---|
+| Fact 4.2 (§4): "Let S be a Lukasiewicz propositional logic, and Σ ⊆ S. Then Σ is consistent if and only if it is satisﬁable." | `ContinuousFOL.luk_consistent_iff_satisfiable` | `[Nonempty I]`: at least one propositional variable | False when there are no variables: there are then no formulas, so `∅` is satisfiable but inconsistent (Def. 3.1). Proved: `LukPropForm.consistent_iff_satisfiable_fails_empty`. |
+| Fact 4.3 (§4): "Let S be a continuous propositional logic and Σ ⊆ S. Then Σ is consistent if and only if it is satisﬁable." | `ContinuousFOL.cl_consistent_iff_satisfiable` | `[Nonempty I]`: at least one propositional variable | Same counterexample. Proved: `CLPropForm.consistent_iff_satisfiable_fails_empty`. |
+
+Consistent ⇒ satisfiable is proved for every `I` (`*.satisfiable_of_consistent`).
+Neither Fact is used by the main theorems. No other paper statement was changed.

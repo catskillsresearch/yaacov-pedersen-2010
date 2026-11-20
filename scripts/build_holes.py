@@ -76,13 +76,13 @@ NODES: dict[str, dict] = {
         "label": "Fact 4.2 Łuk cons",
         "section": 4,
         "file": "ContinuousFOL/BlackBox/LukConsistentIffSatisfiable.lean",
-        "detail": "Fact 4.2: a Łukasiewicz set is consistent iff it is satisfiable. No Lean user on the completeness path.",
+        "detail": "Fact 4.2: a Łukasiewicz set is consistent iff it is satisfiable. Added premise [Nonempty I] (at least one variable); false without it (LukPropForm.consistent_iff_satisfiable_fails_empty). No Lean user on the completeness path.",
     },
     "cl_consistent_iff_satisfiable": {
         "label": "Fact 4.3 CL cons",
         "section": 4,
         "file": "ContinuousFOL/BlackBox/CLConsistentIffSatisfiable.lean",
-        "detail": "Fact 4.3: a continuous-propositional set is consistent iff it is satisfiable. No Lean user on the completeness path.",
+        "detail": "Fact 4.3: a continuous-propositional set is consistent iff it is satisfiable. Added premise [Nonempty I] (at least one variable); false without it (CLPropForm.consistent_iff_satisfiable_fails_empty). No Lean user on the completeness path.",
     },
     "cl_approx_strong_completeness": {
         "label": "Fact 4.4 CL approx",

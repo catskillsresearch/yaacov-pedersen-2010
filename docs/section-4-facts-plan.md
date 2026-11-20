@@ -221,3 +221,12 @@ no formulas, so `∅` is satisfiable (vacuously) but not consistent
 least one propositional variable. The official statements are left unchanged,
 still `sorry`; the decision on how to restate them (for example adding
 `[Nonempty I]`) is for the project owner.
+
+### Resolution (approved by Lars Ericson)
+
+The official Facts 4.2 and 4.3 now carry `[Nonempty I]` and are proved from
+`LukPropForm.consistent_iff_satisfiable` and
+`CLPropForm.consistent_iff_satisfiable`. Nothing else in the statements changed.
+The added premise is documented in the Lean docstrings, `ContinuousFOL/Abstract.md`,
+`README.md` and `PROVENANCE.md` (deviations table), `ContinuousFOL/BlackBox.md`,
+and `formalization.yaml`.

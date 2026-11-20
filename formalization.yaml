@@ -16,6 +16,14 @@ project:
     Warren Ericson’s direction and review. Mathlib is the Lake dependency.
     Palomar registration pending; packaging follows the Challenge /
     Solution / comparator.json pattern.
+    Deviation from the paper: Facts 4.2 and 4.3 (consistency iff
+    satisfiability, Łukasiewicz and continuous propositional logic) needed
+    the added premise that there is at least one propositional variable
+    (`[Nonempty I]`). As literally stated they fail when there are no
+    variables (the empty set is then satisfiable but inconsistent); this
+    counterexample is proved in Lean
+    (`LukPropForm.consistent_iff_satisfiable_fails_empty`,
+    `CLPropForm.consistent_iff_satisfiable_fails_empty`).
   authors:
   - Lars Warren Ericson
   license: Apache-2.0
@@ -121,6 +129,12 @@ known_gaps:
     prefer it over pdftotext when aligning Lean to the paper.
 
 limitations:
+  - >-
+    Deviation: Facts 4.2 and 4.3 carry the added premise `[Nonempty I]`
+    (at least one propositional variable). The literal statements are false
+    without it; see `LukPropForm.consistent_iff_satisfiable_fails_empty` and
+    `CLPropForm.consistent_iff_satisfiable_fails_empty`, and the deviations
+    table in README.md.
   - >-
     No external mathematical review has been performed.
   - >-

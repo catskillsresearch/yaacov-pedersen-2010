@@ -149,3 +149,40 @@ Double negation is the first remaining lemma.
    axioms so `LukLind` is an `MVAlgebra`.
 3. Formalize Chang’s representation theorem and close Fact 4.1.
 4. Extend the argument by `½` and finish Fact 4.5.
+
+## Progress after the Chang-transfer checkpoint (2026-11-20)
+
+All sorry-free; the official Fact 4.1 / 4.5 statements are unchanged.
+
+- `LukLindenbaum.lean`: provable equivalence is now relative to any premise set
+  `Γ`. `LukLindT Γ` is an `MVAlgebra` (MV1 associativity, MV2 commutativity and
+  MV6 proved in the Hilbert calculus from (A1)–(A4)). `φ ∸ ψ` is MV-subtraction
+  on classes, and `Γ ⊢ φ ↔ evalMV (canonical) φ = 0`
+  (`LukLind.provable_iff_evalMV_canonical`).
+- `LinearTransfer.lean`: a finite system of homogeneous integer-linear
+  inequalities (strict or not) solvable in a linearly ordered abelian group is
+  solvable in `ℝ` (Fourier–Motzkin with integer multipliers; the
+  Gurevich–Kokorin step). `LinTransfer.exists_real_solution(_fintype)`.
+- `GroupEval.lean`: evaluation in `Γ(G, u)` and
+  `LukPropForm.exists_real_of_evalG_ne_zero`: a formula that is non-zero in
+  `[0,u] ⊆ G` is non-zero under some `[0,1]`-assignment.
+
+## Route chosen for the rest of Fact 4.1
+
+1. MV-algebra basics on the `MVAlgebra` class: natural order, lattice
+   (Mundici, *Introducing MV-algebras*, Prop. 1.5), distributivity (Prop. 1.6),
+   prelinearity `(x ⊖ y) ∧ (y ⊖ x) = 0` (Prop. 1.7), and
+   `x ∧ y = 0 → nx ∧ ny = 0` (Lemma 1.8).
+2. Linear theories: if `Γ ⊬ φ`, a theory `Γ' ⊇ Γ` maximal with `Γ' ⊬ φ` (Zorn,
+   using `LukPropForm.compact`) has `LukLindT Γ'` a chain. Uses the weak
+   deduction theorem (already proved) plus step 1.
+3. Chain → ordered group: for an MV-chain `C`, the group `ℤ × {a ∈ C | a ≠ 1}`
+   with carry `a ⊕ b = 1`, lexicographic order, and the embedding
+   `C → Γ(G, (1,0))` (Mundici Ch. 2 restricted to chains; Lemma 1.2.6 (vii) of
+   the tutorial gives the key cancellation identity).
+4. Assembly: `Γ ⊬ φ` ⇒ `[φ] ≠ 0` in the chain `LukLindT Γ'` ⇒ `evalG ≠ 0` in its
+   group ⇒ `exists_real_of_evalG_ne_zero` ⇒ `⊭ φ`. With `LukPropForm.soundness`
+   and `entails_empty_iff_evalMV` this closes `luk_weak_completeness`.
+
+Estimate for steps 1–4: about 1,200–2,000 lines. Step 3 (associativity of the
+carry addition) is the largest remaining piece.

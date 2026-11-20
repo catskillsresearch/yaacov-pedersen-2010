@@ -258,6 +258,51 @@ theorem exists_real_solution {G : Type*} [AddCommGroup G] [LinearOrder G]
         rw [div_lt_iff₀ hA] at h
         linarith
 
+/-- A homogeneous integer-linear constraint over a finite index type `κ`. -/
+structure KCon (κ : Type*) where
+  coef : κ → ℤ
+  strict : Bool
+
+namespace KCon
+
+variable {κ : Type*} [Fintype κ]
+
+def eval {M : Type*} [AddCommGroup M] (c : KCon κ) (x : κ → M) : M :=
+  ∑ k, c.coef k • x k
+
+def Holds {M : Type*} [AddCommGroup M] [Preorder M] (c : KCon κ) (x : κ → M) : Prop :=
+  rel c.strict 0 (c.eval x)
+
+/-- Transport along `κ ≃ Fin n`. -/
+def toLin (c : KCon κ) : LinCon (Fintype.card κ) :=
+  ⟨fun j => c.coef ((Fintype.equivFin κ).symm j), c.strict⟩
+
+lemma eval_toLin {M : Type*} [AddCommGroup M] (c : KCon κ) (x : κ → M) :
+    c.toLin.eval (fun j => x ((Fintype.equivFin κ).symm j)) = c.eval x := by
+  simp only [toLin, LinCon.eval, eval]
+  exact Equiv.sum_comp (Fintype.equivFin κ).symm (fun k => c.coef k • x k)
+
+end KCon
+
+/-- **Transfer** over a finite index type. -/
+theorem exists_real_solution_fintype {κ : Type*} [Fintype κ]
+    {G : Type*} [AddCommGroup G] [LinearOrder G] [IsOrderedAddMonoid G]
+    (S : List (KCon κ)) (x : κ → G) (hS : ∀ c ∈ S, c.Holds x) :
+    ∃ y : κ → ℝ, ∀ c ∈ S, c.Holds y := by
+  obtain ⟨y', hy'⟩ := exists_real_solution _ (S.map KCon.toLin)
+    (fun j => x ((Fintype.equivFin κ).symm j)) (by
+      intro c hc
+      obtain ⟨c', hc', rfl⟩ := List.mem_map.mp hc
+      have h := hS c' hc'
+      simp only [LinCon.Holds, KCon.Holds] at h ⊢
+      rw [KCon.eval_toLin]
+      exact h)
+  refine ⟨fun k => y' (Fintype.equivFin κ k), fun c hc => ?_⟩
+  have h := hy' _ (List.mem_map.mpr ⟨c, hc, rfl⟩)
+  simp only [LinCon.Holds, KCon.Holds] at h ⊢
+  rw [← KCon.eval_toLin]
+  simpa [KCon.toLin] using h
+
 end LinTransfer
 
 end ContinuousFOL

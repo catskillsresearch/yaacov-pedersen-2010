@@ -2,4 +2,6 @@
 
 *Proof.* ($\Leftarrow$) By soundness every model gives $\varphi$ a value at most $2^{-n}$ for all $n$, hence $0$. ($\Rightarrow$) Fix $n$. Every model of $\Gamma$ gives $\varphi$ the value $0$, so no model makes $2^{-n}\dot-\varphi$ zero, i.e. $\Gamma\cup\{2^{-n}\dot-\varphi\}$ is unsatisfiable. By completeness it is inconsistent, and the refutation lemma gives $\Gamma\vdash\varphi\dot-2^{-n}$.
 
-**Theorems** (`..._metric_pre`, `..._metric_complete`, `approximated_strong_completeness_metric`). The same equivalence for metric pre-structures and for complete structures (using complete satisfiability in the completeness step).
+**Theorems** (`..._metric_pre`, `..._metric_complete`, `approximated_strong_completeness_metric`). The same equivalence for metric pre-structures and for complete structures.
+
+*Proof.* The argument above goes through word for word with the metric calculus $\vdash_Q$ including (A10)–(A14): soundness for metric pre-structures gives ($\Leftarrow$). For ($\Rightarrow$), the completeness theorem for metric pre-structures (respectively complete satisfiability, for complete structures) turns the unsatisfiable set $\Gamma\cup\{2^{-n}\dot-\varphi\}$ into an inconsistent one, and the metric refutation lemma gives $\Gamma\vdash_Q\varphi\dot-2^{-n}$.

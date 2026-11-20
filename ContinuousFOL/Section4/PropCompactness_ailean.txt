@@ -2,9 +2,13 @@
 
 *Proof.* The cube is compact by Tychonoff, and the zero sets are closed sets with the finite intersection property.
 
-**Lemma.** For a Łukasiewicz or continuous formula, $v\mapsto v(\varphi)$ is continuous on $\mathbb R^I$, since $\dot-$, $1-x$ and $x/2$ are continuous.
+**Lemma.** For a Łukasiewicz or continuous formula, $v\mapsto v(\varphi)$ is continuous on $\mathbb R^I$.
+
+*Proof.* Induction on $\varphi$. A variable gives a coordinate projection, which is continuous, and each connective composes continuous functions with one of the continuous maps $(x,y)\mapsto\max(x-y,0)$, $x\mapsto1-x$ and $x\mapsto x/2$.
 
 **Theorem** (`satisfiable_of_finite`, compactness). A set of formulae is satisfiable if each finite subset is.
+
+*Proof.* Consider the family of functions $v\mapsto v(\varphi)$, one for each $\varphi\in\Gamma$; they are continuous by the previous lemma. A finite subfamily corresponds to a finite set $\Gamma_0\subseteq\Gamma$, which is satisfiable by hypothesis, so the subfamily has a common zero in the cube. By `exists_common_zero` the whole family has a common zero $v\in[0,1]^I$, and then $v(\varphi)=0$ for every $\varphi\in\Gamma$, i.e. $v$ satisfies $\Gamma$.
 
 **Theorem** (`satisfiable_of_consistent`). For any $I$, a consistent $\Gamma$ is satisfiable (Łukasiewicz and continuous versions).
 
@@ -16,7 +20,11 @@
 
 **Theorem** (`consistent_iff_satisfiable`, Facts 4.2 and 4.3). If $I$ is nonempty, $\Gamma$ is consistent iff it is satisfiable.
 
-**Theorem** (`consistent_iff_satisfiable_fails_empty`). With no propositional variables there are no formulae; then $\emptyset$ is satisfiable but, vacuously, inconsistent, so the equivalence fails as literally stated.
+*Proof.* Combine the two preceding theorems. The hypothesis that $I$ is nonempty is used only in the direction from satisfiable to consistent.
+
+**Theorem** (`consistent_iff_satisfiable_fails_empty`). With no propositional variables the equivalence fails for $\Gamma=\emptyset$.
+
+*Proof.* If $I$ is empty there is no formula at all. By induction on formulae, a formula would have to contain a variable, and there is none to choose. Consistency of a set asks for some formula that it does not prove, so $\emptyset$ is not consistent. On the other hand the empty assignment satisfies $\emptyset$, since there is nothing to check.
 
 **Theorem** (`entails_iff_forall_provable_tsub_pow2Neg`, Fact 4.4). $\Gamma\models\varphi$ iff $\Gamma\vdash\varphi\dot-2^{-n}$ for all $n$, where the constant $2^{-n}$ is the dyadic formula built from $\varphi$.
 

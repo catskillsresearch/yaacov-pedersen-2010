@@ -13,3 +13,5 @@ Let $\mathfrak M$ be a metric pre-structure and $D(\bar a,\bar b)=\max_id(a_i,b_
 *Proof.* Induction. Terms: compose the joint modulus of $f$ with the moduli of the arguments. Formulae: atomic as for terms; $\dot-$ splits $\epsilon$ between the two sides; $\neg$ and $\tfrac12$ do not increase distances; for $\sup_x\alpha$ use the same $\delta$ as for $\alpha$, since updating both assignments at $x$ with the same element keeps them $\delta$-close on $\mathrm{FV}(\alpha)$, and suprema of pointwise $\epsilon$-close families are $\epsilon$-close.
 
 **Theorem** (`eval_uniformly_continuous`, Theorem 6.8). The maps $\tilde t:M^n\to M$ and $\tilde\varphi:M^n\to[0,1]$ are uniformly continuous with respect to $D$.
+
+*Proof.* Let $\epsilon>0$ and take $\delta$ from the previous lemma. If $D(\bar a,\bar b)<\delta$, the assignments $x_i\mapsto a_i$ and $x_i\mapsto b_i$ (equal elsewhere) are $\delta$-close on $\bar x$, which contains the relevant variables. So the values $\tilde t(\bar a),\tilde t(\bar b)$ are within $\epsilon$, and likewise for $\tilde\varphi$.

@@ -8,7 +8,9 @@ Fix a set $\Gamma$ of Łukasiewicz formulae and write $\varphi\to\psi$ for $\psi
 
 *Proof.* Short Hilbert-style derivations from (A1)–(A4), syllogism and exchange of antecedents; double negation elimination combines ex falso with (A4), and direct contraposition is obtained from the converse one by double negation.
 
-**Lemma** (congruence). $\equiv_\Gamma$ is compatible with $\neg$ and with $\dot-$ in both arguments. Subtracting a theorem changes nothing, contraposition and exchange of antecedents are equivalences, and (A3) says that $\varphi\vee\psi\equiv\psi\vee\varphi$.
+**Lemma** (congruence). $\equiv_\Gamma$ is compatible with $\neg$ and with $\dot-$ in both arguments. Moreover, subtracting a theorem changes nothing, contraposition and exchange of antecedents are equivalences, and (A3) says that $\varphi\vee\psi\equiv\psi\vee\varphi$.
+
+*Proof.* If $\varphi\equiv_\Gamma\psi$, direct contraposition applied to $\varphi\to\psi$ and to $\psi\to\varphi$ gives $\neg\psi\to\neg\varphi$ and $\neg\varphi\to\neg\psi$, so $\neg\varphi\equiv_\Gamma\neg\psi$. For the first argument of $\dot-$, the derived monotonicity rule $(\varphi\to\varphi')\to((\varphi\dot-\alpha)\to(\varphi'\dot-\alpha))$, used in both directions, gives $\varphi\dot-\alpha\equiv_\Gamma\varphi'\dot-\alpha$. For the second argument, right antitonicity does the same. Combining the two steps handles both arguments at once.
 
 **Definition.** At the formula level $\varphi\oplus\psi:=\neg(\neg\varphi\dot-\psi)$. Up to $\equiv_\Gamma$ it is commutative and associative, has any theorem as neutral element and its negation as absorbing element, satisfies Chang's axiom, and $\varphi\dot-\psi\equiv\neg(\neg\varphi\oplus\psi)$.
 
@@ -17,6 +19,8 @@ Fix a set $\Gamma$ of Łukasiewicz formulae and write $\varphi\to\psi$ for $\psi
 **Definition** (`LukLindT Γ`). The quotient of formulae by $\equiv_\Gamma$, with $\neg[\varphi]=[\neg\varphi]$, $[\varphi]\oplus[\psi]=[\varphi\oplus\psi]$ and $0=[\psi\dot-\psi]$ for any $\psi$ (all choices give the same class).
 
 **Theorem** (`instMVAlgebra`). $\mathrm{Lind}(\Gamma)$ is an MV-algebra, its truncated subtraction is $[\varphi]\ominus[\psi]=[\varphi\dot-\psi]$, and $[\varphi]=0$ iff $\Gamma\vdash\varphi$ (`mk_eq_zero_iff`).
+
+*Proof.* The operations are well defined on classes by the congruence lemma. The MV-algebra axioms are associativity and commutativity of $\oplus$, the neutral element $0$, $\neg\neg x=x$, absorption $x\oplus\neg0=\neg0$ and Chang's axiom. Each is the class version of one of the formula-level equivalences listed above, and double negation is `ProvableEq.neg_neg`. The truncated subtraction of the MV-algebra is $x\ominus y=\neg(\neg x\oplus y)$, and on classes this is $[\varphi\dot-\psi]$ by the equivalence $\varphi\dot-\psi\equiv\neg(\neg\varphi\oplus\psi)$. Finally $[\varphi]=0=[\psi\dot-\psi]$ means $\varphi\equiv_\Gamma\psi\dot-\psi$, which holds iff $\Gamma\vdash\varphi$ by the first lemma.
 
 **Theorem** (`provable_iff_evalMV_canonical`). Evaluating $\varphi$ in $\mathrm{Lind}(\Gamma)$ at the canonical assignment $i\mapsto[P_i]$ returns $[\varphi]$; hence $\Gamma\vdash\varphi$ iff $\varphi$ evaluates to $0$ there.
 

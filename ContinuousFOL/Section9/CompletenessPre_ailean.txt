@@ -2,4 +2,6 @@
 
 *Proof.* The Henkin model $(\mathfrak M,\sigma)$ satisfies $\Delta\supseteq e[\Gamma]$; its reduct to $\mathcal L$ gives every $\varphi\in\Gamma$ the value $\mathfrak M(e(\varphi),\sigma)=0$.
 
-**Theorem.** Satisfiability does not depend on the universe: a model in universe $0$ lifts to every universe, and a model in any universe makes $\Gamma$ consistent (soundness), hence satisfiable in universe $0$. Consequently $\Gamma$ is consistent iff satisfiable, in any universe.
+**Theorem.** Satisfiability does not depend on the universe, and $\Gamma$ is consistent iff it is satisfiable, in any universe.
+
+*Proof.* A model in universe $0$ lifts to any universe $u$ by replacing its carrier with a copy in universe $u$; values of formulae are unchanged. Conversely, a model in any universe makes $\Gamma$ consistent by soundness (Theorem 7.2), and then the previous theorem gives a model in universe $0$. So all three conditions (consistent, satisfiable in universe $0$, satisfiable in universe $u$) are equivalent.

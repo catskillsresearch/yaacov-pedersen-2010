@@ -1,8 +1,8 @@
-# §3 Axioms: Group 1
+# Yaacov–Pedersen §3 Axioms: Group 1
 
 Paper §3 (arXiv pp. 5–6) gives the axiom schemata (A1)–(A4) for Łukasiewicz logic and (A1)–(A6) for continuous logic, modus ponens as the only rule, consistency, the iterated-subtraction notation $\psi\dot-n\varphi$, the abbreviations $1$, $0$, $2^{-n}$, and Remark 3.4 on dyadic values.
 
-@import "Section3.svg" {code_block=false, caption="Module dependencies within §3"}
+@import "Section3.svg" {code_block=false, caption="Module dependencies within Yaacov–Pedersen §3"}
 
 Subsections follow Lean import order; labels are mathematical English.
 

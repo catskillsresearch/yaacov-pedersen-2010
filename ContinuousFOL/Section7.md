@@ -1,8 +1,8 @@
-# §7 Axioms: Group 2
+# Yaacov–Pedersen §7 Axioms: Group 2
 
 Paper §7 (arXiv pp. 14–15) adds the quantifier axioms (A7)–(A9) and, for a signature with a metric, the pseudo-metric axioms (A10)–(A12) and the uniform-continuity axioms (A13)–(A14). The axioms are all generalizations of these schemata together with (A1)–(A6); modus ponens remains the only rule. Theorem 7.2 is soundness, which the paper proves in outline and which is proved here schema by schema.
 
-@import "Section7.svg" {code_block=false, caption="Module dependencies within §7"}
+@import "Section7.svg" {code_block=false, caption="Module dependencies within Yaacov–Pedersen §7"}
 
 Subsections follow Lean import order; labels are mathematical English.
 

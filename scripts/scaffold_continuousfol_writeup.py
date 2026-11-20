@@ -84,7 +84,10 @@ SECTION_2_KEEP = {
     "LukasiewiczAndContinuous/CLPropFormEval",
     "LukasiewiczAndContinuous/CLPropFormModels",
 }
-MODULE_SECTION = {"Basic": 1}
+# ProvableTsubOfInconsistentAdjoin lives in Completeness/ but only imports §7/§8
+# material, is cited as "cf. the proof of Lemma 8.5" and is imported by the §8
+# module ConsistentAdjoin, so it is written up in §8 (no §8 <-> §9 cycle).
+MODULE_SECTION = {"Basic": 1, "Completeness/ProvableTsubOfInconsistentAdjoin": 8}
 
 LEAN_IMPORT_RE = re.compile(r"^\s*(?:public\s+)?import\s+ContinuousFOL\.(\S+)", re.M)
 REF_RE = re.compile(
@@ -272,13 +275,14 @@ def build_section_svg(sec: int, mods: list[str], titles: dict[str, str]) -> None
 def write_barrel(sec: int, mods: list[str], titles: dict[str, str], sections: dict) -> None:
     meta = sections.get(str(sec), {})
     title = SECTION_TITLES[sec]
-    lines = [f"# {title}", ""]
+    # Chapter headings name the paper's own section, e.g. "Yaacov–Pedersen §1 Introduction".
+    lines = [f"# Yaacov–Pedersen {title}", ""]
     if meta.get("blurb"):
         lines += [meta["blurb"].strip(), ""]
     if meta.get("notes"):
         lines += [meta["notes"].strip(), ""]
     lines += [
-        f'@import "Section{sec}.svg" {{code_block=false, caption="Module dependencies within {title.split()[0]}"}}',
+        f'@import "Section{sec}.svg" {{code_block=false, caption="Module dependencies within Yaacov–Pedersen {title.split()[0]}"}}',
         "",
         "Subsections follow Lean import order; labels are mathematical English.",
         "",

@@ -27,7 +27,7 @@ Toolchain: Lean `v4.35.0` (see `lean-toolchain`), Mathlib pin in `lakefile.toml`
 |------|---------|
 | `sources/yaacov_pedersen_2010.pdf` | Source paper |
 | `sources/yaacov_pedersen_2010_vision.md` | Vision OCR (preferred over pdftotext) |
-| `ContinuousFOL/<Section>/*.lean` | Lean library, one folder per paper section (§1–§9) |
+| `ContinuousFOL/<Topic>/*.lean` | Lean library, one folder per topic (e.g. `Essentials/`, `Completeness/`); the writeup maps modules to the paper's §§1–9 |
 | `ContinuousFOL.lean` | Library root (imports every module) |
 | `ContinuousFOL.md` | Paper-facing writeup root (table of contents) |
 | `ContinuousFOLComparator/` | Palomar Challenge / Solution pair |
@@ -163,6 +163,6 @@ python3 -m http.server 8765 --bind 127.0.0.1
 | Fact 4.3 (§4): "Let S be a continuous propositional logic and Σ ⊆ S. Then Σ is consistent if and only if it is satisﬁable." | `ContinuousFOL.cl_consistent_iff_satisfiable` | `[Nonempty I]`: at least one propositional variable | Same counterexample. Proved: `CLPropForm.consistent_iff_satisfiable_fails_empty`. |
 
 Consistent ⇒ satisfiable is proved for every `I` (`*.satisfiable_of_consistent`).
-Neither Fact is used by the main theorems. No other paper statement was changed;
+Neither Fact is used in the proof of any other result: no Lean module imports them (only the library root does), so the main theorems are unaffected. No other paper statement was changed;
 reading choices for Definition 9.9, Corollaries 9.8 and 9.11 are listed in
 `formalization.yaml` → `fidelity.divergences`.

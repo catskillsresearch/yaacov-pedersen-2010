@@ -1,8 +1,8 @@
-# §1 Introduction
+# Yaacov–Pedersen §1 Introduction
 
 Paper §1 (arXiv pp. 1–4) motivates continuous first-order logic and states the goals: completeness, approximated strong completeness and decidability. The only Lean needed from §1 is real truncated subtraction and the two closure facts for the unit interval, which every later truth-value computation uses.
 
-@import "Section1.svg" {code_block=false, caption="Module dependencies within §1"}
+@import "Section1.svg" {code_block=false, caption="Module dependencies within Yaacov–Pedersen §1"}
 
 Subsections follow Lean import order; labels are mathematical English.
 

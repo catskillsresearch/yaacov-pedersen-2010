@@ -24,7 +24,6 @@ allowed (Definition 2.1 does not require `I` to be nonempty), both Facts are
 false: with no variables there are no formulas, so the empty set is satisfiable
 but, by Definition 3.1, inconsistent. This counterexample is proved in Lean
 (`LukPropForm.consistent_iff_satisfiable_fails_empty`,
-`CLPropForm.consistent_iff_satisfiable_fails_empty`). Neither Fact is used by
-the main theorems, which are unaffected.
+`CLPropForm.consistent_iff_satisfiable_fails_empty`). Neither Fact is used in the proof of any other result: no Lean module imports them (only the library root does), so the main theorems are unaffected.
 
 **Palomar Registration:** TBD.

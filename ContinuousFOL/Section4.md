@@ -1,10 +1,10 @@
-# §4 Black-box theorems
+# Yaacov–Pedersen §4 Black-box theorems
 
 Paper §4 (arXiv pp. 6–7) records five facts about the propositional logics and uses them as black boxes: weak completeness of Łukasiewicz logic (Fact 4.1), consistency versus satisfiability (Facts 4.2, 4.3), approximated strong completeness (Fact 4.4) and finite strong completeness (Fact 4.5) of continuous logic. The formalization does not assume them: all five are proved in Lean. The proof of Fact 4.1 follows Chang's algebraic route (MV-algebras, the Lindenbaum algebra, linearly ordered quotients and ordered abelian groups); Fact 4.5 reduces continuous logic to Łukasiewicz logic; Facts 4.2–4.4 follow by compactness.
 
-**Added premise in Facts 4.2 and 4.3.** As stated in the paper these two facts are false when there are no propositional variables: then there are no formulae at all, so the empty set is satisfiable but (vacuously) inconsistent. The Lean statements therefore carry the extra hypothesis `[Nonempty I]` (at least one propositional variable), and the counterexample is itself proved (`LukPropForm.consistent_iff_satisfiable_fails_empty`, `CLPropForm.consistent_iff_satisfiable_fails_empty`). No other §4 statement needs a change, and the first-order results of §§7–9 do not use Facts 4.2 and 4.3.
+**Added premise in Facts 4.2 and 4.3.** As stated in the paper these two facts are false when there are no propositional variables: then there are no formulae at all, so the empty set is satisfiable but (vacuously) inconsistent. The Lean statements therefore carry the extra hypothesis `[Nonempty I]` (at least one propositional variable), and the counterexample is itself proved (`LukPropForm.consistent_iff_satisfiable_fails_empty`, `CLPropForm.consistent_iff_satisfiable_fails_empty`). No other §4 statement needs a change. Neither Fact is used in the proof of any other result: no Lean module imports them (only the library root does), so the main theorems are unaffected.
 
-@import "Section4.svg" {code_block=false, caption="Module dependencies within §4"}
+@import "Section4.svg" {code_block=false, caption="Module dependencies within Yaacov–Pedersen §4"}
 
 Subsections follow Lean import order; labels are mathematical English.
 

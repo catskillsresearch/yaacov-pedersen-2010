@@ -1,10 +1,10 @@
-# §5 Language and semantics of continuous first-order logic
+# Yaacov–Pedersen §5 Language and semantics of continuous first-order logic
 
 Paper §5 (arXiv pp. 7–11) sets up continuous first-order logic: the logical symbols, continuous signatures with moduli of uniform continuity, signatures with a metric, pre-structures and structures, assignments, the value $\mathfrak M(\varphi,\sigma)\in[0,1]$ of a formula, models, satisfiability, entailment and logical equivalence. The Lean modules follow these definitions one by one; a few (the formula constants, iterated subtraction, rank, universe lifting) are bookkeeping that later sections need.
 
 Universe levels: the paper lets the universe of a structure be any non-empty set. In Lean the carrier lives in an arbitrary universe `Type u`, and all semantic notions (satisfiable, entails, equivalent) are parameterized by that universe. `UliftPreStructure` shows that models in universe $0$ lift to every universe without changing any truth value, which is what lets the completeness theorem be stated for an arbitrary universe.
 
-@import "Section5.svg" {code_block=false, caption="Module dependencies within §5"}
+@import "Section5.svg" {code_block=false, caption="Module dependencies within Yaacov–Pedersen §5"}
 
 Subsections follow Lean import order; labels are mathematical English.
 

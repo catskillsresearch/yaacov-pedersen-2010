@@ -65,4 +65,4 @@ the work and takes responsibility for it.
 | Fact 4.3 (§4): "Let S be a continuous propositional logic and Σ ⊆ S. Then Σ is consistent if and only if it is satisﬁable." | `ContinuousFOL.cl_consistent_iff_satisfiable` | `[Nonempty I]`: at least one propositional variable | Same counterexample. Proved: `CLPropForm.consistent_iff_satisfiable_fails_empty`. |
 
 Consistent ⇒ satisfiable is proved for every `I` (`*.satisfiable_of_consistent`).
-Neither Fact is used by the main theorems. No other paper statement was changed.
+Neither Fact is used in the proof of any other result: no Lean module imports them (only the library root does), so the main theorems are unaffected. No other paper statement was changed.

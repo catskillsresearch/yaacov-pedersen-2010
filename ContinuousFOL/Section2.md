@@ -1,8 +1,8 @@
-# §2 Łukasiewicz logic and continuous logic
+# Yaacov–Pedersen §2 Łukasiewicz logic and continuous logic
 
 Paper §2 (arXiv pp. 4–5) introduces Łukasiewicz propositional logic (connectives $\dot-$ and $\neg$) and continuous propositional logic (adding $\tfrac12$), with truth assignments into $[0,1]$, models, satisfiability and semantic entailment. In Lean each logic is an inductive type of formulae over an arbitrary type $I$ of propositional variables, with a recursive evaluation map.
 
-@import "Section2.svg" {code_block=false, caption="Module dependencies within §2"}
+@import "Section2.svg" {code_block=false, caption="Module dependencies within Yaacov–Pedersen §2"}
 
 Subsections follow Lean import order; labels are mathematical English.
 
